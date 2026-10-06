@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-10-06 — Phase 1 validation checkpoint
+
+Implemented baseline GLM-5.1 task generation and the example Task Lab UI with
+oracle/nop checks, five solver slots, and turn-by-turn inspection.
+Docker execution is limited to three concurrent trials.
+All six examples passed their controls, three examples achieved 5/5 solver
+passes each, and all 89 automated tests passed.
+Stopped remaining model attempts once the infrastructure smoke test was
+sufficient; cancelled attempts are excluded from solve rates.
+The generated smoke task passes its controls but still needs semantic review,
+and adaptive generation remains deferred pending approval.
+
 ## 2026-10-06 — Baseline generator and example Task Lab
 
 - Implemented GLM-5.1 task authoring with structured file bundles, safe paths,
