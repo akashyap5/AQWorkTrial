@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Secrets / environment
+.env
+
+# OS
+.DS_Store
+
+# Harbor run outputs (written by `harbor run`)
+jobs/
+trials/
+.harbor/
+dist.tar.gz
+.tasklab/
+*.generation/
+output/

@@ -1,0 +1,6 @@
+# TOML parsing uses tomllib from the Python 3.11+ standard library — no
+# third-party dependency is required for the structural checks.
+#
+# Optional: install the real framework to enable the native schema cross-check
+# (validate.py picks it up automatically if importable):
+#   pip install harbor
