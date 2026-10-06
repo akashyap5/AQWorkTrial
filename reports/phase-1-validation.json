@@ -1,0 +1,495 @@
+{
+  "recorded_at": "2026-10-06T19:45:41.824466+00:00",
+  "scope": "Phase 1: baseline authoring and local example-runner verification. Adaptive generation awaits user approval.",
+  "implementation_commit": "b7e245725d0e313f5e21af2e1f432edb447cac8e",
+  "author_model": "z-ai/glm-5.1",
+  "evaluator_model": "openrouter/z-ai/glm-5.3-flash",
+  "reasoning_effort": "high",
+  "api_base": "https://openrouter.ai/api/v1",
+  "max_parallel_trials": 3,
+  "observed_peak_parallel_trials": 3,
+  "offline_tests": {
+    "command": ".venv/bin/python -m pytest -q",
+    "passed": 89
+  },
+  "browser_checks": [
+    "Real turns, commands, terminal output, tests and logs",
+    "Expanded turns and scroll survive polling",
+    "390px mobile layout",
+    "No browser exceptions"
+  ],
+  "examples": [
+    {
+      "task": "openssl-selfsigned-cert",
+      "job_id": "5dfc9512ed824ab6",
+      "task_sha256": "42c8637efe18698687cf74d1dd11d3adf3bc854d1e618ce26c57aa934aba6dc6",
+      "structure_passed": true,
+      "job_status": "completed",
+      "controls_passed": true,
+      "controls": [
+        {
+          "kind": "oracle",
+          "status": "passed",
+          "reward": 1.0,
+          "tests": 6
+        },
+        {
+          "kind": "nop",
+          "status": "passed",
+          "reward": 0.0,
+          "tests": 6
+        }
+      ],
+      "evaluation": {
+        "passes": 5,
+        "failures": 0,
+        "valid_runs": 5,
+        "total_runs": 5,
+        "learnable": false
+      },
+      "runs": [
+        {
+          "id": "eval-1",
+          "status": "passed",
+          "reward": 1.0,
+          "turns": 4,
+          "duration_sec": 236.77
+        },
+        {
+          "id": "eval-2",
+          "status": "passed",
+          "reward": 1.0,
+          "turns": 3,
+          "duration_sec": 124.39
+        },
+        {
+          "id": "eval-3",
+          "status": "passed",
+          "reward": 1.0,
+          "turns": 3,
+          "duration_sec": 124.39
+        },
+        {
+          "id": "eval-4",
+          "status": "passed",
+          "reward": 1.0,
+          "turns": 5,
+          "duration_sec": 363.15
+        },
+        {
+          "id": "eval-5",
+          "status": "passed",
+          "reward": 1.0,
+          "turns": 3,
+          "duration_sec": 167.53
+        }
+      ],
+      "evidence_directory": ".tasklab/jobs/5dfc9512ed824ab6"
+    },
+    {
+      "task": "log-summary-date-ranges",
+      "job_id": "75b5f0e6ec3e442b",
+      "task_sha256": "4a7a87c89f43bc430e0b7d2883a94bdbd936dafaa813b82dca3d5a4ab2641a51",
+      "structure_passed": true,
+      "job_status": "completed",
+      "controls_passed": true,
+      "controls": [
+        {
+          "kind": "oracle",
+          "status": "passed",
+          "reward": 1.0,
+          "tests": 2
+        },
+        {
+          "kind": "nop",
+          "status": "passed",
+          "reward": 0.0,
+          "tests": 2
+        }
+      ],
+      "evaluation": {
+        "passes": 5,
+        "failures": 0,
+        "valid_runs": 5,
+        "total_runs": 5,
+        "learnable": false
+      },
+      "runs": [
+        {
+          "id": "eval-1",
+          "status": "passed",
+          "reward": 1.0,
+          "turns": 5,
+          "duration_sec": 385.25
+        },
+        {
+          "id": "eval-2",
+          "status": "passed",
+          "reward": 1.0,
+          "turns": 4,
+          "duration_sec": 74.23
+        },
+        {
+          "id": "eval-3",
+          "status": "passed",
+          "reward": 1.0,
+          "turns": 4,
+          "duration_sec": 93.29
+        },
+        {
+          "id": "eval-4",
+          "status": "passed",
+          "reward": 1.0,
+          "turns": 4,
+          "duration_sec": 85.28
+        },
+        {
+          "id": "eval-5",
+          "status": "passed",
+          "reward": 1.0,
+          "turns": 8,
+          "duration_sec": 185.61
+        }
+      ],
+      "evidence_directory": ".tasklab/jobs/75b5f0e6ec3e442b"
+    },
+    {
+      "task": "fix-git",
+      "job_id": "8f864da71a594fe6",
+      "task_sha256": "ea7a21e60169aa077453ef76e844b1f106f3036a9741c3ee29a7350f9f5f8b0c",
+      "structure_passed": true,
+      "job_status": "completed",
+      "controls_passed": true,
+      "controls": [
+        {
+          "kind": "oracle",
+          "status": "passed",
+          "reward": 1.0,
+          "tests": 2
+        },
+        {
+          "kind": "nop",
+          "status": "passed",
+          "reward": 0.0,
+          "tests": 2
+        }
+      ],
+      "evaluation": {
+        "passes": 5,
+        "failures": 0,
+        "valid_runs": 5,
+        "total_runs": 5,
+        "learnable": false
+      },
+      "runs": [
+        {
+          "id": "eval-1",
+          "status": "passed",
+          "reward": 1.0,
+          "turns": 7,
+          "duration_sec": 90.31
+        },
+        {
+          "id": "eval-2",
+          "status": "passed",
+          "reward": 1.0,
+          "turns": 7,
+          "duration_sec": 107.36
+        },
+        {
+          "id": "eval-3",
+          "status": "passed",
+          "reward": 1.0,
+          "turns": 7,
+          "duration_sec": 110.33
+        },
+        {
+          "id": "eval-4",
+          "status": "passed",
+          "reward": 1.0,
+          "turns": 6,
+          "duration_sec": 130.38
+        },
+        {
+          "id": "eval-5",
+          "status": "passed",
+          "reward": 1.0,
+          "turns": 10,
+          "duration_sec": 148.43
+        }
+      ],
+      "evidence_directory": ".tasklab/jobs/8f864da71a594fe6"
+    },
+    {
+      "task": "chess-best-move",
+      "job_id": "d8dcb1d185d545c2",
+      "task_sha256": "46f49562eb41115e5591404ffd8420ca58cd6ddc85577811c032f6cac8dba4e2",
+      "structure_passed": true,
+      "job_status": "cancelled",
+      "controls_passed": true,
+      "controls": [
+        {
+          "kind": "oracle",
+          "status": "passed",
+          "reward": 1.0,
+          "tests": 1
+        },
+        {
+          "kind": "nop",
+          "status": "passed",
+          "reward": 0.0,
+          "tests": 1
+        }
+      ],
+      "evaluation": {
+        "passes": 0,
+        "failures": 0,
+        "valid_runs": 0,
+        "total_runs": 5,
+        "learnable": null
+      },
+      "runs": [
+        {
+          "id": "eval-1",
+          "status": "cancelled",
+          "reward": null,
+          "turns": 14,
+          "duration_sec": 625.53
+        },
+        {
+          "id": "eval-2",
+          "status": "cancelled",
+          "reward": null,
+          "turns": 12,
+          "duration_sec": 625.42
+        },
+        {
+          "id": "eval-3",
+          "status": "cancelled",
+          "reward": null,
+          "turns": 12,
+          "duration_sec": 625.52
+        },
+        {
+          "id": "eval-4",
+          "status": "cancelled",
+          "reward": null,
+          "turns": 0,
+          "duration_sec": null
+        },
+        {
+          "id": "eval-5",
+          "status": "cancelled",
+          "reward": null,
+          "turns": 0,
+          "duration_sec": null
+        }
+      ],
+      "evidence_directory": ".tasklab/jobs/d8dcb1d185d545c2"
+    },
+    {
+      "task": "configure-git-webserver",
+      "job_id": "e46422ef10074b9c",
+      "task_sha256": "c5961cec6b8b40872c97652a70fcc5b9311bc6853cc7000776f847b5565c1957",
+      "structure_passed": true,
+      "job_status": "completed",
+      "controls_passed": true,
+      "controls": [
+        {
+          "kind": "oracle",
+          "status": "passed",
+          "reward": 1.0,
+          "tests": 1
+        },
+        {
+          "kind": "nop",
+          "status": "passed",
+          "reward": 0.0,
+          "tests": 1
+        }
+      ],
+      "evaluation": {
+        "passes": 0,
+        "failures": 0,
+        "valid_runs": 0,
+        "total_runs": 5,
+        "learnable": null
+      },
+      "runs": [
+        {
+          "id": "eval-1",
+          "status": "skipped",
+          "reward": null,
+          "turns": 0,
+          "duration_sec": null
+        },
+        {
+          "id": "eval-2",
+          "status": "skipped",
+          "reward": null,
+          "turns": 0,
+          "duration_sec": null
+        },
+        {
+          "id": "eval-3",
+          "status": "skipped",
+          "reward": null,
+          "turns": 0,
+          "duration_sec": null
+        },
+        {
+          "id": "eval-4",
+          "status": "skipped",
+          "reward": null,
+          "turns": 0,
+          "duration_sec": null
+        },
+        {
+          "id": "eval-5",
+          "status": "skipped",
+          "reward": null,
+          "turns": 0,
+          "duration_sec": null
+        }
+      ],
+      "evidence_directory": ".tasklab/jobs/e46422ef10074b9c"
+    },
+    {
+      "task": "fix-code-vulnerability",
+      "job_id": "bc9e375371194c84",
+      "task_sha256": "c15d5990094a1f50023b43ac7078b4a5a420fad3e334dfd623b06d6615b568ec",
+      "structure_passed": true,
+      "job_status": "completed",
+      "controls_passed": true,
+      "controls": [
+        {
+          "kind": "oracle",
+          "status": "passed",
+          "reward": 1.0,
+          "tests": 373
+        },
+        {
+          "kind": "nop",
+          "status": "passed",
+          "reward": 0.0,
+          "tests": 373
+        }
+      ],
+      "evaluation": {
+        "passes": 0,
+        "failures": 0,
+        "valid_runs": 0,
+        "total_runs": 5,
+        "learnable": null
+      },
+      "runs": [
+        {
+          "id": "eval-1",
+          "status": "skipped",
+          "reward": null,
+          "turns": 0,
+          "duration_sec": null
+        },
+        {
+          "id": "eval-2",
+          "status": "skipped",
+          "reward": null,
+          "turns": 0,
+          "duration_sec": null
+        },
+        {
+          "id": "eval-3",
+          "status": "skipped",
+          "reward": null,
+          "turns": 0,
+          "duration_sec": null
+        },
+        {
+          "id": "eval-4",
+          "status": "skipped",
+          "reward": null,
+          "turns": 0,
+          "duration_sec": null
+        },
+        {
+          "id": "eval-5",
+          "status": "skipped",
+          "reward": null,
+          "turns": 0,
+          "duration_sec": null
+        }
+      ],
+      "evidence_directory": ".tasklab/jobs/bc9e375371194c84"
+    }
+  ],
+  "early_stop": "User confirmed three fully passing examples were sufficient for this smoke phase. Remaining model attempts were cancelled; incomplete results are excluded from solve rates. No turn cap was added to the calibrated evaluator.",
+  "generated_smoke": {
+    "task": "output/inventory-diff-smoke-repaired",
+    "job_id": "e2d8a57218004038",
+    "controls_passed": true,
+    "generation_evidence": "output/.generation-runs/0ef6daf4e842418e80c861071a7fc570",
+    "audit": {
+      "audit_kind": "read-only static contract and implementation review",
+      "original_task": "/Users/anirudhkashyap/Documents/afterquery_platform_engineer_work_trial/output/inventory-diff-smoke",
+      "original_evidence_dir": "/Users/anirudhkashyap/Documents/afterquery_platform_engineer_work_trial/output/.generation-runs/162c301c159c4eaab9b9947a07ed7668",
+      "prior_truncated_repair_evidence_dir": "/Users/anirudhkashyap/Documents/afterquery_platform_engineer_work_trial/output/.generation-runs/b9e0291228e1451687f559a98ad275c2",
+      "structural_validation": {
+        "passed": true,
+        "errors": [],
+        "warnings": []
+      },
+      "oracle_embedded_python_parses": true,
+      "snapshot_json_example_parses": true,
+      "test_functions": 48,
+      "original_test_functions": 29,
+      "original_test_names_missing": [],
+      "all_app_subprocesses_use_python3": true,
+      "all_app_subprocesses_have_timeout": true,
+      "verified_by_reading": [
+        "Non-array before and after exit code 2",
+        "Success uses sys.stdout.write without newline",
+        "Original behavioral tests retained",
+        "New non-array, malformed JSON, newline and large integer tests",
+        "Framework verifier collects all /tests modules"
+      ],
+      "remaining_contract_review_findings": [
+        "test_exact_stdout_empty_result asserts exact serialized key order, which instruction does not require.",
+        "test_stderr_on_non_array requires literal array in stderr, while contract allows descriptive errors.",
+        "test_stderr_on_malformed_quantity requires quantity or negative in stderr, while contract allows descriptive errors."
+      ],
+      "functional_validation": {
+        "oracle": "not_run",
+        "nop": "not_run"
+      },
+      "generation_finish_reason": "stop",
+      "generation_usage": {
+        "completion_tokens": 18936,
+        "prompt_tokens": 6203,
+        "total_tokens": 25139,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": 0,
+          "reasoning_tokens": 11661,
+          "rejected_prediction_tokens": null,
+          "image_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost": 0,
+        "is_byok": true,
+        "cost_details": {
+          "upstream_inference_cost": 0.08740247,
+          "upstream_inference_prompt_cost": 0.00824999,
+          "upstream_inference_completions_cost": 0.07915248
+        }
+      },
+      "status": "needs_review",
+      "intended_use": "Baseline generator and infrastructure smoke coverage only.",
+      "acceptance_note": "Oracle/nop success would establish executability, not resolve the listed semantic mismatches. This task is not approved as training-ready or learnable."
+    }
+  }
+}

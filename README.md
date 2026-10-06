@@ -60,6 +60,14 @@ Its Dockerfile now copies the exact original Git fixture, including detached
 commit and reflog, from the supplied image pinned by digest into a native image.
 The example's instructions, verifier, and reference solution are unchanged.
 
+The [first-stage validation report](reports/phase-1-validation.json) records
+successful oracle/nop checks for all six examples and 5/5 solver passes each for
+OpenSSL, log-summary, and fix-git. At the user's smoke-test checkpoint, remaining
+model attempts were cancelled and excluded from solve rates. The generated
+inventory-diff smoke task passes its controls but retains a `needs_review`
+semantic audit; it is not classified as training-ready or learnable. Phase two
+awaits user approval.
+
 The original work-trial specification follows.
 
 ## Context

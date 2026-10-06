@@ -31,3 +31,12 @@
   tokens as well as the task bundle; truncated bundles are never published.
 - Verified the provided key authenticates on OpenRouter directly; the README's
   AfterQuery gateway returns 401 for this key. Endpoint remains configurable.
+- Completed live oracle/nop verification for all six examples. OpenSSL,
+  log-summary, and fix-git each produced five valid solver passes (15/15 total).
+  Stopped remaining model work at the user's smoke-test checkpoint; cancelled
+  attempts are excluded from scores. Observed concurrency peaked at three.
+- Recorded `reports/phase-1-validation.json`, including job IDs, task hashes,
+  control/test counts, solver outcomes, and browser checks. The original
+  generated smoke task was withheld after semantic review. Its GLM-authored
+  repair passes oracle/nop but remains explicitly `needs_review` because of
+  overly strict assertions. No learnability claim is made for generated tasks.
