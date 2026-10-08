@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-10-07 (late) — Pipeline split into stage modules
+
+`generator/fast_author.py` (2,443 lines) is now a short entry point over `generator/taskgen/`, one module per stage:
+core (paths, fake mode, GLM-5.1 client, log), taskfiles, docker_checks, learning, families, grid_family (retired),
+authoring, repair, probing, tuning, gate, candidate, and cli (108–426 lines each). The modules import strictly downward,
+with no cycles. Code was moved verbatim and behaviour is unchanged: all 330 tests pass, and in fake mode a full batch,
+a kill -9 followed by `--resume`, and two concurrent copies behave as before. Fake runs now also keep prompt versions
+under output/fake/.
+
 ## 2026-10-07 (evening) — Champion/challenger prompts, repeat measurements, and two new Task Lab views
 
 A three-hour run tested what raises the share of learnable tasks. Champion/challenger prompts: the champion (the

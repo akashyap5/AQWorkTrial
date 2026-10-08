@@ -4,6 +4,7 @@ import json
 import pytest
 
 from generator import fast_author
+from generator.taskgen import core
 
 
 @pytest.mark.parametrize(
@@ -23,6 +24,7 @@ def test_probe_waits_for_real_five_run_outcomes(
 ):
     monkeypatch.setattr(fast_author.store, "DATA", tmp_path)
     monkeypatch.setattr(fast_author, "RUNS", tmp_path)
+    monkeypatch.setattr(core, "RUNS", tmp_path)  # log() lives in generator.taskgen.core
     # Even an old operator flag must not cancel the remaining paid runs.
     (tmp_path / "cancel_early.flag").write_text("old flag")
     job_dir = tmp_path / "jobs" / "probe-job"
