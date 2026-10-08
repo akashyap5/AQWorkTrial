@@ -285,6 +285,17 @@ def window(size: int = 10):
     return {"shipped": with_names(rows), "window": meta}
 
 
+@app.get("/stats")
+def stats_page():
+    return FileResponse(store.ROOT / "api" / "static" / "index.html")
+
+
+@app.get("/api/stats")
+def stats():
+    """Headline results recomputed from the records (generator/stats_report.py)."""
+    return {"stats": read_json(store.ROOT / "output" / "stats" / "latest.json", None)}
+
+
 @app.get("/fidelity")
 def fidelity_page():
     return FileResponse(store.ROOT / "api" / "static" / "index.html")
