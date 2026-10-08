@@ -1,0 +1,67 @@
+#!/usr/bin/env python3
+"""Local catalog administration with a write-ahead outbox.
+
+Ingestion acknowledgements confirm acceptance into the outbox. Administrative
+reads include accepted updates; application consumers load the committed snapshot.
+Checkpointing materializes accepted updates into that snapshot.
+"""
+import argparse
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent
+SNAPSHOT = ROOT / "data" / "catalog.json"
+OUTBOX = ROOT / "data" / "outbox.json"
+
+
+def read(path):
+    return json.loads(path.read_text())
+
+
+def write(path, value):
+    temporary = path.with_suffix(path.suffix + ".new")
+    temporary.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+    temporary.replace(path)
+
+
+def overlay(snapshot, pending):
+    records = dict(snapshot["records"])
+    for receipt in pending:
+        records.update(receipt["updates"])
+    return {"schema": snapshot["schema"], "records": records}
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Administer the local release catalog.")
+    commands = parser.add_subparsers(dest="command", required=True)
+    batch = commands.add_parser("batch", help="accept alias updates from a JSON manifest",
+                                description="Accept updates into the write-ahead outbox. An accepted receipt is not a committed snapshot; checkpoint publishes accepted updates to application consumers.")
+    batch.add_argument("manifest")
+    commands.add_parser("show", help="show the administrative read-your-writes view",
+                        description="Show the snapshot overlaid with accepted outbox updates. Application consumers read the committed snapshot instead.")
+    commands.add_parser("checkpoint", help="publish accepted updates to the committed snapshot")
+    args = parser.parse_args()
+    snapshot, pending = read(SNAPSHOT), read(OUTBOX)
+    if args.command == "batch":
+        updates = read(Path(args.manifest))
+        if not isinstance(updates, dict) or not all(
+            isinstance(name, str) and name and isinstance(value, dict)
+            and set(value) == {"target", "enabled"}
+            and isinstance(value["target"], str) and isinstance(value["enabled"], bool)
+            for name, value in updates.items()
+        ):
+            parser.error("manifest must map alias names to target/enabled records")
+        receipt = max((row["receipt"] for row in pending), default=0) + 1
+        pending.append({"receipt": receipt, "updates": updates})
+        write(OUTBOX, pending)
+        print(json.dumps({"status": "accepted", "receipt": receipt, "records": len(updates)}))
+    elif args.command == "show":
+        print(json.dumps(overlay(snapshot, pending)["records"], sort_keys=True))
+    elif args.command == "checkpoint":
+        write(SNAPSHOT, overlay(snapshot, pending))
+        write(OUTBOX, [])
+        print(json.dumps({"status": "committed", "receipts": len(pending)}))
+
+
+if __name__ == "__main__":
+    main()

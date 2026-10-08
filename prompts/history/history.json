@@ -1,0 +1,574 @@
+{
+  "schema_version": 1,
+  "current_version": "v0006",
+  "versions": [
+    {
+      "version": "v0001",
+      "text": "Generate one original, self-contained terminal task matching the supplied topic.\nAim for a useful debugging or implementation problem with a clear public contract,\nenough interacting requirements to exercise reasoning, and a deterministic oracle.\nFor this first demo, prefer a compact Python CLI with two or three interacting\nrequirements and a small existing broken implementation. Avoid large boilerplate,\nmultiple services, elaborate installations, and runtime-heavy workloads.\n\nStart with a compact existing application and realistic fixture data. The initial\nstate must contain a meaningful defect or missing behavior that causes tests to fail.\nKeep dependencies modest and install them during the image build. Solving should\ndepend on reading and changing the application, not network access or long computation.\n\nDescribe every required behavior explicitly: command interface, file paths, input\nformat, output format, ordering, error handling, and boundary conditions. Make an\nindependent checklist of this contract before writing the oracle and verifier.\nEnsure oracle, examples, and every test agree with that checklist. The tests should\ncheck observable behavior with multiple small independent cases, not a preferred\nimplementation. Include important boundaries but do not invent hidden requirements.\n\nUse an original scenario rather than adapting any public task. Make the task\nsubstantial enough that success is not guaranteed by one obvious edit, while staying\nsmall enough to attempt within a five-minute demo run. Do not assume this makes the\ntask learnable: the evaluator will measure difficulty separately. Return only the\ncomplete JSON task bundle required by the fixed framework instructions.\n",
+      "sha256": "078b16ab234372088471ae54320563d210f839f326410f9742caca577dbf2045",
+      "parent_version": null,
+      "evidence": {
+        "source": "prompts/starter_prompt.txt"
+      },
+      "status": "baseline",
+      "created_at": "2026-10-06T21:00:23.134031+00:00",
+      "active": false
+    },
+    {
+      "version": "v0002",
+      "text": "Generate one original, self-contained terminal task matching the supplied topic.\nAim for a useful debugging or implementation problem with a clear public contract,\nenough interacting requirements to exercise reasoning, and a deterministic oracle.\nFor this first demo, prefer a compact Python CLI with two or three interacting\nrequirements and a small existing broken implementation. Avoid large boilerplate,\nmultiple services, elaborate installations, and runtime-heavy workloads.\n\nStart with a compact existing application and realistic fixture data. The initial\nstate must contain two or three meaningful defects whose fixes interact: correcting\none bug alone should not make most tests pass, and the solver must understand how\nthe rules interact to produce the right fix. Keep fixture files to three to five\ncases that collectively exercise every rule boundary; avoid proliferating fixtures\nbeyond what is needed for coverage.\n\nKeep dependencies modest and install them during the image build. Solving should\ndepend on reading and changing the application, not network access or long computation.\n\nDescribe every required behavior explicitly: command interface, file paths, input\nformat, output format, ordering, error handling, and boundary conditions. Make an\nindependent checklist of this contract before writing the oracle and verifier.\nEnsure oracle, examples, and every test agree with that checklist. The tests should\ncheck observable behavior with multiple small independent cases, not a preferred\nimplementation. Include important boundaries but do not invent hidden requirements.\n\nUse an original scenario rather than adapting any public task. Make the task\nsubstantial enough that success is not guaranteed by one obvious edit, while staying\nsmall enough to attempt within a five-minute demo run. Do not assume this makes the\ntask learnable: the evaluator will measure difficulty separately. Return only the\ncomplete JSON task bundle required by the fixed framework instructions.\n",
+      "sha256": "2304ba15f6cb7f2498ca620dbe2fdb93f7da01700bc89fe562ce98be5002e5cd",
+      "parent_version": "v0001",
+      "evidence": {
+        "batch_id": "2d5768b9ec27419c",
+        "metrics": {
+          "task_slots": 3,
+          "generation_attempts": 4,
+          "generated_candidates": 4,
+          "valid_tasks": 3,
+          "observed_demo_band_tasks": 0,
+          "budget_limited_tasks": 1,
+          "canonical_learnable_tasks": null
+        },
+        "feedback": {
+          "rationale": "Two of three tasks were solved by all five attempts (too easy: bugs were single-line fixes visible on first read), while the third exhausted the budget on every attempt (too hard: 12 fixture files and multiple interacting rules exceeded reasoning time). The prompt needs to calibrate between these extremes by requiring interacting bugs where fixing one alone is insufficient, and by limiting fixture count so the solver can reason within the demo budget.",
+          "expected_effect": "Next batch should yield tasks where 1-3 of 5 solver attempts succeed, because bugs will require understanding rule interactions rather than spotting a single wrong line, and fixture scope will stay within budget reasoning limits.",
+          "evidence": [
+            "manifest-reconciliation: 5/5 passes, bugs were immediately visible (wrong branch logic, missing dedup)",
+            "ordered-rule-resolution: 5/5 passes, bugs were immediately visible (reversed iteration, missing null handling)",
+            "event-ledger: 0/5 passes, all budget-exhausted; 12 fixture CSVs and 3+ interacting rules exceeded the 5-minute budget"
+          ],
+          "uncertainty": "The interacting-bugs guidance may not be sufficient if the model generates bugs that are still too obvious when combined, or if it overcorrects toward excessive complexity. Fixture count guidance is approximate; the right number depends on rule complexity."
+        }
+      },
+      "status": "rejected",
+      "created_at": "2026-10-06T21:55:17.200912+00:00",
+      "status_updated_at": "2026-10-06T21:59:25.451510+00:00",
+      "active": false
+    },
+    {
+      "version": "v0003",
+      "text": "Generate one original, self-contained terminal task matching the supplied topic.\nAim for a useful debugging or implementation problem with a clear public contract,\nenough interacting requirements to exercise reasoning, and a deterministic oracle.\nFor this first demo, prefer a compact Python CLI with two or three interacting\nrequirements and a small existing broken implementation. Avoid large boilerplate,\nmultiple services, elaborate installations, and runtime-heavy workloads.\n\nStart with a compact existing application and realistic fixture data. The initial\nstate must contain two or three meaningful defects whose fixes interact: correcting\none bug alone should not make most tests pass, and the solver must understand how\nthe rules interact to produce the right fix. Keep fixture files to three to five\ncases that collectively exercise every rule boundary; avoid proliferating fixtures\nbeyond what is needed for coverage.\n\nKeep dependencies modest and install them during the image build. Solving should\ndepend on reading and changing the application, not network access or long computation.\n\nDescribe every required behavior explicitly: command interface, file paths, input\nformat, output format, ordering, error handling, and boundary conditions. Make an\nindependent checklist of this contract before writing the oracle and verifier.\nEnsure oracle, examples, and every test agree with that checklist. The tests should\ncheck observable behavior with multiple small independent cases, not a preferred\nimplementation. Include important boundaries but do not invent hidden requirements.\n\nUse an original scenario rather than adapting any public task. Make the task\nsubstantial enough that success is not guaranteed by one obvious edit, while staying\nsmall enough to attempt within a five-minute demo run. Do not assume this makes the\ntask learnable: the evaluator will measure difficulty separately. Return only the\ncomplete JSON task bundle required by the fixed framework instructions.",
+      "sha256": "f47e097b1ef60c06fe9947acac86c07e3b9c789ff0b70a64b2ff8d2781dfbc6c",
+      "parent_version": "v0001",
+      "evidence": {
+        "batch_id": "2d5768b9ec27419c",
+        "metrics": {
+          "task_slots": 3,
+          "generation_attempts": 4,
+          "generated_candidates": 4,
+          "valid_tasks": 3,
+          "observed_demo_band_tasks": 0,
+          "budget_limited_tasks": 1,
+          "canonical_learnable_tasks": null
+        },
+        "feedback": {
+          "rationale": "Two completed tasks (manifest-reconciliation, ordered-rule-resolution) both achieved 5/5 solver success, indicating they fell below the target difficulty band. Each had isolated bugs fixable by one obvious edit. The prompt should require interacting defects so that partial fixes leave most tests failing, forcing the solver to understand rule interactions. Limiting fixtures to three to five keeps the task compact for the demo budget; the ledger task's 12 fixtures required multiple turns just to read, though its budget outcomes are inconclusive due to confirmed host-sleep confounding on runs 1–3.",
+          "expected_effect": "Next batch should yield tasks where success requires understanding how two or three rules interact, producing 1–3 successes out of 5 valid solver attempts rather than 5/5 or 0/5.",
+          "evidence": [
+            "manifest-reconciliation: 5/5 eval runs passed (87–266 s), outcome too_easy_in_demo",
+            "ordered-rule-resolution: 5/5 eval runs passed (87–203 s), outcome too_easy_in_demo",
+            "event-ledger: all 5 runs budget_exhausted; runs 1–3 confounded by host sleep per host-sleep-2026-10-06-first-wave observation — inconclusive for difficulty",
+            "event-ledger had 12 fixture CSVs; solvers spent first turns reading all fixtures before attempting fixes"
+          ],
+          "uncertainty": "The ledger task's difficulty is genuinely unknown (host sleep confounded 3 of 5 runs; runs 4–5 also timed out but at shorter wall durations). It is possible that interacting defects plus fewer fixtures will overshoot into too-difficult territory; this must be measured, not assumed. The 5/5 easy outcomes may also reflect the specific topics chosen rather than the prompt alone."
+        }
+      },
+      "status": "candidate",
+      "created_at": "2026-10-06T21:59:52.965523+00:00",
+      "active": false
+    },
+    {
+      "version": "v0004",
+      "text": "Generate one original, self-contained terminal task matching the supplied topic.\nAim for a useful debugging or implementation problem with a clear public contract,\nenough interacting requirements to exercise reasoning, and a deterministic oracle.\n\nStart with a realistic partial implementation and fixture data. The initial\nstate must contain multiple meaningful defects whose fixes interact: correcting\nany single defect alone must leave most tests failing, and the solver must\nunderstand how the rules interact to produce the right combined fix. Do not\ncreate tasks where one obvious edit resolves most of the contract. Keep fixture\nfiles to the minimum that collectively exercises every rule boundary; avoid\nproliferating fixtures beyond what is needed for coverage.\n\nVary the solution structure across task families such as transaction recovery,\ndependency graph planning, incremental protocol decoding, safe filesystem\nmigration, relational transformation, deterministic message delivery, resource\nscheduling, and configuration compilation. These are directions to explore,\nnot a requirement to combine unrelated topics in one task. Use the archive to\navoid repeating the same algorithm under new names.\n\nDifficulty should come from understanding interacting invariants and\nimplementing a substantive algorithm or state transition, not from vague\ninstructions, excess boilerplate, obscure package installation, long\ncomputation, or arbitrary format traps. The solver must be able to inspect\nand change the application. Generate a coherent existing system with multiple\nincomplete or incorrect components when the task calls for it, rather than\na minimal skeleton with isolated one-line bugs.\n\nKeep dependencies modest and install them during the image build. Solving should\ndepend on reading and changing the application, not network access or long computation.\n\nDescribe every required behavior explicitly: command interface, file paths, input\nformat, output format, ordering, error handling, and boundary conditions. Make an\nindependent checklist of this contract before writing the oracle and verifier.\nEnsure oracle, examples, and every test agree with that checklist. The tests should\ncheck observable behavior with multiple small independent cases, not a preferred\nimplementation. Include important boundaries but do not invent hidden requirements.\n\nProvide a readable task name and a useful plain-language description of what\nthe task does and why its central challenge matters.\n\nUse an original scenario rather than adapting any public task. Return only the\ncomplete JSON task bundle required by the fixed framework instructions.",
+      "sha256": "c6a31d68cb9023f9c44154f4b13a19539ddc85c5f529de131e682dc4d754476b",
+      "parent_version": "v0003",
+      "evidence": {
+        "search_bootstrap": "9e52229dd22c4fbe",
+        "rationale": "Both completed tasks (manifest-reconciliation, ordered-rule-resolution) achieved 5/5 solver success because each had isolated bugs fixable by one obvious edit, despite v0003 already requesting interacting defects. The prompt still constrained scope to 'compact Python CLI with two or three interacting requirements and a small existing broken implementation,' which led generators to produce minimal skeletons with loosely coupled bugs. Removing the compact/two-or-three ceiling, requiring that any single-defect fix leaves most tests failing, and allowing coherent multi-component systems should produce tasks where the solver must reason about rule interactions rather than spot one wrong line. The event-ledger outcome is inconclusive due to host-sleep confounding, so no difficulty conclusion is drawn from it.",
+        "evidence": [
+          "manifest-reconciliation: 5/5 eval runs passed (87–266 s), outcome too_easy_in_demo",
+          "ordered-rule-resolution: 5/5 eval runs passed (87–203 s), outcome too_easy_in_demo",
+          "event-ledger: all 5 runs budget_exhausted; runs 1–3 confounded by host sleep — inconclusive for difficulty",
+          "v0003 prompt still contained 'compact Python CLI with two or three interacting requirements' and 'small existing broken implementation,' constraining generators toward minimal tasks"
+        ],
+        "uncertainty": "The ledger task's difficulty remains genuinely unknown (host sleep confounded 3 of 5 runs). Removing the compact-CLI ceiling may produce tasks that overshoot into too-difficult territory if generators add unnecessary complexity; this must be measured, not assumed. The 5/5 easy outcomes may also reflect the specific topics chosen rather than scope alone.",
+        "expected_effect": "Next batch should yield tasks where fixing any single defect alone leaves most tests failing, requiring the solver to understand how multiple rules interact; this should produce 1–3 successes out of 5 valid solver attempts rather than 5/5."
+      },
+      "status": "candidate",
+      "created_at": "2026-10-06T22:58:57.681856+00:00",
+      "active": false
+    },
+    {
+      "version": "v0005",
+      "text": "Generate one original, self-contained terminal task matching the supplied topic.\nAim for a useful debugging or implementation problem with a clear public contract,\nenough interacting requirements to exercise reasoning, and a deterministic oracle.\n\nStart with a realistic partial implementation and fixture data. The initial\nstate must contain multiple meaningful defects whose fixes interact: correcting\nany single defect alone must leave most tests failing, and the solver must\nunderstand how the rules interact to produce the right combined fix. Do not\ncreate tasks where one obvious edit resolves most of the contract. Keep fixture\nfiles to the minimum that collectively exercises every rule boundary; avoid\nproliferating fixtures beyond what is needed for coverage.\n\nVary the solution structure across task families such as transaction recovery,\ndependency graph planning, incremental protocol decoding, safe filesystem\nmigration, relational transformation, deterministic message delivery, resource\nscheduling, and configuration compilation. These are directions to explore,\nnot a requirement to combine unrelated topics in one task. Use the archive to\navoid repeating the same algorithm under new names.\n\nDifficulty should come from understanding interacting invariants and\nimplementing a substantive algorithm or state transition, not from vague\ninstructions, excess boilerplate, obscure package installation, long\ncomputation, or arbitrary format traps. The solver must be able to inspect\nand change the application. Generate a coherent existing system with multiple\nincomplete or incorrect components when the task calls for it, rather than\na minimal skeleton with isolated one-line bugs.\n\nKeep dependencies modest and install them during the image build. Solving should\ndepend on reading and changing the application, not network access or long computation.\n\nDescribe every required behavior explicitly: command interface, file paths, input\nformat, output format, ordering, error handling, and boundary conditions. Make an\nindependent checklist of this contract before writing the oracle and verifier.\nEnsure oracle, examples, and every test agree with that checklist. The tests should\ncheck observable behavior with multiple small independent cases, not a preferred\nimplementation. Include important boundaries but do not invent hidden requirements.\n\nCRITICAL: The reference solution must pass every test. After writing the oracle,\nreference solution, and tests, verify that the reference solution produces the\ncorrect output for every test case. If any test fails against the reference\nsolution, fix the reference solution or the test before submitting. An oracle\nfailure invalidates the entire task.\n\nProvide a readable task name and a useful plain-language description of what\nthe task does and why its central challenge matters.\n\nUse an original scenario rather than adapting any public task. Return only the\ncomplete JSON task bundle required by the fixed framework instructions.",
+      "sha256": "5001d020b5c21a83520f68db4fc316129559b8e85e2ca942a3e3e4f7d386426c",
+      "parent_version": "v0004",
+      "evidence": {
+        "batch_id": "18ce31a72ce54500",
+        "generation_prompt_version": "v0004",
+        "metrics": {
+          "task_slots": 3,
+          "generation_attempts": 23,
+          "generated_candidates": 23,
+          "valid_tasks": 0,
+          "observed_demo_band_tasks": 0,
+          "budget_limited_tasks": 0,
+          "canonical_learnable_tasks": 0,
+          "learnable_band_tasks": 0,
+          "duplicate_tasks": 0,
+          "invalid_tasks": 3,
+          "inconclusive_tasks": 0
+        },
+        "feedback": {
+          "rationale": "All three tasks in the v0004 batch were invalid due to authoring defects in the reference solution, not difficulty or scope issues. The transaction-recovery task failed oracle verification (test_multiple_checkpoints returned 'None' instead of '3'). The dependency-planning and streaming-protocol tasks had reference solutions with incorrect in-degree computation and broken escape-sequence state machines respectively. The prompt already requests an independent contract checklist, but this hasn't prevented the generator from producing reference solutions that disagree with their own tests. Adding an explicit post-authoring verification step—requiring the generator to confirm the reference solution passes every test before finalizing—directly addresses the observed failure mode: reference-solution/test contract mismatches.",
+          "expected_effect": "Next batch should yield a higher proportion of valid tasks (oracle and nop controls both passing) because the generator will catch and fix reference-solution/test mismatches before submission, reducing the dominant authoring defect observed in v0004.",
+          "evidence": [
+            "transaction-recovery-0001: oracle run failed on test_multiple_checkpoints (returned 'None' instead of '3'); reference solution disagrees with its own tests",
+            "dependency-planning-0002: semantic review found topological sort in-degree computation is backwards in reference solution; would fail diamond-dependency tests",
+            "streaming-protocol-0003: semantic review found ESC handling in payload state incorrectly transitions to CRC state, breaking escaped-payload decoding; eot state missing SOH resync; Session.frames_err not accumulated",
+            "All 3/3 v0004 tasks invalid due to reference-solution bugs, zero due to difficulty or scope"
+          ],
+          "uncertainty": "The verification instruction relies on the generator model faithfully simulating test execution, which may not catch subtle bugs (e.g., the streaming-protocol ESC state machine error). The root cause may also partly be model capability limits on complex stateful code. Adding verification may slightly reduce task complexity if the generator simplifies contracts to ensure they pass, but this is preferable to invalid tasks."
+        }
+      },
+      "status": "candidate",
+      "created_at": "2026-10-06T23:39:56.260446+00:00",
+      "active": false
+    },
+    {
+      "version": "v0006",
+      "text": "Generate one original, self-contained terminal task matching the supplied topic.\nAim for a useful debugging or implementation problem with a clear public contract,\nenough interacting requirements to exercise reasoning, and a deterministic oracle.\n\nStart with a realistic partial implementation and fixture data. The initial\nstate must contain multiple meaningful defects whose fixes interact: correcting\nany single defect alone must leave most tests failing, and the solver must\nunderstand how the rules interact to produce the right combined fix. Do not\ncreate tasks where one obvious edit resolves most of the contract. Keep fixture\nfiles to the minimum that collectively exercises every rule boundary; avoid\nproliferating fixtures beyond what is needed for coverage.\n\nVary the solution structure across task families such as transaction recovery,\ndependency graph planning, incremental protocol decoding, safe filesystem\nmigration, relational transformation, deterministic message delivery, resource\nscheduling, and configuration compilation. These are directions to explore,\nnot a requirement to combine unrelated topics in one task. Use the archive to\navoid repeating the same algorithm under new names.\n\nDifficulty should come from understanding interacting invariants and\nimplementing a substantive algorithm or state transition, not from vague\ninstructions, excess boilerplate, obscure package installation, long\ncomputation, or arbitrary format traps. The solver must be able to inspect\nand change the application. Generate a coherent existing system with multiple\nincomplete or incorrect components when the task calls for it, rather than\na minimal skeleton with isolated one-line bugs.\n\nKeep dependencies modest and install them during the image build. Solving should\ndepend on reading and changing the application, not network access or long computation.\n\nDescribe every required behavior explicitly: command interface, file paths, input\nformat, output format, ordering, error handling, and boundary conditions. Make an\nindependent checklist of this contract before writing the oracle and verifier.\nEnsure oracle, examples, and every test agree with that checklist. The tests should\ncheck observable behavior with multiple small independent cases, not a preferred\nimplementation. Include important boundaries but do not invent hidden requirements.\n\nCRITICAL: The reference solution must pass every test. After writing the oracle,\nreference solution, and tests, you MUST trace through each test case step by step\nagainst the reference solution code, verifying every assertion by hand. Pay\nparticular attention to: (1) boundary conditions where one rule transitions to\nanother (e.g., lease expiry boundaries, state transitions, off-by-one comparisons);\n(2) multi-step sequences where an earlier operation changes state that a later\noperation depends on (e.g., delete-then-reinsert, partial-apply-then-resume,\nrename chains with cycle-breaking); (3) operations that query state without\nadvancing the clock or triggering a transition (e.g., pending/expired queries\nbefore tick, provenance queries after partial operations). If any test fails\nagainst the reference solution, fix the reference solution or the test before\nsubmitting. An oracle failure invalidates the entire task.\n\nProvide a readable task name and a useful plain-language description of what\nthe task does and why its central challenge matters.\n\nUse an original scenario rather than adapting any public task. Return only the\ncomplete JSON task bundle required by the fixed framework instructions.",
+      "sha256": "77c330e8366b3e4dcf2b31c177f4d27e185c3195021d1d2dde2eedb580cbd3a2",
+      "parent_version": "v0005",
+      "evidence": {
+        "batch_id": "50a1d151f0eb45fe",
+        "generation_prompt_version": "v0005",
+        "metrics": {
+          "task_slots": 3,
+          "generation_attempts": 12,
+          "generated_candidates": 12,
+          "valid_tasks": 0,
+          "observed_demo_band_tasks": 0,
+          "budget_limited_tasks": 0,
+          "canonical_learnable_tasks": 0,
+          "learnable_band_tasks": 0,
+          "duplicate_tasks": 0,
+          "invalid_tasks": 3,
+          "inconclusive_tasks": 0
+        },
+        "feedback": {
+          "rationale": "All 6/6 tasks across v0004 and v0005 were invalid due to reference-solution/test contract mismatches. The v0005 CRITICAL instruction asked the generator to 'verify that the reference solution produces the correct output for every test case' but this was too vague—the generator apparently did not actually trace through the failing scenarios. The specific failure patterns are highly consistent: (1) boundary condition errors (lease_until < vs <=, rmdir inclusion when no temp paths used), (2) multi-step state sequences (delete-then-reinsert provenance, partial-apply-then-resume journal recovery, rename chain content mapping), (3) queries without transitions (pending/expired before tick, provenance table existence). Naming these three specific failure categories in the prompt gives the generator concrete checkpoints to trace, making the verification instruction actionable rather than aspirational.",
+          "expected_effect": "Next batch should yield a higher proportion of valid tasks (oracle and nop controls both passing) because the generator will trace through the three named failure categories—boundary transitions, multi-step state sequences, and queries-without-transitions—catching the bugs that currently slip through vague verification instructions.",
+          "evidence": [
+            "filesystem-migration-0004: 7 oracle failures including rename chain content mapping (gamma.txt gets alpha_content instead of beta_content), partial-apply resume FileNotFoundError, rmdir emitted when no temp paths used",
+            "relational-transforms-0005: 8 oracle failures including missing provenance table (no such table), delete_a not cascading correctly, dual-provenance and reinsert-after-delete failures",
+            "message-delivery-0006: 7 oracle failures including lease boundary (pending shows expired messages), cancel(EXPIRED) incorrectly returns True, pending not excluding expired leases",
+            "All 3/3 v0005 tasks invalid due to reference-solution bugs passing semantic review but failing oracle execution",
+            "v0004 had identical failure mode: 3/3 invalid due to reference-solution/test mismatches"
+          ],
+          "uncertainty": "The generator model may still not faithfully trace complex multi-step scenarios even with explicit checkpoints, especially for tasks with many interacting rules. The three named categories cover the observed failures but may not cover all future failure modes. There is a risk the generator simplifies contracts to avoid these categories, slightly reducing task complexity, but this is preferable to continued 100% invalid-task yield."
+        }
+      },
+      "status": "candidate",
+      "created_at": "2026-10-06T23:45:44.582038+00:00",
+      "active": true
+    }
+  ],
+  "events": [
+    {
+      "schema_version": 1,
+      "event_id": "479c435119f1429ba60be4b1d8aa3176",
+      "recorded_at": "2026-10-06T22:37:43.299662+00:00",
+      "operation": "recovered_snapshot",
+      "recovery_key": "snapshot:v0001",
+      "record": {
+        "version": "v0001",
+        "text": "Generate one original, self-contained terminal task matching the supplied topic.\nAim for a useful debugging or implementation problem with a clear public contract,\nenough interacting requirements to exercise reasoning, and a deterministic oracle.\nFor this first demo, prefer a compact Python CLI with two or three interacting\nrequirements and a small existing broken implementation. Avoid large boilerplate,\nmultiple services, elaborate installations, and runtime-heavy workloads.\n\nStart with a compact existing application and realistic fixture data. The initial\nstate must contain a meaningful defect or missing behavior that causes tests to fail.\nKeep dependencies modest and install them during the image build. Solving should\ndepend on reading and changing the application, not network access or long computation.\n\nDescribe every required behavior explicitly: command interface, file paths, input\nformat, output format, ordering, error handling, and boundary conditions. Make an\nindependent checklist of this contract before writing the oracle and verifier.\nEnsure oracle, examples, and every test agree with that checklist. The tests should\ncheck observable behavior with multiple small independent cases, not a preferred\nimplementation. Include important boundaries but do not invent hidden requirements.\n\nUse an original scenario rather than adapting any public task. Make the task\nsubstantial enough that success is not guaranteed by one obvious edit, while staying\nsmall enough to attempt within a five-minute demo run. Do not assume this makes the\ntask learnable: the evaluator will measure difficulty separately. Return only the\ncomplete JSON task bundle required by the fixed framework instructions.\n",
+        "sha256": "078b16ab234372088471ae54320563d210f839f326410f9742caca577dbf2045",
+        "parent_version": null,
+        "evidence": {
+          "source": "prompts/starter_prompt.txt"
+        },
+        "status": "baseline",
+        "created_at": "2026-10-06T21:00:23.134031+00:00",
+        "active": false
+      },
+      "source": "versions/v0001.json + states/v0001.json",
+      "note": "Snapshot at recovery; created_at/status_updated_at are source timestamps. Past activation times and order are unknown."
+    },
+    {
+      "schema_version": 1,
+      "event_id": "2d978accbce840f99e069500bc1b3f32",
+      "recorded_at": "2026-10-06T22:37:43.300295+00:00",
+      "operation": "recovered_snapshot",
+      "recovery_key": "snapshot:v0002",
+      "record": {
+        "version": "v0002",
+        "text": "Generate one original, self-contained terminal task matching the supplied topic.\nAim for a useful debugging or implementation problem with a clear public contract,\nenough interacting requirements to exercise reasoning, and a deterministic oracle.\nFor this first demo, prefer a compact Python CLI with two or three interacting\nrequirements and a small existing broken implementation. Avoid large boilerplate,\nmultiple services, elaborate installations, and runtime-heavy workloads.\n\nStart with a compact existing application and realistic fixture data. The initial\nstate must contain two or three meaningful defects whose fixes interact: correcting\none bug alone should not make most tests pass, and the solver must understand how\nthe rules interact to produce the right fix. Keep fixture files to three to five\ncases that collectively exercise every rule boundary; avoid proliferating fixtures\nbeyond what is needed for coverage.\n\nKeep dependencies modest and install them during the image build. Solving should\ndepend on reading and changing the application, not network access or long computation.\n\nDescribe every required behavior explicitly: command interface, file paths, input\nformat, output format, ordering, error handling, and boundary conditions. Make an\nindependent checklist of this contract before writing the oracle and verifier.\nEnsure oracle, examples, and every test agree with that checklist. The tests should\ncheck observable behavior with multiple small independent cases, not a preferred\nimplementation. Include important boundaries but do not invent hidden requirements.\n\nUse an original scenario rather than adapting any public task. Make the task\nsubstantial enough that success is not guaranteed by one obvious edit, while staying\nsmall enough to attempt within a five-minute demo run. Do not assume this makes the\ntask learnable: the evaluator will measure difficulty separately. Return only the\ncomplete JSON task bundle required by the fixed framework instructions.\n",
+        "sha256": "2304ba15f6cb7f2498ca620dbe2fdb93f7da01700bc89fe562ce98be5002e5cd",
+        "parent_version": "v0001",
+        "evidence": {
+          "batch_id": "2d5768b9ec27419c",
+          "metrics": {
+            "task_slots": 3,
+            "generation_attempts": 4,
+            "generated_candidates": 4,
+            "valid_tasks": 3,
+            "observed_demo_band_tasks": 0,
+            "budget_limited_tasks": 1,
+            "canonical_learnable_tasks": null
+          },
+          "feedback": {
+            "rationale": "Two of three tasks were solved by all five attempts (too easy: bugs were single-line fixes visible on first read), while the third exhausted the budget on every attempt (too hard: 12 fixture files and multiple interacting rules exceeded reasoning time). The prompt needs to calibrate between these extremes by requiring interacting bugs where fixing one alone is insufficient, and by limiting fixture count so the solver can reason within the demo budget.",
+            "expected_effect": "Next batch should yield tasks where 1-3 of 5 solver attempts succeed, because bugs will require understanding rule interactions rather than spotting a single wrong line, and fixture scope will stay within budget reasoning limits.",
+            "evidence": [
+              "manifest-reconciliation: 5/5 passes, bugs were immediately visible (wrong branch logic, missing dedup)",
+              "ordered-rule-resolution: 5/5 passes, bugs were immediately visible (reversed iteration, missing null handling)",
+              "event-ledger: 0/5 passes, all budget-exhausted; 12 fixture CSVs and 3+ interacting rules exceeded the 5-minute budget"
+            ],
+            "uncertainty": "The interacting-bugs guidance may not be sufficient if the model generates bugs that are still too obvious when combined, or if it overcorrects toward excessive complexity. Fixture count guidance is approximate; the right number depends on rule complexity."
+          }
+        },
+        "status": "rejected",
+        "created_at": "2026-10-06T21:55:17.200912+00:00",
+        "status_updated_at": "2026-10-06T21:59:25.451510+00:00",
+        "active": false
+      },
+      "source": "versions/v0002.json + states/v0002.json",
+      "note": "Snapshot at recovery; created_at/status_updated_at are source timestamps. Past activation times and order are unknown."
+    },
+    {
+      "schema_version": 1,
+      "event_id": "364993644f5442c0b826d55165e339ad",
+      "recorded_at": "2026-10-06T22:37:43.300493+00:00",
+      "operation": "recovered_snapshot",
+      "recovery_key": "snapshot:v0003",
+      "record": {
+        "version": "v0003",
+        "text": "Generate one original, self-contained terminal task matching the supplied topic.\nAim for a useful debugging or implementation problem with a clear public contract,\nenough interacting requirements to exercise reasoning, and a deterministic oracle.\nFor this first demo, prefer a compact Python CLI with two or three interacting\nrequirements and a small existing broken implementation. Avoid large boilerplate,\nmultiple services, elaborate installations, and runtime-heavy workloads.\n\nStart with a compact existing application and realistic fixture data. The initial\nstate must contain two or three meaningful defects whose fixes interact: correcting\none bug alone should not make most tests pass, and the solver must understand how\nthe rules interact to produce the right fix. Keep fixture files to three to five\ncases that collectively exercise every rule boundary; avoid proliferating fixtures\nbeyond what is needed for coverage.\n\nKeep dependencies modest and install them during the image build. Solving should\ndepend on reading and changing the application, not network access or long computation.\n\nDescribe every required behavior explicitly: command interface, file paths, input\nformat, output format, ordering, error handling, and boundary conditions. Make an\nindependent checklist of this contract before writing the oracle and verifier.\nEnsure oracle, examples, and every test agree with that checklist. The tests should\ncheck observable behavior with multiple small independent cases, not a preferred\nimplementation. Include important boundaries but do not invent hidden requirements.\n\nUse an original scenario rather than adapting any public task. Make the task\nsubstantial enough that success is not guaranteed by one obvious edit, while staying\nsmall enough to attempt within a five-minute demo run. Do not assume this makes the\ntask learnable: the evaluator will measure difficulty separately. Return only the\ncomplete JSON task bundle required by the fixed framework instructions.",
+        "sha256": "f47e097b1ef60c06fe9947acac86c07e3b9c789ff0b70a64b2ff8d2781dfbc6c",
+        "parent_version": "v0001",
+        "evidence": {
+          "batch_id": "2d5768b9ec27419c",
+          "metrics": {
+            "task_slots": 3,
+            "generation_attempts": 4,
+            "generated_candidates": 4,
+            "valid_tasks": 3,
+            "observed_demo_band_tasks": 0,
+            "budget_limited_tasks": 1,
+            "canonical_learnable_tasks": null
+          },
+          "feedback": {
+            "rationale": "Two completed tasks (manifest-reconciliation, ordered-rule-resolution) both achieved 5/5 solver success, indicating they fell below the target difficulty band. Each had isolated bugs fixable by one obvious edit. The prompt should require interacting defects so that partial fixes leave most tests failing, forcing the solver to understand rule interactions. Limiting fixtures to three to five keeps the task compact for the demo budget; the ledger task's 12 fixtures required multiple turns just to read, though its budget outcomes are inconclusive due to confirmed host-sleep confounding on runs 1–3.",
+            "expected_effect": "Next batch should yield tasks where success requires understanding how two or three rules interact, producing 1–3 successes out of 5 valid solver attempts rather than 5/5 or 0/5.",
+            "evidence": [
+              "manifest-reconciliation: 5/5 eval runs passed (87–266 s), outcome too_easy_in_demo",
+              "ordered-rule-resolution: 5/5 eval runs passed (87–203 s), outcome too_easy_in_demo",
+              "event-ledger: all 5 runs budget_exhausted; runs 1–3 confounded by host sleep per host-sleep-2026-10-06-first-wave observation — inconclusive for difficulty",
+              "event-ledger had 12 fixture CSVs; solvers spent first turns reading all fixtures before attempting fixes"
+            ],
+            "uncertainty": "The ledger task's difficulty is genuinely unknown (host sleep confounded 3 of 5 runs; runs 4–5 also timed out but at shorter wall durations). It is possible that interacting defects plus fewer fixtures will overshoot into too-difficult territory; this must be measured, not assumed. The 5/5 easy outcomes may also reflect the specific topics chosen rather than the prompt alone."
+          }
+        },
+        "status": "candidate",
+        "created_at": "2026-10-06T21:59:52.965523+00:00",
+        "active": true
+      },
+      "source": "versions/v0003.json + states/v0003.json",
+      "note": "Snapshot at recovery; created_at/status_updated_at are source timestamps. Past activation times and order are unknown."
+    },
+    {
+      "schema_version": 1,
+      "event_id": "b3fc85afb94a4330a531f5decbef18eb",
+      "recorded_at": "2026-10-06T22:37:43.300616+00:00",
+      "operation": "recovered_current",
+      "recovery_key": "current_snapshot",
+      "version": "v0003",
+      "note": "Current pointer observed at recovery; this is not an activation event."
+    },
+    {
+      "schema_version": 1,
+      "event_id": "79a4912d7793472aaeceda881443c8d8",
+      "recorded_at": "2026-10-06T22:37:43.300680+00:00",
+      "operation": "recovery_complete"
+    },
+    {
+      "schema_version": 1,
+      "event_id": "cbf9c6520be345e396d79cb04c1849f0",
+      "recorded_at": "2026-10-06T22:37:43.301424+00:00",
+      "operation": "recovered_evidence",
+      "recovery_key": "report:dbb30be75eb67159ed3e6e912f2e874d8664e3c7e78d14d512d152cc51a8ea1e",
+      "source": "reports/phase-2-checkpoint.json",
+      "source_recorded_at": "2026-10-06T22:02:29.238577+00:00",
+      "batch_id": "2d5768b9ec27419c",
+      "evidence": {
+        "source_version": "v0001",
+        "rejected_version": "v0002",
+        "current_candidate": "v0003",
+        "candidate_validated": false,
+        "rejection_reason": "Unsupported difficulty claim: all ledger attempts were budget-limited; first three were also confounded by confirmed host sleep. There is no valid 0/5 difficulty measurement or evidence that fixture count caused timeouts.",
+        "proposal_attempts": [
+          {
+            "request_name": "prompt-update",
+            "status": "completed",
+            "cost_usd": 0.03934824,
+            "rejected_version": "v0002",
+            "rejection_reason": "Unsupported difficulty claim: all ledger attempts were budget-limited; first three were also confounded by confirmed host sleep. There is no valid 0/5 difficulty measurement or evidence that fixture count caused timeouts."
+          },
+          {
+            "request_name": "prompt-update-correction-1",
+            "status": "completed",
+            "cost_usd": 0.035271904,
+            "correction_feedback": {
+              "rejected_version": "v0002",
+              "rejection_reason": "Unsupported difficulty claim: all ledger attempts were budget-limited; first three were also confounded by confirmed host sleep. There is no valid 0/5 difficulty measurement or evidence that fixture count caused timeouts.",
+              "previous_proposal": "Generate one original, self-contained terminal task matching the supplied topic.\nAim for a useful debugging or implementation problem with a clear public contract,\nenough interacting requirements to exercise reasoning, and a deterministic oracle.\nFor this first demo, prefer a compact Python CLI with two or three interacting\nrequirements and a small existing broken implementation. Avoid large boilerplate,\nmultiple services, elaborate installations, and runtime-heavy workloads.\n\nStart with a compact existing application and realistic fixture data. The initial\nstate must contain two or three meaningful defects whose fixes interact: correcting\none bug alone should not make most tests pass, and the solver must understand how\nthe rules interact to produce the right fix. Keep fixture files to three to five\ncases that collectively exercise every rule boundary; avoid proliferating fixtures\nbeyond what is needed for coverage.\n\nKeep dependencies modest and install them during the image build. Solving should\ndepend on reading and changing the application, not network access or long computation.\n\nDescribe every required behavior explicitly: command interface, file paths, input\nformat, output format, ordering, error handling, and boundary conditions. Make an\nindependent checklist of this contract before writing the oracle and verifier.\nEnsure oracle, examples, and every test agree with that checklist. The tests should\ncheck observable behavior with multiple small independent cases, not a preferred\nimplementation. Include important boundaries but do not invent hidden requirements.\n\nUse an original scenario rather than adapting any public task. Make the task\nsubstantial enough that success is not guaranteed by one obvious edit, while staying\nsmall enough to attempt within a five-minute demo run. Do not assume this makes the\ntask learnable: the evaluator will measure difficulty separately. Return only the\ncomplete JSON task bundle required by the fixed framework instructions.\n",
+              "instructions": "Make one corrected revision from the original source prompt. Use the two complete 5/5 tasks as evidence of easy demo tasks; treat the ledger as inconclusive. Do not call budget stops verified failures or infer their cause. Include the now-supplied host-sleep evidence and earlier semantic repair history. Any expected improvement must remain a hypothesis for fresh evaluation. Preserve validity, coverage, fixed model/budget rules and original-task requirements."
+            }
+          }
+        ],
+        "authored_by_model_verified": true,
+        "model_response_id": "gen-1791323966-uL8rwx3CyBVFgwNd2NuR"
+      },
+      "note": "Recovered report evidence, not a reconstruction of missing activation events."
+    },
+    {
+      "schema_version": 1,
+      "event_id": "e5b701aa8dd947a4b6b12dd64d26c09f",
+      "recorded_at": "2026-10-06T22:58:57.681911+00:00",
+      "operation": "version_create",
+      "phase": "intent",
+      "operation_id": "11e856b9c78d4104ad5b8df00c7e1a3c",
+      "record": {
+        "version": "v0004",
+        "text": "Generate one original, self-contained terminal task matching the supplied topic.\nAim for a useful debugging or implementation problem with a clear public contract,\nenough interacting requirements to exercise reasoning, and a deterministic oracle.\n\nStart with a realistic partial implementation and fixture data. The initial\nstate must contain multiple meaningful defects whose fixes interact: correcting\nany single defect alone must leave most tests failing, and the solver must\nunderstand how the rules interact to produce the right combined fix. Do not\ncreate tasks where one obvious edit resolves most of the contract. Keep fixture\nfiles to the minimum that collectively exercises every rule boundary; avoid\nproliferating fixtures beyond what is needed for coverage.\n\nVary the solution structure across task families such as transaction recovery,\ndependency graph planning, incremental protocol decoding, safe filesystem\nmigration, relational transformation, deterministic message delivery, resource\nscheduling, and configuration compilation. These are directions to explore,\nnot a requirement to combine unrelated topics in one task. Use the archive to\navoid repeating the same algorithm under new names.\n\nDifficulty should come from understanding interacting invariants and\nimplementing a substantive algorithm or state transition, not from vague\ninstructions, excess boilerplate, obscure package installation, long\ncomputation, or arbitrary format traps. The solver must be able to inspect\nand change the application. Generate a coherent existing system with multiple\nincomplete or incorrect components when the task calls for it, rather than\na minimal skeleton with isolated one-line bugs.\n\nKeep dependencies modest and install them during the image build. Solving should\ndepend on reading and changing the application, not network access or long computation.\n\nDescribe every required behavior explicitly: command interface, file paths, input\nformat, output format, ordering, error handling, and boundary conditions. Make an\nindependent checklist of this contract before writing the oracle and verifier.\nEnsure oracle, examples, and every test agree with that checklist. The tests should\ncheck observable behavior with multiple small independent cases, not a preferred\nimplementation. Include important boundaries but do not invent hidden requirements.\n\nProvide a readable task name and a useful plain-language description of what\nthe task does and why its central challenge matters.\n\nUse an original scenario rather than adapting any public task. Return only the\ncomplete JSON task bundle required by the fixed framework instructions.",
+        "sha256": "c6a31d68cb9023f9c44154f4b13a19539ddc85c5f529de131e682dc4d754476b",
+        "parent_version": "v0003",
+        "evidence": {
+          "search_bootstrap": "9e52229dd22c4fbe",
+          "rationale": "Both completed tasks (manifest-reconciliation, ordered-rule-resolution) achieved 5/5 solver success because each had isolated bugs fixable by one obvious edit, despite v0003 already requesting interacting defects. The prompt still constrained scope to 'compact Python CLI with two or three interacting requirements and a small existing broken implementation,' which led generators to produce minimal skeletons with loosely coupled bugs. Removing the compact/two-or-three ceiling, requiring that any single-defect fix leaves most tests failing, and allowing coherent multi-component systems should produce tasks where the solver must reason about rule interactions rather than spot one wrong line. The event-ledger outcome is inconclusive due to host-sleep confounding, so no difficulty conclusion is drawn from it.",
+          "evidence": [
+            "manifest-reconciliation: 5/5 eval runs passed (87–266 s), outcome too_easy_in_demo",
+            "ordered-rule-resolution: 5/5 eval runs passed (87–203 s), outcome too_easy_in_demo",
+            "event-ledger: all 5 runs budget_exhausted; runs 1–3 confounded by host sleep — inconclusive for difficulty",
+            "v0003 prompt still contained 'compact Python CLI with two or three interacting requirements' and 'small existing broken implementation,' constraining generators toward minimal tasks"
+          ],
+          "uncertainty": "The ledger task's difficulty remains genuinely unknown (host sleep confounded 3 of 5 runs). Removing the compact-CLI ceiling may produce tasks that overshoot into too-difficult territory if generators add unnecessary complexity; this must be measured, not assumed. The 5/5 easy outcomes may also reflect the specific topics chosen rather than scope alone.",
+          "expected_effect": "Next batch should yield tasks where fixing any single defect alone leaves most tests failing, requiring the solver to understand how multiple rules interact; this should produce 1–3 successes out of 5 valid solver attempts rather than 5/5."
+        },
+        "status": "candidate",
+        "created_at": "2026-10-06T22:58:57.681856+00:00"
+      }
+    },
+    {
+      "schema_version": 1,
+      "event_id": "7dd58681afbc4295a603cacde866fc05",
+      "recorded_at": "2026-10-06T22:58:57.683362+00:00",
+      "operation": "version_create",
+      "phase": "applied",
+      "operation_id": "11e856b9c78d4104ad5b8df00c7e1a3c"
+    },
+    {
+      "schema_version": 1,
+      "event_id": "1443976e243a43528e04588ab8c3f0cc",
+      "recorded_at": "2026-10-06T22:58:57.683636+00:00",
+      "operation": "activate",
+      "phase": "intent",
+      "operation_id": "b93800317b38403e90b63c349dc403e1",
+      "version": "v0004",
+      "previous_version": "v0003",
+      "reason": "Activate newly created prompt."
+    },
+    {
+      "schema_version": 1,
+      "event_id": "f3e20676a4ab41c1ae722eea689e4934",
+      "recorded_at": "2026-10-06T22:58:57.684448+00:00",
+      "operation": "activate",
+      "phase": "applied",
+      "operation_id": "b93800317b38403e90b63c349dc403e1"
+    },
+    {
+      "schema_version": 1,
+      "event_id": "5928670c9358480285ca8f5b871f5f7e",
+      "recorded_at": "2026-10-06T23:39:43.300626+00:00",
+      "operation": "activate",
+      "phase": "intent",
+      "operation_id": "e774bd3eab1f4ff1a9b315bc5ae26019",
+      "version": "v0004",
+      "previous_version": "v0004",
+      "reason": "Use the best empirically observed prompt as the optimizer's starting point."
+    },
+    {
+      "schema_version": 1,
+      "event_id": "43ebaafba852465cbec755db4493656e",
+      "recorded_at": "2026-10-06T23:39:43.301274+00:00",
+      "operation": "activate",
+      "phase": "applied",
+      "operation_id": "e774bd3eab1f4ff1a9b315bc5ae26019"
+    },
+    {
+      "schema_version": 1,
+      "event_id": "c60efada80d84bfd92f0fad3be745b5b",
+      "recorded_at": "2026-10-06T23:39:56.260511+00:00",
+      "operation": "version_create",
+      "phase": "intent",
+      "operation_id": "23ee63e9665e428b89b7464114a33d85",
+      "record": {
+        "version": "v0005",
+        "text": "Generate one original, self-contained terminal task matching the supplied topic.\nAim for a useful debugging or implementation problem with a clear public contract,\nenough interacting requirements to exercise reasoning, and a deterministic oracle.\n\nStart with a realistic partial implementation and fixture data. The initial\nstate must contain multiple meaningful defects whose fixes interact: correcting\nany single defect alone must leave most tests failing, and the solver must\nunderstand how the rules interact to produce the right combined fix. Do not\ncreate tasks where one obvious edit resolves most of the contract. Keep fixture\nfiles to the minimum that collectively exercises every rule boundary; avoid\nproliferating fixtures beyond what is needed for coverage.\n\nVary the solution structure across task families such as transaction recovery,\ndependency graph planning, incremental protocol decoding, safe filesystem\nmigration, relational transformation, deterministic message delivery, resource\nscheduling, and configuration compilation. These are directions to explore,\nnot a requirement to combine unrelated topics in one task. Use the archive to\navoid repeating the same algorithm under new names.\n\nDifficulty should come from understanding interacting invariants and\nimplementing a substantive algorithm or state transition, not from vague\ninstructions, excess boilerplate, obscure package installation, long\ncomputation, or arbitrary format traps. The solver must be able to inspect\nand change the application. Generate a coherent existing system with multiple\nincomplete or incorrect components when the task calls for it, rather than\na minimal skeleton with isolated one-line bugs.\n\nKeep dependencies modest and install them during the image build. Solving should\ndepend on reading and changing the application, not network access or long computation.\n\nDescribe every required behavior explicitly: command interface, file paths, input\nformat, output format, ordering, error handling, and boundary conditions. Make an\nindependent checklist of this contract before writing the oracle and verifier.\nEnsure oracle, examples, and every test agree with that checklist. The tests should\ncheck observable behavior with multiple small independent cases, not a preferred\nimplementation. Include important boundaries but do not invent hidden requirements.\n\nCRITICAL: The reference solution must pass every test. After writing the oracle,\nreference solution, and tests, verify that the reference solution produces the\ncorrect output for every test case. If any test fails against the reference\nsolution, fix the reference solution or the test before submitting. An oracle\nfailure invalidates the entire task.\n\nProvide a readable task name and a useful plain-language description of what\nthe task does and why its central challenge matters.\n\nUse an original scenario rather than adapting any public task. Return only the\ncomplete JSON task bundle required by the fixed framework instructions.",
+        "sha256": "5001d020b5c21a83520f68db4fc316129559b8e85e2ca942a3e3e4f7d386426c",
+        "parent_version": "v0004",
+        "evidence": {
+          "batch_id": "18ce31a72ce54500",
+          "generation_prompt_version": "v0004",
+          "metrics": {
+            "task_slots": 3,
+            "generation_attempts": 23,
+            "generated_candidates": 23,
+            "valid_tasks": 0,
+            "observed_demo_band_tasks": 0,
+            "budget_limited_tasks": 0,
+            "canonical_learnable_tasks": 0,
+            "learnable_band_tasks": 0,
+            "duplicate_tasks": 0,
+            "invalid_tasks": 3,
+            "inconclusive_tasks": 0
+          },
+          "feedback": {
+            "rationale": "All three tasks in the v0004 batch were invalid due to authoring defects in the reference solution, not difficulty or scope issues. The transaction-recovery task failed oracle verification (test_multiple_checkpoints returned 'None' instead of '3'). The dependency-planning and streaming-protocol tasks had reference solutions with incorrect in-degree computation and broken escape-sequence state machines respectively. The prompt already requests an independent contract checklist, but this hasn't prevented the generator from producing reference solutions that disagree with their own tests. Adding an explicit post-authoring verification step—requiring the generator to confirm the reference solution passes every test before finalizing—directly addresses the observed failure mode: reference-solution/test contract mismatches.",
+            "expected_effect": "Next batch should yield a higher proportion of valid tasks (oracle and nop controls both passing) because the generator will catch and fix reference-solution/test mismatches before submission, reducing the dominant authoring defect observed in v0004.",
+            "evidence": [
+              "transaction-recovery-0001: oracle run failed on test_multiple_checkpoints (returned 'None' instead of '3'); reference solution disagrees with its own tests",
+              "dependency-planning-0002: semantic review found topological sort in-degree computation is backwards in reference solution; would fail diamond-dependency tests",
+              "streaming-protocol-0003: semantic review found ESC handling in payload state incorrectly transitions to CRC state, breaking escaped-payload decoding; eot state missing SOH resync; Session.frames_err not accumulated",
+              "All 3/3 v0004 tasks invalid due to reference-solution bugs, zero due to difficulty or scope"
+            ],
+            "uncertainty": "The verification instruction relies on the generator model faithfully simulating test execution, which may not catch subtle bugs (e.g., the streaming-protocol ESC state machine error). The root cause may also partly be model capability limits on complex stateful code. Adding verification may slightly reduce task complexity if the generator simplifies contracts to ensure they pass, but this is preferable to invalid tasks."
+          }
+        },
+        "status": "candidate",
+        "created_at": "2026-10-06T23:39:56.260446+00:00"
+      }
+    },
+    {
+      "schema_version": 1,
+      "event_id": "e2f355d0784d4c33a030c19952b7291a",
+      "recorded_at": "2026-10-06T23:39:56.261969+00:00",
+      "operation": "version_create",
+      "phase": "applied",
+      "operation_id": "23ee63e9665e428b89b7464114a33d85"
+    },
+    {
+      "schema_version": 1,
+      "event_id": "d2102eb7978e44a78a23bfe1d76415a5",
+      "recorded_at": "2026-10-06T23:39:56.262313+00:00",
+      "operation": "activate",
+      "phase": "intent",
+      "operation_id": "665bed2e44174cb58d1c47489ee99f31",
+      "version": "v0005",
+      "previous_version": "v0004",
+      "reason": "Activate newly created prompt."
+    },
+    {
+      "schema_version": 1,
+      "event_id": "51efc32ce650488bb546f85139ccebad",
+      "recorded_at": "2026-10-06T23:39:56.263074+00:00",
+      "operation": "activate",
+      "phase": "applied",
+      "operation_id": "665bed2e44174cb58d1c47489ee99f31"
+    },
+    {
+      "schema_version": 1,
+      "event_id": "264c38b0d7c345f0a07c67789fc5ab44",
+      "recorded_at": "2026-10-06T23:45:30.161497+00:00",
+      "operation": "activate",
+      "phase": "intent",
+      "operation_id": "9530bf7ce1274f25aad9be33c45d3bdf",
+      "version": "v0005",
+      "previous_version": "v0005",
+      "reason": "Use the best empirically observed prompt as the optimizer's starting point."
+    },
+    {
+      "schema_version": 1,
+      "event_id": "ad6ae34dbd074cc18085fdb8b23a4097",
+      "recorded_at": "2026-10-06T23:45:30.162045+00:00",
+      "operation": "activate",
+      "phase": "applied",
+      "operation_id": "9530bf7ce1274f25aad9be33c45d3bdf"
+    },
+    {
+      "schema_version": 1,
+      "event_id": "28062869de9449768efd278396d7de55",
+      "recorded_at": "2026-10-06T23:45:44.582099+00:00",
+      "operation": "version_create",
+      "phase": "intent",
+      "operation_id": "5c1d4d32095f4ccabc2c77ea11238eb3",
+      "record": {
+        "version": "v0006",
+        "text": "Generate one original, self-contained terminal task matching the supplied topic.\nAim for a useful debugging or implementation problem with a clear public contract,\nenough interacting requirements to exercise reasoning, and a deterministic oracle.\n\nStart with a realistic partial implementation and fixture data. The initial\nstate must contain multiple meaningful defects whose fixes interact: correcting\nany single defect alone must leave most tests failing, and the solver must\nunderstand how the rules interact to produce the right combined fix. Do not\ncreate tasks where one obvious edit resolves most of the contract. Keep fixture\nfiles to the minimum that collectively exercises every rule boundary; avoid\nproliferating fixtures beyond what is needed for coverage.\n\nVary the solution structure across task families such as transaction recovery,\ndependency graph planning, incremental protocol decoding, safe filesystem\nmigration, relational transformation, deterministic message delivery, resource\nscheduling, and configuration compilation. These are directions to explore,\nnot a requirement to combine unrelated topics in one task. Use the archive to\navoid repeating the same algorithm under new names.\n\nDifficulty should come from understanding interacting invariants and\nimplementing a substantive algorithm or state transition, not from vague\ninstructions, excess boilerplate, obscure package installation, long\ncomputation, or arbitrary format traps. The solver must be able to inspect\nand change the application. Generate a coherent existing system with multiple\nincomplete or incorrect components when the task calls for it, rather than\na minimal skeleton with isolated one-line bugs.\n\nKeep dependencies modest and install them during the image build. Solving should\ndepend on reading and changing the application, not network access or long computation.\n\nDescribe every required behavior explicitly: command interface, file paths, input\nformat, output format, ordering, error handling, and boundary conditions. Make an\nindependent checklist of this contract before writing the oracle and verifier.\nEnsure oracle, examples, and every test agree with that checklist. The tests should\ncheck observable behavior with multiple small independent cases, not a preferred\nimplementation. Include important boundaries but do not invent hidden requirements.\n\nCRITICAL: The reference solution must pass every test. After writing the oracle,\nreference solution, and tests, you MUST trace through each test case step by step\nagainst the reference solution code, verifying every assertion by hand. Pay\nparticular attention to: (1) boundary conditions where one rule transitions to\nanother (e.g., lease expiry boundaries, state transitions, off-by-one comparisons);\n(2) multi-step sequences where an earlier operation changes state that a later\noperation depends on (e.g., delete-then-reinsert, partial-apply-then-resume,\nrename chains with cycle-breaking); (3) operations that query state without\nadvancing the clock or triggering a transition (e.g., pending/expired queries\nbefore tick, provenance queries after partial operations). If any test fails\nagainst the reference solution, fix the reference solution or the test before\nsubmitting. An oracle failure invalidates the entire task.\n\nProvide a readable task name and a useful plain-language description of what\nthe task does and why its central challenge matters.\n\nUse an original scenario rather than adapting any public task. Return only the\ncomplete JSON task bundle required by the fixed framework instructions.",
+        "sha256": "77c330e8366b3e4dcf2b31c177f4d27e185c3195021d1d2dde2eedb580cbd3a2",
+        "parent_version": "v0005",
+        "evidence": {
+          "batch_id": "50a1d151f0eb45fe",
+          "generation_prompt_version": "v0005",
+          "metrics": {
+            "task_slots": 3,
+            "generation_attempts": 12,
+            "generated_candidates": 12,
+            "valid_tasks": 0,
+            "observed_demo_band_tasks": 0,
+            "budget_limited_tasks": 0,
+            "canonical_learnable_tasks": 0,
+            "learnable_band_tasks": 0,
+            "duplicate_tasks": 0,
+            "invalid_tasks": 3,
+            "inconclusive_tasks": 0
+          },
+          "feedback": {
+            "rationale": "All 6/6 tasks across v0004 and v0005 were invalid due to reference-solution/test contract mismatches. The v0005 CRITICAL instruction asked the generator to 'verify that the reference solution produces the correct output for every test case' but this was too vague—the generator apparently did not actually trace through the failing scenarios. The specific failure patterns are highly consistent: (1) boundary condition errors (lease_until < vs <=, rmdir inclusion when no temp paths used), (2) multi-step state sequences (delete-then-reinsert provenance, partial-apply-then-resume journal recovery, rename chain content mapping), (3) queries without transitions (pending/expired before tick, provenance table existence). Naming these three specific failure categories in the prompt gives the generator concrete checkpoints to trace, making the verification instruction actionable rather than aspirational.",
+            "expected_effect": "Next batch should yield a higher proportion of valid tasks (oracle and nop controls both passing) because the generator will trace through the three named failure categories—boundary transitions, multi-step state sequences, and queries-without-transitions—catching the bugs that currently slip through vague verification instructions.",
+            "evidence": [
+              "filesystem-migration-0004: 7 oracle failures including rename chain content mapping (gamma.txt gets alpha_content instead of beta_content), partial-apply resume FileNotFoundError, rmdir emitted when no temp paths used",
+              "relational-transforms-0005: 8 oracle failures including missing provenance table (no such table), delete_a not cascading correctly, dual-provenance and reinsert-after-delete failures",
+              "message-delivery-0006: 7 oracle failures including lease boundary (pending shows expired messages), cancel(EXPIRED) incorrectly returns True, pending not excluding expired leases",
+              "All 3/3 v0005 tasks invalid due to reference-solution bugs passing semantic review but failing oracle execution",
+              "v0004 had identical failure mode: 3/3 invalid due to reference-solution/test mismatches"
+            ],
+            "uncertainty": "The generator model may still not faithfully trace complex multi-step scenarios even with explicit checkpoints, especially for tasks with many interacting rules. The three named categories cover the observed failures but may not cover all future failure modes. There is a risk the generator simplifies contracts to avoid these categories, slightly reducing task complexity, but this is preferable to continued 100% invalid-task yield."
+          }
+        },
+        "status": "candidate",
+        "created_at": "2026-10-06T23:45:44.582038+00:00"
+      }
+    },
+    {
+      "schema_version": 1,
+      "event_id": "9b4a456bdfca4df49b9b354323a6a1d5",
+      "recorded_at": "2026-10-06T23:45:44.583743+00:00",
+      "operation": "version_create",
+      "phase": "applied",
+      "operation_id": "5c1d4d32095f4ccabc2c77ea11238eb3"
+    },
+    {
+      "schema_version": 1,
+      "event_id": "c2e0934cee8b460a8899c9498b15fbca",
+      "recorded_at": "2026-10-06T23:45:44.584094+00:00",
+      "operation": "activate",
+      "phase": "intent",
+      "operation_id": "bad0329279a2444db4c7a4dce285bb66",
+      "version": "v0006",
+      "previous_version": "v0005",
+      "reason": "Activate newly created prompt."
+    },
+    {
+      "schema_version": 1,
+      "event_id": "0af0ed4a1c6149cf88ff770cbc936d50",
+      "recorded_at": "2026-10-06T23:45:44.584959+00:00",
+      "operation": "activate",
+      "phase": "applied",
+      "operation_id": "bad0329279a2444db4c7a4dce285bb66"
+    }
+  ]
+}

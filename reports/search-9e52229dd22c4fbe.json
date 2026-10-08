@@ -1,0 +1,627 @@
+{
+  "id": "9e52229dd22c4fbe",
+  "status": "checkpoint",
+  "phase": "Checkpoint: review results",
+  "created_at": "2026-10-06T22:58:41.386671+00:00",
+  "target": 10,
+  "config": {
+    "target": 10,
+    "tasks_per_round": 3,
+    "max_rounds": 36,
+    "stagnant_rounds": 0,
+    "max_cost_usd": 150.0,
+    "max_task_repairs": 3,
+    "generation_cost_usd": 1.5,
+    "semantic_review_cost_usd": 1.0,
+    "failure_audit_cost_usd": 0.75,
+    "prompt_update_cost_usd": 0.75,
+    "author_timeout_sec": 600,
+    "agent_timeout_sec": 600,
+    "attempt_cost_usd": 0.2,
+    "minimum_families": 4,
+    "maximum_per_family": 3,
+    "round_allowance_usd": 13.5
+  },
+  "api_base": "https://openrouter.ai/api/v1",
+  "rounds": [
+    "18ce31a72ce54500",
+    "50a1d151f0eb45fe",
+    "2f8f1efa503d4645"
+  ],
+  "accepted": [],
+  "processed_rounds": [
+    "18ce31a72ce54500",
+    "50a1d151f0eb45fe"
+  ],
+  "prompt_scores": {
+    "v0004": {
+      "slots": 3,
+      "accepted": 0,
+      "rounds": [
+        "18ce31a72ce54500"
+      ],
+      "yield": 0.0
+    },
+    "v0005": {
+      "slots": 3,
+      "accepted": 0,
+      "rounds": [
+        "50a1d151f0eb45fe"
+      ],
+      "yield": 0.0
+    },
+    "v0006": {
+      "slots": 3,
+      "accepted": 0,
+      "rounds": [
+        "2f8f1efa503d4645"
+      ],
+      "yield": 0.0
+    }
+  },
+  "stagnant_rounds": 3,
+  "stop_reason": "A task encountered an authoring, infrastructure, audit, or incomplete-evaluation error. Inspect the retained evidence before continuing.",
+  "report_path": "reports/search-9e52229dd22c4fbe.json",
+  "bootstrap_cost_usd": 0.04293392,
+  "starting_prompt": "v0003",
+  "accounted_cost_usd": 3.984295228,
+  "attempted_count": 9,
+  "generation_attempts": 47,
+  "accepted_count": 0,
+  "families": {},
+  "updated_at": "2026-10-07T00:11:28.236648+00:00",
+  "bootstrap_started_at": "2026-10-06T22:58:41.798345+00:00",
+  "bootstrap_response_status": "completed",
+  "bootstrap_prompt": "v0004",
+  "runtime_changes": [
+    {
+      "at": "2026-10-06T23:10:08.005591+00:00",
+      "reason": "Explicit speed migration: two prior GLM author requests exhausted all output tokens on reasoning without producing a task. Stop this repeated old-configuration request, retain its full reservation, and authorize a replacement using non-thinking GLM-5.1 with throughput routing and parallel authoring.",
+      "old_docker_concurrency": 3,
+      "docker_concurrency": 5,
+      "parallel_author_pipelines": 3,
+      "generation_reasoning_enabled": false,
+      "interrupted_author_attempt": 2,
+      "retained_reservation_usd": 0.17157105000000003
+    }
+  ],
+  "resume_events": [
+    {
+      "resumed_at": "2026-10-06T23:21:40.001049+00:00",
+      "previous_status": "checkpoint",
+      "previous_stop_reason": "A task encountered an authoring, infrastructure, audit, or incomplete-evaluation error. Inspect the retained evidence before continuing.",
+      "previous_error": null,
+      "previous_completed_at": "2026-10-06T23:12:34.930669+00:00",
+      "previous_config": {
+        "target": 10,
+        "tasks_per_round": 3,
+        "max_rounds": 12,
+        "stagnant_rounds": 3,
+        "max_cost_usd": 50.0,
+        "generation_cost_usd": 0.75,
+        "semantic_review_cost_usd": 0.3,
+        "failure_audit_cost_usd": 0.2,
+        "prompt_update_cost_usd": 0.25,
+        "author_timeout_sec": 600,
+        "agent_timeout_sec": 600,
+        "attempt_cost_usd": 0.2,
+        "minimum_families": 4,
+        "maximum_per_family": 3,
+        "round_allowance_usd": 7.0
+      },
+      "reopened_rounds": [
+        "18ce31a72ce54500"
+      ]
+    },
+    {
+      "resumed_at": "2026-10-06T23:35:35.429674+00:00",
+      "previous_status": "checkpoint",
+      "previous_stop_reason": "Operator recovery of framework feedback defects",
+      "previous_error": null,
+      "previous_completed_at": null,
+      "previous_config": {
+        "target": 10,
+        "tasks_per_round": 3,
+        "max_rounds": 36,
+        "stagnant_rounds": 0,
+        "max_cost_usd": 150.0,
+        "max_task_repairs": 3,
+        "generation_cost_usd": 1.5,
+        "semantic_review_cost_usd": 1.0,
+        "failure_audit_cost_usd": 0.75,
+        "prompt_update_cost_usd": 0.75,
+        "author_timeout_sec": 600,
+        "agent_timeout_sec": 600,
+        "attempt_cost_usd": 0.2,
+        "minimum_families": 4,
+        "maximum_per_family": 3,
+        "round_allowance_usd": 13.5
+      },
+      "reopened_rounds": [
+        "18ce31a72ce54500"
+      ]
+    }
+  ],
+  "error": null,
+  "progress_assessments": [
+    {
+      "round_ids": [
+        "18ce31a72ce54500",
+        "50a1d151f0eb45fe",
+        "2f8f1efa503d4645"
+      ],
+      "prompt_versions": [
+        "v0004",
+        "v0005",
+        "v0006"
+      ],
+      "task_slots": 9,
+      "five_valid_outcome_slots": 1,
+      "audited_learnable_slots": 0,
+      "mean_distance_to_band": 0.0
+    }
+  ],
+  "severe_bottleneck": null,
+  "best_observed_prompt": "v0006",
+  "completed_at": "2026-10-07T00:11:28.208924+00:00",
+  "candidates": [
+    {
+      "batch_id": "18ce31a72ce54500",
+      "prompt_version": "v0004",
+      "stages": {
+        "attempted": true,
+        "structurally_validated": true,
+        "oracle_nop_valid": false,
+        "five_valid_outcomes": false,
+        "audited_learnable": false
+      },
+      "generation_attempts": 9,
+      "id": "transaction-recovery-0001",
+      "display_name": "Segmented Journal Store",
+      "family": "transaction-recovery",
+      "status": "invalid",
+      "summary": {
+        "passes": 0,
+        "failures": 0,
+        "valid_runs": 0,
+        "total_runs": 5,
+        "learnable": null,
+        "controls_passed": false,
+        "inconclusive_runs": 5,
+        "budget_exhausted": 0,
+        "outcome": "invalid_task"
+      },
+      "accepted": false,
+      "job_id": "74ac986bed8c44c7",
+      "semantic_review": {
+        "verdict": "pass",
+        "summary": "The instruction, reference solution, environment, and tests are fully consistent. All seven bugs in the initial implementation have corresponding contract rules, correct fixes in the reference solution, and comprehensive test coverage. No missing behavioral coverage, leaked solutions, nondeterminism, or unavailable dependencies were found. The task is novel relative to the archive.",
+        "issues": [],
+        "solution_pattern": "segmented journal replay with monotonic txid validation, partial-line crash truncation handling, snapshot-based recovery with segment gap skipping, and active segment computation as max(latest_snapshot_N, highest_journal_M + 1)",
+        "novelty": {
+          "verdict": "pass",
+          "reason": "The archive tasks involve event ledger reconciliation, manifest reconciliation, ordered rule resolution, topological build planning, and escaped-frame protocol decoding. None involve segmented journal replay with snapshot boundaries, monotonic txid validation across segments, or partial-line crash truncation recovery. The state management and recovery invariants are fundamentally different.",
+          "match_id": null
+        }
+      },
+      "failure_audit": null,
+      "collection_exclusion": null,
+      "accounted_cost_usd": 0.9674629620000001,
+      "error": "Task repair limit reached; excluded from target-band yield."
+    },
+    {
+      "batch_id": "18ce31a72ce54500",
+      "prompt_version": "v0004",
+      "stages": {
+        "attempted": true,
+        "structurally_validated": true,
+        "oracle_nop_valid": false,
+        "five_valid_outcomes": false,
+        "audited_learnable": false
+      },
+      "generation_attempts": 7,
+      "id": "dependency-planning-0002",
+      "display_name": "Conditional Build Planner",
+      "family": "dependency-planning",
+      "status": "invalid",
+      "summary": {
+        "passes": 0,
+        "failures": 0,
+        "valid_runs": 0,
+        "total_runs": 5,
+        "learnable": null,
+        "controls_passed": false,
+        "inconclusive_runs": 5,
+        "budget_exhausted": 0,
+        "outcome": "invalid_task"
+      },
+      "accepted": false,
+      "job_id": "e46df2e8b08045fa",
+      "semantic_review": {
+        "verdict": "repair",
+        "summary": "The initial implementation has two concrete bugs: (1) it fails to deduplicate dependencies when the same target appears in both 'depends' and active 'conditional_depends', violating the contract's rule 3; (2) its topological sort incorrectly computes in-degrees by iterating over the resolved dependency list (which represents outgoing edges) instead of the actual incoming edges, producing wrong build orders for any non-trivial graph. The reference solution correctly fixes both issues.",
+        "issues": [
+          {
+            "file": "environment/planner.py",
+            "evidence": "In resolve_dependencies, `resolved[name] = deps + cond_deps` concatenates both lists without deduplication. The contract states: 'If a dependency name appears in both depends and conditional_depends (and the condition is active), it is counted only once in the resolved dependency list.' The test test_dedup_affects_hash and test_duplicate_dependency_dedup verify this.",
+            "suggested_fix": "Use `resolved[name] = list(dict.fromkeys(deps + cond_deps))` to deduplicate while preserving first-occurrence order."
+          },
+          {
+            "file": "environment/planner.py",
+            "evidence": "In topological_sort, the in-degree computation `for n, deps in resolved.items(): for d in deps: in_degree[d] += 1` treats the dependency list as outgoing edges and increments the dependency's in-degree. This is backwards; a node's in-degree should equal the count of edges pointing TO it (i.e., how many targets depend on it). This causes incorrect topological ordering (e.g., test_diamond_dependency would fail).",
+            "suggested_fix": "Build a reverse dependency map and compute in-degrees correctly: `for n, deps in resolved.items(): for d in deps: in_degree[n] += 1; reverse_deps[d].append(n)`. Then use reverse_deps to decrement in-degrees when processing nodes."
+          }
+        ],
+        "solution_pattern": "deterministic topological sort with lexicographic tie-breaking on Kahn's algorithm, feature-gated conditional dependency resolution with deduplication, SHA-1 content hashing of sorted resolved/active dependencies, and incremental rebuild invalidation via transitive dependency validity propagation",
+        "novelty": {
+          "verdict": "pass",
+          "reason": "Combines feature-gated conditional dependency resolution with deduplication, deterministic topological ordering, and incremental rebuild invalidation via content hashing. No archive task implements this specific combination of interacting invariants (conditional graph topology + hash-based invalidation cascades).",
+          "match_id": null
+        }
+      },
+      "failure_audit": null,
+      "collection_exclusion": null,
+      "accounted_cost_usd": 0.5099351480000001,
+      "error": "Task repair limit reached; excluded from target-band yield."
+    },
+    {
+      "batch_id": "18ce31a72ce54500",
+      "prompt_version": "v0004",
+      "stages": {
+        "attempted": true,
+        "structurally_validated": true,
+        "oracle_nop_valid": false,
+        "five_valid_outcomes": false,
+        "audited_learnable": false
+      },
+      "generation_attempts": 7,
+      "id": "streaming-protocol-0003",
+      "display_name": "Escaped Frame Decoder",
+      "family": "streaming-protocol",
+      "status": "invalid",
+      "summary": null,
+      "accepted": false,
+      "job_id": null,
+      "semantic_review": {
+        "verdict": "repair",
+        "summary": "The reference solution has a critical protocol parsing bug: when ESC is received in the 'payload' state, it immediately transitions to the 'crc' state, which means any payload byte that happens to equal ESC (0x1B) is misinterpreted as the CRC delimiter. The contract explicitly states that ESC ESC decodes to literal ESC in the payload, and only the ESC preceding the CRC marks the end of the payload. The solution also lacks the 'eot' state handling for resynchronization on SOH, and the Session class doesn't accumulate frames_err correctly.",
+        "issues": [
+          {
+            "file": "solution/solve.sh",
+            "evidence": "In the Decoder's 'payload' state, `elif b == ESC: self.state = 'crc'` unconditionally transitions to CRC state. This breaks decoding of payloads containing 0x1B (which should be encoded as ESC ESC). The second ESC would be processed in the 'crc' state instead of being recognized as the escape sequence for literal ESC.",
+            "suggested_fix": "In the 'payload' state, when ESC is received, set `self._escape_next = True` and remain in 'payload' state. Then, when the next byte is also ESC, append literal 0x1B to raw_payload. Only transition to 'crc' state when ESC is received and `_escape_next` is already True (i.e., this is the third consecutive ESC, marking the CRC delimiter)."
+          },
+          {
+            "file": "solution/solve.sh",
+            "evidence": "In the 'eot' state, there is no handler for receiving SOH. The contract states: 'If SOH is received while already inside a frame (in payload, crc, or eot state), the partial frame is discarded and a new frame starts at the new SOH. The resynchronization counts as frames_err.'",
+            "suggested_fix": "Add an `elif b == SOH` branch in the 'eot' state that increments error_count, resets state to 'payload', and clears buffers."
+          },
+          {
+            "file": "solution/solve.sh",
+            "evidence": "Session.process sets `self.frames_err = self.decoder.error_count` instead of accumulating it with `+=`. If process() is called multiple times, the error count from previous calls is overwritten and lost.",
+            "suggested_fix": "Change `self.frames_err = self.decoder.error_count` to `self.frames_err += self.decoder.error_count` and reset `self.decoder.error_count = 0` after reading it to avoid double-counting."
+          }
+        ],
+        "solution_pattern": "incremental escaped-frame protocol parser with state machine across idle/payload/crc/eot states, escape sequence handling with look-ahead for CRC delimiter, CRC-16/MODBUS validation, resynchronization on mid-frame SOH with error counting, and chunk-boundary state preservation",
+        "novelty": {
+          "verdict": "pass",
+          "reason": "This task implements an incremental byte-protocol decoder with escape sequences and CRC validation, requiring a state machine that handles arbitrary chunk boundaries and resynchronization. The archive tasks involve event ledger reconciliation, manifest reconciliation, rule resolution, journal replay, and build planning \u2014 none involve protocol parsing, byte-level escaping, or CRC checksums. The implementation challenge and interacting invariants are fundamentally different.",
+          "match_id": null
+        }
+      },
+      "failure_audit": null,
+      "collection_exclusion": null,
+      "accounted_cost_usd": 0.56413318,
+      "error": "Task repair limit reached; excluded from target-band yield."
+    },
+    {
+      "batch_id": "50a1d151f0eb45fe",
+      "prompt_version": "v0005",
+      "stages": {
+        "attempted": true,
+        "structurally_validated": true,
+        "oracle_nop_valid": false,
+        "five_valid_outcomes": false,
+        "audited_learnable": false
+      },
+      "generation_attempts": 4,
+      "id": "filesystem-migration-0004",
+      "display_name": "Journal Fs Migration",
+      "family": "filesystem-migration",
+      "status": "invalid",
+      "summary": {
+        "passes": 0,
+        "failures": 0,
+        "valid_runs": 0,
+        "total_runs": 5,
+        "learnable": null,
+        "controls_passed": false,
+        "inconclusive_runs": 5,
+        "budget_exhausted": 0,
+        "outcome": "invalid_task"
+      },
+      "accepted": false,
+      "job_id": "a70498fa7b414113",
+      "semantic_review": {
+        "verdict": "pass",
+        "summary": "The instruction, reference solution, environment, and tests are consistent and well-aligned. The reference solution correctly implements all behavioral rules including rename cycle breaking via temp paths, collision-safe hard links, permission ordering, journal-based recovery with content-based dedup, and temp directory cleanup. Tests cover all specified behaviors. No blocking validity defects found.",
+        "issues": [],
+        "solution_pattern": "rename cycle breaking via deterministic temporary paths under .migrate_tmp/, topological ordering of renames (temp moves first, then final renames), collision-safe hard links after renames, chmod after path creation, content-based journal deduplication for crash recovery, and temp directory cleanup via rmdir operation",
+        "novelty": {
+          "verdict": "pass",
+          "reason": "This task implements filesystem migration with rename cycle breaking via temporary paths, hard link collision safety, and journal-based recovery. The archive tasks involve event ledgers, manifest reconciliation, rule resolution, journal stores, build planners, protocol decoders, relational joins, and message brokers - none involve filesystem operations, rename cycle detection, or hard link management. The core invariants and implementation challenge are distinct.",
+          "match_id": null
+        }
+      },
+      "failure_audit": null,
+      "collection_exclusion": null,
+      "accounted_cost_usd": 0.281975428,
+      "error": "Task repair limit reached; excluded from target-band yield."
+    },
+    {
+      "batch_id": "50a1d151f0eb45fe",
+      "prompt_version": "v0005",
+      "stages": {
+        "attempted": true,
+        "structurally_validated": true,
+        "oracle_nop_valid": false,
+        "five_valid_outcomes": false,
+        "audited_learnable": false
+      },
+      "generation_attempts": 4,
+      "id": "relational-transforms-0005",
+      "display_name": "Provenance Join Engine",
+      "family": "relational-transforms",
+      "status": "invalid",
+      "summary": {
+        "passes": 0,
+        "failures": 0,
+        "valid_runs": 0,
+        "total_runs": 5,
+        "learnable": null,
+        "controls_passed": false,
+        "inconclusive_runs": 5,
+        "budget_exhausted": 0,
+        "outcome": "invalid_task"
+      },
+      "accepted": false,
+      "job_id": "760dee903442461a",
+      "semantic_review": {
+        "verdict": "pass",
+        "summary": "The instruction, reference solution, environment, and tests are fully consistent. The reference solution correctly implements all contract requirements including dual-source provenance tracking, conditional view_join insertion, source-specific deletion with cascade based on remaining provenance, directory creation for exports, and duplicate prevention. Tests comprehensively cover all specified behaviors and edge cases. No blocking validity defects found.",
+        "issues": [],
+        "solution_pattern": "SQLite-backed incremental join engine with dual-source provenance tracking: INSERT OR IGNORE for provenance to prevent duplicates, conditional view_join insertion only when (a_id, b_id) absent, source-specific provenance deletion on delete_a/delete_b, and view_join cascade deletion only when no remaining provenance entries exist for the pair (NOT EXISTS subquery).",
+        "novelty": {
+          "verdict": "pass",
+          "reason": "The provenance-join-engine task implements a fundamentally different algorithmic challenge (dual-source provenance tracking with conditional view maintenance and cascade deletion) compared to all archived tasks, which cover event ledger reconciliation, manifest reconciliation, ordered rule resolution, journal replay, build planning, protocol decoding, filesystem migration, and message delivery. The core invariant\u2014view rows exist iff provenance exists, with multi-source provenance allowing partial deletion survival\u2014is unique to this task.",
+          "match_id": null
+        }
+      },
+      "failure_audit": null,
+      "collection_exclusion": null,
+      "accounted_cost_usd": 0.31101723200000003,
+      "error": "Task repair limit reached; excluded from target-band yield."
+    },
+    {
+      "batch_id": "50a1d151f0eb45fe",
+      "prompt_version": "v0005",
+      "stages": {
+        "attempted": true,
+        "structurally_validated": true,
+        "oracle_nop_valid": false,
+        "five_valid_outcomes": false,
+        "audited_learnable": false
+      },
+      "generation_attempts": 4,
+      "id": "message-delivery-0006",
+      "display_name": "Lease Fenced Broker",
+      "family": "message-delivery",
+      "status": "invalid",
+      "summary": {
+        "passes": 0,
+        "failures": 0,
+        "valid_runs": 0,
+        "total_runs": 5,
+        "learnable": null,
+        "controls_passed": false,
+        "inconclusive_runs": 5,
+        "budget_exhausted": 0,
+        "outcome": "invalid_task"
+      },
+      "accepted": false,
+      "job_id": "57c0ca191174411f",
+      "semantic_review": {
+        "verdict": "pass",
+        "summary": "The instruction, environment, reference solution, and tests are fully consistent. The initial broker.py contains five intentional bugs (wrong lease boundary in tick/cancel/deliver/pending/expired) that the reference solve.sh fixes precisely to match the contract. All test cases verify contract-specified behavior with no missing coverage or over-constrained assertions.",
+        "issues": [],
+        "solution_pattern": "deterministic message broker with logical clock, lease boundary using strict less-than comparison, EXPIRED messages eligible for redelivery but not cancellation, pending/expired queries reflecting lease state even before tick() transitions status",
+        "novelty": {
+          "verdict": "pass",
+          "reason": "This task implements a lease-based message broker with logical clock, acknowledgment fencing, and redelivery semantics. The archive tasks cover event ledgers, manifest reconciliation, rule resolution, journal stores, build planners, protocol decoders, filesystem migration, and join engines \u2014 none involve lease management, message delivery queues, or acknowledgment fencing. The interacting invariants (lease boundary strictness, expired-but-not-cancelled state, pending/expired consistency without tick) are unique to this task.",
+          "match_id": null
+        }
+      },
+      "failure_audit": null,
+      "collection_exclusion": null,
+      "accounted_cost_usd": 0.2462096,
+      "error": "Task repair limit reached; excluded from target-band yield."
+    },
+    {
+      "batch_id": "2f8f1efa503d4645",
+      "prompt_version": "v0006",
+      "stages": {
+        "attempted": true,
+        "structurally_validated": true,
+        "oracle_nop_valid": false,
+        "five_valid_outcomes": false,
+        "audited_learnable": false
+      },
+      "generation_attempts": 4,
+      "id": "resource-scheduling-0007",
+      "display_name": "Preemptive Slot Scheduler",
+      "family": "resource-scheduling",
+      "status": "invalid",
+      "summary": {
+        "passes": 0,
+        "failures": 0,
+        "valid_runs": 0,
+        "total_runs": 5,
+        "learnable": null,
+        "controls_passed": false,
+        "inconclusive_runs": 5,
+        "budget_exhausted": 0,
+        "outcome": "invalid_task"
+      },
+      "accepted": false,
+      "job_id": "9ed89a15fee643f4",
+      "semantic_review": {
+        "verdict": "pass",
+        "summary": "The task contract, reference solution, environment, and tests are consistent. The initial code has two clear bugs (reservation check uses `is not None` instead of `== t`, and cycle detection has a path-set mutation bug) that the reference solution correctly fixes. All tests verify behavior specified in the contract, with no missing coverage for core rules or edge cases. No leaked solutions, unavailable dependencies, or nondeterminism found.",
+        "issues": [],
+        "solution_pattern": "deterministic preemptive slot scheduler with discrete time steps, priority-based preemption with lexicographic tie-breaking (lowest priority + largest id victim, highest priority + smallest id waiter), reservation mechanism at t+1 after preemption, dependency gating via remaining==0 check, and greedy first-fit scheduling of eligible waiting jobs sorted by (-priority, id)",
+        "novelty": {
+          "verdict": "pass",
+          "reason": "While the task family 'resource-scheduling' exists in the archive (cluster-quota-admitter), the implementation challenge and interacting invariants differ significantly: this task requires preemptive scheduling with reservations over discrete time, time-step-based simulation with release/reservation/preempt/schedule phases, and lexicographic tie-breaking for both victims and waiters. The archive task involves multi-node first-fit allocation, tenant fairness limits, and cumulative cancellation with rollback\u2014completely different coordination invariants and state management.",
+          "match_id": null
+        }
+      },
+      "failure_audit": null,
+      "collection_exclusion": null,
+      "accounted_cost_usd": 0.284726096,
+      "error": "Task repair limit reached; excluded from target-band yield."
+    },
+    {
+      "batch_id": "2f8f1efa503d4645",
+      "prompt_version": "v0006",
+      "stages": {
+        "attempted": true,
+        "structurally_validated": true,
+        "oracle_nop_valid": true,
+        "five_valid_outcomes": true,
+        "audited_learnable": false
+      },
+      "generation_attempts": 4,
+      "id": "configuration-semantics-0008",
+      "display_name": "Scoped Config Compiler",
+      "family": "configuration-semantics",
+      "status": "error",
+      "summary": {
+        "passes": 3,
+        "failures": 2,
+        "valid_runs": 5,
+        "total_runs": 5,
+        "learnable": true,
+        "controls_passed": true,
+        "inconclusive_runs": 0,
+        "budget_exhausted": 0,
+        "outcome": "learnable_band"
+      },
+      "accepted": false,
+      "job_id": "4bfe86dabbf04e0a",
+      "semantic_review": {
+        "verdict": "pass",
+        "summary": "The task contract, reference solution, environment, and tests are consistent. The initial application has several intentional bugs (missing LPAREN/RPAREN token patterns, INT pattern accepting negative literals, int+str type error in '+', syntax error in main function) that the agent must repair. The reference solution correctly fixes all these bugs. Tests cover the contract's specified behaviors including scoping, type checking, cycle detection, division truncation, and error message formatting. No blocking validity defects found.",
+        "issues": [],
+        "solution_pattern": "multi-pass scoped configuration compiler with lexical scope resolution (innermost-first for bare refs, ancestor-qualified for :: refs), lazy evaluation with cycle detection via resolution stack, strict type checking for arithmetic/equality operators, truncation-toward-zero division, and unary negation on integers only",
+        "novelty": {
+          "verdict": "pass",
+          "reason": "This task implements a scoped configuration language compiler with lexical scoping, ancestor-qualified references, type-checked operations, and cycle detection. The archive contains tasks in different domains (event ledger, manifest reconciliation, rule resolution, journal store, build planner, protocol decoder, filesystem migration, relational joins, message broker, resource scheduling) with fundamentally different algorithms and invariants. No archive task involves language parsing, scope resolution, or the specific combination of features in this compiler.",
+          "match_id": null
+        }
+      },
+      "failure_audit": {
+        "verdict": "inconclusive",
+        "summary": "Invalid failure audit schema.",
+        "failures": [],
+        "task_defects": [],
+        "stop_reason": "invalid_response",
+        "accepted": false
+      },
+      "collection_exclusion": null,
+      "accounted_cost_usd": 0.448689286,
+      "error": null
+    },
+    {
+      "batch_id": "2f8f1efa503d4645",
+      "prompt_version": "v0006",
+      "stages": {
+        "attempted": true,
+        "structurally_validated": true,
+        "oracle_nop_valid": false,
+        "five_valid_outcomes": false,
+        "audited_learnable": false
+      },
+      "generation_attempts": 4,
+      "id": "resource-scheduling-0009",
+      "display_name": "Cluster Quota Admitter",
+      "family": "resource-scheduling",
+      "status": "invalid",
+      "summary": {
+        "passes": 0,
+        "failures": 0,
+        "valid_runs": 0,
+        "total_runs": 5,
+        "learnable": null,
+        "controls_passed": false,
+        "inconclusive_runs": 5,
+        "budget_exhausted": 0,
+        "outcome": "invalid_task"
+      },
+      "accepted": false,
+      "job_id": "eb3dabd918364340",
+      "semantic_review": {
+        "verdict": "pass",
+        "summary": "The instruction, reference solution, and tests are consistent and well-aligned. The initial application has two bugs (shallow copy of remaining capacities and missing rejected set rollback during cancellation lookahead), both of which are fixed in the reference solution and correctly tested. No contract-test discrepancies or missing behavioral coverage found.",
+        "issues": [],
+        "solution_pattern": "deterministic cluster admission planner with greedy first-fit node selection, dependency gating, per-tenant fairness limits, priority-based cumulative cancellation with rollback on infeasibility, and iterative revisiting of skipped jobs",
+        "novelty": {
+          "verdict": "pass",
+          "reason": "While this task shares a family resemblance with the preemptive-slot-scheduler (resource-scheduling-0007) in using priority-based displacement, the implementation challenge and interacting invariants differ substantially: this task uses cumulative cancellation with rollback on infeasibility (vs. immediate preemption), tenant-scoped cancellation limits (vs. global), and iterative dependency-gated revisiting (vs. time-step simulation with delayed reservations). The core algorithmic loop and state coordination are distinct.",
+          "match_id": null
+        }
+      },
+      "failure_audit": null,
+      "collection_exclusion": null,
+      "accounted_cost_usd": 0.260535068,
+      "error": "Task repair limit reached; excluded from target-band yield."
+    }
+  ],
+  "counts": {
+    "candidate_slots": 9,
+    "attempted_slots": 9,
+    "structurally_validated_task_slots": 9,
+    "oracle_nop_valid_task_slots": 1,
+    "five_valid_outcome_task_slots": 1,
+    "audited_learnable_task_slots": 0,
+    "invalid_task_slots": 8,
+    "duplicate_task_slots": 0,
+    "inconclusive_task_slots": 1,
+    "generation_attempts": 47,
+    "collected_task_slots": 0
+  },
+  "costs": {
+    "bootstrap_prompt_usd": 0.04293392,
+    "task_generation_usd": 2.5715376960000005,
+    "semantic_review_usd": 1.187843634,
+    "failure_audit_usd": 0.02800847,
+    "solver_accounted_usd": 0.08729419999999999,
+    "prompt_updates_usd": 0.066677308,
+    "accounted_total_usd": 3.984295228,
+    "note": "Accounted cost includes unresolved request reservations; it is not necessarily settled provider billing."
+  },
+  "elapsed_wall_sec": 4366.822,
+  "report_as_of": "2026-10-07T00:11:28.296632+00:00",
+  "measurement_notes": {
+    "stages": "Each stage counts candidate slots reaching it in at least one repair attempt; oracle/nop must both pass in the same actual job. These control checks alone do not establish semantic task validity.",
+    "elapsed_wall_sec": "Search creation to completion, or report time if active; includes queueing, generation, model waits, setup, evaluation, and verification."
+  },
+  "yield": {
+    "accepted_collection": 0,
+    "candidate_slots": 9,
+    "rate": 0.0,
+    "audited_learnable_rate": 0.0,
+    "first_ten_slots": 9,
+    "first_ten_audited_learnable": 0,
+    "note": "Adaptive collection, not an unbiased confirmation set. Every failed, invalid, duplicate and inconclusive candidate slot remains in the denominator; repair attempts are reported separately."
+  }
+}

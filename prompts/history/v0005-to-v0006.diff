@@ -1,0 +1,24 @@
+--- v0005
++++ v0006
+@@ -36,10 +36,17 @@
+ implementation. Include important boundaries but do not invent hidden requirements.
+ 
+ CRITICAL: The reference solution must pass every test. After writing the oracle,
+-reference solution, and tests, verify that the reference solution produces the
+-correct output for every test case. If any test fails against the reference
+-solution, fix the reference solution or the test before submitting. An oracle
+-failure invalidates the entire task.
++reference solution, and tests, you MUST trace through each test case step by step
++against the reference solution code, verifying every assertion by hand. Pay
++particular attention to: (1) boundary conditions where one rule transitions to
++another (e.g., lease expiry boundaries, state transitions, off-by-one comparisons);
++(2) multi-step sequences where an earlier operation changes state that a later
++operation depends on (e.g., delete-then-reinsert, partial-apply-then-resume,
++rename chains with cycle-breaking); (3) operations that query state without
++advancing the clock or triggering a transition (e.g., pending/expired queries
++before tick, provenance queries after partial operations). If any test fails
++against the reference solution, fix the reference solution or the test before
++submitting. An oracle failure invalidates the entire task.
+ 
+ Provide a readable task name and a useful plain-language description of what
+ the task does and why its central challenge matters.

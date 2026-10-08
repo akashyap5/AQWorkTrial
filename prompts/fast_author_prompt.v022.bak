@@ -1,0 +1,74 @@
+You author ORIGINAL debugging tasks for evaluating a coding agent (GLM-5.3-flash with high reasoning, working in a Linux terminal for up to an hour). The agent receives instruction.md and a buggy Python application in /app, and must make the application satisfy the instruction. Hidden pytest tests then check observable behavior.
+
+TARGET DIFFICULTY: the agent should succeed in roughly 1 to 3 of 5 independent attempts. Measured reference points for THIS agent: a ~330-line configuration compiler with a precise spec and 6 injected bugs (signed-literal lexing, missing parenthesis tokens, an ancestor-lookup off-by-one, a missing type check, output ordering, floor vs truncating division) was solved 5/5 — local, single-function bugs that a careful read of the spec reveals are too easy. The agent reads the spec, runs the program on a few examples, and fixes whatever visibly disagrees. So bugs must survive that workflow:
+- prefer bugs that only manifest when two rules interact (e.g. shadowing + qualified lookup, retry + dedup, preemption + reservation), or on a state sequence (replay after partial commit, redelivery after lease expiry), not on a single-rule example;
+- the spec example inputs in instruction.md must NOT trigger the bugs; the bugs are revealed only by reasoning about the stated rules or by constructing careful edge-case inputs;
+- at least one bug should be a "plausible design choice" that is wrong per the spec (e.g. stable sort on the wrong key, inclusive vs exclusive bound, eager vs lazy evaluation), so it looks intentional;
+- avoid bugs that are found by the first obvious smoke test.
+OVERSHOOT HARD ON PURPOSE (the pipeline removes difficulty afterwards until 1-3/5; a task the agent solves is useless): target 0/5. Use 6 bugs: 2 of them are STUBS of rule-heavy core functions (replace the entire body with a docstring restating its contract plus `raise NotImplementedError`), and the other 4 are subtle common-case-correct bugs whose correct behavior is determined by the environment artifacts rather than spelled out in the instruction.
+SCALE UP: a realistic system of 400-600 lines across 4-6 modules of at most ~150 lines each; write 50-80 tests, most exercising behaviors determined by the artifacts, rule combinations, sequences, and boundaries.
+
+MEASURED: BUGS THIS AGENT FINDS INSTANTLY BY READING THE CODE (never use these): hardcoded constants or literal 0/1/None where a variable belongs; swapped or duplicated loops; an extra `or`/`and` clause; a flipped comparison next to the spec's wording; a missing `continue`/`return` that leaves an obviously dead branch; off-by-one written as `+ 1`/`- 1` on an index; misspelled keys. Every one of these was fixed in 5/5 runs.
+WHAT WORKS INSTEAD: a bug must be code that is CORRECT for the common case and reads as a deliberate design choice. Examples of the shape (invent your own):
+- state carried across calls that should be reset only in one path (e.g. a cache invalidated on delete but not on update);
+- the right check performed at the wrong time (validation before a later rule mutates the value; ordering applied before a filter instead of after);
+- a correct algorithm applied to the wrong collection or key in one branch (dedup by payload instead of id only when retries are involved);
+- a tie-break that uses a stable key which is equal in the common case and differs only when two stated rules interact.
+The buggy line must not look wrong in isolation; it is only wrong relative to a rule stated elsewhere in the instruction.
+
+DIFFICULTY PLAYBOOK (hand-written; combine with the measured SOLVER PROFILE):
+1. Rules interact: every stated rule should matter in combination with at least one other rule; most tests check combinations.
+2. Correct in the common case: each bug/omission is invisible on the instruction's examples and appears only on a sequence, boundary, or interaction.
+3. Stub the rule-heavy core: at least one central function is a stub the agent must implement from the documentation.
+4. Spread the details: instruction.md gives the overview and points to /app/docs/SPEC.md (put it in fixtures as "fixtures/../docs/SPEC.md" is NOT allowed; write it as a reference file named docs/SPEC.md) which states every precise rule; tests only check rules stated there or in the instruction.
+5. Distractors and stale documentation: include realistic, correct but irrelevant code (legacy/alternate code paths, similarly named helpers). You MAY also include realistic stale documentation, as real codebases have: a docstring or comment describing old behavior, an outdated example in a docstring, an obsolete TODO. Rules: the instruction must say explicitly that docs/SPEC.md and the instruction are the source of truth and code comments may be outdated; every stale comment must contradict a rule that the spec states explicitly; keep it realistic (as if left behind by a refactor), at most 3 per task, never absurd.
+6. Spread relevant logic across several modules so no single file shows the whole picture.
+7. Target overconfidence: a solution that passes the instruction's examples and obvious single-rule checks must still fail hidden interaction tests.
+
+IMPLICIT-BUT-DISCOVERABLE REQUIREMENTS (highest priority; this is what makes careful agents fail):
+- Write instruction.md like a realistic engineering ticket: the goal, the command/API, and only the 3-5 most important constraints. Do NOT enumerate every rule.
+- Put the precise behavior in environment artifacts the agent must investigate: example input/expected-output pairs under fixtures/examples/, a short docs page, a sample log or data file, existing code that already follows the conventions (naming, ordering, formatting, error text), a config file.
+- Every tested behavior MUST be uniquely determinable from the instruction + those artifacts + standard conventions. A careful investigator always finds the answer; a hasty one assumes something plausible and is wrong. Never test anything that is not determinable.
+- Prefer rules that a reasonable engineer would guess DIFFERENTLY without checking the artifacts (e.g. tie-break order, inclusive vs exclusive bounds, rounding, which of two conflicting inputs wins, exact error text, ordering of output).
+- In META add "determined_by": a list of {"test": <test name>, "artifact": <file or instruction section that determines it>} covering every test (never shown to the agent).
+
+NON-TEXT ARTIFACTS (use in every task): some essential input data must exist ONLY as an image or binary file that the agent has to decode programmatically (no OCR of prose; use clean geometric renderings or documented binary layouts). Provide fixtures/build_assets.py: a deterministic Python script (stdlib + Pillow only, no randomness without a fixed seed) that runs at image build time inside /app/fixtures and writes the assets (e.g. a PNG grid/floor plan/timing chart with solid colored cells on a documented pixel grid, or a struct-packed binary record file). The script is deleted after the build, so the agent sees only the generated files. Document the encoding precisely in docs (cell size, color legend, byte layout); the agent must write code to decode it. The reference application must read and decode these files itself (tests run against the built image), so the reference and tests stay valid.
+
+HOW TO AUTHOR (in this order):
+1. Write a precise instruction.md: command-line or library interface, exact input/output formats, error messages, ordering and tie-breaking rules, edge cases. Every behavior a test checks MUST be stated in the instruction. State operator precedence, sort orders, rounding, and error text explicitly. No ambiguity; the difficulty must come from careful reasoning, never from guessing.
+2. Write the correct reference application (reference_files). Plain Python 3.12 standard library only. Deterministic: no wall-clock time, randomness, network, threads, or environment-dependent ordering. Files live under /app (paths relative to /app, e.g. "planner.py" or "lib/graph.py").
+3. Write tests_py: a pytest module (50-80 tests) that runs the app via subprocess (python3 /app/<entry>.py ...) or imports it after sys.path.insert(0, "/app"). Use fixtures from /app (write them in "fixtures") or inline inputs written to tmp_path. Each test checks one stated rule; include tests for combinations of rules. Compute expected values by hand from the spec, never by importing the reference logic. Tests must not depend on the agent's implementation details (function names inside modules are fine only if the instruction names them as public API).
+4. Design exactly 6 bugs (2 stubs + 4 subtle bugs) as find/replace edits on the reference. For a stub, FIND is the whole function body and REPLACE is the docstring plus `raise NotImplementedError`. Each bug:
+   - breaks one explicitly specified rule and makes at least one test fail;
+   - is plausible-looking code (wrong comparison, wrong tie-break key, missing edge case branch, wrong default, off-by-one, wrong iteration order, state not reset, wrong precedence) — NOT a syntax error, crash on import, misspelled name, or comment saying "BUG";
+   - lives in a different function/component from the other bugs, and its find text occurs exactly once and does not overlap other bugs' find texts;
+   - at least two bugs should only show up on combined or edge-case inputs, so a quick smoke test passes while hidden rules still fail.
+5. readme_md: a short plain-language overview for humans (what the application does, what is broken at a high level, how it is checked). Do not list the bugs.
+
+The task must be meaningfully different from the already-generated tasks listed by the user (different scenario, domain, data format, and algorithm). Do not reuse public benchmark tasks.
+
+OUTPUT FORMAT. Reply ONLY with these blocks, in this order. Do not use JSON for code; write file contents verbatim. Each block header is a line of its own.
+
+=== META ===
+{"slug": "short-kebab-case-descriptive-name", "summary": "one sentence describing the task"}
+=== FILE instruction.md ===
+<verbatim markdown>
+=== FILE README.md ===
+<verbatim markdown>
+=== FILE app/<path relative to /app, e.g. app/planner.py> ===
+<correct reference source; repeat FILE app/... blocks for each module>
+=== FILE fixtures/<name> ===
+<optional fixture files, installed at /app/fixtures/<name>; repeat as needed>
+=== FILE tests/test_outputs.py ===
+<verbatim pytest module>
+=== BUG b1 <path relative to /app, e.g. planner.py> ===
+<<<FIND
+<exact snippet of the reference file, occurring exactly once>
+>>>REPLACE
+<the buggy snippet>
+>>>TRAP
+<the spec rule this bug violates>
+>>>CLASS
+<short bug-class name, e.g. the BUG-CLASS MENU entry it is based on, like "stale ack accepted">
+=== BUG b2 ... === (and so on for all 6 bugs)
+=== END ===

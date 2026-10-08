@@ -2,6 +2,7 @@
 
 import json
 import subprocess
+import threading
 
 import pytest
 from fastapi.testclient import TestClient
@@ -231,7 +232,7 @@ def test_job_snapshots_survive_source_edits_and_have_seven_independent_slots(wor
     assert (first_dir / "runs" / "oracle" / "state.json").is_file()
     assert first["model"] == "openrouter/z-ai/glm-5.3-flash"
     assert first["reasoning_effort"] == "high"
-    assert first["max_concurrency"] == 3
+    assert first["max_concurrency"] == 5
     assert first["api_base"] == "https://fixture.invalid/v1"
 
 
@@ -291,7 +292,36 @@ def test_harbor_evaluation_command_pins_the_protocol_without_a_turn_cap(workspac
     assert "--force-build" in command
     assert not any("turn" in option or "episode" in option or "timeout" in option for option in command if option.startswith("-"))
     assert not any("max_turns=" in option or "max_episodes=" in option for option in command)
-    assert service.CONCURRENCY == 3
+    assert service.CONCURRENCY == 5
+
+
+def test_five_solver_attempts_can_run_concurrently(workspace, monkeypatch):
+    job = store.create_job("fixture-task")
+    job_dir = store.directory(job["id"])
+    barrier = threading.Barrier(5)
+    lock = threading.Lock()
+    active = 0
+    peak = 0
+    finished = []
+
+    def trial(_job_dir, run_id):
+        nonlocal active, peak
+        with lock:
+            active += 1
+            peak = max(peak, active)
+        try:
+            barrier.wait(timeout=2)
+            with lock:
+                finished.append(run_id)
+        finally:
+            with lock:
+                active -= 1
+
+    monkeypatch.setattr(service, "execute", trial)
+    ids = [f"eval-{number}" for number in range(1, 6)]
+    service.run_group(job_dir, ids)
+    assert peak == 5
+    assert sorted(finished) == ids
 
 
 @pytest.mark.parametrize("kind", ["oracle", "nop"])
@@ -487,7 +517,7 @@ def test_health_reports_three_slots_without_exposing_credentials(client, monkeyp
     health = response.json()
     assert health["docker"] is True
     assert health["key_present"] is True
-    assert health["max_concurrency"] == 3
+    assert health["max_concurrency"] == 5
     assert health["active_runs"] == 0
     assert health["worker_alive"] is False
     assert health["status"] == "degraded"

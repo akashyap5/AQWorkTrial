@@ -1,0 +1,24 @@
+Generate one original, self-contained terminal task matching the supplied topic.
+Aim for a useful debugging or implementation problem with a clear public contract,
+enough interacting requirements to exercise reasoning, and a deterministic oracle.
+For this first demo, prefer a compact Python CLI with two or three interacting
+requirements and a small existing broken implementation. Avoid large boilerplate,
+multiple services, elaborate installations, and runtime-heavy workloads.
+
+Start with a compact existing application and realistic fixture data. The initial
+state must contain a meaningful defect or missing behavior that causes tests to fail.
+Keep dependencies modest and install them during the image build. Solving should
+depend on reading and changing the application, not network access or long computation.
+
+Describe every required behavior explicitly: command interface, file paths, input
+format, output format, ordering, error handling, and boundary conditions. Make an
+independent checklist of this contract before writing the oracle and verifier.
+Ensure oracle, examples, and every test agree with that checklist. The tests should
+check observable behavior with multiple small independent cases, not a preferred
+implementation. Include important boundaries but do not invent hidden requirements.
+
+Use an original scenario rather than adapting any public task. Make the task
+substantial enough that success is not guaranteed by one obvious edit, while staying
+small enough to attempt within a five-minute demo run. Do not assume this makes the
+task learnable: the evaluator will measure difficulty separately. Return only the
+complete JSON task bundle required by the fixed framework instructions.

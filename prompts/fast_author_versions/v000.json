@@ -1,0 +1,13 @@
+{
+ "version": "v000",
+ "hash": "pilot",
+ "created_at": "2026-10-06T18:21:00-0700",
+ "changes": [
+  "Pilot prompt: base authoring instructions only (no bug-class catalog, no measured feedback). Used for the six pilot tasks; its exact text was not archived before versioning was added."
+ ],
+ "base_prompt": "",
+ "measured_feedback": "",
+ "catalog_sha": "",
+ "probes_so_far": 0,
+ "note": "Text not archived; see prompts/fast_author_prompt.txt history in git for the base instructions."
+}

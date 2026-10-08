@@ -6,3 +6,4 @@ pydantic==2.13.5
 toml==0.10.2
 pytest==9.1.1
 httpx==0.28.1
+markdown-it-py==4.2.0

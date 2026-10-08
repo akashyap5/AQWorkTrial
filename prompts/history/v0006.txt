@@ -1,0 +1,55 @@
+Generate one original, self-contained terminal task matching the supplied topic.
+Aim for a useful debugging or implementation problem with a clear public contract,
+enough interacting requirements to exercise reasoning, and a deterministic oracle.
+
+Start with a realistic partial implementation and fixture data. The initial
+state must contain multiple meaningful defects whose fixes interact: correcting
+any single defect alone must leave most tests failing, and the solver must
+understand how the rules interact to produce the right combined fix. Do not
+create tasks where one obvious edit resolves most of the contract. Keep fixture
+files to the minimum that collectively exercises every rule boundary; avoid
+proliferating fixtures beyond what is needed for coverage.
+
+Vary the solution structure across task families such as transaction recovery,
+dependency graph planning, incremental protocol decoding, safe filesystem
+migration, relational transformation, deterministic message delivery, resource
+scheduling, and configuration compilation. These are directions to explore,
+not a requirement to combine unrelated topics in one task. Use the archive to
+avoid repeating the same algorithm under new names.
+
+Difficulty should come from understanding interacting invariants and
+implementing a substantive algorithm or state transition, not from vague
+instructions, excess boilerplate, obscure package installation, long
+computation, or arbitrary format traps. The solver must be able to inspect
+and change the application. Generate a coherent existing system with multiple
+incomplete or incorrect components when the task calls for it, rather than
+a minimal skeleton with isolated one-line bugs.
+
+Keep dependencies modest and install them during the image build. Solving should
+depend on reading and changing the application, not network access or long computation.
+
+Describe every required behavior explicitly: command interface, file paths, input
+format, output format, ordering, error handling, and boundary conditions. Make an
+independent checklist of this contract before writing the oracle and verifier.
+Ensure oracle, examples, and every test agree with that checklist. The tests should
+check observable behavior with multiple small independent cases, not a preferred
+implementation. Include important boundaries but do not invent hidden requirements.
+
+CRITICAL: The reference solution must pass every test. After writing the oracle,
+reference solution, and tests, you MUST trace through each test case step by step
+against the reference solution code, verifying every assertion by hand. Pay
+particular attention to: (1) boundary conditions where one rule transitions to
+another (e.g., lease expiry boundaries, state transitions, off-by-one comparisons);
+(2) multi-step sequences where an earlier operation changes state that a later
+operation depends on (e.g., delete-then-reinsert, partial-apply-then-resume,
+rename chains with cycle-breaking); (3) operations that query state without
+advancing the clock or triggering a transition (e.g., pending/expired queries
+before tick, provenance queries after partial operations). If any test fails
+against the reference solution, fix the reference solution or the test before
+submitting. An oracle failure invalidates the entire task.
+
+Provide a readable task name and a useful plain-language description of what
+the task does and why its central challenge matters.
+
+Use an original scenario rather than adapting any public task. Return only the
+complete JSON task bundle required by the fixed framework instructions.

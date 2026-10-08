@@ -1,0 +1,8 @@
+{
+  "schema": 1,
+  "records": {
+    "stable-api": {"target": "api-2026.09", "enabled": true},
+    "legacy-reports": {"target": "reports-2024.11", "enabled": false},
+    "internal-audit": {"target": "audit-2026.06", "enabled": true}
+  }
+}

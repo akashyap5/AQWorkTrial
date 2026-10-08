@@ -1,5 +1,6 @@
-"""Single durable worker; at most three independent Harbor processes at once."""
+"""Single durable worker; at most five independent Harbor processes at once."""
 import argparse
+import json
 import ast
 import concurrent.futures
 import fcntl
@@ -12,7 +13,7 @@ from datetime import datetime
 from pathlib import Path
 
 from runner import artifacts
-from runner.store import (CONCURRENCY, DATA, EFFORT, JOB_TERMINAL, MODEL, ROOT,
+from runner.store import (CONCURRENCY, DATA, EFFORT, JOB_TERMINAL, METERED_PROFILES, MODEL, ROOT,
                           TERMINAL, now, read_json, redact, write_json)
 from validator.validate import validate_task
 
@@ -33,15 +34,85 @@ def validate(task):
     return result
 
 
-def command(job_dir, run_id, kind):
+# Restrict solver calls to fp8 providers (GLM-5.3-flash is also served at fp4),
+# letting OpenRouter load-balance among them. Sorting by throughput sent every
+# concurrent agent to one provider, which then queued requests for 9+ minutes.
+# A per-request timeout with retries keeps a dropped connection from hanging a run until the agent timeout.
+SOLVER_CALL_KWARGS = {"extra_body": {"provider": {"quantizations": ["fp8"]}}, "timeout": 300, "num_retries": 2}
+
+
+def command(job_dir, run_id, kind, proxy_url=None):
     args = [str(ROOT / ".venv" / "bin" / "harbor"), "run", "-p", str(job_dir / "task"),
             "-a", "terminus-2" if kind == "evaluation" else kind,
             "--jobs-dir", str(job_dir / "runs" / run_id / "harbor"),
             "--job-name", f"{job_dir.name}-{run_id}", "--n-attempts", "1",
             "--n-concurrent", "1", "--max-retries", "0", "--force-build"]
     if kind == "evaluation":
-        args += ["-m", MODEL, "--ak", f"reasoning_effort={EFFORT}"]
+        args += ["-m", MODEL, "--ak", f"reasoning_effort={EFFORT}",
+                 "--ak", "llm_call_kwargs=" + json.dumps(SOLVER_CALL_KWARGS)]
+        record = read_json(job_dir / "job.json", {})
+        if record.get("profile") in METERED_PROFILES:
+            if not proxy_url:
+                raise ValueError("Bounded evaluations require the metered trial gateway")
+            # CLI --agent replaces the full agents config, so use the complete
+            # agent object in a per-run config and omit those CLI overrides.
+            args = args[:args.index("-a")] + args[args.index("-a") + 2:]
+            args = args[:args.index("-m")]
+            config = job_dir / "runs" / run_id / f"{record['profile']}-config.json"
+            kwargs = {"reasoning_effort": EFFORT}
+            if proxy_url:
+                kwargs["api_base"] = proxy_url
+            write_json(config, {"agents": [{"name": "terminus-2", "model_name": MODEL,
+                "override_timeout_sec": record["budget"]["agent_timeout_sec"], "kwargs": kwargs}]})
+            args += ["--config", str(config)]
     return args
+
+
+def apply_budget_outcome(state, result, record, ledger):
+    """Budget outcomes override missing verifier reports, never become failures."""
+    if state["kind"] != "evaluation" or record.get("profile") not in METERED_PROFILES:
+        return
+    state["budget"] = ledger
+    state["cost_usd"] = ledger.get("spent_usd", 0)
+    state["reserved_cost_usd"] = ledger.get("reserved_usd", 0)
+    exception = (result or {}).get("exception_info") or {}
+    reason = ledger.get("stop_reason") or ("time" if exception.get("exception_type") == "AgentTimeoutError" else None)
+    if reason:
+        state.update(status="budget_exhausted", budget_reason=reason, passed=None, reward=None,
+                     failure_reason=f"budget_{reason}",
+                     error=f"{record['profile'].capitalize()} {reason} budget exhausted; excluded from learnability.")
+    elif ledger.get("accounting_error"):
+        state.update(status="error", passed=None, reward=None,
+                     failure_reason="cost_accounting_error",
+                     error="Cost accounting could not be reconciled: " + ledger["accounting_error"])
+
+
+# Preserve callers from the original demo integration.
+apply_demo_outcome = apply_budget_outcome
+
+
+def execution_metadata(state, result):
+    """Expose phase timing and the real exception alongside verifier details."""
+    exception = result.get("exception_info") or {}
+    state["exception_type"] = exception.get("exception_type")
+    state["exception_message"] = redact(exception.get("exception_message", ""))
+    state["phase_durations_sec"] = {}
+    for phase in ("environment_setup", "agent_setup", "agent_execution", "verifier"):
+        timing = result.get(phase) or {}
+        if timing.get("started_at") and timing.get("finished_at"):
+            try:
+                duration = (datetime.fromisoformat(timing["finished_at"]) - datetime.fromisoformat(timing["started_at"])).total_seconds()
+                state["phase_durations_sec"][phase] = round(duration, 2)
+            except (ValueError, TypeError):
+                pass
+    if state["status"] == "failed":
+        state["failure_reason"] = "verified_tests_failed"
+    elif exception:
+        state["failure_reason"] = "harness_exception"
+    elif state["status"] == "error":
+        state["failure_reason"] = "invalid_verifier_result"
+    else:
+        state["failure_reason"] = None
 
 
 def process_alive(pid, marker):
@@ -71,6 +142,8 @@ def execute(job_dir, run_id):
     previous_result = read_json(previous_trial / "result.json") if previous_trial else None
     proc = None
     log = None
+    proxy = None
+    record = read_json(job_dir / "job.json")
     if previous_result:
         pass  # Reconcile completed work before making another paid request.
     elif state["status"] == "running":
@@ -88,15 +161,26 @@ def execute(job_dir, run_id):
         write_json(state_path, state)
         return
     else:
-        args = command(job_dir, run_id, state["kind"])
         env = os.environ.copy()
-        env["OPENROUTER_API_BASE"] = read_json(job_dir / "job.json")["api_base"]
+        env["OPENROUTER_API_BASE"] = record["api_base"]
+        if state["kind"] == "evaluation" and record.get("profile") in METERED_PROFILES:
+            from runner.budget_proxy import BudgetProxy
+            proxy = BudgetProxy(run_dir / "budget.json", record["budget"], record["api_base"])
+            env["OPENROUTER_API_BASE"] = proxy.url
+            env["OPENROUTER_API_KEY"] = proxy.key
+        args = command(job_dir, run_id, state["kind"], proxy.url if proxy else None)
         env["PATH"] = str(ROOT / ".venv" / "bin") + os.pathsep + env.get("PATH", "")
         env["PYTHONUNBUFFERED"] = "1"
         state.update(status="running", started_at=now(), command=args)
         write_json(state_path, state)
         log = (run_dir / "console.log").open("a")
-        proc = subprocess.Popen(args, cwd=ROOT, env=env, stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
+        try:
+            proc = subprocess.Popen(args, cwd=ROOT, env=env, stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
+        except Exception:
+            log.close()
+            if proxy:
+                proxy.close()
+            raise
         state["pid"] = proc.pid
         write_json(state_path, state)
     cancel_at = None
@@ -116,6 +200,8 @@ def execute(job_dir, run_id):
         time.sleep(1)
     if log:
         log.close()
+    if proxy:
+        proxy.close()
     trial = artifacts.trial_directory(run_dir)
     result = read_json(trial / "result.json") if trial else None
     state["completed_at"] = now()
@@ -131,8 +217,10 @@ def execute(job_dir, run_id):
                 state.update(status="error", passed=None, error="Evaluation collected different tests from the successful oracle; excluded from solve rate.")
         state["usage"] = result.get("agent_result") or {}
         state["trial_directory"] = str(trial)
+        execution_metadata(state, result)
     else:
         state.update(status="error", error="Harbor exited without a trial result. Inspect the run log.")
+    apply_budget_outcome(state, result, record, read_json(run_dir / "budget.json", {}))
     if cancel_at is not None:
         state.update(status="cancelled", passed=None, error="Cancelled by user; excluded from the learnability calculation.")
     write_json(state_path, state)
@@ -146,7 +234,48 @@ def skip_pending(job_dir, status="skipped"):
             write_json(path, state)
 
 
-def run_group(job_dir, ids):
+# Docker failures before the agent starts (no model call yet) are retried safely.
+INFRA_MARKERS = ("address pools", "Docker compose command failed", "failed to create network",
+                 "Cannot connect to the Docker daemon", "No such container", "Command timed out after")
+
+
+def pre_agent_infra_error(run_dir):
+    state = read_json(run_dir / "state.json", {})
+    if state.get("status") != "error" or state.get("turns"):
+        return False
+    trial = artifacts.trial_directory(run_dir)
+    if trial is None:
+        return False
+    text = ""
+    for name in ("exception.txt", "result.json"):
+        try:
+            text += (trial / name).read_text(errors="replace")[-20000:]
+        except OSError:
+            pass
+    return any(marker in text for marker in INFRA_MARKERS)
+
+
+def retry_infra_errors(job_dir, ids, attempts=3):
+    for attempt in range(attempts):
+        retry = [rid for rid in ids if pre_agent_infra_error(job_dir / "runs" / rid)]
+        if not retry or (job_dir / "cancel").exists():
+            return
+        time.sleep(15 * (attempt + 1))
+        for rid in retry:
+            run_dir = job_dir / "runs" / rid
+            old = run_dir / "harbor"
+            if old.exists():
+                old.rename(run_dir / f"harbor-infra-retry-{attempt + 1}")
+            state = read_json(run_dir / "state.json")
+            state.update(status="queued", error=None, passed=None, reward=None, pid=None,
+                         started_at=None, completed_at=None, tests=[],
+                         infra_retries=state.get("infra_retries", 0) + 1)
+            write_json(run_dir / "state.json", state)
+        print(f"Retrying {len(retry)} pre-agent infrastructure failures in {job_dir.name}: {retry}", flush=True)
+        run_group(job_dir, retry, retry_infra=False)
+
+
+def run_group(job_dir, ids, retry_infra=True):
     with concurrent.futures.ThreadPoolExecutor(max_workers=CONCURRENCY) as pool:
         futures = {pool.submit(execute, job_dir, rid): rid for rid in ids}
         for future in concurrent.futures.as_completed(futures):
@@ -157,6 +286,8 @@ def run_group(job_dir, ids):
                 state = read_json(path)
                 state.update(status="error", error=redact(str(exc)), completed_at=now())
                 write_json(path, state)
+    if retry_infra:
+        retry_infra_errors(job_dir, ids)
 
 
 def process_job(job_dir):
@@ -201,13 +332,27 @@ def process_job(job_dir):
             states = [read_json(job_dir / "runs" / f"eval-{n}" / "state.json")["status"] for n in range(1, 6)]
             if (job_dir / "cancel").exists():
                 record.update(status="cancelled", phase="Cancelled")
-            elif all(s in {"passed", "failed"} for s in states):
-                record.update(status="completed", phase="Five runs completed")
+            elif all(s in {"passed", "failed"} | ({"budget_exhausted"} if record.get("profile") == "demo" else set()) for s in states):
+                record.update(status="completed", phase="Five demo attempts completed" if record.get("profile") == "demo" else "Five runs completed")
             else:
                 record.update(status="error", phase="Evaluation contains incomplete or invalid runs", error="Errors/timeouts are excluded from model failures; inspect individual runs.")
     record["updated_at"] = now()
     record["completed_at"] = now()
     write_json(path, record)
+
+
+# Several jobs may run at once; each job runs up to CONCURRENCY trials.
+MAX_JOBS = int(os.environ.get("TASKLAB_MAX_JOBS", "4"))
+
+
+def guarded_job(job_path):
+    try:
+        process_job(job_path.parent)
+    except Exception as exc:
+        record = read_json(job_path)
+        record.update(status="error", phase="Worker error", error=redact(str(exc)), updated_at=now())
+        write_json(job_path, record)
+        print(redact(str(exc)), flush=True)
 
 
 def main():
@@ -222,12 +367,21 @@ def main():
             raise SystemExit("A Task Lab worker is already running for this data directory.")
         lock.write(str(os.getpid()))
         lock.flush()
+        jobs = concurrent.futures.ThreadPoolExecutor(max_workers=16)
+        active = {}
         while True:
-            pending = [p for p in (DATA / "jobs").glob("*/job.json") if read_json(p, {}).get("status") not in JOB_TERMINAL]
+            for done in [d for d, f in active.items() if f.done()]:
+                active.pop(done)
+            pending = [p for p in (DATA / "jobs").glob("*/job.json")
+                       if read_json(p, {}).get("status") not in JOB_TERMINAL and p.parent not in active]
             pending.sort(key=lambda p: read_json(p)["created_at"])
-            if not pending and args.once:
+            if not pending and not active and args.once:
                 return
-            if not pending:
+            try:  # adjustable without restarting the worker
+                limit = int((DATA / "max_jobs").read_text().strip())
+            except (OSError, ValueError):
+                limit = MAX_JOBS
+            if not pending or len(active) >= limit:
                 time.sleep(1)
                 continue
             # Queue submissions safely while Docker Desktop is starting/offline.
@@ -246,13 +400,7 @@ def main():
                         write_json(pending[0], record)
                     time.sleep(3)
                     continue
-            try:
-                process_job(pending[0].parent)
-            except Exception as exc:
-                record = read_json(pending[0])
-                record.update(status="error", phase="Worker error", error=redact(str(exc)), updated_at=now())
-                write_json(pending[0], record)
-                print(redact(str(exc)), flush=True)
+            active[pending[0].parent] = jobs.submit(guarded_job, pending[0])
 
 
 if __name__ == "__main__":

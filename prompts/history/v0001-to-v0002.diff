@@ -1,0 +1,16 @@
+--- v0001
++++ v0002
+@@ -6,7 +6,12 @@
+ multiple services, elaborate installations, and runtime-heavy workloads.
+ 
+ Start with a compact existing application and realistic fixture data. The initial
+-state must contain a meaningful defect or missing behavior that causes tests to fail.
++state must contain two or three meaningful defects whose fixes interact: correcting
++one bug alone should not make most tests pass, and the solver must understand how
++the rules interact to produce the right fix. Keep fixture files to three to five
++cases that collectively exercise every rule boundary; avoid proliferating fixtures
++beyond what is needed for coverage.
++
+ Keep dependencies modest and install them during the image build. Solving should
+ depend on reading and changing the application, not network access or long computation.
+ 

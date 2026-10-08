@@ -1,0 +1,107 @@
+#!/usr/bin/env python3
+"""Manage the local Notes API deployment. No external service manager required."""
+import argparse
+import json
+import os
+from pathlib import Path
+import signal
+import subprocess
+import sys
+import time
+from urllib.request import urlopen
+
+ROOT = Path('/app')
+RUN = ROOT / 'run'
+PID_FILE = RUN / 'notes-api.pid'
+BOOT_FILE = RUN / 'notes-api-boot.json'
+INSTALLED = ROOT / 'deployed/current.json'
+
+
+def server_pid():
+    try:
+        pid = int(PID_FILE.read_text())
+        process = Path('/proc') / str(pid)
+        args = (process / 'cmdline').read_bytes().split(b'\0')
+        if b'/app/server.py' not in args or (process / 'stat').read_text().split()[2] == 'Z':
+            return None
+        return pid
+    except (OSError, ValueError, IndexError):
+        return None
+
+
+def stop():
+    pid = server_pid()
+    if pid:
+        os.kill(pid, signal.SIGTERM)
+        deadline = time.monotonic() + 3
+        while server_pid() == pid and time.monotonic() < deadline:
+            time.sleep(.05)
+        if server_pid() == pid:
+            os.kill(pid, signal.SIGKILL)
+    PID_FILE.unlink(missing_ok=True)
+    BOOT_FILE.unlink(missing_ok=True)
+
+
+def start():
+    if server_pid():
+        return
+    BOOT_FILE.unlink(missing_ok=True)
+    with (RUN / 'notes-api.log').open('ab') as log:
+        process = subprocess.Popen(
+            [sys.executable, '/app/server.py', str(INSTALLED)],
+            stdin=subprocess.DEVNULL, stdout=log, stderr=log, start_new_session=True,
+        )
+    PID_FILE.write_text(str(process.pid))
+    deadline = time.monotonic() + 5
+    while time.monotonic() < deadline:
+        if process.poll() is not None:
+            raise RuntimeError('Server exited; inspect /app/run/notes-api.log')
+        try:
+            boot = json.loads(BOOT_FILE.read_text())
+            if boot['pid'] == process.pid:
+                return
+        except (OSError, ValueError):
+            pass
+        time.sleep(.05)
+    raise RuntimeError('Server did not become ready; inspect /app/run/notes-api.log')
+
+
+def apply():
+    config = json.loads((ROOT / 'deployment.json').read_text())
+    port = config['port']
+    if not isinstance(port, int) or not 1024 <= port <= 65535:
+        raise ValueError('port must be an integer from 1024 to 65535')
+    release = json.loads((ROOT / config['release_dir'] / 'release.json').read_text())
+    if set(release) != {'application', 'revision', 'message'} or not all(isinstance(v, str) for v in release.values()):
+        raise ValueError('release must contain application, revision, and message strings')
+    temporary = INSTALLED.with_suffix('.tmp')
+    temporary.write_text(json.dumps({'port': port, 'release': release}) + '\n')
+    temporary.replace(INSTALLED)
+    print(f"Installed {release['revision']} for port {port}; running processes are unchanged.")
+
+
+def status():
+    start()
+    boot = json.loads(BOOT_FILE.read_text())
+    with urlopen(f"http://127.0.0.1:{boot['port']}/health", timeout=2) as response:
+        print(f"running pid={boot['pid']} port={boot['port']} health={response.status}")
+
+
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('command', choices=['apply', 'start', 'stop', 'restart', 'status'],
+                    help='apply installs selected data; start/status lazily start installed data; restart reloads installed data')
+args = parser.parse_args()
+try:
+    if args.command == 'apply':
+        apply()
+    elif args.command == 'stop':
+        stop()
+    elif args.command == 'restart':
+        stop()
+        start()
+        status()
+    else:
+        status()
+except Exception as error:
+    print(f'deployctl: {error}', file=sys.stderr)
+    sys.exit(1)

@@ -1,0 +1,10 @@
+Load the release aliases in /app/import.json into the local catalog. The installed
+administration command is /app/catalogctl. When this task is finished, a newly
+started consumer (/app/consumer.py) must see exactly the imported value for every
+alias in that manifest. Existing aliases absent from the manifest must keep their
+original values, including their enabled/disabled state. Keep the catalog's schema
+version unchanged and leave the import manifest and consumer program unchanged.
+
+The result must be persistent local catalog state, not a running process, shell
+environment change, or a report printed to the terminal. All necessary files and
+tools are already present; no network access or dependency installation is needed.

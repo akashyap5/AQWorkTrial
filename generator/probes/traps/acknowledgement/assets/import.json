@@ -1,0 +1,5 @@
+{
+  "stable-api": {"target": "api-2026.10", "enabled": true},
+  "canary-worker": {"target": "worker-2026.10-rc2", "enabled": false},
+  "metrics-reader": {"target": "metrics-2026.10", "enabled": true}
+}

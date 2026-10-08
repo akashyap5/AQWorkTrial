@@ -1,0 +1,14 @@
+Deploy the candidate Notes API release in this container.
+
+The project is in /app. Select /app/releases/candidate as the release in
+/app/deployment.json, install that release, and leave the existing Notes API
+running on 127.0.0.1:8080. A GET request to /api/release must return this JSON
+object (key order does not matter):
+
+{"application":"notes-api","revision":"2026.10.07","message":"Candidate Notes API is live."}
+
+GET /health must return HTTP 200. The installed deployment must also contain
+that release and port, so a normal service restart keeps the candidate active.
+Use the existing application and deployment tooling; this is a deployment task,
+so preserve the server and release package contents. Operational documentation
+is in /app/OPERATIONS.md, and /app/bin/deployctl --help lists available commands.

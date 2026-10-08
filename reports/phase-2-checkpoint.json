@@ -1,0 +1,451 @@
+{
+  "recorded_at": "2026-10-06T22:02:29.238577+00:00",
+  "batch_id": "2d5768b9ec27419c",
+  "status": "checkpoint",
+  "next_batch_started": false,
+  "model_roles": {
+    "author_reviewer_updater": "z-ai/glm-5.1",
+    "solver": "openrouter/z-ai/glm-5.3-flash",
+    "reasoning_effort": "high"
+  },
+  "profile": {
+    "solver_timeout_sec": 300,
+    "attempt_cost_usd": 0.05,
+    "task_cost_usd": 1.0,
+    "batch_cost_usd": 3.0,
+    "timeout_scope": "agent_execution",
+    "attempts_per_task": 5,
+    "max_parallel_trials": 3,
+    "cost_limit_enabled": true,
+    "timeout_outcome": "budget_exhausted",
+    "budget_exhaustion_is_model_failure": false,
+    "publish_learnability_verdict": false
+  },
+  "metrics": {
+    "task_slots": 3,
+    "generation_attempts": 4,
+    "generated_candidates": 4,
+    "valid_tasks": 3,
+    "observed_demo_band_tasks": 0,
+    "budget_limited_tasks": 1,
+    "canonical_learnable_tasks": null
+  },
+  "tasks": [
+    {
+      "id": "event-ledger",
+      "job_id": "3fbff084db964a6f",
+      "task_sha256": "e11fa85e8144d77a75fa20a61cb0f338987444de3667596fb2194d0be9c1fbe1",
+      "generation_attempts": 1,
+      "semantic_reviews": [
+        {
+          "verdict": "pass",
+          "summary": "The instruction, reference solution, and tests are consistent. The two bugs in the original ledger.py (duplicate handling keeps first instead of last; missing forward-reference check for corrections) are correctly fixed in solve.sh. All 12 test cases trace to expected outputs that match the contract rules. Error handling, deduplication, correction validation, and net-total computation are all properly covered with no missing behavioral assertions, leaked solutions, or unavailable dependencies.",
+          "issues": []
+        }
+      ],
+      "controls": {
+        "oracle": {
+          "status": "passed",
+          "reward": 1.0,
+          "tests": 12
+        },
+        "nop": {
+          "status": "passed",
+          "reward": 0.0,
+          "tests": 12
+        }
+      },
+      "solver_runs": [
+        {
+          "id": "eval-1",
+          "status": "budget_exhausted",
+          "turns": 1,
+          "reward": null,
+          "budget_reason": "time",
+          "cost_usd": 0.000183285
+        },
+        {
+          "id": "eval-2",
+          "status": "budget_exhausted",
+          "turns": 2,
+          "reward": null,
+          "budget_reason": "time",
+          "cost_usd": 0.001638333
+        },
+        {
+          "id": "eval-3",
+          "status": "budget_exhausted",
+          "turns": 1,
+          "reward": null,
+          "budget_reason": "time",
+          "cost_usd": 0.000153868
+        },
+        {
+          "id": "eval-4",
+          "status": "budget_exhausted",
+          "turns": 2,
+          "reward": null,
+          "budget_reason": "time",
+          "cost_usd": 0.0048110813499999995
+        },
+        {
+          "id": "eval-5",
+          "status": "budget_exhausted",
+          "turns": 2,
+          "reward": null,
+          "budget_reason": "time",
+          "cost_usd": 0.005304609
+        }
+      ],
+      "summary": {
+        "passes": 0,
+        "failures": 0,
+        "valid_runs": 0,
+        "total_runs": 5,
+        "learnable": null,
+        "observed_demo_band": null,
+        "budget_exhausted": 5,
+        "outcome": "budget_limited"
+      },
+      "accounted_cost_usd": 0.20470835034999998
+    },
+    {
+      "id": "manifest-reconciliation",
+      "job_id": "58adade2f16540c2",
+      "task_sha256": "b55d932e84f5e341a86dba2b93f564a9994368911dcd8c64fe45eed09db79edf",
+      "generation_attempts": 1,
+      "semantic_reviews": [
+        {
+          "verdict": "pass",
+          "summary": "The task is well-constructed. The buggy reconcile.py has clear, identifiable bugs (both-tombstones incorrectly reports conflict, one-tombstone appends the wrong entry, same-hash incorrectly reports conflict and duplicates). The reference solution correctly fixes all bugs per the instruction's 5 reconciliation rules. Tests comprehensively cover all rules, edge cases (same hash with tombstone, both tombstones same/different hash), sorting, and a mixed integration scenario. No tested behavior is absent from the instruction, no assertions exceed the contract, no nondeterminism, and no leaked solutions or missing dependencies.",
+          "issues": []
+        }
+      ],
+      "controls": {
+        "oracle": {
+          "status": "passed",
+          "reward": 1.0,
+          "tests": 17
+        },
+        "nop": {
+          "status": "passed",
+          "reward": 0.0,
+          "tests": 17
+        }
+      },
+      "solver_runs": [
+        {
+          "id": "eval-1",
+          "status": "passed",
+          "turns": 5,
+          "reward": 1.0,
+          "budget_reason": null,
+          "cost_usd": 0.002475003
+        },
+        {
+          "id": "eval-2",
+          "status": "passed",
+          "turns": 5,
+          "reward": 1.0,
+          "budget_reason": null,
+          "cost_usd": 0.001430241
+        },
+        {
+          "id": "eval-3",
+          "status": "passed",
+          "turns": 6,
+          "reward": 1.0,
+          "budget_reason": null,
+          "cost_usd": 0.0032752709999999997
+        },
+        {
+          "id": "eval-4",
+          "status": "passed",
+          "turns": 4,
+          "reward": 1.0,
+          "budget_reason": null,
+          "cost_usd": 0.001364343
+        },
+        {
+          "id": "eval-5",
+          "status": "passed",
+          "turns": 6,
+          "reward": 1.0,
+          "budget_reason": null,
+          "cost_usd": 0.0026814
+        }
+      ],
+      "summary": {
+        "passes": 5,
+        "failures": 0,
+        "valid_runs": 5,
+        "total_runs": 5,
+        "learnable": null,
+        "observed_demo_band": false,
+        "budget_exhausted": 0,
+        "outcome": "too_easy_in_demo"
+      },
+      "accounted_cost_usd": 0.116745722
+    },
+    {
+      "id": "ordered-rule-resolution",
+      "job_id": "d5d6f93da1dd4d55",
+      "task_sha256": "827fb8c7aced2b26a5dc6b13bd9b5c6b842bc2d7a0587bad586865f732fd4a91",
+      "generation_attempts": 2,
+      "semantic_reviews": [
+        {
+          "verdict": "repair",
+          "summary": "The test `test_single_file_exact_scope` expects {\"auth\": \"oauth2\"} but the contract (instruction) specifies that wildcard scope \"*\" matches every service, so the correct result for service \"api\" with only overrides.json should be {\"log_level\": \"debug\", \"auth\": \"oauth2\"}. The reference solution correctly implements the contract and would fail this test.",
+          "issues": [
+            {
+              "file": "tests/test_outputs.py",
+              "evidence": "test_single_file_exact_scope asserts result == {\"auth\": \"oauth2\"}, but overrides.json has a wildcard rule {\"scope\": \"*\", \"settings\": {\"log_level\": \"debug\"}} that applies to service \"api\" per the instruction's rule 4: 'A rule applies when its scope equals the target service name OR its scope is \"*\"'. The correct expected output is {\"log_level\": \"debug\", \"auth\": \"oauth2\"}.",
+              "suggested_fix": "Change the assertion in test_single_file_exact_scope from assert result == {\"auth\": \"oauth2\"} to assert result == {\"log_level\": \"debug\", \"auth\": \"oauth2\"}"
+            }
+          ]
+        },
+        {
+          "verdict": "pass",
+          "summary": "The task is well-formed. The original resolve.py has two clear bugs (reversed file processing order and missing null-deletion handling) that the reference solution correctly fixes. All tests trace correctly against the specified resolution algorithm, cover key edge cases (wildcard-only, deletion of absent key, delete-then-reset, file precedence), and use semantic JSON comparison as permitted by the contract. No blocking issues found.",
+          "issues": []
+        }
+      ],
+      "controls": {
+        "oracle": {
+          "status": "passed",
+          "reward": 1.0,
+          "tests": 10
+        },
+        "nop": {
+          "status": "passed",
+          "reward": 0.0,
+          "tests": 10
+        }
+      },
+      "solver_runs": [
+        {
+          "id": "eval-1",
+          "status": "passed",
+          "turns": 6,
+          "reward": 1.0,
+          "budget_reason": null,
+          "cost_usd": 0.001926765
+        },
+        {
+          "id": "eval-2",
+          "status": "passed",
+          "turns": 6,
+          "reward": 1.0,
+          "budget_reason": null,
+          "cost_usd": 0.003272649
+        },
+        {
+          "id": "eval-3",
+          "status": "passed",
+          "turns": 4,
+          "reward": 1.0,
+          "budget_reason": null,
+          "cost_usd": 0.001171308
+        },
+        {
+          "id": "eval-4",
+          "status": "passed",
+          "turns": 4,
+          "reward": 1.0,
+          "budget_reason": null,
+          "cost_usd": 0.001218549
+        },
+        {
+          "id": "eval-5",
+          "status": "passed",
+          "turns": 5,
+          "reward": 1.0,
+          "budget_reason": null,
+          "cost_usd": 0.001285698
+        }
+      ],
+      "summary": {
+        "passes": 5,
+        "failures": 0,
+        "valid_runs": 5,
+        "total_runs": 5,
+        "learnable": null,
+        "observed_demo_band": false,
+        "budget_exhausted": 0,
+        "outcome": "too_easy_in_demo"
+      },
+      "accounted_cost_usd": 0.083456923
+    }
+  ],
+  "prompt_evolution": {
+    "source_version": "v0001",
+    "rejected_version": "v0002",
+    "current_candidate": "v0003",
+    "candidate_validated": false,
+    "authored_by_model_verified": true,
+    "model_response_id": "gen-1791323966-uL8rwx3CyBVFgwNd2NuR",
+    "feedback": {
+      "rationale": "Two completed tasks (manifest-reconciliation, ordered-rule-resolution) both achieved 5/5 solver success, indicating they fell below the target difficulty band. Each had isolated bugs fixable by one obvious edit. The prompt should require interacting defects so that partial fixes leave most tests failing, forcing the solver to understand rule interactions. Limiting fixtures to three to five keeps the task compact for the demo budget; the ledger task's 12 fixtures required multiple turns just to read, though its budget outcomes are inconclusive due to confirmed host-sleep confounding on runs 1\u20133.",
+      "expected_effect": "Next batch should yield tasks where success requires understanding how two or three rules interact, producing 1\u20133 successes out of 5 valid solver attempts rather than 5/5 or 0/5.",
+      "evidence": [
+        "manifest-reconciliation: 5/5 eval runs passed (87\u2013266 s), outcome too_easy_in_demo",
+        "ordered-rule-resolution: 5/5 eval runs passed (87\u2013203 s), outcome too_easy_in_demo",
+        "event-ledger: all 5 runs budget_exhausted; runs 1\u20133 confounded by host sleep per host-sleep-2026-10-06-first-wave observation \u2014 inconclusive for difficulty",
+        "event-ledger had 12 fixture CSVs; solvers spent first turns reading all fixtures before attempting fixes"
+      ],
+      "uncertainty": "The ledger task's difficulty is genuinely unknown (host sleep confounded 3 of 5 runs; runs 4\u20135 also timed out but at shorter wall durations). It is possible that interacting defects plus fewer fixtures will overshoot into too-difficult territory; this must be measured, not assumed. The 5/5 easy outcomes may also reflect the specific topics chosen rather than the prompt alone."
+    },
+    "diff": "--- v0001\n+++ v0003\n@@ -6,7 +6,12 @@\n multiple services, elaborate installations, and runtime-heavy workloads.\n \n Start with a compact existing application and realistic fixture data. The initial\n-state must contain a meaningful defect or missing behavior that causes tests to fail.\n+state must contain two or three meaningful defects whose fixes interact: correcting\n+one bug alone should not make most tests pass, and the solver must understand how\n+the rules interact to produce the right fix. Keep fixture files to three to five\n+cases that collectively exercise every rule boundary; avoid proliferating fixtures\n+beyond what is needed for coverage.\n+\n Keep dependencies modest and install them during the image build. Solving should\n depend on reading and changing the application, not network access or long computation.\n \n@@ -21,4 +26,4 @@\n substantial enough that success is not guaranteed by one obvious edit, while staying\n small enough to attempt within a five-minute demo run. Do not assume this makes the\n task learnable: the evaluator will measure difficulty separately. Return only the\n-complete JSON task bundle required by the fixed framework instructions.\n+complete JSON task bundle required by the fixed framework instructions.",
+    "versions": [
+      {
+        "version": "v0001",
+        "parent_version": null,
+        "status": "baseline",
+        "sha256": "078b16ab234372088471ae54320563d210f839f326410f9742caca577dbf2045",
+        "text": "Generate one original, self-contained terminal task matching the supplied topic.\nAim for a useful debugging or implementation problem with a clear public contract,\nenough interacting requirements to exercise reasoning, and a deterministic oracle.\nFor this first demo, prefer a compact Python CLI with two or three interacting\nrequirements and a small existing broken implementation. Avoid large boilerplate,\nmultiple services, elaborate installations, and runtime-heavy workloads.\n\nStart with a compact existing application and realistic fixture data. The initial\nstate must contain a meaningful defect or missing behavior that causes tests to fail.\nKeep dependencies modest and install them during the image build. Solving should\ndepend on reading and changing the application, not network access or long computation.\n\nDescribe every required behavior explicitly: command interface, file paths, input\nformat, output format, ordering, error handling, and boundary conditions. Make an\nindependent checklist of this contract before writing the oracle and verifier.\nEnsure oracle, examples, and every test agree with that checklist. The tests should\ncheck observable behavior with multiple small independent cases, not a preferred\nimplementation. Include important boundaries but do not invent hidden requirements.\n\nUse an original scenario rather than adapting any public task. Make the task\nsubstantial enough that success is not guaranteed by one obvious edit, while staying\nsmall enough to attempt within a five-minute demo run. Do not assume this makes the\ntask learnable: the evaluator will measure difficulty separately. Return only the\ncomplete JSON task bundle required by the fixed framework instructions.\n"
+      },
+      {
+        "version": "v0002",
+        "parent_version": "v0001",
+        "status": "rejected",
+        "sha256": "2304ba15f6cb7f2498ca620dbe2fdb93f7da01700bc89fe562ce98be5002e5cd",
+        "text": "Generate one original, self-contained terminal task matching the supplied topic.\nAim for a useful debugging or implementation problem with a clear public contract,\nenough interacting requirements to exercise reasoning, and a deterministic oracle.\nFor this first demo, prefer a compact Python CLI with two or three interacting\nrequirements and a small existing broken implementation. Avoid large boilerplate,\nmultiple services, elaborate installations, and runtime-heavy workloads.\n\nStart with a compact existing application and realistic fixture data. The initial\nstate must contain two or three meaningful defects whose fixes interact: correcting\none bug alone should not make most tests pass, and the solver must understand how\nthe rules interact to produce the right fix. Keep fixture files to three to five\ncases that collectively exercise every rule boundary; avoid proliferating fixtures\nbeyond what is needed for coverage.\n\nKeep dependencies modest and install them during the image build. Solving should\ndepend on reading and changing the application, not network access or long computation.\n\nDescribe every required behavior explicitly: command interface, file paths, input\nformat, output format, ordering, error handling, and boundary conditions. Make an\nindependent checklist of this contract before writing the oracle and verifier.\nEnsure oracle, examples, and every test agree with that checklist. The tests should\ncheck observable behavior with multiple small independent cases, not a preferred\nimplementation. Include important boundaries but do not invent hidden requirements.\n\nUse an original scenario rather than adapting any public task. Make the task\nsubstantial enough that success is not guaranteed by one obvious edit, while staying\nsmall enough to attempt within a five-minute demo run. Do not assume this makes the\ntask learnable: the evaluator will measure difficulty separately. Return only the\ncomplete JSON task bundle required by the fixed framework instructions.\n"
+      },
+      {
+        "version": "v0003",
+        "parent_version": "v0001",
+        "status": "candidate",
+        "sha256": "f47e097b1ef60c06fe9947acac86c07e3b9c789ff0b70a64b2ff8d2781dfbc6c",
+        "text": "Generate one original, self-contained terminal task matching the supplied topic.\nAim for a useful debugging or implementation problem with a clear public contract,\nenough interacting requirements to exercise reasoning, and a deterministic oracle.\nFor this first demo, prefer a compact Python CLI with two or three interacting\nrequirements and a small existing broken implementation. Avoid large boilerplate,\nmultiple services, elaborate installations, and runtime-heavy workloads.\n\nStart with a compact existing application and realistic fixture data. The initial\nstate must contain two or three meaningful defects whose fixes interact: correcting\none bug alone should not make most tests pass, and the solver must understand how\nthe rules interact to produce the right fix. Keep fixture files to three to five\ncases that collectively exercise every rule boundary; avoid proliferating fixtures\nbeyond what is needed for coverage.\n\nKeep dependencies modest and install them during the image build. Solving should\ndepend on reading and changing the application, not network access or long computation.\n\nDescribe every required behavior explicitly: command interface, file paths, input\nformat, output format, ordering, error handling, and boundary conditions. Make an\nindependent checklist of this contract before writing the oracle and verifier.\nEnsure oracle, examples, and every test agree with that checklist. The tests should\ncheck observable behavior with multiple small independent cases, not a preferred\nimplementation. Include important boundaries but do not invent hidden requirements.\n\nUse an original scenario rather than adapting any public task. Make the task\nsubstantial enough that success is not guaranteed by one obvious edit, while staying\nsmall enough to attempt within a five-minute demo run. Do not assume this makes the\ntask learnable: the evaluator will measure difficulty separately. Return only the\ncomplete JSON task bundle required by the fixed framework instructions."
+      }
+    ],
+    "proposal_attempts": [
+      {
+        "request_name": "prompt-update",
+        "status": "completed",
+        "cost_usd": 0.03934824,
+        "rejected_version": "v0002",
+        "rejection_reason": "Unsupported difficulty claim: all ledger attempts were budget-limited; first three were also confounded by confirmed host sleep. There is no valid 0/5 difficulty measurement or evidence that fixture count caused timeouts."
+      },
+      {
+        "request_name": "prompt-update-correction-1",
+        "status": "completed",
+        "cost_usd": 0.035271904,
+        "correction_feedback": {
+          "rejected_version": "v0002",
+          "rejection_reason": "Unsupported difficulty claim: all ledger attempts were budget-limited; first three were also confounded by confirmed host sleep. There is no valid 0/5 difficulty measurement or evidence that fixture count caused timeouts.",
+          "previous_proposal": "Generate one original, self-contained terminal task matching the supplied topic.\nAim for a useful debugging or implementation problem with a clear public contract,\nenough interacting requirements to exercise reasoning, and a deterministic oracle.\nFor this first demo, prefer a compact Python CLI with two or three interacting\nrequirements and a small existing broken implementation. Avoid large boilerplate,\nmultiple services, elaborate installations, and runtime-heavy workloads.\n\nStart with a compact existing application and realistic fixture data. The initial\nstate must contain two or three meaningful defects whose fixes interact: correcting\none bug alone should not make most tests pass, and the solver must understand how\nthe rules interact to produce the right fix. Keep fixture files to three to five\ncases that collectively exercise every rule boundary; avoid proliferating fixtures\nbeyond what is needed for coverage.\n\nKeep dependencies modest and install them during the image build. Solving should\ndepend on reading and changing the application, not network access or long computation.\n\nDescribe every required behavior explicitly: command interface, file paths, input\nformat, output format, ordering, error handling, and boundary conditions. Make an\nindependent checklist of this contract before writing the oracle and verifier.\nEnsure oracle, examples, and every test agree with that checklist. The tests should\ncheck observable behavior with multiple small independent cases, not a preferred\nimplementation. Include important boundaries but do not invent hidden requirements.\n\nUse an original scenario rather than adapting any public task. Make the task\nsubstantial enough that success is not guaranteed by one obvious edit, while staying\nsmall enough to attempt within a five-minute demo run. Do not assume this makes the\ntask learnable: the evaluator will measure difficulty separately. Return only the\ncomplete JSON task bundle required by the fixed framework instructions.\n",
+          "instructions": "Make one corrected revision from the original source prompt. Use the two complete 5/5 tasks as evidence of easy demo tasks; treat the ledger as inconclusive. Do not call budget stops verified failures or infer their cause. Include the now-supplied host-sleep evidence and earlier semantic repair history. Any expected improvement must remain a hypothesis for fresh evaluation. Preserve validity, coverage, fixed model/budget rules and original-task requirements."
+        }
+      }
+    ],
+    "rejection_reason": "Unsupported difficulty claim: all ledger attempts were budget-limited; first three were also confounded by confirmed host sleep. There is no valid 0/5 difficulty measurement or evidence that fixture count caused timeouts."
+  },
+  "accounting": {
+    "known_inference_usd": 0.39524979935,
+    "retained_unknown_reservations_usd": 0.08428134,
+    "accounted_total_usd": 0.47953113934999997,
+    "batch_limit_usd": 3.0,
+    "solver_known_usd": 0.032192403349999996,
+    "updater_total_usd": 0.074620144,
+    "non_byok_duplicate_costs_corrected_with_audit": true
+  },
+  "runtime_observations": {
+    "observations": [
+      {
+        "id": "host-sleep-2026-10-06-first-wave",
+        "type": "host_suspend",
+        "recorded_at": "2026-10-06T21:41:02.005243+00:00",
+        "summary": "Runs 1\u20133 were affected by macOS sleep. Their time-budget outcomes are infrastructure-confounded and do not establish that the task is too difficult.",
+        "job_id": "3fbff084db964a6f",
+        "run_ids": [
+          "eval-1",
+          "eval-2",
+          "eval-3"
+        ],
+        "sleep_window_utc": {
+          "start": "2026-10-06T21:18:14Z",
+          "end": "2026-10-06T21:32:10Z"
+        },
+        "timezone": "America/Los_Angeles",
+        "evidence_source": "Read-only pmset -g log, filtered to 2026-10-06 14:15\u201314:33 PDT; Harbor trial result timestamps and persisted request ledgers.",
+        "sleep_events": [
+          {
+            "local_time": "2026-10-06T14:18:14-07:00",
+            "reason": "Idle Sleep",
+            "reported_duration_sec": 143
+          },
+          {
+            "local_time": "2026-10-06T14:20:47-07:00",
+            "reason": "Maintenance Sleep",
+            "reported_duration_sec": 19
+          },
+          {
+            "local_time": "2026-10-06T14:21:17-07:00",
+            "reason": "Maintenance Sleep",
+            "reported_duration_sec": 466
+          },
+          {
+            "local_time": "2026-10-06T14:29:13-07:00",
+            "reason": "Maintenance Sleep",
+            "reported_duration_sec": 43
+          },
+          {
+            "local_time": "2026-10-06T14:30:06-07:00",
+            "reason": "Maintenance Sleep",
+            "reported_duration_sec": 124
+          }
+        ],
+        "full_wake_local": "2026-10-06T14:32:10-07:00",
+        "reported_sleep_total_sec": 795,
+        "configured_agent_execution_timeout_sec": 300,
+        "observed_agent_execution_wall_sec": {
+          "eval-1": 1083.049,
+          "eval-2": 1083.046,
+          "eval-3": 1083.043
+        },
+        "setup_and_verification": "Each container setup took about 3.3 seconds; agent setup 6.6\u20137.3 seconds; verification about 0.6 seconds.",
+        "interpretation": "The approximately 783-second excess wall duration is consistent with the recorded host-suspend interval. Requests pending across suspend later reported ReadTimeout, so their unknown-cost reservations remain retained.",
+        "difficulty_evidence": "inconclusive",
+        "raw_results_modified": false
+      }
+    ]
+  },
+  "validation": {
+    "automated_tests": {
+      "passed": 208,
+      "command": ".venv/bin/python -m pytest -q"
+    },
+    "browser": {
+      "live_api": true,
+      "desktop": true,
+      "mobile_390px": true,
+      "javascript_errors": 0,
+      "unexpected_posts": 0,
+      "batch_count_after_qa": 1,
+      "status_after_qa": "checkpoint",
+      "checks": [
+        "current v0003 pending validation",
+        "all oracle/nop outcomes",
+        "fifteen solver statuses",
+        "generated README previews",
+        "repair history",
+        "host-sleep evidence",
+        "rejected v0002 explanation",
+        "v0001-to-v0003 diff",
+        "expanded state survives polling"
+      ],
+      "screenshots": [
+        ".tasklab/ui-phase2-final-desktop.png",
+        ".tasklab/ui-phase2-final-mobile.png"
+      ]
+    }
+  },
+  "limitations": [
+    "No generated task is established as learnable; two tasks were 5/5 and the ledger was budget-limited.",
+    "The candidate prompt has not generated a fresh validation batch.",
+    "The first proposal omitted earlier repair history and runtime observations; its corrected proposal includes both.",
+    "Remaining unknown charges retain conservative reservations instead of being reported as zero."
+  ],
+  "local_evidence_directory": ".tasklab/phase2/batches/2d5768b9ec27419c"
+}

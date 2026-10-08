@@ -1,0 +1,63 @@
+# Each explicit batch stops at a checkpoint; no automatic next batch.
+
+[demo]
+solver_timeout_sec = 300
+attempt_cost_usd = 0.05
+task_cost_usd = 1.0
+batch_cost_usd = 3.0
+# Include model-response waits and terminal actions. Exclude queueing,
+# container build/setup, generation, oracle/nop, and final verification.
+timeout_scope = "agent_execution"
+attempts_per_task = 5
+max_parallel_trials = 5
+cost_limit_enabled = true
+timeout_outcome = "budget_exhausted"
+budget_exhaustion_is_model_failure = false
+publish_learnability_verdict = false
+
+[calibration]
+agent = "terminus-2"
+model = "openrouter/z-ai/glm-5.3-flash"
+reasoning_effort = "high"
+use_original_task_timeout = true
+required_valid_attempts = 5
+minimum_passes = 1
+maximum_passes = 3
+exclude_budget_and_infrastructure_errors = true
+
+[authoring]
+model = "z-ai/glm-5.1"
+max_task_repairs = 2
+generation_cost_usd = 0.50
+semantic_review_cost_usd = 0.166666
+require_semantic_review = true
+allow_public_task_adaptation = false
+
+[adaptation]
+tasks_per_batch = 3
+prompt_update_cost_usd = 0.25
+stop_after_batch = true
+# Candidate promotion/comparison is reviewed at the checkpoint; no automatic
+# "validated" label is assigned merely because a prompt was revised.
+evolve_strategy_prompts = false
+
+# Sustained, explicitly started search. Limits stop work at a review checkpoint;
+# interrupted attempts never count as solver failures or learnable outcomes.
+[search]
+target = 10
+tasks_per_round = 3
+max_rounds = 36
+# Disable the early three-round stop; sustained, measured stagnation is assessed
+# separately, after multiple prompt revisions. The user authorized cap changes.
+stagnant_rounds = 0
+max_cost_usd = 150.0
+max_task_repairs = 3
+generation_cost_usd = 1.50
+semantic_review_cost_usd = 1.00
+failure_audit_cost_usd = 0.75
+prompt_update_cost_usd = 0.75
+author_timeout_sec = 600
+agent_timeout_sec = 600
+attempt_cost_usd = 0.20
+minimum_families = 4
+maximum_per_family = 3

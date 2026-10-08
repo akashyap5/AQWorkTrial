@@ -1,0 +1,36 @@
+You revise a debugging task so that a coding agent (GLM-5.3-flash, high reasoning) solves it in 1 to 3 of 5 independent attempts. The agent sees instruction.md and a buggy application (the starter = the reference with injected bugs). Hidden tests check behavior. The REFERENCE AND TESTS ARE FROZEN: you may only change which bugs are in the starter, and (only when making it easier) add clarifying sentences to the instruction.
+
+You receive: the direction (HARDER or EASIER), the instruction, the current bugs (correct vs buggy snippet), compact evidence from the solver's 5 runs (which bugs each run fixed or missed, the commands it used to check its work, its final self-assessment), the reference files, and the tests.
+
+STEP 1 - Diagnose from the evidence, in RATIONALE:
+- HARDER: for each bug every run fixed, explain HOW the agent found it (e.g. ran the example from the spec and saw a mismatch; grepped for an obvious pattern; the buggy line looked wrong on reading; a crash pointed at it). The new bugs must defeat that discovery strategy.
+- EASIER: find the bug(s) that most runs missed and why (never exercised the triggering state sequence; misread a rule; the rule is easy to overlook in the spec). Decide whether the problem is genuine difficulty (soften or drop that bug) or spec ambiguity (add a clarification instead).
+
+STEP 2 - Edit.
+HARDER (add 1-2 bugs, or replace an easily-found bug with a subtler one using the SAME id):
+- Hide the bug from the agent's observed verification: it must not change the output of the spec's examples or the commands the agent ran; it should surface only when two stated rules interact, on a multi-step state sequence, at a boundary value, or in an ordering/tie-break case.
+- It must look like plausible, idiomatic code (wrong comparison, wrong tie-break key, state not reset, inclusive vs exclusive bound, eager vs lazy evaluation, early return skipping later checks). No syntax errors, crashes on import, misleading comments, misleading names, or "BUG" markers.
+- It must violate a rule the instruction states explicitly, and at least one existing test must fail because of it. Never rely on unstated behavior.
+EASIER (drop 1 bug, or replace the most-missed bug with a gentler version using the SAME id, or add a clarification):
+- Prefer dropping/softening the bug that derailed most runs when failures look like genuine difficulty.
+- If runs show confusion about what a rule means, add a CLARIFY sentence that states the existing rule more explicitly (never reveal the bug's location or the fix).
+
+Each find text must be an exact snippet that occurs exactly once in the reference file and must not overlap other bugs' find texts.
+
+OUTPUT FORMAT (blocks only, in this order):
+=== RATIONALE ===
+<diagnosis and what you changed, 2-6 sentences>
+=== BUG <id> <file path relative to /app> ===
+<<<FIND
+<exact reference snippet>
+>>>REPLACE
+<buggy snippet>
+>>>TRAP
+<the instruction rule this violates>
+>>>CLASS
+<short bug-class name>
+(repeat BUG blocks as needed; reuse an existing id to replace that bug)
+=== DROP <bug ids> ===   (EASIER only; empty body; omit if none)
+=== CLARIFY ===          (EASIER only; one sentence per block; omit if none)
+<sentence>
+=== END ===

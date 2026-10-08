@@ -1,4 +1,5 @@
 """Small, file-backed job store. Each trial has its own atomic state file."""
+import copy
 import hashlib
 import json
 import os
@@ -13,9 +14,19 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = Path(os.environ.get("TASKLAB_DATA", ROOT / ".tasklab")).resolve()
 MODEL = "openrouter/z-ai/glm-5.3-flash"
 EFFORT = "high"
-CONCURRENCY = 3
-TERMINAL = {"passed", "failed", "error", "timeout", "cancelled", "skipped", "interrupted"}
+CONCURRENCY = 5
+TERMINAL = {"passed", "failed", "error", "timeout", "budget_exhausted", "cancelled", "skipped", "interrupted"}
 JOB_TERMINAL = {"completed", "validation_failed", "error", "cancelled", "interrupted"}
+DEMO_BUDGET = {"agent_timeout_sec": 300, "cost_usd": 0.05,
+               "max_completion_tokens": 16384,
+               "max_price_per_million": {"prompt": 0.3, "completion": 1.0}}
+# The installed LiteLLM OpenRouter catalog declares 131072 output tokens for
+# this model. Search keeps that native maximum, without the demo's short cap.
+SEARCH_BUDGET = {"agent_timeout_sec": 600, "cost_usd": 0.20,
+                 "max_completion_tokens": 131072,
+                 "provider_sort": "throughput",
+                 "max_price_per_million": {"prompt": 0.3, "completion": 1.0}}
+METERED_PROFILES = {"demo", "search"}
 
 
 def now():
@@ -61,26 +72,45 @@ def directory(job_id):
     return path
 
 
+# Accepted generated tasks are listed after the supplied examples.
+LEARNABLE = ROOT / "output" / "learnable"
+
+
+def task_dirs():
+    """Yield (id, name, group, path) for every selectable task."""
+    for path in sorted((ROOT / "examples").iterdir()):
+        if (path / "task.toml").is_file():
+            yield path.name, path.name, "Examples", path
+    if LEARNABLE.is_dir():
+        for path in sorted(LEARNABLE.iterdir()):
+            if (path / "task.toml").is_file():
+                yield f"gen-{path.name}", path.name, "Generated", path
+
+
 def examples():
     import tomllib
     rows = []
-    for path in sorted((ROOT / "examples").iterdir()):
-        if not (path / "task.toml").is_file():
-            continue
+    for task_id, name, group, path in task_dirs():
         config = tomllib.loads((path / "task.toml").read_text())
-        rows.append({"id": path.name, "name": path.name,
+        readme = path / "README.md"
+        rows.append({"id": task_id, "name": name, "group": group,
                      "description": config.get("task", {}).get("description", ""),
+                     "metadata": config.get("metadata", {}),
+                     "readme": readme.read_text() if readme.is_file() else "",
                      "instruction": (path / "instruction.md").read_text()})
     return rows
 
 
-def create_job(task_id, mode="full", task_path=None):
+def create_job(task_id, mode="full", task_path=None, *, profile="calibration", metadata=None):
     if mode not in {"full", "controls"}:
         raise ValueError("Mode must be full or controls")
+    if profile not in {"calibration", "demo", "search"}:
+        raise ValueError("Profile must be calibration, demo, or search")
     if task_path is None:
-        if task_id not in {row["id"] for row in examples()}:
+        sources = {tid: path for tid, _, _, path in task_dirs()}
+        if task_id not in sources:
             raise ValueError("Unknown example task")
-        source = ROOT / "examples" / task_id
+        source = sources[task_id]
     else:
         source = Path(task_path).resolve()
     job_id = uuid.uuid4().hex[:16]
@@ -94,6 +124,8 @@ def create_job(task_id, mode="full", task_path=None):
             digest.update(str(file.relative_to(snapshot)).encode())
             digest.update(file.read_bytes())
     record = {"id": job_id, "task_id": task_id, "task_name": task_id, "mode": mode,
+              "profile": profile, "metadata": metadata or {},
+              "budget": copy.deepcopy({"demo": DEMO_BUDGET, "search": SEARCH_BUDGET}.get(profile)),
               "status": "queued", "phase": "Waiting for worker", "created_at": now(),
               "updated_at": now(), "error": None, "validation": None,
               "task_sha256": digest.hexdigest(), "model": MODEL, "reasoning_effort": EFFORT,
@@ -113,12 +145,24 @@ def create_job(task_id, mode="full", task_path=None):
     return job(job_id)
 
 
-def summarize(runs):
+def summarize(runs, profile="calibration"):
     evaluations = [r for r in runs if r["kind"] == "evaluation"]
     valid = [r for r in evaluations if r["status"] in {"passed", "failed"}]
     passes = sum(r["status"] == "passed" for r in valid)
-    return {"passes": passes, "failures": len(valid) - passes, "valid_runs": len(valid),
-            "total_runs": 5, "learnable": 1 <= passes <= 3 if len(valid) == 5 else None}
+    band = 1 <= passes <= 3 if len(valid) == 5 else None
+    summary = {"passes": passes, "failures": len(valid) - passes, "valid_runs": len(valid),
+               "total_runs": 5, "learnable": band if profile in {"calibration", "search"} else None}
+    if profile == "demo":
+        summary.update(observed_demo_band=band, budget_exhausted=sum(
+            r["status"] == "budget_exhausted" for r in evaluations))
+    if profile == "search":
+        controls = {r["kind"]: r["status"] for r in runs if r["kind"] in {"oracle", "nop"}}
+        controls_passed = controls == {"oracle": "passed", "nop": "passed"}
+        summary.update(controls_passed=controls_passed,
+                       learnable=band if controls_passed else None,
+                       inconclusive_runs=sum(r["status"] in TERMINAL - {"passed", "failed"} for r in evaluations),
+                       budget_exhausted=sum(r["status"] == "budget_exhausted" for r in evaluations))
+    return summary
 
 
 def job(job_id):
@@ -128,9 +172,14 @@ def job(job_id):
     # Live turn counts can be read without waiting for the Harbor process to finish.
     from runner.artifacts import episodes
     for run in record["runs"]:
+        budget = read_json(path / "runs" / run["id"] / "budget.json")
+        if budget:
+            run["budget"] = budget
+            run["cost_usd"] = budget["spent_usd"]
+            run["reserved_cost_usd"] = budget["reserved_usd"]
         if run["status"] == "running":
             run["turns"] = len(episodes(path / "runs" / run["id"]))
-    record["summary"] = summarize(record["runs"])
+    record["summary"] = summarize(record["runs"], record.get("profile", "calibration"))
     return record
 
 

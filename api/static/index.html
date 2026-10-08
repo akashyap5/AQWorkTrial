@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light" />
     <title>AfterQuery · Task Lab</title>
-    <link rel="stylesheet" href="/static/style.css?v=1" />
-    <script src="/static/app.js?v=1" defer></script>
+    <link rel="stylesheet" href="/static/style.css?v=10" />
+    <script src="/static/app.js?v=10" defer></script>
   </head>
   <body>
     <main>
       <header>
         <div>
           <div class="eyebrow">AFTERQUERY</div>
-          <h1>Task Lab <span class="pill">EXAMPLES</span></h1>
-          <p class="subtitle">Run an example. Check the controls. Inspect every turn.</p>
+          <h1>Task Lab <span class="pill">GENERATE · EVALUATE · REFINE</span></h1>
+          <p class="subtitle">Inspect task quality, solver results, and the evidence behind each prompt revision.</p>
         </div>
         <a class="secondary" href="/docs" target="_blank" rel="noopener">API docs ↗</a>
       </header>
@@ -44,6 +44,10 @@
           </div>
           <div class="launch-note"><span id="model-label">GLM-5.3-Flash · high reasoning</span><span>Controls use no model calls.</span></div>
         </form>
+        <details class="task-preview" id="task-readme-preview">
+          <summary>Task overview (README)</summary>
+          <div id="task-readme" class="readme-content"><p>Choose an example to read its overview.</p></div>
+        </details>
         <details class="task-preview" id="task-preview">
           <summary>View task instructions</summary>
           <pre id="task-instruction">Choose an example to read its instructions.</pre>
@@ -53,19 +57,41 @@
 
       <div class="workspace-grid">
         <aside class="panel submissions" aria-labelledby="jobs-title">
-          <div class="section-heading"><h2 id="jobs-title">Evaluations <span id="job-count" class="count">0</span></h2><button id="refresh" class="icon-button" title="Refresh evaluations" aria-label="Refresh evaluations">↻</button></div>
-          <div id="job-list" class="submission-list"><p class="list-empty">Your evaluations will appear here.</p></div>
+          <div class="section-heading"><h2 id="jobs-title">Shipped tasks <span id="job-count" class="count">0</span></h2><button id="refresh" class="icon-button" title="Refresh" aria-label="Refresh shipped tasks">↻</button></div>
+          <p class="help list-help">Each task passed the GLM-5.1 fairness gate. The probe that shipped it comes first, then every later run of the same task.</p>
+          <div id="job-list" class="submission-list"><p class="list-empty">Loading shipped tasks…</p></div>
         </aside>
         <section id="detail" class="panel detail" aria-label="Evaluation details">
           <div class="empty-state">
             <div class="empty-icon">⌘</div>
-            <h2>Start with an example</h2>
-            <p>Choose a task above to check the environment.<br />You’ll see both controls, five attempts, and the agent’s terminal activity here.</p>
+            <h2>Pick a shipped task</h2>
+            <p>Choose a run on the left, or a task above to run it again.<br />You’ll see both controls, five attempts, and the agent’s terminal activity here.</p>
             <button class="secondary" id="focus-example">Choose an example ↑</button>
           </div>
         </section>
       </div>
-      <footer><span>Each run starts in a fresh container. Results remain available when it finishes.</span><span>Target: 1–3 successful attempts out of 5.</span></footer>
+      <section class="panel evolution-panel history-panel" aria-labelledby="prompt-title">
+        <div class="section-heading">
+          <div>
+            <div class="step">GENERATOR</div>
+            <h2 id="prompt-title">Prompt history</h2>
+            <p class="help">Every version of the prompt GLM-5.1 authors checklist tasks from, with what its first probes measured. A new version is recorded whenever the instructions or the measured feedback change; the prompt governor rolls back to the best-measured instructions (t005).</p>
+          </div>
+        </div>
+        <div id="prompt-content" aria-live="polite"><p class="help">Loading prompt history…</p></div>
+      </section>
+
+      <section class="panel evolution-panel history-panel" aria-labelledby="strategy-title">
+        <div class="section-heading">
+          <div>
+            <div class="step">LEARNING LOOP</div>
+            <h2 id="strategy-title">Strategy evolution</h2>
+            <p class="help">The lever library the GLM-5.1 strategist edits after every probe. Each lever's measured pass rate comes from the solver runs of the tasks that used it, and the library feeds the next authoring prompt.</p>
+          </div>
+        </div>
+        <div id="strategy-content" aria-live="polite"><p class="help">Loading strategy history…</p></div>
+      </section>
+      <footer><span>Each run starts in a fresh container. Results remain available when it finishes.</span><span>Timeouts and budget stops never count as model failures.</span></footer>
     </main>
   </body>
 </html>

@@ -1,0 +1,43 @@
+This is fixed guidance for the GLM prompt optimizer, written by the framework
+author. It is not itself a learned prompt and must not be described as one.
+
+Revise the current generation prompt for a sustained search for original,
+learnable terminal tasks. Earlier demonstration tasks were mostly solved 5/5.
+Use the measured outcomes and concrete solver traces supplied with this request;
+do not infer difficulty from timeouts, infrastructure errors, or spending limits.
+The desired measured band is one to three passes from five valid solver outcomes.
+
+Remove the demonstration-specific preference for a tiny CLI, two or three rules,
+one obvious edit, or a five-minute exercise. Generate a coherent existing system
+with multiple incomplete or incorrect components when the task calls for it.
+Difficulty should come from understanding interacting invariants and implementing
+a substantive algorithm or state transition, not from vague instructions, excess
+boilerplate, obscure package installation, long computation, or arbitrary format
+traps. The solver must be able to inspect and change the application. Start with
+realistic partial code, interfaces, and examples rather than an empty directory.
+
+Respect the supplied task family while varying the actual solution structure.
+Examples of distinct structures include transaction recovery, dependency graph
+planning, incremental protocol decoding, safe filesystem migration, relational
+transformation, deterministic message delivery, and resource scheduling. These
+are directions to explore, not a requirement to combine unrelated topics in one
+task. Use the archive to avoid repeating the same algorithm under new names.
+
+Require an explicit, consistent public contract covering every tested behavior:
+interfaces, state transitions, error behavior, ordering, tie breaking, and limits.
+Build a complete requirement-to-test matrix before writing the verifier. Include
+independent deterministic cases for each requirement and adversarial combinations
+of interacting requirements. Tests must not simply run the oracle and compare to
+its output or duplicate one possibly incorrect implementation. Independently
+derived expected values and small exhaustive cases can expose implementation
+shortcuts. Keep all expected behavior stated publicly; never create hidden rules.
+
+Provide a readable task name and a useful plain-language description of what
+the task does and why its central challenge matters. The framework will turn
+these into the expandable README.md. Preserve the fixed JSON/file contract,
+self-contained environment, deterministic oracle, and meaningful nop failure.
+
+Use only GLM-authored prompt revisions. Explain which observed failure mode the
+revision addresses, what change in task distribution you expect, and what remains
+uncertain. Keep a successful prompt unless new measurements justify changing it.
+Treat every new prompt as a candidate pending fresh-task evaluation.

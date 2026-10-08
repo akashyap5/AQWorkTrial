@@ -1,0 +1,1660 @@
+{
+ "generated": "2026-10-07T14:46:44",
+ "batches": [
+  {
+   "batch": "batch-20261007-134403-51289-0",
+   "args": {
+    "families": "everyday-trap",
+    "count": 6,
+    "start": 24,
+    "max_edits": 1
+   },
+   "tasks": [
+    {
+     "slot": 24,
+     "variant": "checklist breadth: a receipt or invoice text formatter",
+     "slug": "receipt-formatter-checklist-24",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "9bb2889a757f4885",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 5,
+       "completed": 5,
+       "class": "too_easy"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": "too_easy",
+     "final_probe_class": "too_easy",
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0272,
+     "minutes": 28.5
+    },
+    {
+     "slot": 25,
+     "variant": "checklist breadth: a roster, schedule, or timetable export",
+     "slug": "shift-roster-checklist-export",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "e20c24a8102243af",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 2,
+       "completed": 5,
+       "class": "learnable_range"
+      },
+      {
+       "job": "75ea4f1b9d484aa1",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 2,
+       "completed": 5,
+       "class": "learnable_range"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": "learnable_range",
+     "final_probe_class": "learnable_range",
+     "ever_in_range": true,
+     "gate": "learnable",
+     "shipped": true,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.054,
+     "minutes": 50.4
+    },
+    {
+     "slot": 26,
+     "variant": "checklist breadth: a log or metrics summary report",
+     "slug": "server-metrics-checklist-report",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "f7e20613b5af467b",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 0,
+       "completed": 5,
+       "class": "too_hard"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": "too_hard",
+     "final_probe_class": "too_hard",
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.026,
+     "minutes": 8.9
+    },
+    {
+     "slot": 27,
+     "variant": "checklist breadth: a mailing-list or contact-list cleaner",
+     "slug": "contact-list-cleaner-breadth",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "8f6aace7d4934e19",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 1,
+       "completed": 5,
+       "class": "learnable_range"
+      },
+      {
+       "job": "5e46448fc412424c",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 0,
+       "completed": 5,
+       "class": "too_hard"
+      },
+      {
+       "job": "20eb7a6a1e63413f",
+       "status": "running",
+       "controls_ok": true,
+       "passes": 4,
+       "completed": 4,
+       "class": "inconclusive"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": "learnable_range",
+     "final_probe_class": "too_hard",
+     "ever_in_range": true,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.074,
+     "minutes": 54.7
+    },
+    {
+     "slot": 28,
+     "variant": "checklist breadth: an inventory or price-list exporter",
+     "slug": "inventory-export-checklist",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "bd0b732ef3524890",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 0,
+       "completed": 5,
+       "class": "too_hard"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": "too_hard",
+     "final_probe_class": "too_hard",
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0205,
+     "minutes": 25.8
+    },
+    {
+     "slot": 29,
+     "variant": "checklist breadth: a leaderboard or ranking table",
+     "slug": "leaderboard-checklist-format",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "c42600f284a64f6b",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 2,
+       "completed": 5,
+       "class": "learnable_range"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": "learnable_range",
+     "final_probe_class": "learnable_range",
+     "ever_in_range": true,
+     "gate": "learnable",
+     "shipped": true,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0357,
+     "minutes": 48.5
+    }
+   ]
+  },
+  {
+   "batch": "batch-20261007-134403-51290-0",
+   "args": {
+    "families": "everyday-trap",
+    "count": 6,
+    "start": 24,
+    "max_edits": 1
+   },
+   "tasks": [
+    {
+     "slot": 24,
+     "variant": "checklist breadth: a receipt or invoice text formatter",
+     "slug": "receipt-formatter-checklist",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "861b77d1f7d74ad4",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 5,
+       "completed": 5,
+       "class": "too_easy"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": "too_easy",
+     "final_probe_class": "too_easy",
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0324,
+     "minutes": 28.8
+    },
+    {
+     "slot": 25,
+     "variant": "checklist breadth: a roster, schedule, or timetable export",
+     "slug": "roster-export-checklist-breadth",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "397e0451bf40468d",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 4,
+       "completed": 5,
+       "class": "too_easy"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": "too_easy",
+     "final_probe_class": "too_easy",
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0285,
+     "minutes": 13.4
+    },
+    {
+     "slot": 26,
+     "variant": "checklist breadth: a log or metrics summary report",
+     "slug": "metrics-log-checklist-summary",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "18ceb41dbe93463a",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 3,
+       "completed": 5,
+       "class": "learnable_range"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": "learnable_range",
+     "final_probe_class": "learnable_range",
+     "ever_in_range": true,
+     "gate": "learnable",
+     "shipped": true,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.046,
+     "minutes": 49.7
+    },
+    {
+     "slot": 27,
+     "variant": "checklist breadth: a mailing-list or contact-list cleaner",
+     "slug": "contact-list-cleaner-checklist",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "efc4d618cbf740b1",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 0,
+       "completed": 5,
+       "class": "too_hard"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": "too_hard",
+     "final_probe_class": "too_hard",
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0556,
+     "minutes": 28.1
+    },
+    {
+     "slot": 28,
+     "variant": "checklist breadth: an inventory or price-list exporter",
+     "slug": "catalog-export-checklist",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "a1114a76ce1d4e0d",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 3,
+       "completed": 5,
+       "class": "learnable_range"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": "learnable_range",
+     "final_probe_class": "learnable_range",
+     "ever_in_range": true,
+     "gate": "learnable",
+     "shipped": true,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0341,
+     "minutes": 47.8
+    },
+    {
+     "slot": 29,
+     "variant": "checklist breadth: a leaderboard or ranking table",
+     "slug": "sales-leaderboard-checklist",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "5086079ddd14490a",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 2,
+       "completed": 5,
+       "class": "learnable_range"
+      },
+      {
+       "job": "f2d1b6eb79974ee6",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 5,
+       "completed": 5,
+       "class": "too_easy"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": "learnable_range",
+     "final_probe_class": "too_easy",
+     "ever_in_range": true,
+     "gate": "held_by_fairness_audit",
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0562,
+     "minutes": 54.9
+    }
+   ]
+  },
+  {
+   "batch": "batch-20261007-140247-94412-0",
+   "args": {
+    "families": "everyday-trap",
+    "count": 6,
+    "start": 24,
+    "max_edits": 1
+   },
+   "tasks": [
+    {
+     "slot": 24,
+     "variant": "checklist breadth: a receipt or invoice text formatter",
+     "slug": "print-shop-invoice-checklist",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "6c40ef6c73284d3d",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 5,
+       "completed": 5,
+       "class": "too_easy"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": "too_easy",
+     "final_probe_class": "too_easy",
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0108,
+     "minutes": 32.3
+    },
+    {
+     "slot": 25,
+     "variant": "checklist breadth: a roster, schedule, or timetable export",
+     "slug": "workshop-timetable-checklist-export",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "b14645085cfb423c",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 2,
+       "completed": 5,
+       "class": "learnable_range"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": "learnable_range",
+     "final_probe_class": "learnable_range",
+     "ever_in_range": true,
+     "gate": "learnable",
+     "shipped": true,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0186,
+     "minutes": 33.0
+    },
+    {
+     "slot": 26,
+     "variant": "checklist breadth: a log or metrics summary report",
+     "slug": "parking-garage-checklist-report",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "b92c81631d5b4994",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 5,
+       "completed": 5,
+       "class": "too_easy"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": "too_easy",
+     "final_probe_class": "too_easy",
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0322,
+     "minutes": 32.4
+    },
+    {
+     "slot": 27,
+     "variant": "checklist breadth: a mailing-list or contact-list cleaner",
+     "slug": "subscriber-list-checklist-cleaner",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "999d029f9eb64a90",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 0,
+       "completed": 5,
+       "class": "too_hard"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": "too_hard",
+     "final_probe_class": "too_hard",
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0149,
+     "minutes": 28.6
+    },
+    {
+     "slot": 28,
+     "variant": "checklist breadth: an inventory or price-list exporter",
+     "slug": "wholesale-pricelist-checklist",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "02b76cd8ef5848ac",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 4,
+       "completed": 5,
+       "class": "too_easy"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": "too_easy",
+     "final_probe_class": "too_easy",
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0196,
+     "minutes": 32.4
+    },
+    {
+     "slot": 29,
+     "variant": "checklist breadth: a leaderboard or ranking table",
+     "slug": "tournament-leaderboard-checklist",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "18826b3dd39a4502",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 4,
+       "completed": 5,
+       "class": "too_easy"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": "too_easy",
+     "final_probe_class": "too_easy",
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0156,
+     "minutes": 11.7
+    }
+   ]
+  },
+  {
+   "batch": "batch-20261007-140247-94413-0",
+   "args": {
+    "families": "everyday-trap",
+    "count": 6,
+    "start": 24,
+    "max_edits": 1
+   },
+   "tasks": [
+    {
+     "slot": 24,
+     "variant": "checklist breadth: a receipt or invoice text formatter",
+     "slug": "dry-clean-receipt-checklist",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "1f787834ddba4b86",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 5,
+       "completed": 5,
+       "class": "too_easy"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": "too_easy",
+     "final_probe_class": "too_easy",
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0143,
+     "minutes": 32.4
+    },
+    {
+     "slot": 25,
+     "variant": "checklist breadth: a roster, schedule, or timetable export",
+     "slug": "fleet-maintenance-checklist-export",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "8e62da82844b44fc",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 5,
+       "completed": 5,
+       "class": "too_easy"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": "too_easy",
+     "final_probe_class": "too_easy",
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0169,
+     "minutes": 32.5
+    },
+    {
+     "slot": 26,
+     "variant": "checklist breadth: a log or metrics summary report",
+     "slug": "ticket-resolution-checklist-report",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "955f88892e4e4ba5",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 3,
+       "completed": 5,
+       "class": "learnable_range"
+      },
+      {
+       "job": "a37fd9d31a5349fd",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 5,
+       "completed": 5,
+       "class": "too_easy"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": "learnable_range",
+     "final_probe_class": "too_easy",
+     "ever_in_range": true,
+     "gate": "held_by_fairness_audit",
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0335,
+     "minutes": 35.7
+    },
+    {
+     "slot": 27,
+     "variant": "checklist breadth: a mailing-list or contact-list cleaner",
+     "slug": "subscriber-list-checklist",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "9e01522d34e04568",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 4,
+       "completed": 5,
+       "class": "too_easy"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": "too_easy",
+     "final_probe_class": "too_easy",
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.013,
+     "minutes": 32.0
+    },
+    {
+     "slot": 28,
+     "variant": "checklist breadth: an inventory or price-list exporter",
+     "slug": "parts-order-summary-checklist",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "e103d881aee24953",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 1,
+       "completed": 5,
+       "class": "learnable_range"
+      },
+      {
+       "job": "c1dd2f17707d46f7",
+       "status": "queued",
+       "controls_ok": null,
+       "passes": 0,
+       "completed": 0,
+       "class": "inconclusive"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": "learnable_range",
+     "final_probe_class": "learnable_range",
+     "ever_in_range": true,
+     "gate": "held_by_fairness_audit",
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.016,
+     "minutes": 30.9
+    },
+    {
+     "slot": 29,
+     "variant": "checklist breadth: a leaderboard or ranking table",
+     "slug": "step-challenge-leaderboard-checklist",
+     "authored": true,
+     "outcome": "invalid",
+     "status": "done",
+     "structural_valid": true,
+     "docker_valid": false,
+     "probes": [],
+     "functionally_correct": false,
+     "first_probe_class": null,
+     "final_probe_class": null,
+     "ever_in_range": false,
+     "gate": "invalid",
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0,
+     "minutes": 2.1
+    }
+   ]
+  },
+  {
+   "batch": "batch-20261007-141923-24326-0",
+   "args": {
+    "families": "everyday-trap",
+    "count": 6,
+    "start": 24,
+    "max_edits": 1
+   },
+   "tasks": [
+    {
+     "slot": 24,
+     "variant": "checklist breadth: a receipt or invoice text formatter",
+     "slug": "equipment-rental-invoice-checklist",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "24a58e5d84e54b19",
+       "status": "queued",
+       "controls_ok": null,
+       "passes": 0,
+       "completed": 0,
+       "class": "inconclusive"
+      }
+     ],
+     "functionally_correct": false,
+     "first_probe_class": null,
+     "final_probe_class": null,
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0,
+     "minutes": 1.8
+    },
+    {
+     "slot": 25,
+     "variant": "checklist breadth: a roster, schedule, or timetable export",
+     "slug": "library-schedule-checklist-export",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "513323db05374edd",
+       "status": "queued",
+       "controls_ok": null,
+       "passes": 0,
+       "completed": 0,
+       "class": "inconclusive"
+      }
+     ],
+     "functionally_correct": false,
+     "first_probe_class": null,
+     "final_probe_class": null,
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0,
+     "minutes": 1.4
+    },
+    {
+     "slot": 26,
+     "variant": "checklist breadth: a log or metrics summary report",
+     "slug": "bakery-order-checklist-summary",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "b9405281942b4989",
+       "status": "queued",
+       "controls_ok": null,
+       "passes": 0,
+       "completed": 0,
+       "class": "inconclusive"
+      }
+     ],
+     "functionally_correct": false,
+     "first_probe_class": null,
+     "final_probe_class": null,
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0,
+     "minutes": 1.3
+    },
+    {
+     "slot": 27,
+     "variant": "checklist breadth: a mailing-list or contact-list cleaner",
+     "slug": "mailing-list-cleaner-breadth",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "fefee323cc5b49ad",
+       "status": "running",
+       "controls_ok": true,
+       "passes": 4,
+       "completed": 4,
+       "class": "inconclusive"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": null,
+     "final_probe_class": null,
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0124,
+     "minutes": 20.2
+    },
+    {
+     "slot": 28,
+     "variant": "checklist breadth: an inventory or price-list exporter",
+     "slug": "seed-catalog-checklist-export",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "5bb44e76df764ae1",
+       "status": "queued",
+       "controls_ok": null,
+       "passes": 0,
+       "completed": 0,
+       "class": "inconclusive"
+      }
+     ],
+     "functionally_correct": false,
+     "first_probe_class": null,
+     "final_probe_class": null,
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0,
+     "minutes": 1.3
+    },
+    {
+     "slot": 29,
+     "variant": "checklist breadth: a leaderboard or ranking table",
+     "slug": "charity-leaderboard-checklist",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "53c88023d9bf4364",
+       "status": "running",
+       "controls_ok": true,
+       "passes": 0,
+       "completed": 0,
+       "class": "inconclusive"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": null,
+     "final_probe_class": null,
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0,
+     "minutes": 0.7
+    }
+   ]
+  },
+  {
+   "batch": "batch-20261007-141923-24328-0",
+   "args": {
+    "families": "everyday-trap",
+    "count": 6,
+    "start": 24,
+    "max_edits": 1
+   },
+   "tasks": [
+    {
+     "slot": 24,
+     "variant": "checklist breadth: a receipt or invoice text formatter",
+     "slug": "repair-shop-invoice-checklist",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "972fa0b480b34a80",
+       "status": "queued",
+       "controls_ok": null,
+       "passes": 0,
+       "completed": 0,
+       "class": "inconclusive"
+      }
+     ],
+     "functionally_correct": false,
+     "first_probe_class": null,
+     "final_probe_class": null,
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0,
+     "minutes": 1.3
+    },
+    {
+     "slot": 25,
+     "variant": "checklist breadth: a roster, schedule, or timetable export",
+     "slug": "pool-booking-checklist-export",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "b632634f8a2f4049",
+       "status": "queued",
+       "controls_ok": null,
+       "passes": 0,
+       "completed": 0,
+       "class": "inconclusive"
+      }
+     ],
+     "functionally_correct": false,
+     "first_probe_class": null,
+     "final_probe_class": null,
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0,
+     "minutes": 1.3
+    },
+    {
+     "slot": 26,
+     "variant": "checklist breadth: a log or metrics summary report",
+     "slug": "gym-attendance-checklist-report",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "9270b192066442d1",
+       "status": "queued",
+       "controls_ok": null,
+       "passes": 0,
+       "completed": 0,
+       "class": "inconclusive"
+      }
+     ],
+     "functionally_correct": false,
+     "first_probe_class": null,
+     "final_probe_class": null,
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0,
+     "minutes": 1.3
+    },
+    {
+     "slot": 27,
+     "variant": "checklist breadth: a mailing-list or contact-list cleaner",
+     "slug": "mailing-list-summary-checklist",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "83c7a6ff6fa44e4b",
+       "status": "queued",
+       "controls_ok": null,
+       "passes": 0,
+       "completed": 0,
+       "class": "inconclusive"
+      }
+     ],
+     "functionally_correct": false,
+     "first_probe_class": null,
+     "final_probe_class": null,
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0,
+     "minutes": 1.4
+    },
+    {
+     "slot": 28,
+     "variant": "checklist breadth: an inventory or price-list exporter",
+     "slug": "tool-rental-invoice-checklist",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "42538223778742b5",
+       "status": "queued",
+       "controls_ok": null,
+       "passes": 0,
+       "completed": 0,
+       "class": "inconclusive"
+      }
+     ],
+     "functionally_correct": false,
+     "first_probe_class": null,
+     "final_probe_class": null,
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0,
+     "minutes": 0.5
+    },
+    {
+     "slot": 29,
+     "variant": "checklist breadth: a leaderboard or ranking table",
+     "slug": "charity-run-leaderboard-checklist",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "afff419767b14f82",
+       "status": "running",
+       "controls_ok": true,
+       "passes": 0,
+       "completed": 0,
+       "class": "inconclusive"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": null,
+     "final_probe_class": null,
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0,
+     "minutes": 0.6
+    }
+   ]
+  },
+  {
+   "batch": "batch-20261007-141923-24330-0",
+   "args": {
+    "families": "everyday-trap",
+    "count": 6,
+    "start": 24,
+    "max_edits": 1
+   },
+   "tasks": [
+    {
+     "slot": 24,
+     "variant": "checklist breadth: a receipt or invoice text formatter",
+     "slug": "catering-receipt-checklist",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "ae9447c83eb142f5",
+       "status": "queued",
+       "controls_ok": null,
+       "passes": 0,
+       "completed": 0,
+       "class": "inconclusive"
+      }
+     ],
+     "functionally_correct": false,
+     "first_probe_class": null,
+     "final_probe_class": null,
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0,
+     "minutes": 0.7
+    },
+    {
+     "slot": 25,
+     "variant": "checklist breadth: a roster, schedule, or timetable export",
+     "slug": "community-center-schedule-checklist",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "00bcf3ba0f484af8",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 5,
+       "completed": 5,
+       "class": "too_easy"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": "too_easy",
+     "final_probe_class": "too_easy",
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0213,
+     "minutes": 19.3
+    },
+    {
+     "slot": 26,
+     "variant": "checklist breadth: a log or metrics summary report",
+     "slug": "bakery-production-checklist-report",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "2c1d5ac8d7724c1a",
+       "status": "queued",
+       "controls_ok": null,
+       "passes": 0,
+       "completed": 0,
+       "class": "inconclusive"
+      }
+     ],
+     "functionally_correct": false,
+     "first_probe_class": null,
+     "final_probe_class": null,
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0,
+     "minutes": 1.7
+    },
+    {
+     "slot": 27,
+     "variant": "checklist breadth: a mailing-list or contact-list cleaner",
+     "slug": "newsletter-subscriber-checklist-cleaner",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "513dff1ae6664d48",
+       "status": "running",
+       "controls_ok": true,
+       "passes": 0,
+       "completed": 0,
+       "class": "inconclusive"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": null,
+     "final_probe_class": null,
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0,
+     "minutes": 0.6
+    },
+    {
+     "slot": 28,
+     "variant": "checklist breadth: an inventory or price-list exporter",
+     "slug": "wholesale-pricelist-checklist-export",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "a539112ebe524546",
+       "status": "queued",
+       "controls_ok": null,
+       "passes": 0,
+       "completed": 0,
+       "class": "inconclusive"
+      }
+     ],
+     "functionally_correct": false,
+     "first_probe_class": null,
+     "final_probe_class": null,
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0,
+     "minutes": 1.5
+    },
+    {
+     "slot": 29,
+     "variant": "checklist breadth: a leaderboard or ranking table",
+     "slug": "fundraiser-leaderboard-checklist",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "2ed448f9487f420b",
+       "status": "queued",
+       "controls_ok": null,
+       "passes": 0,
+       "completed": 0,
+       "class": "inconclusive"
+      }
+     ],
+     "functionally_correct": false,
+     "first_probe_class": null,
+     "final_probe_class": null,
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0,
+     "minutes": 1.1
+    }
+   ]
+  },
+  {
+   "batch": "batch-20261007-141923-24331-0",
+   "args": {
+    "families": "everyday-trap",
+    "count": 6,
+    "start": 24,
+    "max_edits": 1
+   },
+   "tasks": [
+    {
+     "slot": 24,
+     "variant": "checklist breadth: a receipt or invoice text formatter",
+     "slug": "bike-repair-invoice-checklist",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "566e970955a94c51",
+       "status": "running",
+       "controls_ok": true,
+       "passes": 0,
+       "completed": 1,
+       "class": "inconclusive"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": null,
+     "final_probe_class": null,
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0033,
+     "minutes": 0.5
+    },
+    {
+     "slot": 25,
+     "variant": "checklist breadth: a roster, schedule, or timetable export",
+     "slug": "swim-schedule-checklist-export",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "14b612faf1e343cb",
+       "status": "queued",
+       "controls_ok": null,
+       "passes": 0,
+       "completed": 0,
+       "class": "inconclusive"
+      }
+     ],
+     "functionally_correct": false,
+     "first_probe_class": null,
+     "final_probe_class": null,
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0,
+     "minutes": 0.2
+    },
+    {
+     "slot": 26,
+     "variant": "checklist breadth: a log or metrics summary report",
+     "slug": "wifi-usage-checklist-report",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "89d03e9decdf45a7",
+       "status": "queued",
+       "controls_ok": null,
+       "passes": 0,
+       "completed": 0,
+       "class": "inconclusive"
+      }
+     ],
+     "functionally_correct": false,
+     "first_probe_class": null,
+     "final_probe_class": null,
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0,
+     "minutes": 1.4
+    },
+    {
+     "slot": 27,
+     "variant": "checklist breadth: a mailing-list or contact-list cleaner",
+     "slug": "mailing-list-report-checklist",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "ccdb1473793c4d80",
+       "status": "running",
+       "controls_ok": true,
+       "passes": 0,
+       "completed": 0,
+       "class": "inconclusive"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": null,
+     "final_probe_class": null,
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0,
+     "minutes": 0.7
+    },
+    {
+     "slot": 28,
+     "variant": "checklist breadth: an inventory or price-list exporter",
+     "slug": "bookstore-pricelist-checklist-export",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "2b5443fcfef548ac",
+       "status": "queued",
+       "controls_ok": null,
+       "passes": 0,
+       "completed": 0,
+       "class": "inconclusive"
+      }
+     ],
+     "functionally_correct": false,
+     "first_probe_class": null,
+     "final_probe_class": null,
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0,
+     "minutes": 2.0
+    },
+    {
+     "slot": 29,
+     "variant": "checklist breadth: a leaderboard or ranking table",
+     "slug": "gym-leaderboard-checklist",
+     "authored": true,
+     "outcome": null,
+     "status": "probing",
+     "structural_valid": true,
+     "docker_valid": true,
+     "probes": [
+      {
+       "job": "66735138630643f7",
+       "status": "completed",
+       "controls_ok": true,
+       "passes": 4,
+       "completed": 5,
+       "class": "too_easy"
+      }
+     ],
+     "functionally_correct": true,
+     "first_probe_class": "too_easy",
+     "final_probe_class": "too_easy",
+     "ever_in_range": false,
+     "gate": null,
+     "shipped": false,
+     "glm_cost_usd": 0,
+     "solver_cost_usd": 0.0257,
+     "minutes": 19.8
+    }
+   ]
+  },
+  {
+   "batch": "batch-20261007-144136-62036-0",
+   "args": {
+    "families": "everyday-trap",
+    "count": 6,
+    "start": 34,
+    "max_edits": 1
+   },
+   "tasks": [
+    {
+     "slot": 34,
+     "variant": "checklist breadth in a command-line tool with flags, exit codes, and stderr messages",
+     "slug": null,
+     "authored": false,
+     "outcome": null,
+     "status": "pending"
+    },
+    {
+     "slot": 35,
+     "variant": "checklist breadth in a file or directory reorganiser driven by a manifest",
+     "slug": null,
+     "authored": false,
+     "outcome": null,
+     "status": "pending"
+    },
+    {
+     "slot": 36,
+     "variant": "checklist breadth in a config-format migrator (for example INI to JSON) with defaults and overrides",
+     "slug": null,
+     "authored": false,
+     "outcome": null,
+     "status": "pending"
+    },
+    {
+     "slot": 37,
+     "variant": "checklist breadth in an event-log replay that tracks account or device state",
+     "slug": null,
+     "authored": false,
+     "outcome": null,
+     "status": "pending"
+    },
+    {
+     "slot": 38,
+     "variant": "checklist breadth in a data validator that writes an error report with line numbers",
+     "slug": null,
+     "authored": false,
+     "outcome": null,
+     "status": "pending"
+    },
+    {
+     "slot": 39,
+     "variant": "checklist breadth in a room, shift, or resource allocator with tie-break rules",
+     "slug": null,
+     "authored": false,
+     "outcome": null,
+     "status": "pending"
+    }
+   ]
+  },
+  {
+   "batch": "batch-20261007-144136-62037-0",
+   "args": {
+    "families": "everyday-trap",
+    "count": 6,
+    "start": 38,
+    "max_edits": 1
+   },
+   "tasks": [
+    {
+     "slot": 38,
+     "variant": "checklist breadth in a data validator that writes an error report with line numbers",
+     "slug": null,
+     "authored": false,
+     "outcome": null,
+     "status": "pending"
+    },
+    {
+     "slot": 39,
+     "variant": "checklist breadth in a room, shift, or resource allocator with tie-break rules",
+     "slug": null,
+     "authored": false,
+     "outcome": null,
+     "status": "pending"
+    },
+    {
+     "slot": 40,
+     "variant": "checklist breadth in a path, URL, or identifier normaliser",
+     "slug": null,
+     "authored": false,
+     "outcome": null,
+     "status": "pending"
+    },
+    {
+     "slot": 41,
+     "variant": "checklist breadth in a bank-statement or ledger reconciler",
+     "slug": null,
+     "authored": false,
+     "outcome": null,
+     "status": "pending"
+    },
+    {
+     "slot": 42,
+     "variant": "modified classic: interval or range merging",
+     "slug": null,
+     "authored": false,
+     "outcome": null,
+     "status": "pending"
+    },
+    {
+     "slot": 43,
+     "variant": "constraint implied by the goal: route or delivery planning",
+     "slug": null,
+     "authored": false,
+     "outcome": null,
+     "status": "pending"
+    }
+   ]
+  }
+ ],
+ "summary": {
+  "slots": 60,
+  "authored": 48,
+  "structural_valid": 48,
+  "docker_valid": 47,
+  "functionally_correct": 31,
+  "first_probe": {
+   "too_easy": 12,
+   "learnable_range": 9,
+   "too_hard": 4
+  },
+  "ever_in_learnable_range": 9,
+  "shipped_after_gate": 5,
+  "glm_cost_usd": 0,
+  "solver_cost_usd": 0.76,
+  "median_minutes": 13.4,
+  "glm_cost_usd_window": 2.57
+ }
+}

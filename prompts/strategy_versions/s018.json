@@ -1,0 +1,448 @@
+{
+ "version": 18,
+ "updated": "2026-10-07 16:17:01",
+ "note": "Seeded from measured probes on 2026-10-06/07 (see reports/failure_rules.md). Updated after every probe: pass/fail counts per strategy, and GLM-5.1 strategist edits from failure forensics.",
+ "strategies": [
+  {
+   "id": "H1",
+   "kind": "hard",
+   "status": "active",
+   "name": "Counter-idiomatic stated exception",
+   "how": "State a rule or exception that contradicts the obvious implementation (for example: tiles passed over during a forced movement do not trigger, only the tile where movement stops does; a blocked forced move still consumes the resource) and make it change the answer on several instances. The rule must be stated plainly once in the docs; do not hide it. Crucially, ensure the provided worked example does NOT exercise this exception, so the agent cannot catch the bug by testing its code against the example.",
+   "evidence": [
+    {
+     "text": "gravity-fall-grid-puzzle 4/5: the failing run applied gravity pads it fell past, contrary to RULES.md step 3b/3c",
+     "job": "d576445d35d24f67"
+    },
+    {
+     "text": "Turing TB3 failure study: under-modeling stated requirements is 28.8% of agent failures",
+     "job": ""
+    },
+    {
+     "text": "gravity-fall-grid-puzzle (run 3): failing run found longer paths (14 vs 12 moves) because it triggered gravity pads during the fall instead of only at the end, preventing falling past them.",
+     "job": "d576445d35d24f67"
+    },
+    {
+     "text": "gravity-fall-grid-puzzle 4/5: the worked example exercised the tricky rule (pads only trigger at the end of the fall), allowing 4 passing runs to verify their implementation against it and catch the H1 bug.",
+     "job": "d576445d35d24f67"
+    }
+   ],
+   "stats": {
+    "runs": 10,
+    "passes": 8,
+    "tasks": 2
+   },
+   "previous_how": [
+    "State a rule or exception that contradicts the obvious implementation (for example: tiles passed over during a forced movement do not trigger, only the tile where movement stops does; a blocked forced move still consumes the resource) and make it change the answer on several instances. The rule must be stated plainly once in the docs; do not hide it."
+   ]
+  },
+  {
+   "id": "H2",
+   "kind": "hard",
+   "status": "active",
+   "name": "Unverifiable decoding of a confusable symbol",
+   "how": "Make the essential input depend on telling apart two symbols that look nearly alike (a 1-2 pixel difference in a marker's width or position, two close colours, O vs 0 style glyphs). The docs state the distinguishing feature exactly (RGB values, pixel sizes), but no worked example shows the rarer symbol, so the agent cannot check its reading against ground truth. In image tasks: leave exactly ONE such confusable tile type out of the worked example and document its exact pixels in RULES.md; use it on several boards where it changes the answer.",
+   "evidence": [
+    {
+     "text": "tb2-gcode-to-text: 1 pass, 3 fail, 1 timeout; every failure read letter O where the plotted glyph is digit 0",
+     "job": "efbdf58500e2456d"
+    }
+   ],
+   "stats": {
+    "runs": 4,
+    "passes": 1,
+    "tasks": 1
+   }
+  },
+  {
+   "id": "H3",
+   "kind": "hard",
+   "status": "active",
+   "name": "All optimal answers required",
+   "how": "Require every optimal answer (all minimal move sequences, all best moves), sorted in a stated order; listing a subset fails.",
+   "evidence": [
+    {
+     "text": "probe-conveyor-d: one failing run listed 1 of 2 minimal sequences",
+     "job": "ba20600b9f4146e4"
+    }
+   ],
+   "stats": {
+    "runs": 15,
+    "passes": 11,
+    "tasks": 3
+   }
+  },
+  {
+   "id": "H4",
+   "kind": "hard",
+   "status": "active",
+   "name": "Orientation trap on square instances",
+   "how": "Use square instances, so a transposed or mirrored decoding still produces a well-formed answer that fails.",
+   "evidence": [
+    {
+     "text": "probe-conveyor-d: failing run decoded a square board transposed (every D and R swapped)",
+     "job": "ba20600b9f4146e4"
+    }
+   ],
+   "stats": {
+    "runs": 15,
+    "passes": 11,
+    "tasks": 3
+   }
+  },
+  {
+   "id": "H5",
+   "kind": "hard",
+   "status": "active",
+   "name": "Many stated constraints, one easy to forget",
+   "how": "Give six or more independent constraints on the output; one is stated once, briefly, and is not exercised by any provided example.",
+   "evidence": [
+    {
+     "text": "tb2-dna-assembly (timeboxed): run claimed every constraint verified but missed the 1-nucleotide clamp before the BsaI site",
+     "job": "a3cdad5d7e564256"
+    }
+   ],
+   "stats": {
+    "runs": 63,
+    "passes": 48,
+    "tasks": 14
+   }
+  },
+  {
+   "id": "H6",
+   "kind": "hard",
+   "status": "active",
+   "name": "Several independent instances",
+   "how": "4-8 independent instances that must all be right; vary them so different instances exercise different rules.",
+   "evidence": [
+    {
+     "text": "probe-conveyor-e (8 boards) 3/5 vs probe-conveyor-d (1 board) 7/10; failures were mostly systematic across boards",
+     "job": "4531cf09"
+    }
+   ],
+   "stats": {
+    "runs": 10,
+    "passes": 7,
+    "tasks": 2
+   }
+  },
+  {
+   "id": "H7",
+   "kind": "hard",
+   "status": "active",
+   "name": "Stated non-default convention",
+   "how": "State plainly once, in the docs, a convention that differs from the programming default and changes the answer: a sort order that is not alphabetical (e.g. sequences sorted with U < R < D < L), coordinates with y increasing upward, 1-based indices, or ties broken by a stated non-obvious key. Agents apply the default (sorted(), 0-based, row-major) without re-reading.",
+   "evidence": [
+    {
+     "text": "untested hypothesis; TB3 study: misreading stated requirements is 38.4% of agent failures; tb2-raman-fitting (rank 2/89) fails on input conventions",
+     "job": ""
+    }
+   ],
+   "stats": {
+    "runs": 34,
+    "passes": 28,
+    "tasks": 7
+   }
+  },
+  {
+   "id": "H8",
+   "kind": "hard",
+   "status": "active",
+   "name": "Stated non-default initial state",
+   "how": "The starting state differs from what the picture suggests and is stated only in the docs: e.g. the player starts facing or falling a stated direction, starts with a stated non-zero resource, a switch starts in the flipped position, or the first move has a stated special effect. Agents initialise from the image and defaults.",
+   "evidence": [
+    {
+     "text": "untested hypothesis (same misreading class as H7)",
+     "job": ""
+    }
+   ],
+   "stats": {
+    "runs": 0,
+    "passes": 0,
+    "tasks": 0
+   }
+  },
+  {
+   "id": "E1",
+   "kind": "easy",
+   "status": "active",
+   "name": "Full legend / explicit encoding",
+   "how": "Document every symbol's exact appearance so nothing is inferred.",
+   "evidence": [
+    {
+     "text": "probe-conveyor-c (full legend) 4/5 vs probe-conveyor-d (partial legend) 7/10",
+     "job": "408d3970"
+    }
+   ],
+   "stats": {
+    "runs": 5,
+    "passes": 4,
+    "tasks": 1
+   }
+  },
+  {
+   "id": "E2",
+   "kind": "easy",
+   "status": "active",
+   "name": "Fewer instances",
+   "how": "Pre-fill or remove instances so fewer must be solved.",
+   "evidence": [],
+   "stats": {
+    "runs": 0,
+    "passes": 0,
+    "tasks": 0
+   }
+  },
+  {
+   "id": "E3",
+   "kind": "easy",
+   "status": "active",
+   "name": "Worked example of the tricky rule",
+   "how": "Show a step-by-step trace of the rule interaction on a small example.",
+   "evidence": [],
+   "stats": {
+    "runs": 0,
+    "passes": 0,
+    "tasks": 0
+   }
+  },
+  {
+   "id": "E4",
+   "kind": "easy",
+   "status": "active",
+   "name": "Worked example containing every symbol",
+   "how": "An example image plus its text form that includes every tile type makes decoding fully checkable.",
+   "evidence": [
+    {
+     "text": "v028 grid-image-puzzle tasks: 14 of 15 completed runs passed (grid-image-puzzle-09 5/5, current-charge 5/5, gravity-fall 4/5)",
+     "job": ""
+    }
+   ],
+   "stats": {
+    "runs": 15,
+    "passes": 14,
+    "tasks": 3
+   }
+  },
+  {
+   "id": "A1",
+   "kind": "avoid",
+   "status": "active",
+   "name": "Independent checker in the environment",
+   "how": "Any runnable oracle, round-trip tool, simulator accepting arbitrary inputs, or command that reveals the answer lets the agent verify until correct.",
+   "evidence": [
+    {
+     "text": "probe-hidden-rules-game v1 5/5 (custom boards on the binary); tb2-write-compressor and tb2-model-extraction passes all verified against the shipped checker",
+     "job": "42298c84927c488b"
+    }
+   ],
+   "stats": {
+    "runs": 15,
+    "passes": 13,
+    "tasks": 3
+   }
+  },
+  {
+   "id": "A2",
+   "kind": "avoid",
+   "status": "active",
+   "name": "Readable reference internals",
+   "how": "A small binary or script containing the rules is disassembled or read.",
+   "evidence": [
+    {
+     "text": "probe-hidden-rules-game-v2 4/5: agents disassembled the AArch64 binary to extract the rules",
+     "job": "3cabad352dbe4146"
+    }
+   ],
+   "stats": {
+    "runs": 5,
+    "passes": 4,
+    "tasks": 1
+   }
+  },
+  {
+   "id": "A3",
+   "kind": "avoid",
+   "status": "active",
+   "name": "Difficulty from scale or search depth",
+   "how": "Large builds, deep searches, or long programs make the agent run out of time; timeouts are not failures.",
+   "evidence": [
+    {
+     "text": "tb2-path-tracing-reverse 5 timeouts; tb2-circuit-fibsqrt and tb2-dna-assembly 4 timeouts each",
+     "job": ""
+    }
+   ],
+   "stats": {
+    "runs": 0,
+    "passes": 0,
+    "tasks": 0
+   }
+  },
+  {
+   "id": "A4",
+   "kind": "avoid",
+   "status": "active",
+   "name": "Ambiguity or rendering defects",
+   "how": "Failures caused by unclear wording or unreadable renders are fake hardness and are rejected by audits.",
+   "evidence": [
+    {
+     "text": "visual-circuit-analysis-707 0/5 from collinear overlapping edges; probe-beam-d3 1/5 from ambiguous numbering",
+     "job": "80f20a75"
+    }
+   ],
+   "stats": {
+    "runs": 0,
+    "passes": 0,
+    "tasks": 0
+   }
+  },
+  {
+   "id": "A5",
+   "kind": "avoid",
+   "status": "active",
+   "name": "Explicit-spec bug fixing",
+   "how": "Fixing injected bugs against an explicit rule list is the agent's strength regardless of size or bug count.",
+   "evidence": [
+    {
+     "text": "about 48 GLM-5.1 bug-fix tasks scored 4-5/5",
+     "job": ""
+    }
+   ],
+   "stats": {
+    "runs": 0,
+    "passes": 0,
+    "tasks": 0
+   }
+  },
+  {
+   "id": "A6",
+   "kind": "avoid",
+   "status": "active",
+   "name": "Time-box instructions",
+   "how": "Telling the agent to stop after N minutes does not work: it checks the clock and keeps going.",
+   "evidence": [
+    {
+     "text": "tb2-dna-assembly-timebox: agents ran date 2-7 times and kept working past 35 minutes with a 15-minute box",
+     "job": "a3cdad5d7e564256"
+    }
+   ],
+   "stats": {
+    "runs": 0,
+    "passes": 0,
+    "tasks": 0
+   }
+  }
+ ],
+ "recorded_jobs": [
+  "d576445d35d24f67",
+  "b8ec90f8852344b9",
+  "b646a8371c2b4f46",
+  "90a29a347e344945",
+  "4547a396feb44407",
+  "5e46448fc412424c",
+  "75ea4f1b9d484aa1",
+  "f2d1b6eb79974ee6",
+  "a37fd9d31a5349fd",
+  "20eb7a6a1e63413f",
+  "c1dd2f17707d46f7",
+  "fb60e268e5da457a",
+  "3ecbfcbad3b9423c",
+  "37319a04edbd4041",
+  "62574bae65a94ce2",
+  "2e86b82c6c5349f5",
+  "2c750cc511774c61",
+  "c385b647a7494252"
+ ],
+ "history": [
+  {
+   "version": 1,
+   "at": "2026-10-07 11:50:00",
+   "note": "Seeded from measured probes."
+  },
+  {
+   "version": 2,
+   "at": "2026-10-07 11:58:29",
+   "note": "H2 made concrete for image tasks; added untested H7 (stated non-default convention) and H8 (stated non-default initial state)."
+  },
+  {
+   "version": 3,
+   "at": "2026-10-07 12:00:26",
+   "note": "strategist after gravity-fall-grid-puzzle (4/5): note H1, note H1, revise H1"
+  },
+  {
+   "version": 4,
+   "at": "2026-10-07 16:17:01",
+   "note": "gateflip-grid-puzzle: 4/5 passed using ['H1', 'H3', 'H4', 'H6']"
+  },
+  {
+   "version": 5,
+   "at": "2026-10-07 16:17:01",
+   "note": "euro-expense-exclusive-range: 4/5 passed using ['H7']"
+  },
+  {
+   "version": 6,
+   "at": "2026-10-07 16:17:01",
+   "note": "contact-list-cleaner-breadth: 0/5 passed using ['H5']"
+  },
+  {
+   "version": 7,
+   "at": "2026-10-07 16:17:01",
+   "note": "shift-roster-checklist-export: 2/5 passed using ['H7', 'H5']"
+  },
+  {
+   "version": 8,
+   "at": "2026-10-07 16:17:01",
+   "note": "sales-leaderboard-checklist: 5/5 passed using ['H5', 'H7']"
+  },
+  {
+   "version": 9,
+   "at": "2026-10-07 16:17:01",
+   "note": "ticket-resolution-checklist-report: 5/5 passed using ['H5', 'H7']"
+  },
+  {
+   "version": 10,
+   "at": "2026-10-07 16:17:01",
+   "note": "contact-list-cleaner-breadth: 5/5 passed using ['H5']"
+  },
+  {
+   "version": 11,
+   "at": "2026-10-07 16:17:01",
+   "note": "parts-order-summary-checklist: 3/5 passed using ['H5']"
+  },
+  {
+   "version": 12,
+   "at": "2026-10-07 16:17:01",
+   "note": "url-registry-normaliser: 3/5 passed using ['H5', 'H7']"
+  },
+  {
+   "version": 13,
+   "at": "2026-10-07 16:17:01",
+   "note": "charity-leaderboard-checklist: 5/5 passed using ['H5']"
+  },
+  {
+   "version": 14,
+   "at": "2026-10-07 16:17:01",
+   "note": "charity-run-leaderboard-checklist: 5/5 passed using ['H5', 'H7']"
+  },
+  {
+   "version": 15,
+   "at": "2026-10-07 16:17:01",
+   "note": "repair-shop-invoice-checklist: 3/5 passed using ['H5']"
+  },
+  {
+   "version": 16,
+   "at": "2026-10-07 16:17:01",
+   "note": "bank-statement-reconciler-checklist: 4/4 passed using ['H5']"
+  },
+  {
+   "version": 17,
+   "at": "2026-10-07 16:17:01",
+   "note": "url-registry-normaliser: 4/4 passed using ['H5', 'H7']"
+  },
+  {
+   "version": 18,
+   "at": "2026-10-07 16:17:01",
+   "note": "repair-shop-invoice-checklist: 4/4 passed using ['H5']"
+  }
+ ]
+}

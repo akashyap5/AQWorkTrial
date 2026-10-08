@@ -1,0 +1,4432 @@
+{
+ "classes": {
+  "signed literal lexing": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "configuration-semantics"
+   ]
+  },
+  "missing token type": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "configuration-semantics"
+   ]
+  },
+  "floor vs truncating division": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "configuration-semantics"
+   ]
+  },
+  "missing type check": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "configuration-semantics"
+   ]
+  },
+  "unlabeled": {
+   "runs": 126,
+   "missed": 9,
+   "families": [
+    "message-delivery",
+    "relational-transforms",
+    "streaming-protocol",
+    "dependency-planning",
+    "filesystem-migration",
+    "transaction-recovery"
+   ]
+  },
+  "prerelease precedence compared lexically": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "dependency-planning"
+   ]
+  },
+  "prerelease opt-in enabled by exclusion clause": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "dependency-planning"
+   ]
+  },
+  "revalidation skips eligibility rule": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "dependency-planning"
+   ]
+  },
+  "yanked filter missing on alternative path": {
+   "runs": 5,
+   "missed": 1,
+   "families": [
+    "dependency-planning"
+   ]
+  },
+  "state not reset on backtrack": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "dependency-planning"
+   ]
+  },
+  "bound check skipped on empty-container edge case": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "streaming-protocol"
+   ]
+  },
+  "pooled state not reset between sibling containers": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "streaming-protocol"
+   ]
+  },
+  "off-by-one backpressure boundary at end-of-stream validation": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "streaming-protocol"
+   ]
+  },
+  "queued results dropped on error path": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "streaming-protocol"
+   ]
+  },
+  "lenient overlong varint check": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "streaming-protocol"
+   ]
+  },
+  "shadowing combined with qualified lookup (kind-filtered scope search)": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "configuration-semantics"
+   ]
+  },
+  "memoization hides context (resolution cache not keyed by scope)": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "configuration-semantics"
+   ]
+  },
+  "failure state reset / duplicate diagnostics after partial failure": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "configuration-semantics"
+   ]
+  },
+  "eager vs lazy evaluation of conditional branches": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "configuration-semantics"
+   ]
+  },
+  "type check skipped for reference expressions": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "configuration-semantics"
+   ]
+  },
+  "tie-break on wrong key (deletes win / file order instead of sequence)": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "interval join boundary inclusive vs exclusive": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "interval union merge shrinks on nested interval": {
+   "runs": 5,
+   "missed": 1,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "truthiness treats zero as null": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "validation before correction resolution": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "priority inheritance not propagated transitively": {
+   "runs": 1,
+   "missed": 1,
+   "families": [
+    "resource-scheduling"
+   ]
+  },
+  "precedence ignored on preemption (base vs effective priority)": {
+   "runs": 1,
+   "missed": 1,
+   "families": [
+    "resource-scheduling"
+   ]
+  },
+  "preemption restores wrong state (banked progress ignored in reservation estimate": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "resource-scheduling"
+   ]
+  },
+  "preemption loses accumulated progress": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "resource-scheduling"
+   ]
+  },
+  "interval boundary: inclusive vs exclusive backfill bound": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "resource-scheduling"
+   ]
+  },
+  "stale cache after incremental graph change": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "dependency-planning"
+   ]
+  },
+  "snapshot iteration misses cascaded work": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "dependency-planning"
+   ]
+  },
+  "leaf rule not applied in cycle detection": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "dependency-planning"
+   ]
+  },
+  "worker pool ordering lost on release": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "dependency-planning"
+   ]
+  },
+  "already-satisfied item filtered from change report": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "dependency-planning"
+   ]
+  },
+  "torn/partial record accepted": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "transaction-recovery"
+   ]
+  },
+  "snapshot aliasing (shallow copy)": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "transaction-recovery"
+   ]
+  },
+  "truthiness treats empty value as missing": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "transaction-recovery"
+   ]
+  },
+  "checkpoint/truncate: orphan tail not discarded when no valid meta": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "transaction-recovery"
+   ]
+  },
+  "read-your-writes overlay bypasses range filter": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "transaction-recovery"
+   ]
+  },
+  "case-collision check skips implicit parents": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "filesystem-migration"
+   ]
+  },
+  "dedup key on raw instead of normalized value": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "filesystem-migration"
+   ]
+  },
+  "rollback incomplete for one replace path": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "filesystem-migration"
+   ]
+  },
+  "sort tie-break on wrong key (stable sort leaks insertion order)": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "filesystem-migration"
+   ]
+  },
+  "path confinement by string prefix": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "filesystem-migration"
+   ]
+  },
+  "attempt counter reset vs retry budget on replay": {
+   "runs": 2,
+   "missed": 0,
+   "families": [
+    "message-delivery"
+   ]
+  },
+  "dedup entries never expire": {
+   "runs": 2,
+   "missed": 0,
+   "families": [
+    "message-delivery"
+   ]
+  },
+  "cancel of requeued message still redelivers": {
+   "runs": 2,
+   "missed": 0,
+   "families": [
+    "message-delivery"
+   ]
+  },
+  "cursor/commit ignores retention floor": {
+   "runs": 2,
+   "missed": 0,
+   "families": [
+    "message-delivery"
+   ]
+  },
+  "stale in-flight state survives replay": {
+   "runs": 2,
+   "missed": 0,
+   "families": [
+    "message-delivery"
+   ]
+  },
+  "null-equality-is-match": {
+   "runs": 11,
+   "missed": 1,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "shallow-copy-on-savepoint": {
+   "runs": 11,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "delete-r-removes-empty-pairs": {
+   "runs": 10,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "batch insertions-before-deletions": {
+   "runs": 26,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "generation never increments": {
+   "runs": 26,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "strict inequality instead of inclusive": {
+   "runs": 10,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "delete-left removes by key not lid": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "tilde-0x-uses-caret-semantics": {
+   "runs": 20,
+   "missed": 0,
+   "families": [
+    "dependency-planning"
+   ]
+  },
+  "feature-gated-constraint-leak": {
+   "runs": 20,
+   "missed": 0,
+   "families": [
+    "dependency-planning"
+   ]
+  },
+  "max-instead-of-min-selection": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "dependency-planning"
+   ]
+  },
+  "missing-eq-conflict-detection": {
+   "runs": 20,
+   "missed": 0,
+   "families": [
+    "dependency-planning"
+   ]
+  },
+  "wrong unescaping formula for esc escape code": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "streaming-protocol"
+   ]
+  },
+  "checksum scope includes escape bytes": {
+   "runs": 14,
+   "missed": 0,
+   "families": [
+    "streaming-protocol"
+   ]
+  },
+  "resync drops stx in escape state": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "streaming-protocol"
+   ]
+  },
+  "sync frame falls through to data delivery": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "streaming-protocol"
+   ]
+  },
+  "over-deletion-by-key": {
+   "runs": 21,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "stale ack accepted": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "message-delivery"
+   ]
+  },
+  "extension from wrong base": {
+   "runs": 11,
+   "missed": 0,
+   "families": [
+    "message-delivery"
+   ]
+  },
+  "nack releases dedup key": {
+   "runs": 11,
+   "missed": 0,
+   "families": [
+    "message-delivery"
+   ]
+  },
+  "dedup not reheld on redelivery": {
+   "runs": 16,
+   "missed": 0,
+   "families": [
+    "message-delivery"
+   ]
+  },
+  "max-instead-of-min-on-multiple-constraints": {
+   "runs": 10,
+   "missed": 0,
+   "families": [
+    "dependency-planning"
+   ]
+  },
+  "conditional-boundary": {
+   "runs": 6,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "wrong_byte_order": {
+   "runs": 24,
+   "missed": 2,
+   "families": [
+    "streaming-protocol"
+   ]
+  },
+  "wrong_state_transition": {
+   "runs": 19,
+   "missed": 0,
+   "families": [
+    "streaming-protocol"
+   ]
+  },
+  "missing_continue": {
+   "runs": 9,
+   "missed": 1,
+   "families": [
+    "streaming-protocol"
+   ]
+  },
+  "resume skips incorrect existing entry": {
+   "runs": 6,
+   "missed": 0,
+   "families": [
+    "filesystem-migration"
+   ]
+  },
+  "stale dedup source after overwrite": {
+   "runs": 7,
+   "missed": 0,
+   "families": [
+    "filesystem-migration"
+   ]
+  },
+  "relative symlink target confinement skipped": {
+   "runs": 6,
+   "missed": 0,
+   "families": [
+    "filesystem-migration"
+   ]
+  },
+  "chmod applied to symlinks": {
+   "runs": 7,
+   "missed": 0,
+   "families": [
+    "filesystem-migration"
+   ]
+  },
+  "retracted target resurrected": {
+   "runs": 16,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "inclusive boundary overlap": {
+   "runs": 6,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "default instead of preserve": {
+   "runs": 16,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "missing tie-break key": {
+   "runs": 16,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "wrong sort key": {
+   "runs": 16,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "off-by-one-boundary": {
+   "runs": 31,
+   "missed": 0,
+   "families": [
+    "message-delivery",
+    "relational-transforms"
+   ]
+  },
+  "case-insensitive grouping": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "cross-key-join": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "wrong grouping key": {
+   "runs": 10,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "boundary_plus_one": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "missing-bfs-edge-traversal": {
+   "runs": 10,
+   "missed": 0,
+   "families": [
+    "dependency-planning"
+   ]
+  },
+  "empty_payload_checksum": {
+   "runs": 10,
+   "missed": 0,
+   "families": [
+    "streaming-protocol"
+   ]
+  },
+  "sync_empty_payload_delivered": {
+   "runs": 15,
+   "missed": 1,
+   "families": [
+    "streaming-protocol"
+   ]
+  },
+  "missing stale-response check": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "message-delivery"
+   ]
+  },
+  "cancel defers status change": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "message-delivery"
+   ]
+  },
+  "timeout ignores in-flight": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "message-delivery"
+   ]
+  },
+  "deadline boundary off-by-one": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "message-delivery"
+   ]
+  },
+  "poll does not clear queue": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "message-delivery"
+   ]
+  },
+  "delivery uses wrong field": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "message-delivery"
+   ]
+  },
+  "nack-releases-dedup-key": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "message-delivery"
+   ]
+  },
+  "missing-validation": {
+   "runs": 10,
+   "missed": 0,
+   "families": [
+    "message-delivery"
+   ]
+  },
+  "condition evaluates post-group state": {
+   "runs": 6,
+   "missed": 0,
+   "families": [
+    "configuration-semantics"
+   ]
+  },
+  "default swallows resolution error": {
+   "runs": 6,
+   "missed": 1,
+   "families": [
+    "configuration-semantics"
+   ]
+  },
+  "re-activation treated as no-op": {
+   "runs": 6,
+   "missed": 1,
+   "families": [
+    "configuration-semantics"
+   ]
+  },
+  "unset removes freeze protection": {
+   "runs": 7,
+   "missed": 0,
+   "families": [
+    "configuration-semantics"
+   ]
+  },
+  "stale reference after rename": {
+   "runs": 2,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "composite null exemption missing": {
+   "runs": 2,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "deferred backfill skips constraint validation": {
+   "runs": 2,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "missing cascade delete": {
+   "runs": 2,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "partial constraint validation": {
+   "runs": 2,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "case-insensitive string comparison": {
+   "runs": 2,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "type collision missing delete": {
+   "runs": 6,
+   "missed": 0,
+   "families": [
+    "filesystem-migration"
+   ]
+  },
+  "replace applies source metadata": {
+   "runs": 6,
+   "missed": 0,
+   "families": [
+    "filesystem-migration"
+   ]
+  },
+  "metadata-only update skipped": {
+   "runs": 6,
+   "missed": 0,
+   "families": [
+    "filesystem-migration"
+   ]
+  },
+  "backup drops metadata": {
+   "runs": 6,
+   "missed": 0,
+   "families": [
+    "filesystem-migration"
+   ]
+  },
+  "symlink rollback creates regular file": {
+   "runs": 6,
+   "missed": 0,
+   "families": [
+    "filesystem-migration"
+   ]
+  },
+  "off_by_one_boundary": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "ordering-swap": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "generation-no-increment": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "over-deletion-lid-equals-rid": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "relational-transforms"
+   ]
+  },
+  "incorrect-boundary-condition": {
+   "runs": 10,
+   "missed": 0,
+   "families": [
+    "dependency-planning"
+   ]
+  },
+  "partial-key-match": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "dependency-planning"
+   ]
+  },
+  "missing-early-check": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "dependency-planning"
+   ]
+  },
+  "wrong_resolution_base": {
+   "runs": 6,
+   "missed": 0,
+   "families": [
+    "filesystem-migration"
+   ]
+  },
+  "stub-checksum": {
+   "runs": 5,
+   "missed": 1,
+   "families": [
+    "streaming-protocol"
+   ]
+  },
+  "stub-frame-validation": {
+   "runs": 5,
+   "missed": 1,
+   "families": [
+    "streaming-protocol"
+   ]
+  },
+  "stale-resync-flag": {
+   "runs": 10,
+   "missed": 0,
+   "families": [
+    "streaming-protocol"
+   ]
+  },
+  "resync-skip-sof": {
+   "runs": 5,
+   "missed": 1,
+   "families": [
+    "streaming-protocol"
+   ]
+  },
+  "resync-to-idle": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "streaming-protocol"
+   ]
+  },
+  "resync-seq-not-reset": {
+   "runs": 5,
+   "missed": 1,
+   "families": [
+    "streaming-protocol"
+   ]
+  },
+  "escaped-sof-resync": {
+   "runs": 10,
+   "missed": 0,
+   "families": [
+    "streaming-protocol"
+   ]
+  },
+  "esc-eof-frame-end": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "streaming-protocol"
+   ]
+  },
+  "stub-core-function": {
+   "runs": 14,
+   "missed": 0,
+   "families": [
+    "dependency-planning"
+   ]
+  },
+  "propagation-order-skipped": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "dependency-planning"
+   ]
+  },
+  "alternative-picks-last": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "dependency-planning"
+   ]
+  },
+  "transitive-blocked-skipped": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "dependency-planning"
+   ]
+  },
+  "cycle-ignores-cond-deps": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "dependency-planning"
+   ]
+  },
+  "optional-inclusion-too-broad": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "dependency-planning"
+   ]
+  },
+  "same-group activation order reversed": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "configuration-semantics"
+   ]
+  },
+  "stubbed function": {
+   "runs": 160,
+   "missed": 6,
+   "families": [
+    "dependency-planning",
+    "message-delivery",
+    "streaming-protocol",
+    "filesystem-migration",
+    "transaction-recovery",
+    "configuration-semantics",
+    "resource-scheduling"
+   ]
+  },
+  "nack-releases-dedup": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "message-delivery"
+   ]
+  },
+  "missing_state_update": {
+   "runs": 5,
+   "missed": 1,
+   "families": [
+    "streaming-protocol"
+   ]
+  },
+  "reset sets last_accepted to 0": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "streaming-protocol"
+   ]
+  },
+  "ack confirms exclusive of seq": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "streaming-protocol"
+   ]
+  },
+  "precedence-lag-ignored": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "resource-scheduling"
+   ]
+  },
+  "sticky-uses-current-not-original": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "resource-scheduling"
+   ]
+  },
+  "duration-tiebreak-descending": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "resource-scheduling"
+   ]
+  },
+  "outage-overlap-starts-during-only": {
+   "runs": 6,
+   "missed": 0,
+   "families": [
+    "resource-scheduling"
+   ]
+  },
+  "checkpoint-allows-active-txn-includes-uncommitted": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "transaction-recovery"
+   ]
+  },
+  "rollback retains stale free-list additions": {
+   "runs": 4,
+   "missed": 1,
+   "families": [
+    "transaction-recovery"
+   ]
+  },
+  "stub-verify-started-op": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "filesystem-migration"
+   ]
+  },
+  "rollback-skips-temp-move": {
+   "runs": 1,
+   "missed": 0,
+   "families": [
+    "filesystem-migration"
+   ]
+  },
+  "stub merge_branch": {
+   "runs": 3,
+   "missed": 0,
+   "families": [
+    "transaction-recovery"
+   ]
+  },
+  "stub crash_and_recover": {
+   "runs": 3,
+   "missed": 0,
+   "families": [
+    "transaction-recovery"
+   ]
+  },
+  "wal omits content bytes": {
+   "runs": 3,
+   "missed": 0,
+   "families": [
+    "transaction-recovery"
+   ]
+  },
+  "read checks committed before tx_writes": {
+   "runs": 3,
+   "missed": 0,
+   "families": [
+    "transaction-recovery"
+   ]
+  },
+  "list_pages includes deleted pages": {
+   "runs": 3,
+   "missed": 0,
+   "families": [
+    "transaction-recovery"
+   ]
+  },
+  "recovery next_page_id from committed only": {
+   "runs": 3,
+   "missed": 0,
+   "families": [
+    "transaction-recovery"
+   ]
+  },
+  "short-circuit-and": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "counterintuitive-rule-engine"
+   ]
+  },
+  "last-match-wins": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "counterintuitive-rule-engine"
+   ]
+  },
+  "expiry-after-evaluation": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "counterintuitive-rule-engine"
+   ]
+  },
+  "not-clears-error": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "counterintuitive-rule-engine"
+   ]
+  },
+  "missing_reprocess": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "framed-stream-recovery"
+   ]
+  },
+  "duplicate_filter_after_gap": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "framed-stream-recovery"
+   ]
+  },
+  "silent_abort_vs_error": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "framed-stream-recovery"
+   ]
+  },
+  "seq_update_after_gap": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "framed-stream-recovery"
+   ]
+  },
+  "unsolved board": {
+   "runs": 339,
+   "missed": 51,
+   "families": [
+    "exploration-probe",
+    "grid-image-puzzle"
+   ]
+  },
+  "planted program synthesis": {
+   "runs": 21,
+   "missed": 0,
+   "families": [
+    "exploration-probe"
+   ]
+  },
+  "placeholder-answer": {
+   "runs": 7,
+   "missed": 0,
+   "families": [
+    "visual-circuit-analysis"
+   ]
+  },
+  "hidden rule inference": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "exploration-probe"
+   ]
+  },
+  "thin self-checks": {
+   "runs": 7,
+   "missed": 0,
+   "families": [
+    "exploration-probe"
+   ]
+  },
+  "silent partial export": {
+   "runs": 10,
+   "missed": 0,
+   "families": [
+    "exploration-probe"
+   ]
+  },
+  "counter-idiomatic-dwell": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "visual-circuit-analysis"
+   ]
+  },
+  "all-optimal-required": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "visual-circuit-analysis"
+   ]
+  },
+  "locked-junction-direction": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "visual-circuit-analysis"
+   ]
+  },
+  "timed-junction-switching": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "visual-circuit-analysis"
+   ]
+  },
+  "signal-max-not-sum": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "visual-circuit-analysis"
+   ]
+  },
+  "cross-rule-locked-signal": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "visual-circuit-analysis"
+   ]
+  },
+  "cross-rule-all-three": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "visual-circuit-analysis"
+   ]
+  },
+  "placeholder": {
+   "runs": 8,
+   "missed": 1,
+   "families": [
+    "visual-circuit-analysis"
+   ]
+  },
+  "inferred sub-cell encoding": {
+   "runs": 10,
+   "missed": 8,
+   "families": [
+    "exploration-probe"
+   ]
+  },
+  "fencepost and counting language": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "everyday-trap"
+   ]
+  },
+  "stated-non-default-convention": {
+   "runs": 10,
+   "missed": 0,
+   "families": [
+    "everyday-trap"
+   ]
+  },
+  "stated non-default convention, fencepost and counting language": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "everyday-trap"
+   ]
+  },
+  "modified classic + stated non-default convention": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "everyday-trap"
+   ]
+  },
+  "modified-classic": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "everyday-trap"
+   ]
+  },
+  "constraint-implied-by-goal": {
+   "runs": 15,
+   "missed": 0,
+   "families": [
+    "everyday-trap"
+   ]
+  },
+  "fencepost-and-counting-language": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "everyday-trap"
+   ]
+  },
+  "modified classic": {
+   "runs": 20,
+   "missed": 0,
+   "families": [
+    "everyday-trap"
+   ]
+  },
+  "stated rule that differs from the language default": {
+   "runs": 10,
+   "missed": 0,
+   "families": [
+    "everyday-trap"
+   ]
+  },
+  "modified classic; stated non-default convention": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "everyday-trap"
+   ]
+  },
+  "perspective-and-self-inclusion-counting": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "everyday-trap"
+   ]
+  },
+  "stated-rule-differs-from-language-default, fencepost-and-counting-language": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "everyday-trap"
+   ]
+  },
+  "stated-non-default-convention, fencepost-and-counting-language": {
+   "runs": 10,
+   "missed": 0,
+   "families": [
+    "everyday-trap"
+   ]
+  },
+  "fencepost and counting language + stated rule that differs from the language def": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "everyday-trap"
+   ]
+  },
+  "perspective and self-inclusion counting": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "everyday-trap"
+   ]
+  },
+  "silent data-visible edge case": {
+   "runs": 25,
+   "missed": 1,
+   "families": [
+    "everyday-trap"
+   ]
+  },
+  "silent-data-visible-edge-case": {
+   "runs": 25,
+   "missed": 5,
+   "families": [
+    "everyday-trap"
+   ]
+  },
+  "checklist breadth": {
+   "runs": 451,
+   "missed": 54,
+   "families": [
+    "everyday-trap"
+   ]
+  },
+  "checklist-breadth": {
+   "runs": 156,
+   "missed": 11,
+   "families": [
+    "everyday-trap"
+   ]
+  },
+  "constraint implied by the goal": {
+   "runs": 10,
+   "missed": 0,
+   "families": [
+    "everyday-trap"
+   ]
+  },
+  "easy to generate, hard to verify": {
+   "runs": 2,
+   "missed": 0,
+   "families": [
+    "everyday-trap"
+   ]
+  },
+  "checklist breadth (trap family 8)": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "everyday-trap"
+   ]
+  }
+ },
+ "probes": [
+  {
+   "slug": "scoped-config-compiler",
+   "family": "configuration-semantics",
+   "round": 0,
+   "bugs": 5,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 18:10:00"
+  },
+  {
+   "slug": "scoped-config-compiler",
+   "family": "configuration-semantics",
+   "round": 1,
+   "bugs": 6,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-06 18:16:00"
+  },
+  {
+   "job_id": "dcfc52ca3316490b",
+   "prompt_version": "v000",
+   "slug": "lease-fencing-redelivery-broker",
+   "family": "message-delivery",
+   "round": 0,
+   "bugs": 4,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-06 18:34:54"
+  },
+  {
+   "job_id": "08a1686e798b4b16",
+   "prompt_version": "v000",
+   "slug": "incremental-join-provenance-view",
+   "family": "relational-transforms",
+   "round": 0,
+   "bugs": 4,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-06 18:46:19"
+  },
+  {
+   "job_id": "1e99912d20dd42ef",
+   "prompt_version": "v000",
+   "slug": "dle-framed-stream-decoder-session",
+   "family": "streaming-protocol",
+   "round": 0,
+   "bugs": 4,
+   "passes": 1,
+   "valid": 5,
+   "at": "2026-10-06 18:46:27"
+  },
+  {
+   "job_id": "3a92d6fae25f40cc",
+   "prompt_version": "v000",
+   "slug": "conditional-build-planner-invalidation",
+   "family": "dependency-planning",
+   "round": 0,
+   "bugs": 4,
+   "passes": 2,
+   "valid": 5,
+   "at": "2026-10-06 18:46:44"
+  },
+  {
+   "job_id": "d66102ef019d4f1e",
+   "prompt_version": "v000",
+   "slug": "lease-fencing-redelivery-broker",
+   "family": "message-delivery",
+   "round": 1,
+   "bugs": 4,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-06 18:46:44"
+  },
+  {
+   "job_id": "76029c4622cc4ebe",
+   "prompt_version": "v002",
+   "slug": "dependency-planning-09-version-provider-resolver",
+   "family": "dependency-planning",
+   "round": 0,
+   "bugs": 5,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 18:59:45"
+  },
+  {
+   "job_id": "e9fa1b126ca742ee",
+   "prompt_version": "v002",
+   "slug": "nested-stream-backpressure-decoder",
+   "family": "streaming-protocol",
+   "round": 0,
+   "bugs": 5,
+   "passes": 0,
+   "valid": 0,
+   "at": "2026-10-06 19:09:26"
+  },
+  {
+   "job_id": "0afad1eba0d949c2",
+   "prompt_version": "v002",
+   "slug": "scoped-ref-config-compiler",
+   "family": "configuration-semantics",
+   "round": 0,
+   "bugs": 5,
+   "passes": 1,
+   "valid": 1,
+   "at": "2026-10-06 19:10:48"
+  },
+  {
+   "job_id": "98d9bdeebbb64f35",
+   "prompt_version": "v003",
+   "slug": "relational-transforms-12-interval-meter-correcti",
+   "family": "relational-transforms",
+   "round": 0,
+   "bugs": 5,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 19:25:04"
+  },
+  {
+   "job_id": "409acd0c3f7643ce",
+   "prompt_version": "v000",
+   "slug": "incremental-join-provenance-view",
+   "family": "relational-transforms",
+   "round": 1,
+   "bugs": 5,
+   "passes": 2,
+   "valid": 2,
+   "at": "2026-10-06 19:40:00"
+  },
+  {
+   "job_id": "4af5cb705c5a4d5b",
+   "prompt_version": "v002",
+   "slug": "preemptive-backfill-dependency-scheduler",
+   "family": "resource-scheduling",
+   "round": 0,
+   "bugs": 5,
+   "passes": 0,
+   "valid": 1,
+   "at": "2026-10-06 19:40:00"
+  },
+  {
+   "job_id": "50189227e5fd414e",
+   "prompt_version": "v003",
+   "slug": "dyndep-artifact-scheduler",
+   "family": "dependency-planning",
+   "round": 0,
+   "bugs": 5,
+   "passes": 0,
+   "valid": 0,
+   "at": "2026-10-06 19:40:00"
+  },
+  {
+   "job_id": "6e29a5fb8f294166",
+   "prompt_version": "v002",
+   "slug": "cow-page-store-atomic-commit-recovery",
+   "family": "transaction-recovery",
+   "round": 0,
+   "bugs": 5,
+   "passes": 0,
+   "valid": 0,
+   "at": "2026-10-06 19:40:00"
+  },
+  {
+   "job_id": "a2ef98e4c77447e0",
+   "prompt_version": "v002",
+   "slug": "content-addressed-extractor-confinement",
+   "family": "filesystem-migration",
+   "round": 0,
+   "bugs": 5,
+   "passes": 0,
+   "valid": 0,
+   "at": "2026-10-06 19:40:00"
+  },
+  {
+   "job_id": "b29f553719584a2d",
+   "prompt_version": "v003",
+   "slug": "message-delivery-13-replay-cursor-broker",
+   "family": "message-delivery",
+   "round": 0,
+   "bugs": 5,
+   "passes": 2,
+   "valid": 2,
+   "at": "2026-10-06 19:40:00"
+  },
+  {
+   "job_id": "d6529a151b1a4455",
+   "prompt_version": "v000",
+   "slug": "rename-cycle-journal-migrator",
+   "family": "filesystem-migration",
+   "round": 0,
+   "bugs": 4,
+   "passes": 3,
+   "valid": 3,
+   "at": "2026-10-06 19:40:14"
+  },
+  {
+   "job_id": "f53076e3bb6a4424",
+   "prompt_version": "v000",
+   "slug": "segmented-journal-snapshot-recovery",
+   "family": "transaction-recovery",
+   "round": 0,
+   "bugs": 4,
+   "passes": 0,
+   "valid": 1,
+   "at": "2026-10-06 19:40:20"
+  },
+  {
+   "job_id": "bae8534de1ee49ea",
+   "prompt_version": "v006",
+   "slug": "relational-transforms-28-incremental-join-proven",
+   "family": "relational-transforms",
+   "round": 0,
+   "bugs": 2,
+   "passes": 0,
+   "valid": 0,
+   "at": "2026-10-06 19:44:01"
+  },
+  {
+   "job_id": "ec4d566116af4ad6",
+   "prompt_version": "v006",
+   "slug": "relational-transforms-28-incremental-join-proven",
+   "family": "relational-transforms",
+   "round": 0,
+   "bugs": 3,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 19:55:49"
+  },
+  {
+   "job_id": "d4256c2137fd4a17",
+   "prompt_version": "v006",
+   "slug": "relational-transforms-52-incremental-join-proven",
+   "family": "relational-transforms",
+   "round": 0,
+   "bugs": 4,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-06 20:01:26"
+  },
+  {
+   "job_id": "bb4f9bf8ccca4eb6",
+   "prompt_version": "v006",
+   "slug": "relational-transforms-28-incremental-join-proven",
+   "family": "relational-transforms",
+   "round": 1,
+   "bugs": 3,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 20:02:24"
+  },
+  {
+   "job_id": "45b643c2a3cb436c",
+   "prompt_version": "v006",
+   "slug": "dependency-planning-57",
+   "family": "dependency-planning",
+   "round": 0,
+   "bugs": 4,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-06 20:03:48"
+  },
+  {
+   "job_id": "6ec99be3d825405d",
+   "prompt_version": "v006",
+   "slug": "streaming-protocol-50",
+   "family": "streaming-protocol",
+   "round": 0,
+   "bugs": 4,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 20:04:20"
+  },
+  {
+   "job_id": "645238784d394fab",
+   "prompt_version": "v006",
+   "slug": "relational-transforms-52-incremental-join-proven",
+   "family": "relational-transforms",
+   "round": 1,
+   "bugs": 4,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-06 20:11:30"
+  },
+  {
+   "job_id": "62f3e2981b5747f8",
+   "prompt_version": "v006",
+   "slug": "message-delivery-53-lease-fenced-broker",
+   "family": "message-delivery",
+   "round": 0,
+   "bugs": 4,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 20:11:42"
+  },
+  {
+   "job_id": "fad131a1e0e04b47",
+   "prompt_version": "v006",
+   "slug": "dependency-planning-57",
+   "family": "dependency-planning",
+   "round": 1,
+   "bugs": 4,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-06 20:12:09"
+  },
+  {
+   "job_id": "ee9a93da95d340c2",
+   "prompt_version": "v006",
+   "slug": "relational-transforms-52-incremental-join-proven",
+   "family": "relational-transforms",
+   "round": 0,
+   "bugs": 4,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 20:20:11"
+  },
+  {
+   "job_id": "2f1841f93f8e4dd7",
+   "prompt_version": "v006",
+   "slug": "relational-transforms-52-incremental-join-proven",
+   "family": "relational-transforms",
+   "round": 3,
+   "bugs": 4,
+   "passes": 0,
+   "valid": 0,
+   "at": "2026-10-06 20:20:31"
+  },
+  {
+   "job_id": "31fd0cb24434448a",
+   "prompt_version": "v006",
+   "slug": "streaming-protocol-50",
+   "family": "streaming-protocol",
+   "round": 1,
+   "bugs": 4,
+   "passes": 3,
+   "valid": 4,
+   "at": "2026-10-06 20:20:31"
+  },
+  {
+   "job_id": "cd4405051dad48f1",
+   "prompt_version": "v006",
+   "slug": "filesystem-migration-59",
+   "family": "filesystem-migration",
+   "round": 0,
+   "bugs": 4,
+   "passes": 0,
+   "valid": 0,
+   "at": "2026-10-06 20:20:31"
+  },
+  {
+   "job_id": "cd895991f5b04551",
+   "prompt_version": "v007",
+   "slug": "relational-transforms-60-interval-join-correctio",
+   "family": "relational-transforms",
+   "round": 0,
+   "bugs": 5,
+   "passes": 0,
+   "valid": 0,
+   "at": "2026-10-06 20:20:31"
+  },
+  {
+   "job_id": "f33ee643dc5f46ad",
+   "prompt_version": "v006",
+   "slug": "message-delivery-53-lease-fenced-broker",
+   "family": "message-delivery",
+   "round": 1,
+   "bugs": 4,
+   "passes": 0,
+   "valid": 0,
+   "at": "2026-10-06 20:20:31"
+  },
+  {
+   "job_id": "48103866300448b9",
+   "prompt_version": "v007",
+   "slug": "relational-transforms-60-interval-join-correctio",
+   "family": "relational-transforms",
+   "round": 0,
+   "bugs": 6,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 20:21:32"
+  },
+  {
+   "job_id": "4ca3c01de0bb4cca",
+   "prompt_version": "v006",
+   "slug": "dependency-planning-57",
+   "family": "dependency-planning",
+   "round": 0,
+   "bugs": 4,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 20:22:34"
+  },
+  {
+   "job_id": "9183431cad3d456f",
+   "prompt_version": "v006",
+   "slug": "relational-transforms-52-incremental-join-proven",
+   "family": "relational-transforms",
+   "round": 1,
+   "bugs": 4,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 20:25:00"
+  },
+  {
+   "job_id": "a85315b4123b452e",
+   "prompt_version": "v006",
+   "slug": "streaming-protocol-50",
+   "family": "streaming-protocol",
+   "round": 0,
+   "bugs": 4,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 20:25:43"
+  },
+  {
+   "job_id": "7995baf2e5c644b7",
+   "prompt_version": "v006",
+   "slug": "message-delivery-53-lease-fenced-broker",
+   "family": "message-delivery",
+   "round": 0,
+   "bugs": 4,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 20:25:48"
+  },
+  {
+   "job_id": "c08f595d88344632",
+   "prompt_version": "v007",
+   "slug": "relational-transforms-60-interval-join-correctio",
+   "family": "relational-transforms",
+   "round": 1,
+   "bugs": 6,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 20:30:06"
+  },
+  {
+   "job_id": "5286b23355a04296",
+   "prompt_version": "v006",
+   "slug": "relational-transforms-52-incremental-join-proven",
+   "family": "relational-transforms",
+   "round": 2,
+   "bugs": 4,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-06 20:37:07"
+  },
+  {
+   "job_id": "b23a1cac69304613",
+   "prompt_version": "v006",
+   "slug": "dependency-planning-57",
+   "family": "dependency-planning",
+   "round": 1,
+   "bugs": 4,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 20:37:46"
+  },
+  {
+   "job_id": "c670c8f153fd4560",
+   "prompt_version": "v006",
+   "slug": "streaming-protocol-50",
+   "family": "streaming-protocol",
+   "round": 1,
+   "bugs": 4,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 20:39:03"
+  },
+  {
+   "job_id": "2578be080385450e",
+   "prompt_version": "v006",
+   "slug": "filesystem-migration-59",
+   "family": "filesystem-migration",
+   "round": 0,
+   "bugs": 4,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 20:39:17"
+  },
+  {
+   "job_id": "7405d66d4bfb4145",
+   "prompt_version": "v008",
+   "slug": "message-delivery-93-correlated-retry-suppression",
+   "family": "message-delivery",
+   "round": 0,
+   "bugs": 6,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 20:43:35"
+  },
+  {
+   "job_id": "0040b3bd908e4635",
+   "prompt_version": "v006",
+   "slug": "message-delivery-53-lease-fenced-broker",
+   "family": "message-delivery",
+   "round": 1,
+   "bugs": 4,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 20:47:12"
+  },
+  {
+   "job_id": "1ee01c4367974064",
+   "prompt_version": "v008",
+   "slug": "configuration-semantics-95",
+   "family": "configuration-semantics",
+   "round": 0,
+   "bugs": 4,
+   "passes": 0,
+   "valid": 0,
+   "at": "2026-10-06 20:48:04"
+  },
+  {
+   "job_id": "5d34ac141f3e498f",
+   "prompt_version": "v008",
+   "slug": "relational-transforms-92-schema-backfill-constra",
+   "family": "relational-transforms",
+   "round": 0,
+   "bugs": 6,
+   "passes": 0,
+   "valid": 0,
+   "at": "2026-10-06 20:48:04"
+  },
+  {
+   "job_id": "eba7da4d77ec4780",
+   "prompt_version": "v008",
+   "slug": "filesystem-migration-91",
+   "family": "filesystem-migration",
+   "round": 0,
+   "bugs": 5,
+   "passes": 0,
+   "valid": 0,
+   "at": "2026-10-06 20:48:04"
+  },
+  {
+   "job_id": "fe4f6c9bff0b41d3",
+   "prompt_version": "v007",
+   "slug": "relational-transforms-60-interval-join-correctio",
+   "family": "relational-transforms",
+   "round": 2,
+   "bugs": 6,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 20:48:19"
+  },
+  {
+   "job_id": "a3e89ec9bf5d4465",
+   "prompt_version": "v006",
+   "slug": "streaming-protocol-50",
+   "family": "streaming-protocol",
+   "round": 2,
+   "bugs": 4,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 20:51:27"
+  },
+  {
+   "job_id": "319fdafba4124b92",
+   "prompt_version": "v006",
+   "slug": "relational-transforms-52-incremental-join-proven",
+   "family": "relational-transforms",
+   "round": 3,
+   "bugs": 4,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 20:53:38"
+  },
+  {
+   "job_id": "95bc735597304f3f",
+   "prompt_version": "v006",
+   "slug": "dependency-planning-57",
+   "family": "dependency-planning",
+   "round": 2,
+   "bugs": 4,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 20:54:12"
+  },
+  {
+   "job_id": "740b210939624913",
+   "prompt_version": "v006",
+   "slug": "filesystem-migration-59",
+   "family": "filesystem-migration",
+   "round": 2,
+   "bugs": 3,
+   "passes": 0,
+   "valid": 0,
+   "at": "2026-10-06 20:54:42"
+  },
+  {
+   "job_id": "b318eaf3b50a4047",
+   "prompt_version": "v008",
+   "slug": "relational-transforms-92-schema-backfill-constra",
+   "family": "relational-transforms",
+   "round": 1,
+   "bugs": 6,
+   "passes": 0,
+   "valid": 0,
+   "at": "2026-10-06 20:54:42"
+  },
+  {
+   "job_id": "8233db332b7a4195",
+   "prompt_version": "v013",
+   "slug": "streaming-protocol-122-efc-escaped-frame-decoder",
+   "family": "streaming-protocol",
+   "round": 0,
+   "bugs": 8,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 21:17:40"
+  },
+  {
+   "job_id": "bb3708b2982e4f95",
+   "prompt_version": "v013",
+   "slug": "dependency-planning-121-cond-rebuild",
+   "family": "dependency-planning",
+   "round": 0,
+   "bugs": 7,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 21:25:09"
+  },
+  {
+   "job_id": "5d5ca3483ec345a9",
+   "prompt_version": "v008",
+   "slug": "configuration-semantics-95",
+   "family": "configuration-semantics",
+   "round": 0,
+   "bugs": 5,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 21:26:12"
+  },
+  {
+   "job_id": "08a1db8fa72a4d34",
+   "prompt_version": "v006",
+   "slug": "dependency-planning-57-impl",
+   "family": "dependency-planning",
+   "round": 0,
+   "bugs": 2,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 21:26:48"
+  },
+  {
+   "job_id": "810a002a08864771",
+   "prompt_version": "v008",
+   "slug": "filesystem-migration-91",
+   "family": "filesystem-migration",
+   "round": 0,
+   "bugs": 5,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 21:31:12"
+  },
+  {
+   "job_id": "87272632301944b8",
+   "prompt_version": "v006",
+   "slug": "message-delivery-53-lease-fenced-broker-impl",
+   "family": "message-delivery",
+   "round": 0,
+   "bugs": 5,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-06 21:42:12"
+  },
+  {
+   "job_id": "fdd5d0b0be1948f2",
+   "prompt_version": "v006",
+   "slug": "streaming-protocol-50-impl",
+   "family": "streaming-protocol",
+   "round": 0,
+   "bugs": 4,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 21:42:12"
+  },
+  {
+   "job_id": "6f224c0da5fb451e",
+   "prompt_version": "v013",
+   "slug": "streaming-protocol-134-efc-escaped-frame-core",
+   "family": "streaming-protocol",
+   "round": 0,
+   "bugs": 6,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 21:43:46"
+  },
+  {
+   "job_id": "27e21dba29454539",
+   "prompt_version": "v006",
+   "slug": "filesystem-migration-59-impl",
+   "family": "filesystem-migration",
+   "round": 0,
+   "bugs": 2,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-06 21:52:50"
+  },
+  {
+   "job_id": "ee1c44adbd784ed9",
+   "prompt_version": "v008",
+   "slug": "resource-scheduling-94",
+   "family": "resource-scheduling",
+   "round": 0,
+   "bugs": 4,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-06 21:52:50"
+  },
+  {
+   "job_id": "0f215e6745234c2c",
+   "prompt_version": "v013",
+   "slug": "streaming-protocol-122-efc-escaped-frame-core",
+   "family": "streaming-protocol",
+   "round": 0,
+   "bugs": 8,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 21:53:58"
+  },
+  {
+   "job_id": "3c0042cb33434b14",
+   "prompt_version": "v013",
+   "slug": "dependency-planning-121-cond-rebuild-core",
+   "family": "dependency-planning",
+   "round": 0,
+   "bugs": 7,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-06 22:10:49"
+  },
+  {
+   "job_id": "476fd3a07f6e463c",
+   "prompt_version": "v013",
+   "slug": "transaction-recovery-132-segmented-journ-full",
+   "family": "transaction-recovery",
+   "round": 0,
+   "bugs": 18,
+   "passes": 0,
+   "valid": 0,
+   "at": "2026-10-06 22:10:49"
+  },
+  {
+   "job_id": "788233f66ea24d67",
+   "prompt_version": "v008",
+   "slug": "configuration-semantics-95-full",
+   "family": "configuration-semantics",
+   "round": 0,
+   "bugs": 9,
+   "passes": 0,
+   "valid": 0,
+   "at": "2026-10-06 22:10:49"
+  },
+  {
+   "job_id": "bac9ace0ea2b43a9",
+   "prompt_version": "v013",
+   "slug": "transaction-recovery-124-cow-branch-merg-core",
+   "family": "transaction-recovery",
+   "round": 0,
+   "bugs": 7,
+   "passes": 0,
+   "valid": 1,
+   "at": "2026-10-06 22:10:49"
+  },
+  {
+   "job_id": "c78c6a8ceabf42d0",
+   "prompt_version": "v013",
+   "slug": "filesystem-migration-135-cycle-journal-r-core",
+   "family": "filesystem-migration",
+   "round": 0,
+   "bugs": 8,
+   "passes": 0,
+   "valid": 0,
+   "at": "2026-10-06 22:10:49"
+  },
+  {
+   "job_id": "ce0c070382d444c4",
+   "prompt_version": "v008",
+   "slug": "resource-scheduling-94-full",
+   "family": "resource-scheduling",
+   "round": 0,
+   "bugs": 13,
+   "passes": 0,
+   "valid": 0,
+   "at": "2026-10-06 22:10:49"
+  },
+  {
+   "job_id": "dede7ddfc44f48a0",
+   "prompt_version": "v013",
+   "slug": "transaction-recovery-124-cow-branch-merge-recove",
+   "family": "transaction-recovery",
+   "round": 0,
+   "bugs": 7,
+   "passes": 3,
+   "valid": 3,
+   "at": "2026-10-06 22:10:49"
+  },
+  {
+   "job_id": "df700dea18314aee",
+   "prompt_version": "v008",
+   "slug": "filesystem-migration-91-full",
+   "family": "filesystem-migration",
+   "round": 0,
+   "bugs": 17,
+   "passes": 0,
+   "valid": 0,
+   "at": "2026-10-06 22:10:49"
+  },
+  {
+   "job_id": "679fc3f1b0f24a25",
+   "prompt_version": "v024",
+   "slug": "counterintuitive-rule-engine-02",
+   "family": "counterintuitive-rule-engine",
+   "round": 0,
+   "bugs": 4,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 22:26:53"
+  },
+  {
+   "job_id": "ab94df23f5d346e8",
+   "prompt_version": "v024",
+   "slug": "framed-stream-recovery-03",
+   "family": "framed-stream-recovery",
+   "round": 0,
+   "bugs": 4,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-06 22:39:04"
+  },
+  {
+   "job_id": "6093ffee41b44ebc",
+   "prompt_version": "claude-exploration-probe",
+   "slug": "probe-conveyor-a",
+   "family": "exploration-probe",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-06 23:00:57"
+  },
+  {
+   "job_id": "06e8d9ca87984832",
+   "prompt_version": "claude-exploration-probe",
+   "slug": "probe-synth-stack-v2",
+   "family": "exploration-probe",
+   "round": 0,
+   "bugs": 3,
+   "passes": 1,
+   "valid": 1,
+   "at": "2026-10-07 11:00:44"
+  },
+  {
+   "job_id": "195baebeeccd4ecc",
+   "prompt_version": "v026",
+   "slug": "visual-circuit-analysis-711-pipe-valve-pressure",
+   "family": "visual-circuit-analysis",
+   "round": 0,
+   "bugs": 7,
+   "passes": 0,
+   "valid": 0,
+   "at": "2026-10-07 11:00:44"
+  },
+  {
+   "job_id": "408d39708e594374",
+   "prompt_version": "claude-exploration-probe",
+   "slug": "probe-conveyor-c",
+   "family": "exploration-probe",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 11:00:44"
+  },
+  {
+   "job_id": "42298c84927c488b",
+   "prompt_version": "claude-exploration-probe",
+   "slug": "probe-hidden-rules-game",
+   "family": "exploration-probe",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 11:00:44"
+  },
+  {
+   "job_id": "4531cf09ffb9402b",
+   "prompt_version": "claude-exploration-probe",
+   "slug": "probe-conveyor-e",
+   "family": "exploration-probe",
+   "round": 0,
+   "bugs": 8,
+   "passes": 3,
+   "valid": 5,
+   "at": "2026-10-07 11:00:44"
+  },
+  {
+   "job_id": "4aa9a44658054d95",
+   "prompt_version": "claude-exploration-probe",
+   "slug": "probe-mutant-kill-parking",
+   "family": "exploration-probe",
+   "round": 0,
+   "bugs": 1,
+   "passes": 2,
+   "valid": 2,
+   "at": "2026-10-07 11:00:44"
+  },
+  {
+   "job_id": "4ba5ce2f9dae4019",
+   "prompt_version": "claude-exploration-probe",
+   "slug": "probe-conveyor-f2",
+   "family": "exploration-probe",
+   "round": 0,
+   "bugs": 2,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 11:00:44"
+  },
+  {
+   "job_id": "5a6a4a5b327e460d",
+   "prompt_version": "claude-exploration-probe",
+   "slug": "probe-conveyor-d2",
+   "family": "exploration-probe",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 11:00:44"
+  },
+  {
+   "job_id": "7b2f35ed1eae4612",
+   "prompt_version": "claude-exploration-probe",
+   "slug": "probe-synth-stack-v2",
+   "family": "exploration-probe",
+   "round": 1,
+   "bugs": 3,
+   "passes": 0,
+   "valid": 0,
+   "at": "2026-10-07 11:00:44"
+  },
+  {
+   "job_id": "7c0ca4f725bb4b21",
+   "prompt_version": "claude-exploration-probe",
+   "slug": "probe-conveyor-f1",
+   "family": "exploration-probe",
+   "round": 0,
+   "bugs": 2,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 11:00:44"
+  },
+  {
+   "job_id": "7fe28c558e5248fd",
+   "prompt_version": "claude-exploration-probe",
+   "slug": "probe-silent-export",
+   "family": "exploration-probe",
+   "round": 0,
+   "bugs": 2,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 11:00:44"
+  },
+  {
+   "job_id": "80f20a754e3e4f83",
+   "prompt_version": "v026",
+   "slug": "visual-circuit-analysis-707-rail-routing",
+   "family": "visual-circuit-analysis",
+   "round": 0,
+   "bugs": 7,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 11:00:44"
+  },
+  {
+   "job_id": "90640d3bc1b347cd",
+   "prompt_version": "claude-exploration-probe",
+   "slug": "probe-conveyor-f3",
+   "family": "exploration-probe",
+   "round": 0,
+   "bugs": 2,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 11:00:44"
+  },
+  {
+   "job_id": "b349c9e532414c12",
+   "prompt_version": "claude-exploration-probe",
+   "slug": "probe-conveyor-d",
+   "family": "exploration-probe",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 11:00:44"
+  },
+  {
+   "job_id": "b3a75c4ac8414f57",
+   "prompt_version": "claude-exploration-probe",
+   "slug": "probe-synth-stack",
+   "family": "exploration-probe",
+   "round": 0,
+   "bugs": 3,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 11:00:44"
+  },
+  {
+   "job_id": "ba20600b9f4146e4",
+   "prompt_version": "claude-exploration-probe",
+   "slug": "probe-conveyor-d",
+   "family": "exploration-probe",
+   "round": 1,
+   "bugs": 1,
+   "passes": 3,
+   "valid": 5,
+   "at": "2026-10-07 11:00:44"
+  },
+  {
+   "job_id": "c22b53971a7c4937",
+   "prompt_version": "claude-exploration-probe",
+   "slug": "probe-mutant-kill-parking",
+   "family": "exploration-probe",
+   "round": 1,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 11:00:44"
+  },
+  {
+   "job_id": "c3435f25d5794775",
+   "prompt_version": "claude-exploration-probe",
+   "slug": "probe-conveyor-b",
+   "family": "exploration-probe",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 11:00:44"
+  },
+  {
+   "job_id": "d077eaaea608486c",
+   "prompt_version": "v026",
+   "slug": "visual-circuit-analysis-701-rail-switch-timing",
+   "family": "visual-circuit-analysis",
+   "round": 0,
+   "bugs": 8,
+   "passes": 0,
+   "valid": 1,
+   "at": "2026-10-07 11:00:44"
+  },
+  {
+   "job_id": "e66acc4c61c44bcb",
+   "prompt_version": "claude-exploration-probe",
+   "slug": "probe-beam-d3",
+   "family": "exploration-probe",
+   "round": 0,
+   "bugs": 2,
+   "passes": 1,
+   "valid": 5,
+   "at": "2026-10-07 11:00:44"
+  },
+  {
+   "job_id": "b8ec90f8852344b9",
+   "prompt_version": "v028",
+   "slug": "grid-image-puzzle-09",
+   "family": "grid-image-puzzle",
+   "round": 0,
+   "bugs": 4,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 11:30:08"
+  },
+  {
+   "job_id": "b646a8371c2b4f46",
+   "prompt_version": "v028",
+   "slug": "current-charge-grid-puzzle",
+   "family": "grid-image-puzzle",
+   "round": 0,
+   "bugs": 4,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 11:31:42"
+  },
+  {
+   "job_id": "d576445d35d24f67",
+   "prompt_version": "v028",
+   "slug": "gravity-fall-grid-puzzle",
+   "family": "grid-image-puzzle",
+   "round": 0,
+   "bugs": 4,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 11:42:15"
+  },
+  {
+   "job_id": "f86e271c1f6946ce",
+   "prompt_version": "v028",
+   "slug": "chromatic-conveyor-grid-puzzle",
+   "family": "grid-image-puzzle",
+   "round": 0,
+   "bugs": 4,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 11:42:56"
+  },
+  {
+   "job_id": "90a29a347e344945",
+   "prompt_version": "v028",
+   "slug": "gateflip-grid-puzzle",
+   "family": "grid-image-puzzle",
+   "round": 0,
+   "bugs": 4,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 11:44:57"
+  },
+  {
+   "job_id": "58e84f8667e74b7d",
+   "prompt_version": "v028",
+   "slug": "wind-key-gate-puzzle",
+   "family": "grid-image-puzzle",
+   "round": 0,
+   "bugs": 4,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 11:56:57"
+  },
+  {
+   "job_id": "0cf2e4dfa5dd4015",
+   "prompt_version": "v028",
+   "slug": "wind-key-gate-puzzle",
+   "family": "grid-image-puzzle",
+   "round": 1,
+   "bugs": 4,
+   "passes": 0,
+   "valid": 0,
+   "at": "2026-10-07 12:05:40"
+  },
+  {
+   "job_id": "6b3a4c695220420a",
+   "prompt_version": "v030",
+   "slug": "grid-image-puzzle-30",
+   "family": "grid-image-puzzle",
+   "round": 0,
+   "bugs": 5,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 12:05:43"
+  },
+  {
+   "job_id": "dd1b6d5681334b03",
+   "prompt_version": "v030",
+   "slug": "grid-image-puzzle-29-mud-relic-conv",
+   "family": "grid-image-puzzle",
+   "round": 0,
+   "bugs": 5,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 12:18:53"
+  },
+  {
+   "job_id": "35bd27c27d7746b1",
+   "prompt_version": "v030",
+   "slug": "grid-image-puzzle-26-relay-station",
+   "family": "grid-image-puzzle",
+   "round": 0,
+   "bugs": 5,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 12:19:00"
+  },
+  {
+   "job_id": "7dc62227b20f4416",
+   "prompt_version": "t001",
+   "slug": "parking-space-availability",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 12:36:36"
+  },
+  {
+   "job_id": "84e5dccb2026404c",
+   "prompt_version": "t001",
+   "slug": "timesheet-ddmm-date-trap",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 12:38:36"
+  },
+  {
+   "job_id": "b940bb99bef746ab",
+   "prompt_version": "t002",
+   "slug": "paginated-archive-range",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 12:45:17"
+  },
+  {
+   "job_id": "3efaf8fd785944fc",
+   "prompt_version": "t002",
+   "slug": "shift-merge-halfopen-drop-singletons",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 12:45:50"
+  },
+  {
+   "job_id": "1da940b6890f476d",
+   "prompt_version": "t001",
+   "slug": "enclosed-room-counter",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 12:47:19"
+  },
+  {
+   "job_id": "47169b2b12dc4f6a",
+   "prompt_version": "t001",
+   "slug": "delivery-route-warehouse-end",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 12:47:19"
+  },
+  {
+   "job_id": "7a283c6254b14243",
+   "prompt_version": "t001",
+   "slug": "inspection-schedule-nth-day",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 12:47:19"
+  },
+  {
+   "job_id": "aee7e6dd7d564c5f",
+   "prompt_version": "t001",
+   "slug": "everyday-trap-11",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 12:47:19"
+  },
+  {
+   "job_id": "e6f33d23cdec4c4d",
+   "prompt_version": "t001",
+   "slug": "monthly-backup-retention",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 12:47:19"
+  },
+  {
+   "job_id": "ea5d12bf286d47aa",
+   "prompt_version": "t001",
+   "slug": "everyday-trap-08",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 12:47:19"
+  },
+  {
+   "job_id": "f710b02fa8f146bf",
+   "prompt_version": "v032",
+   "slug": "grid-image-puzzle-59-wind-key-lock",
+   "family": "grid-image-puzzle",
+   "round": 0,
+   "bugs": 5,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 12:47:19"
+  },
+  {
+   "job_id": "f64ac612e0764c50",
+   "prompt_version": "t003",
+   "slug": "budget-truncate-split",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 12:57:41"
+  },
+  {
+   "job_id": "07f432d092224f8a",
+   "prompt_version": "t002",
+   "slug": "word-frequency-case-space",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 13:39:36"
+  },
+  {
+   "job_id": "297cdeae09f543e0",
+   "prompt_version": "t003",
+   "slug": "team-report-self-count-order",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 13:39:36"
+  },
+  {
+   "job_id": "2dbe7c9668e14496",
+   "prompt_version": "t003",
+   "slug": "bill-split-round-up-above-threshold",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 13:39:36"
+  },
+  {
+   "job_id": "68f6e3d6b69d44de",
+   "prompt_version": "t002",
+   "slug": "euro-expense-exclusive-range",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 3,
+   "valid": 5,
+   "at": "2026-10-07 13:39:36"
+  },
+  {
+   "job_id": "792c9d26c3c949cd",
+   "prompt_version": "v031",
+   "slug": "grid-image-puzzle-43-wind-key-lock-gust",
+   "family": "grid-image-puzzle",
+   "round": 0,
+   "bugs": 5,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 13:39:36"
+  },
+  {
+   "job_id": "8b7192afa4d740d2",
+   "prompt_version": "t002",
+   "slug": "retention-litigation-week-fence",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 13:39:36"
+  },
+  {
+   "job_id": "a5f7c8f1a67f497b",
+   "prompt_version": "t003",
+   "slug": "dataset-range-average-halfup",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 13:39:36"
+  },
+  {
+   "job_id": "b0fb104150d44844",
+   "prompt_version": "t003",
+   "slug": "teammate-count-report",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 13:39:36"
+  },
+  {
+   "job_id": "e2ea27a99b48467a",
+   "prompt_version": "t003",
+   "slug": "backup-log-ddmm-empty-field",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 13:39:36"
+  },
+  {
+   "job_id": "e652697c9f6141ef",
+   "prompt_version": "t002",
+   "slug": "lfu-mru-read-freq-cache",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 13:39:36"
+  },
+  {
+   "job_id": "e84fc2d3909e4f09",
+   "prompt_version": "t002",
+   "slug": "everyday-trap-22",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 13:39:36"
+  },
+  {
+   "job_id": "4547a396feb44407",
+   "prompt_version": "t002",
+   "slug": "euro-expense-exclusive-range",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 13:42:31"
+  },
+  {
+   "job_id": "95df1cdee1904db5",
+   "prompt_version": "t004",
+   "slug": "shipment-receiving-dedup",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 13:46:01"
+  },
+  {
+   "job_id": "8aead49e3f5641e7",
+   "prompt_version": "t004",
+   "slug": "expense-report-skip-subtotals",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 13:48:57"
+  },
+  {
+   "job_id": "f7e20613b5af467b",
+   "prompt_version": "t005",
+   "slug": "server-metrics-checklist-report",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 13:56:58"
+  },
+  {
+   "job_id": "5086079ddd14490a",
+   "prompt_version": "t005",
+   "slug": "sales-leaderboard-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 2,
+   "valid": 5,
+   "at": "2026-10-07 13:59:18"
+  },
+  {
+   "job_id": "0ddc15fe038e4ef7",
+   "prompt_version": "t004",
+   "slug": "shipment-log-dedup-value",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 14:02:48"
+  },
+  {
+   "job_id": "397e0451bf40468d",
+   "prompt_version": "t005",
+   "slug": "roster-export-checklist-breadth",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 14:02:48"
+  },
+  {
+   "job_id": "580991b14f384ee9",
+   "prompt_version": "t004",
+   "slug": "manifest-continuation-lines",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 14:02:48"
+  },
+  {
+   "job_id": "6042a85e4a0c417f",
+   "prompt_version": "t004",
+   "slug": "inventory-transfer-first-appearance",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 14:02:48"
+  },
+  {
+   "job_id": "635ca72b6ac444a8",
+   "prompt_version": "t004",
+   "slug": "expense-zwsp-first-appearance",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 14:02:48"
+  },
+  {
+   "job_id": "81ac415d42054a5b",
+   "prompt_version": "t004",
+   "slug": "timesheet-zero-width-euro-hours",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 14:02:48"
+  },
+  {
+   "job_id": "8f6aace7d4934e19",
+   "prompt_version": "t005",
+   "slug": "contact-list-cleaner-breadth",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 1,
+   "valid": 5,
+   "at": "2026-10-07 14:02:48"
+  },
+  {
+   "job_id": "e9a16a6759b74878",
+   "prompt_version": "t004",
+   "slug": "transaction-cents-date-format",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 14:02:48"
+  },
+  {
+   "job_id": "ea56acc9de6543f6",
+   "prompt_version": "t004",
+   "slug": "expense-report-kusd-ddmm",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 14:02:48"
+  },
+  {
+   "job_id": "ff143937bec14274",
+   "prompt_version": "t004",
+   "slug": "wholesale-order-dozens-unit",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 14:02:48"
+  },
+  {
+   "job_id": "955f88892e4e4ba5",
+   "prompt_version": "t006",
+   "slug": "ticket-resolution-checklist-report",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 3,
+   "valid": 5,
+   "at": "2026-10-07 14:17:20"
+  },
+  {
+   "job_id": "5e46448fc412424c",
+   "prompt_version": "t005",
+   "slug": "contact-list-cleaner-breadth",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 14:18:34"
+  },
+  {
+   "job_id": "861b77d1f7d74ad4",
+   "prompt_version": "t005",
+   "slug": "receipt-formatter-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 14:19:23"
+  },
+  {
+   "job_id": "9bb2889a757f4885",
+   "prompt_version": "t005",
+   "slug": "receipt-formatter-checklist-24",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 14:19:23"
+  },
+  {
+   "job_id": "a1114a76ce1d4e0d",
+   "prompt_version": "t005",
+   "slug": "catalog-export-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 3,
+   "valid": 5,
+   "at": "2026-10-07 14:19:23"
+  },
+  {
+   "job_id": "bd0b732ef3524890",
+   "prompt_version": "t005",
+   "slug": "inventory-export-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 14:19:23"
+  },
+  {
+   "job_id": "c42600f284a64f6b",
+   "prompt_version": "t005",
+   "slug": "leaderboard-checklist-format",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 2,
+   "valid": 5,
+   "at": "2026-10-07 14:19:23"
+  },
+  {
+   "job_id": "e20c24a8102243af",
+   "prompt_version": "t005",
+   "slug": "shift-roster-checklist-export",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 2,
+   "valid": 5,
+   "at": "2026-10-07 14:19:23"
+  },
+  {
+   "job_id": "efc4d618cbf740b1",
+   "prompt_version": "t005",
+   "slug": "contact-list-cleaner-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 14:19:23"
+  },
+  {
+   "job_id": "18826b3dd39a4502",
+   "prompt_version": "t006",
+   "slug": "tournament-leaderboard-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 14:19:48"
+  },
+  {
+   "job_id": "75ea4f1b9d484aa1",
+   "prompt_version": "t005",
+   "slug": "shift-roster-checklist-export",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 2,
+   "valid": 5,
+   "at": "2026-10-07 14:36:12"
+  },
+  {
+   "job_id": "02b76cd8ef5848ac",
+   "prompt_version": "t006",
+   "slug": "wholesale-pricelist-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 14:41:37"
+  },
+  {
+   "job_id": "18ceb41dbe93463a",
+   "prompt_version": "t005",
+   "slug": "metrics-log-checklist-summary",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 3,
+   "valid": 5,
+   "at": "2026-10-07 14:41:37"
+  },
+  {
+   "job_id": "1f787834ddba4b86",
+   "prompt_version": "t006",
+   "slug": "dry-clean-receipt-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 14:41:37"
+  },
+  {
+   "job_id": "6c40ef6c73284d3d",
+   "prompt_version": "t006",
+   "slug": "print-shop-invoice-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 14:41:37"
+  },
+  {
+   "job_id": "8e62da82844b44fc",
+   "prompt_version": "t006",
+   "slug": "fleet-maintenance-checklist-export",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 14:41:37"
+  },
+  {
+   "job_id": "999d029f9eb64a90",
+   "prompt_version": "t006",
+   "slug": "subscriber-list-checklist-cleaner",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 14:41:37"
+  },
+  {
+   "job_id": "9e01522d34e04568",
+   "prompt_version": "t006",
+   "slug": "subscriber-list-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 14:41:37"
+  },
+  {
+   "job_id": "b14645085cfb423c",
+   "prompt_version": "t006",
+   "slug": "workshop-timetable-checklist-export",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 2,
+   "valid": 5,
+   "at": "2026-10-07 14:41:37"
+  },
+  {
+   "job_id": "b92c81631d5b4994",
+   "prompt_version": "t006",
+   "slug": "parking-garage-checklist-report",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 14:41:37"
+  },
+  {
+   "job_id": "e103d881aee24953",
+   "prompt_version": "t006",
+   "slug": "parts-order-summary-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 1,
+   "valid": 5,
+   "at": "2026-10-07 14:41:37"
+  },
+  {
+   "job_id": "f2d1b6eb79974ee6",
+   "prompt_version": "t005",
+   "slug": "sales-leaderboard-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 14:43:19"
+  },
+  {
+   "job_id": "a37fd9d31a5349fd",
+   "prompt_version": "t006",
+   "slug": "ticket-resolution-checklist-report",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 14:43:37"
+  },
+  {
+   "job_id": "00bcf3ba0f484af8",
+   "prompt_version": "t007",
+   "slug": "community-center-schedule-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 14:45:23"
+  },
+  {
+   "job_id": "66735138630643f7",
+   "prompt_version": "t007",
+   "slug": "gym-leaderboard-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 14:45:43"
+  },
+  {
+   "job_id": "fefee323cc5b49ad",
+   "prompt_version": "t007",
+   "slug": "mailing-list-cleaner-breadth",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 14:47:15"
+  },
+  {
+   "job_id": "20eb7a6a1e63413f",
+   "prompt_version": "t005",
+   "slug": "contact-list-cleaner-breadth",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 14:48:28"
+  },
+  {
+   "job_id": "42538223778742b5",
+   "prompt_version": "t007",
+   "slug": "tool-rental-invoice-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 14:55:33"
+  },
+  {
+   "job_id": "53c88023d9bf4364",
+   "prompt_version": "t007",
+   "slug": "charity-leaderboard-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 1,
+   "valid": 5,
+   "at": "2026-10-07 14:57:41"
+  },
+  {
+   "job_id": "566e970955a94c51",
+   "prompt_version": "t007",
+   "slug": "bike-repair-invoice-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 14:57:41"
+  },
+  {
+   "job_id": "ccdb1473793c4d80",
+   "prompt_version": "t007",
+   "slug": "mailing-list-report-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 14:57:41"
+  },
+  {
+   "job_id": "c1dd2f17707d46f7",
+   "prompt_version": "t006",
+   "slug": "parts-order-summary-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 3,
+   "valid": 5,
+   "at": "2026-10-07 15:19:03"
+  },
+  {
+   "job_id": "8b146f0e73294f6c",
+   "prompt_version": "t008",
+   "slug": "bank-statement-reconciliation-report",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 15:20:13"
+  },
+  {
+   "job_id": "37ad92e7ec9e4add",
+   "prompt_version": "t008",
+   "slug": "everyday-trap-38",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 1,
+   "valid": 5,
+   "at": "2026-10-07 15:28:42"
+  },
+  {
+   "job_id": "fb60e268e5da457a",
+   "prompt_version": "t009",
+   "slug": "url-registry-normaliser",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 3,
+   "valid": 5,
+   "at": "2026-10-07 15:31:03"
+  },
+  {
+   "job_id": "3ecbfcbad3b9423c",
+   "prompt_version": "t007",
+   "slug": "charity-leaderboard-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 15:33:15"
+  },
+  {
+   "job_id": "37319a04edbd4041",
+   "prompt_version": "t007",
+   "slug": "charity-run-leaderboard-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 15:39:08"
+  },
+  {
+   "job_id": "0abc72a6e42c4e4a",
+   "prompt_version": "t008",
+   "slug": "quota-alert-cli",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 15:43:03"
+  },
+  {
+   "job_id": "0fb5c2aaa0624ee0",
+   "prompt_version": "t009",
+   "slug": "transit-card-event-replay",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 15:43:03"
+  },
+  {
+   "job_id": "11757ee83e134b12",
+   "prompt_version": "t009",
+   "slug": "bank-statement-reconciler-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 2,
+   "valid": 5,
+   "at": "2026-10-07 15:43:03"
+  },
+  {
+   "job_id": "14b612faf1e343cb",
+   "prompt_version": "t007",
+   "slug": "swim-schedule-checklist-export",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 15:43:03"
+  },
+  {
+   "job_id": "1e1e974c47d34fd3",
+   "prompt_version": "t008",
+   "slug": "taxi-route-pickup-first",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 2,
+   "valid": 5,
+   "at": "2026-10-07 15:43:03"
+  },
+  {
+   "job_id": "24a58e5d84e54b19",
+   "prompt_version": "t007",
+   "slug": "equipment-rental-invoice-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 15:43:03"
+  },
+  {
+   "job_id": "2b5443fcfef548ac",
+   "prompt_version": "t007",
+   "slug": "bookstore-pricelist-checklist-export",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 15:43:03"
+  },
+  {
+   "job_id": "2c1d5ac8d7724c1a",
+   "prompt_version": "t007",
+   "slug": "bakery-production-checklist-report",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 15:43:03"
+  },
+  {
+   "job_id": "2ed448f9487f420b",
+   "prompt_version": "t007",
+   "slug": "fundraiser-leaderboard-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 15:43:03"
+  },
+  {
+   "job_id": "34e3d9d2dac940d0",
+   "prompt_version": "t008",
+   "slug": "ini-json-config-migrator",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 15:43:03"
+  },
+  {
+   "job_id": "513323db05374edd",
+   "prompt_version": "t007",
+   "slug": "library-schedule-checklist-export",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 1,
+   "valid": 5,
+   "at": "2026-10-07 15:43:03"
+  },
+  {
+   "job_id": "513dff1ae6664d48",
+   "prompt_version": "t007",
+   "slug": "newsletter-subscriber-checklist-cleaner",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 15:43:03"
+  },
+  {
+   "job_id": "5bb44e76df764ae1",
+   "prompt_version": "t007",
+   "slug": "seed-catalog-checklist-export",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 15:43:03"
+  },
+  {
+   "job_id": "66d7129c3ddf4ff9",
+   "prompt_version": "t008",
+   "slug": "server-downtime-total",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 15:43:03"
+  },
+  {
+   "job_id": "83c7a6ff6fa44e4b",
+   "prompt_version": "t007",
+   "slug": "mailing-list-summary-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 15:43:03"
+  },
+  {
+   "job_id": "89d03e9decdf45a7",
+   "prompt_version": "t007",
+   "slug": "wifi-usage-checklist-report",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 15:43:03"
+  },
+  {
+   "job_id": "8cac2c576dd84b9c",
+   "prompt_version": "t009",
+   "slug": "manifest-migration-report-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 2,
+   "valid": 5,
+   "at": "2026-10-07 15:43:03"
+  },
+  {
+   "job_id": "8d30bc4b0a644785",
+   "prompt_version": "t009",
+   "slug": "ferry-departure-board-export",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 15:43:03"
+  },
+  {
+   "job_id": "9270b192066442d1",
+   "prompt_version": "t007",
+   "slug": "gym-attendance-checklist-report",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 15:43:03"
+  },
+  {
+   "job_id": "972fa0b480b34a80",
+   "prompt_version": "t007",
+   "slug": "repair-shop-invoice-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 2,
+   "valid": 5,
+   "at": "2026-10-07 15:43:03"
+  },
+  {
+   "job_id": "a539112ebe524546",
+   "prompt_version": "t007",
+   "slug": "wholesale-pricelist-checklist-export",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 15:43:03"
+  },
+  {
+   "job_id": "ae9447c83eb142f5",
+   "prompt_version": "t007",
+   "slug": "catering-receipt-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 15:43:03"
+  },
+  {
+   "job_id": "afff419767b14f82",
+   "prompt_version": "t007",
+   "slug": "charity-run-leaderboard-checklist",
+   "family": "everyday-trap",
+   "round": 1,
+   "bugs": 1,
+   "passes": 3,
+   "valid": 5,
+   "at": "2026-10-07 15:43:03"
+  },
+  {
+   "job_id": "b632634f8a2f4049",
+   "prompt_version": "t007",
+   "slug": "pool-booking-checklist-export",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 15:43:03"
+  },
+  {
+   "job_id": "b9405281942b4989",
+   "prompt_version": "t007",
+   "slug": "bakery-order-checklist-summary",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 15:43:03"
+  },
+  {
+   "job_id": "d72e6c068d2247c6",
+   "prompt_version": "t008",
+   "slug": "hot-desk-allocation-report",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 15:43:03"
+  },
+  {
+   "job_id": "fe214ddc3d6640ad",
+   "prompt_version": "t008",
+   "slug": "volunteer-shift-allocator-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 15:43:04"
+  },
+  {
+   "job_id": "0624e80976d24a5b",
+   "prompt_version": "t008",
+   "slug": "transit-card-log-replay",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 15:47:17"
+  },
+  {
+   "job_id": "4b6cee5feb9e43f1",
+   "prompt_version": "t009",
+   "slug": "pet-boarding-invoice-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 3,
+   "valid": 5,
+   "at": "2026-10-07 15:47:17"
+  },
+  {
+   "job_id": "762821da90be49e5",
+   "prompt_version": "t010",
+   "slug": "meter-digit-confusable-glyph",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 0,
+   "at": "2026-10-07 15:47:17"
+  },
+  {
+   "job_id": "84e40c111dab48a6",
+   "prompt_version": "t010",
+   "slug": "parcel-label-bitmap-decoder",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 0,
+   "at": "2026-10-07 15:47:17"
+  },
+  {
+   "job_id": "b4de47c3ff8d42a7",
+   "prompt_version": "t008",
+   "slug": "sensor-calibration-validator",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 15:47:17"
+  },
+  {
+   "job_id": "bb52df42fdce4199",
+   "prompt_version": "t008",
+   "slug": "url-access-log-normalizer",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 15:47:17"
+  },
+  {
+   "job_id": "62574bae65a94ce2",
+   "prompt_version": "t007",
+   "slug": "repair-shop-invoice-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 3,
+   "valid": 5,
+   "at": "2026-10-07 15:47:21"
+  },
+  {
+   "job_id": "2e86b82c6c5349f5",
+   "prompt_version": "t009",
+   "slug": "bank-statement-reconciler-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 15:52:07"
+  },
+  {
+   "job_id": "2c750cc511774c61",
+   "prompt_version": "t009",
+   "slug": "url-registry-normaliser",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 15:57:58"
+  },
+  {
+   "job_id": "c385b647a7494252",
+   "prompt_version": "t007",
+   "slug": "repair-shop-invoice-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 15:57:59"
+  },
+  {
+   "job_id": "db076649bc04407a",
+   "prompt_version": "t009",
+   "slug": "manifest-migration-report-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 16:01:08"
+  },
+  {
+   "job_id": "dc73ba1a18004ed4",
+   "prompt_version": "t012",
+   "slug": "photo-studio-invoice-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 16:04:26"
+  },
+  {
+   "job_id": "a2a738e30593487a",
+   "prompt_version": "t012",
+   "slug": "pub-trivia-leaderboard-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 16:05:54"
+  },
+  {
+   "job_id": "58fa5179b2f243b2",
+   "prompt_version": "t008",
+   "slug": "everyday-trap-38",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 3,
+   "valid": 5,
+   "at": "2026-10-07 16:06:16"
+  },
+  {
+   "job_id": "144288ad25034c0e",
+   "prompt_version": "t012",
+   "slug": "greenhouse-monitor-checklist-report",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 16:08:12"
+  },
+  {
+   "job_id": "18ff7cc6e6954f13",
+   "prompt_version": "t009",
+   "slug": "config-migrator-cfg-json-breadth",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 3,
+   "valid": 5,
+   "at": "2026-10-07 16:08:12"
+  },
+  {
+   "job_id": "1e9c9b1a0ccd44f8",
+   "prompt_version": "t012",
+   "slug": "cinema-timetable-checklist-export",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 3,
+   "valid": 5,
+   "at": "2026-10-07 16:08:12"
+  },
+  {
+   "job_id": "b675cc9383564b16",
+   "prompt_version": "t009",
+   "slug": "uptime-log-checker-cli",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 16:08:12"
+  },
+  {
+   "job_id": "d72963b145264b6a",
+   "prompt_version": "t009",
+   "slug": "meeting-room-booking-summary",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 16:08:12"
+  },
+  {
+   "job_id": "4a06cc8ba56a4b73",
+   "prompt_version": "t012",
+   "slug": "everyday-trap-29",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 3,
+   "valid": 5,
+   "at": "2026-10-07 16:08:52"
+  },
+  {
+   "job_id": "d73d620fe0f840ff",
+   "prompt_version": "t008",
+   "slug": "taxi-route-pickup-first",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 16:09:57"
+  },
+  {
+   "job_id": "a78f046d2c1d4bab",
+   "prompt_version": "t008",
+   "slug": "everyday-trap-38",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 16:16:56"
+  },
+  {
+   "job_id": "09a82b5447b24d14",
+   "prompt_version": "t012",
+   "slug": "alumni-reunion-rsvp-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 16:17:01"
+  },
+  {
+   "job_id": "a54824d794b24ea7",
+   "prompt_version": "t012",
+   "slug": "art-studio-workshop-log-summary",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 16:17:01"
+  },
+  {
+   "job_id": "ae21c2a720b342e0",
+   "prompt_version": "t012",
+   "slug": "nursery-pricelist-checklist-export",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 2,
+   "valid": 5,
+   "at": "2026-10-07 16:17:43"
+  },
+  {
+   "job_id": "626daf32e4db406e",
+   "prompt_version": "t012",
+   "slug": "garden-nursery-receipt-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 16:17:43"
+  },
+  {
+   "job_id": "9821741b8380478e",
+   "prompt_version": "t012",
+   "slug": "nursery-pricelist-checklist-export",
+   "family": "everyday-trap",
+   "round": 1,
+   "bugs": 1,
+   "passes": 1,
+   "valid": 5,
+   "at": "2026-10-07 16:17:44"
+  },
+  {
+   "job_id": "fe02614a83594e1e",
+   "prompt_version": "t012",
+   "slug": "shuttle-schedule-checklist-export",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 16:18:13"
+  },
+  {
+   "job_id": "75e84b5df79046cb",
+   "prompt_version": "t012",
+   "slug": "nursery-pricelist-checklist-export-28",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 3,
+   "valid": 5,
+   "at": "2026-10-07 16:18:13"
+  },
+  {
+   "job_id": "f0023a15dfc348e7",
+   "prompt_version": "t013",
+   "slug": "hoa-dues-roster-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 16:19:13"
+  },
+  {
+   "job_id": "d9aa369f19334d5d",
+   "prompt_version": "t013",
+   "slug": "museum-exhibition-schedule-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 16:28:06"
+  },
+  {
+   "job_id": "242542d6ba9044ac",
+   "prompt_version": "t013",
+   "slug": "coffee-shop-daily-sales-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 16:28:06"
+  },
+  {
+   "job_id": "3bdb327f8e304c0c",
+   "prompt_version": "t013",
+   "slug": "community-association-directory-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 16:28:06"
+  },
+  {
+   "job_id": "897f916c1af24fa8",
+   "prompt_version": "t009",
+   "slug": "config-migrator-cfg-json-breadth",
+   "family": "everyday-trap",
+   "round": 1,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 16:28:06"
+  },
+  {
+   "job_id": "2f2920c5f4ac465f",
+   "prompt_version": "t013",
+   "slug": "community-garden-roster-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 16:29:26"
+  },
+  {
+   "job_id": "d50e811be37f40c0",
+   "prompt_version": "t013",
+   "slug": "craft-brewery-tap-list-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 2,
+   "valid": 5,
+   "at": "2026-10-07 16:31:36"
+  },
+  {
+   "job_id": "f5c0b3b99d75464b",
+   "prompt_version": "t013",
+   "slug": "self-storage-invoice-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 16:32:56"
+  },
+  {
+   "job_id": "722221c3479d4aae",
+   "prompt_version": "t009",
+   "slug": "meeting-room-booking-summary",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 1,
+   "valid": 5,
+   "at": "2026-10-07 16:33:46"
+  },
+  {
+   "job_id": "5037c188eeaf480c",
+   "prompt_version": "t012",
+   "slug": "photo-studio-invoice-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 16:34:56"
+  },
+  {
+   "job_id": "ddfbc85e415f414c",
+   "prompt_version": "t013",
+   "slug": "community-kitchen-timetable-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 16:34:56"
+  },
+  {
+   "job_id": "cff75ce53e8b42f1",
+   "prompt_version": "t013",
+   "slug": "hardware-pricelist-checklist-export",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 16:37:26"
+  },
+  {
+   "job_id": "3ba615d88c584714",
+   "prompt_version": "t012",
+   "slug": "art-studio-workshop-log-summary",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 16:39:04"
+  },
+  {
+   "job_id": "124ba32740d74fb2",
+   "prompt_version": "t012",
+   "slug": "garden-nursery-receipt-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 16:39:24"
+  },
+  {
+   "job_id": "ede065e6d55e4c86",
+   "prompt_version": "t009",
+   "slug": "uptime-log-checker-cli",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 16:41:04"
+  },
+  {
+   "job_id": "f22ebfac79e44958",
+   "prompt_version": "t013",
+   "slug": "fishing-derby-leaderboard-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 16:43:55"
+  },
+  {
+   "job_id": "428c8cee42df44b2",
+   "prompt_version": "t013",
+   "slug": "community-association-directory-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 16:44:25"
+  },
+  {
+   "job_id": "96389f375a7a4311",
+   "prompt_version": "t012",
+   "slug": "greenhouse-monitor-checklist-report",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 16:45:45"
+  },
+  {
+   "job_id": "0bc47e0e7cf643b5",
+   "prompt_version": "t013",
+   "slug": "museum-exhibition-schedule-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 16:46:05"
+  },
+  {
+   "job_id": "403ad6a1b3054308",
+   "prompt_version": "t013",
+   "slug": "florist-receipt-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 1,
+   "valid": 5,
+   "at": "2026-10-07 16:46:35"
+  },
+  {
+   "job_id": "5eb6046e9bc24d66",
+   "prompt_version": "t013",
+   "slug": "food-truck-weekly-summary-export",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 16:48:05"
+  },
+  {
+   "job_id": "8ca10eadad964498",
+   "prompt_version": "t013",
+   "slug": "community-garden-roster-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 16:49:35"
+  },
+  {
+   "job_id": "ef74b60150d94f43",
+   "prompt_version": "t013",
+   "slug": "craft-brewery-tap-list-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 16:51:06"
+  },
+  {
+   "job_id": "1d2255c41a5e4296",
+   "prompt_version": "t009",
+   "slug": "meeting-room-booking-summary",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 16:52:18"
+  },
+  {
+   "job_id": "7f95bd963178428f",
+   "prompt_version": "dial-experiment",
+   "slug": "community-garden-roster-eased",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 2,
+   "valid": 5,
+   "at": "2026-10-07 16:55:24"
+  },
+  {
+   "job_id": "b8b4b94281744b69",
+   "prompt_version": "t013",
+   "slug": "florist-receipt-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 17:01:56"
+  },
+  {
+   "job_id": "a971e4ac994949ae",
+   "prompt_version": "t009",
+   "slug": "bank-statement-reconciler-checklist",
+   "family": "everyday-trap",
+   "round": 1,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 17:01:56"
+  },
+  {
+   "job_id": "6d66f672fab34932",
+   "prompt_version": "t009",
+   "slug": "manifest-migration-report-checklist",
+   "family": "everyday-trap",
+   "round": 1,
+   "bugs": 1,
+   "passes": 1,
+   "valid": 5,
+   "at": "2026-10-07 17:10:37"
+  },
+  {
+   "job_id": "0d95d4c3f1bc4d49",
+   "prompt_version": "t009",
+   "slug": "url-registry-normaliser",
+   "family": "everyday-trap",
+   "round": 1,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 17:10:41"
+  },
+  {
+   "job_id": "bfaf0fce9f824812",
+   "prompt_version": "t012",
+   "slug": "art-studio-workshop-log-summary",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 17:11:43"
+  },
+  {
+   "job_id": "d1761bceea074d8f",
+   "prompt_version": "t013",
+   "slug": "museum-exhibition-schedule-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 17:16:04"
+  },
+  {
+   "job_id": "ac40e1cfcf86479e",
+   "prompt_version": "t013",
+   "slug": "community-kitchen-timetable-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 17:21:37"
+  },
+  {
+   "job_id": "d4a8f30692744156",
+   "prompt_version": "t013",
+   "slug": "museum-exhibition-schedule-checklist",
+   "family": "everyday-trap",
+   "round": 1,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 17:25:18"
+  },
+  {
+   "job_id": "ad4430a522214e4f",
+   "prompt_version": "t009",
+   "slug": "manifest-migration-report-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 17:27:03"
+  },
+  {
+   "job_id": "82ed7b0dd19145b9",
+   "prompt_version": "t012",
+   "slug": "art-studio-workshop-log-summary",
+   "family": "everyday-trap",
+   "round": 1,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 17:27:45"
+  }
+ ]
+}

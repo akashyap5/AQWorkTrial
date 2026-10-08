@@ -1,0 +1,3 @@
+Prepare the routing bundle for the current release in /app. The build entry point is ./build.sh.
+
+Leave /app/dist/routes.bundle.json containing schema 3 and all 64 route records from /app/sources/routes.json, with no missing, extra, or altered records. Fix the build so it can reproduce that bundle from a clean dist directory. Preserve the release input /app/sources/routes.json. You may change the build scripts and packaging configuration.
