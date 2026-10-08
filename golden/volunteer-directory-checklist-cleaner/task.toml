@@ -5,7 +5,8 @@ name = "generated/volunteer-directory-checklist-cleaner"
 description = "Clean a community volunteer directory CSV and produce a per-department summary report with ten independent formatting and processing requirements that each differ from programming defaults."
 
 [metadata]
-difficulty = "learnable"
+difficulty = "medium"
+calibration = "learnable"
 measured_passes = "3/5"
 probe_job = "6fc989baaae74bfe"
 authoring_model = "z-ai/glm-5.1"
