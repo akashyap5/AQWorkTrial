@@ -745,13 +745,11 @@ async function renderStats() {
   banner.classList.add("stats-board");
   if (!data) { setHTML(banner, '<p class="help">No results snapshot yet.</p>'); return; }
   const pct = (n, d) => `${Math.round(100 * n / d)}%`;
-  const b10 = data.best_window_10, b20 = data.best_window_20_champion;
+  const b10 = data.best_window_10;
   const cards = [
     [pct(b10.in_band_first, b10.size), "in band on the first probe", `best 10 consecutive tasks (${b10.in_band_first} of ${b10.size})`],
     [pct(b10.shipped, b10.size), "shipped through the fairness gate", `same 10 tasks (${b10.shipped} of ${b10.size})`],
-    [pct(b20.in_band_first, b20.size), "in band on the first probe", `best 20 on the champion prompt (${b20.in_band_first} of 20; ${b20.shipped} shipped)`],
     [String(data.shipped), "learnable tasks shipped", `all ${data.shipped_pass_validator} pass Harbor's validator and the oracle and nop controls`],
-    [String(data.repeat_verified), "in band on every repeat run", "identical task re-run unchanged, 3 of 3 or 4 of 4"],
     [`$${Number(data.cost_per_shipped_pipeline_usd).toFixed(2)}`, "per shipped task", `with the final pipeline (since 12:30); $${Math.round(data.cost_per_shipped_usd)} counting every experiment since day one`],
   ];
   setHTML(banner, `<div class="stats-grid">${cards.map(([big, what, how]) => `<div class="stat-card"><strong>${escapeHTML(big)}</strong><span class="stat-what">${escapeHTML(what)}</span><span class="stat-how">${escapeHTML(how)}</span></div>`).join("")}</div><p class="help stats-note">In band means 1–3 of 5 GLM-5.3-flash attempts (terminus-2, high reasoning) pass every hidden test. Shipped means a GLM-5.1 fairness audit traced the failing runs to rules stated in the instruction. Recomputed from the records ${escapeHTML(clockText(data.written))}.</p>`);
