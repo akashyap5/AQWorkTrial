@@ -1,0 +1,1 @@
+This task implements a community volunteer directory cleaner. It reads a semicolon-delimited CSV file containing volunteer information and produces a formatted per-department summary report showing volunteer counts, total hours, average donations, and earliest join month.

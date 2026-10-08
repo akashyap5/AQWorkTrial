@@ -1,0 +1,1 @@
+Product catalog price list exporter. Processes a CSV with product data (sku, name, category, price, quantity, added_date) and generates a formatted text report grouped by category with subtotals and a grand total summary.

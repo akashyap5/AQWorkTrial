@@ -1,0 +1,101 @@
+{
+ "slug": "catalog-export-checklist",
+ "decision": "learnable",
+ "reason": "measured 3/5 with controls passing; passed the GLM-5.1 fairness gate (3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe)",
+ "probe_job": "a1114a76ce1d4e0d",
+ "runs": [
+  {
+   "run": 1,
+   "status": "failed",
+   "duration_sec": 158,
+   "turns": 6,
+   "failed_tests": [
+    "test_export_price_list"
+   ]
+  },
+  {
+   "run": 2,
+   "status": "passed",
+   "duration_sec": 323,
+   "turns": 7,
+   "failed_tests": []
+  },
+  {
+   "run": 3,
+   "status": "failed",
+   "duration_sec": 323,
+   "turns": 10,
+   "failed_tests": [
+    "test_export_price_list"
+   ]
+  },
+  {
+   "run": 4,
+   "status": "passed",
+   "duration_sec": 352,
+   "turns": 8,
+   "failed_tests": []
+  },
+  {
+   "run": 5,
+   "status": "passed",
+   "duration_sec": 341,
+   "turns": 7,
+   "failed_tests": []
+  }
+ ],
+ "fairness_audit": {
+  "runs": [
+   {
+    "run": 1,
+    "stated": true,
+    "quote": "Dates should be formatted as \"Mon DD, YYYY\"",
+    "why": "DD in date formatting conventions universally means a zero-padded two-digit day (01-31), so 'Jan 01, 2024' not 'Jan 1, 2024'",
+    "quote_verified": true
+   },
+   {
+    "run": 3,
+    "stated": true,
+    "quote": "== Summary ==\nTotal: $75.00 (3 items)",
+    "why": "The example shows a single product with quantity 3 resulting in '3 items', so items count is the sum of all quantities, not the number of product lines",
+    "quote_verified": true
+   }
+  ],
+  "verdict": "fair",
+  "fix": "",
+  "uncovered_runs": [],
+  "traced_runs": [
+   1,
+   3
+  ],
+  "fair": true,
+  "job_id": "a1114a76ce1d4e0d",
+  "votes": [
+   {
+    "fair": false,
+    "verdict": "ambiguous",
+    "uncovered_runs": [],
+    "unverified": [
+     1,
+     3
+    ]
+   },
+   {
+    "fair": true,
+    "verdict": "fair",
+    "uncovered_runs": [],
+    "unverified": []
+   },
+   {
+    "fair": true,
+    "verdict": "ambiguous",
+    "uncovered_runs": [],
+    "unverified": []
+   }
+  ]
+ },
+ "gate_policy": "3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe",
+ "prompt_version": "t005",
+ "authoring_model": "z-ai/glm-5.1",
+ "written": "2026-10-07T14:38:01-0700"
+}

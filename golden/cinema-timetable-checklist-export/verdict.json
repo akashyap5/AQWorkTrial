@@ -1,0 +1,98 @@
+{
+ "slug": "cinema-timetable-checklist-export",
+ "decision": "learnable",
+ "reason": "measured 3/5 with controls passing; passed the GLM-5.1 fairness gate (3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe)",
+ "probe_job": "1e9c9b1a0ccd44f8",
+ "runs": [
+  {
+   "run": 1,
+   "status": "passed",
+   "duration_sec": 263,
+   "turns": 5,
+   "failed_tests": []
+  },
+  {
+   "run": 2,
+   "status": "failed",
+   "duration_sec": 139,
+   "turns": 6,
+   "failed_tests": [
+    "test_timetable_matches_reference"
+   ]
+  },
+  {
+   "run": 3,
+   "status": "passed",
+   "duration_sec": 285,
+   "turns": 8,
+   "failed_tests": []
+  },
+  {
+   "run": 4,
+   "status": "failed",
+   "duration_sec": 257,
+   "turns": 5,
+   "failed_tests": [
+    "test_timetable_matches_reference"
+   ]
+  },
+  {
+   "run": 5,
+   "status": "passed",
+   "duration_sec": 327,
+   "turns": 5,
+   "failed_tests": []
+  }
+ ],
+ "fairness_audit": {
+  "runs": [
+   {
+    "run": 2,
+    "stated": true,
+    "quote": "ordered by start time with ties going to the higher screen number",
+    "why": "The instruction explicitly says ties go to the higher screen number, but the solver sorted lower screen numbers first when start times were equal.",
+    "quote_verified": true
+   },
+   {
+    "run": 4,
+    "stated": true,
+    "quote": "ordered by start time with ties going to the higher screen number",
+    "why": "Same tie-breaking bug as run 2: the solver ordered lower screen numbers first instead of higher screen numbers first.",
+    "quote_verified": true
+   }
+  ],
+  "verdict": "fair",
+  "fix": "",
+  "uncovered_runs": [],
+  "traced_runs": [
+   2,
+   4
+  ],
+  "fair": true,
+  "job_id": "1e9c9b1a0ccd44f8",
+  "votes": [
+   {
+    "fair": true,
+    "verdict": "fair",
+    "uncovered_runs": [],
+    "unverified": []
+   },
+   {
+    "fair": true,
+    "verdict": "fair",
+    "uncovered_runs": [],
+    "unverified": []
+   },
+   {
+    "fair": true,
+    "verdict": "fair",
+    "uncovered_runs": [],
+    "unverified": []
+   }
+  ]
+ },
+ "gate_policy": "3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe",
+ "prompt_version": "t012",
+ "authoring_model": "z-ai/glm-5.1",
+ "written": "2026-10-07T16:19:44-0700"
+}

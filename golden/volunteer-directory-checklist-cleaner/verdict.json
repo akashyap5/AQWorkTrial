@@ -1,0 +1,103 @@
+{
+ "slug": "volunteer-directory-checklist-cleaner",
+ "decision": "learnable",
+ "reason": "measured 3/5 with controls passing; passed the GLM-5.1 fairness gate (3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe)",
+ "probe_job": "6fc989baaae74bfe",
+ "runs": [
+  {
+   "run": 1,
+   "status": "failed",
+   "duration_sec": 633,
+   "turns": 9,
+   "failed_tests": [
+    "test_clean_directory"
+   ]
+  },
+  {
+   "run": 2,
+   "status": "passed",
+   "duration_sec": 367,
+   "turns": 6,
+   "failed_tests": []
+  },
+  {
+   "run": 3,
+   "status": "failed",
+   "duration_sec": 516,
+   "turns": 8,
+   "failed_tests": [
+    "test_clean_directory"
+   ]
+  },
+  {
+   "run": 4,
+   "status": "passed",
+   "duration_sec": 811,
+   "turns": 19,
+   "failed_tests": []
+  },
+  {
+   "run": 5,
+   "status": "passed",
+   "duration_sec": 291,
+   "turns": 5,
+   "failed_tests": []
+  }
+ ],
+ "fairness_audit": {
+  "runs": [
+   {
+    "run": 1,
+    "stated": true,
+    "quote": "The report lists each department with its volunteer count, total hours, average donation, and the month name of the earliest join date in that department.",
+    "why": "If no rows qualify (all filtered or no data), no departments are listed, so the output is just the header with its trailing newline \u2014 the blank line in the example belongs to the department block, not the header.",
+    "quote_verified": true
+   },
+   {
+    "run": 3,
+    "stated": true,
+    "quote": "Only rows with at least 10 hours are included in the summary.",
+    "why": "When all volunteers in a department have hours below 10, none are included, so that department must not appear in the summary at all \u2014 the KeyError indicates the solver failed to filter before building department records.",
+    "quote_verified": true
+   }
+  ],
+  "verdict": "fair",
+  "fix": "",
+  "uncovered_runs": [],
+  "traced_runs": [
+   1,
+   3
+  ],
+  "fair": true,
+  "job_id": "6fc989baaae74bfe",
+  "votes": [
+   {
+    "fair": true,
+    "verdict": "fair",
+    "uncovered_runs": [],
+    "unverified": []
+   },
+   {
+    "fair": true,
+    "verdict": "ambiguous",
+    "uncovered_runs": [],
+    "unverified": [
+     1
+    ]
+   },
+   {
+    "fair": false,
+    "verdict": "ambiguous",
+    "uncovered_runs": [],
+    "unverified": [
+     1,
+     3
+    ]
+   }
+  ]
+ },
+ "gate_policy": "3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe",
+ "prompt_version": "t015",
+ "authoring_model": "z-ai/glm-5.1",
+ "written": "2026-10-07T17:15:44-0700"
+}

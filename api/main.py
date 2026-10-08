@@ -216,8 +216,19 @@ def author_spec(slug):
     return read_json(store.ROOT / "output" / "candidates" / slug / ".author.json", {})
 
 
+GOLDEN = store.ROOT / "golden"
+
+
 @app.get("/api/shipped")
 def shipped():
+    """The frozen golden set (golden/manifest.json): fixed tasks and measurements that later runs never change."""
+    manifest = read_json(GOLDEN / "manifest.json", None)
+    if manifest:
+        return {"shipped": manifest["shipped"], "frozen_at": manifest.get("frozen_at")}
+    return live_shipped()
+
+
+def live_shipped():
     """Gated learnable tasks with every measurement of the shipped text: the probe that shipped it, then later re-runs."""
     import tomllib
     by_task = {}

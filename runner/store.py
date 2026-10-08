@@ -74,6 +74,7 @@ def directory(job_id):
 
 # Accepted generated tasks are listed after the supplied examples.
 LEARNABLE = ROOT / "output" / "learnable"
+GOLDEN = ROOT / "golden"
 
 
 def task_dirs():
@@ -81,8 +82,9 @@ def task_dirs():
     for path in sorted((ROOT / "examples").iterdir()):
         if (path / "task.toml").is_file():
             yield path.name, path.name, "Examples", path
-    if LEARNABLE.is_dir():
-        for path in sorted(LEARNABLE.iterdir()):
+    generated = GOLDEN if GOLDEN.is_dir() else LEARNABLE  # the frozen golden set; newer tasks are not selectable
+    if generated.is_dir():
+        for path in sorted(generated.iterdir()):
             if (path / "task.toml").is_file():
                 yield f"gen-{path.name}", path.name, "Generated", path
 

@@ -1,0 +1,183 @@
+{
+ "slug": "community-garden-roster-eased",
+ "decision": "learnable",
+ "reason": "measured 2/5 with controls passing; passed the GLM-5.1 fairness gate (3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe)",
+ "family": "everyday-trap",
+ "prompt_version": "dial-experiment",
+ "strategies": [
+  "H5",
+  "H7"
+ ],
+ "rule_relevance": null,
+ "tweaks": [
+  {
+   "direction": "easier",
+   "change": "appended the author's hint to the instruction",
+   "from_job": "2f2920c5f4ac465f"
+  },
+  {
+   "direction": "easier",
+   "change": "GLM-5.1 removed: ['Region group headers must use the == Region == decoration format', 'A blank line must appear after each region group']",
+   "rationale": "All 5 solver runs failed because the instruction never specified the == Region == decoration for region headers or the blank line after each group\u2014both were implicit requirements only in the reference solution. Removing these two unstated formatting requirements makes the task match what solvers naturally produce (bare region name as header, no blank line between groups), eliminating the primary source of failures while keeping all other logic intact.",
+   "from_job": "2f2920c5f4ac465f",
+   "by": "GLM-5.1 (dial experiment, triggered manually)"
+  }
+ ],
+ "probes": [
+  {
+   "job_id": "7f95bd963178428f",
+   "passes": 2,
+   "completed_runs": 5,
+   "controls_ok": true,
+   "runs": [
+    {
+     "run": 1,
+     "status": "failed",
+     "duration_sec": 254,
+     "turns": 6,
+     "failed_tests": [
+      "test_clean_roster"
+     ]
+    },
+    {
+     "run": 2,
+     "status": "failed",
+     "duration_sec": 312,
+     "turns": 6,
+     "failed_tests": [
+      "test_clean_roster"
+     ]
+    },
+    {
+     "run": 3,
+     "status": "failed",
+     "duration_sec": 327,
+     "turns": 9,
+     "failed_tests": [
+      "test_clean_roster"
+     ]
+    },
+    {
+     "run": 4,
+     "status": "passed",
+     "duration_sec": 532,
+     "turns": 14,
+     "failed_tests": []
+    },
+    {
+     "run": 5,
+     "status": "passed",
+     "duration_sec": 373,
+     "turns": 9,
+     "failed_tests": []
+    }
+   ],
+   "failures": "FAILED RUN 1: wrong answers vs expected:\n  assert 'North\\nA1 - ...rdener, $50\\n' == 'North\\nA1 - ...$50 in fees\\n'\n  assert 'North\\nA1 - ...deners, $80\\n' == 'North\\nA1 - ...$80 in fees\\n'\n  assert 'South\\nA1 - ...deners, $60\\n' == 'South\\nA1 - ...$60 in fees\\n'\n  assert 'North\\nA1 - ...rdener, $10\\n' == 'North\\nA1 - ...$10 in fees\\n'\n  assert 'North\\nA1 - ...rdener, $10\\n' == 'North\\nA1 - ...$10 in fees\\n'\n  assert 'South\\nA1 - ...deners, $60\\n' == 'South\\nA1 - ...$60 in fees\\n'\n  agent's last solver code (truncated):\ncat > solution.py <<'PY'\nimport csv\nimport io\nfrom datetime import datetime\nfrom decimal import Decimal, ROUND_HALF_UP\n\n\ndef clean_roster(csv_text: str) -> str:\n    \"\"\"Process a community garden plot assignment roster and produce a formatted text directory.\"\"\"\n    reader = csv.reader(io.StringIO(csv_text), delimiter=\";\")\n    try:\n        next(reader)  # Skip the header.\n    except StopIteration:\n        return \"\"\n\n    regions = []\n    gardeners_by_region = {}\n    total_cents = 0\n\n    for row in reader:\n        if len(row) < 7:\n            continue\n        plot_id, gardener_name, email, joined_date, fee_cents, region, status = row[:7]\n\n        if not email:\n            continue\n        if not status:\n            status = \"active\"\n\n        join_date = datetime.strptime(joined_date, \"%d/%m/%Y\").date()\n        years = 2025 - join_date.year + 1\n        display_name = gardener_name.title()\n        total_cents += int(fee_cents)\n\n        if region not in gardeners_by_region:\n            regions.append(region)\n            gardeners_by_region[region] = []\n        gardeners_by_region[region].append(\n            (join_date, display_name, plot_id, years, status)\n        )\n\n    lines = []\n    for region in regions:\n        lines.append(region)\n        gardeners = sorted(\n            gardeners_by_region[region],\n            key=lambda item: (item[0], item[1]),\n        )\n        for _, name, plot_id, years, status in gardeners:\n            unit = \"year\" if years == 1 else \"years\"\n            lines.append(f\"{plot_id} - {name} - {years} {unit} - {status}\")\n\n    count = sum(len(gardeners) for gardeners in gardeners_by_region.values())\n    dollars = (Decimal(total_cents) / Decimal(100)).quantize(\n        Decimal(\"1\"), rounding=ROUND_HALF_UP\n    )\n    count_word = \"gardener\" if count == 1 else \"gardeners\"\n    lines.append(f\"Total: {count} {count_word}, ${dollars:,}\")\n    return \"\\n\".join(lines) + \"\\n\"\nPY\npython3 - <<'PY'\nfrom solution import clean_roster\n\nsample = '''plot_id;gardener_name;email;joined_date;annual_fee_cents;region;status\nP10;alice smith;a@x.com;01/01/2025;1500;North;\nP2;BOB JONES;b@x.com;02/01/2024;250;North;inactive\nP3;carol;o@x.com;03/01/2024;250;East;active\nP9;skipped@x.com;;04/01/2024;900;East;active\nP4;dan;d@x.com;03/01/2024;250;East;\n'''\nprint(clean_roster(sample), end='')\nprint(repr(clean_roster(sample)))\nPY\n\n\nFAILED RUN 2: wrong answers vs expected:\n  assert 'North\\nA1 - ...rdener, $50\\n' == 'North\\nA1 - ...$50 in fees\\n'\n  assert 'North\\nA1 - ...deners, $80\\n' == 'North\\nA1 - ...$80 in fees\\n'\n  assert 'South\\nA1 - ...deners, $60\\n' == 'South\\nA1 - ...$60 in fees\\n'\n  assert 'North\\nA1 - ...rdener, $10\\n' == 'North\\nA1 - ...$10 in fees\\n'\n  assert 'North\\nA1 - ...rdener, $10\\n' == 'North\\nA1 - ...$10 in fees\\n'\n  assert 'South\\nA1 - ...deners, $60\\n' == 'South\\nA1 - ...$60 in fees\\n'\n  agent's last solver code (truncated):\ncat > solution.py <<'PY'\nimport csv\nimport io\nfrom decimal import Decimal, ROUND_HALF_UP\n\n\ndef clean_roster(csv_text: str) -> str:\n    \"\"\"Process a community garden plot assignment roster and produce a formatted text directory.\"\"\"\n    by_region = {}\n    total_fee_cents = 0\n\n    rows = csv.DictReader(io.StringIO(csv_text, newline=\"\"), delimiter=\";\")\n    for row in rows:\n        email = row[\"email\"]\n        if email == \"\":\n            continue\n\n        status = row[\"status\"]\n        if status == \"\":\n            status = \"active\"\n\n        name = row[\"gardener_name\"].title()\n        join_year = int(row[\"joined_date\"].split(\"/\")[2])\n        membership_years = 2025 - join_year + 1\n        fee_cents = int(row[\"annual_fee_cents\"])\n\n        region = row[\"region\"]\n        if region not in by_region:\n            by_region[region] = []\n        by_region[region].append(\n            (join_year, name, row[\"plot_id\"], membership_years, status)\n        )\n        total_fee_cents += fee_cents\n\n    lines = []\n    for region, gardeners in by_region.items():\n        lines.append(region)\n        for _, name, plot_id, membership_years, status in sorted(gardeners):\n            unit = \"year\" if membership_years == 1 else \"years\"\n            lines.append(f\"{plot_id} - {name} - {membership_years} {unit} - {status}\")\n\n    total_dollars = (\n        (Decimal(total_fee_cents) / Decimal(100))\n        .quantize(Decimal(\"1\"), rounding=ROUND_HALF_UP)\n    )\n    gardener_count = sum(len(gardeners) for gardeners in by_region.values())\n    gardener_word = \"gardener\" if gardener_count == 1 else \"gardeners\"\n    lines.append(\n        f\"Total: {gardener_count} {gardener_word}, ${total_dollars:,.0f}\"\n    )\n\n    return \"\\n\".join(lines) + \"\\n\"\nPY\npython3 - <<'PY'\nfrom solution import clean_roster\n\nassert clean_roster(\n    'plot_id;gardener_name;email;joined_date;annual_fee_cents;region;status\\n'\n    'P2;jane doe;j@x.com;01/01/2025;50;North;\\n'\n    'P1;AL SMITH;a@x.com;05/02/2020;4950;North;active\\n'\n) == (\n    'North\\n'\n    'P1 - Al Smith - 6 years - active\\n'\n    'P2 - Jane Doe - 1 year - active\\n'\n    'Total: 2 gardeners, $50\\n'\n)\n\nassert clean_roster(\n    'plot_id;gardener_name;email;joined_date;annual_fee_cents;region;status\\n'\n    'S1;Lee;south@example.com;01/01/2021;1000;South;inactive\\n'\n    'N1;Ann;north@example.com;01/01/2020;500;North;active\\n'\n    'N2;Bob;bob@example.com;01/01/2020;500;North;\\n'\n    ';Nobody;;01/01/2000;999;North;active\\n'\n) == (\n    'South\\n'\n    'S1 - Lee - 5 years - inactive\\n'\n    'North\\n'\n    'N1 - Ann - 6 years - active\\n'\n    'N2 - Bob - 6 years - active\\n'\n   ",
+   "consensus": {}
+  }
+ ],
+ "error": null,
+ "elapsed_sec": 1239,
+ "written": "2026-10-07T16:56:40-0700",
+ "gate_policy": "3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe",
+ "fairness_audit": {
+  "runs": [
+   {
+    "run": 1,
+    "stated": true,
+    "quote": "After all region groups, output a summary line: `Total: N gardener/gardeners, $X in fees`",
+    "why": "The instruction explicitly specifies the summary line format includes ' in fees', but the solver omitted it, producing '$50' instead of '$50 in fees'.",
+    "quote_verified": true
+   },
+   {
+    "run": 2,
+    "stated": true,
+    "quote": "After all region groups, output a summary line: `Total: N gardener/gardeners, $X in fees`",
+    "why": "Same error as run 1: the solver omitted ' in fees' from the summary line, which is explicitly specified in the instruction.",
+    "quote_verified": true
+   },
+   {
+    "run": 3,
+    "stated": true,
+    "quote": "After all region groups, output a summary line: `Total: N gardener/gardeners, $X in fees`",
+    "why": "Same error as run 1: the solver omitted ' in fees' from the summary line, which is explicitly specified in the instruction.",
+    "quote_verified": true
+   }
+  ],
+  "verdict": "fair",
+  "fix": "",
+  "uncovered_runs": [],
+  "traced_runs": [
+   1,
+   2,
+   3
+  ],
+  "fair": true,
+  "job_id": "7f95bd963178428f",
+  "votes": [
+   {
+    "fair": true,
+    "verdict": "fair",
+    "uncovered_runs": [],
+    "unverified": []
+   },
+   {
+    "fair": true,
+    "verdict": "fair",
+    "uncovered_runs": [],
+    "unverified": []
+   },
+   {
+    "fair": true,
+    "verdict": "fair",
+    "uncovered_runs": [],
+    "unverified": []
+   }
+  ]
+ },
+ "probe_job": "7f95bd963178428f",
+ "runs": [
+  {
+   "run": 1,
+   "status": "failed",
+   "duration_sec": 254,
+   "turns": 6,
+   "failed_tests": [
+    "test_clean_roster"
+   ]
+  },
+  {
+   "run": 2,
+   "status": "failed",
+   "duration_sec": 312,
+   "turns": 6,
+   "failed_tests": [
+    "test_clean_roster"
+   ]
+  },
+  {
+   "run": 3,
+   "status": "failed",
+   "duration_sec": 327,
+   "turns": 9,
+   "failed_tests": [
+    "test_clean_roster"
+   ]
+  },
+  {
+   "run": 4,
+   "status": "passed",
+   "duration_sec": 532,
+   "turns": 14,
+   "failed_tests": []
+  },
+  {
+   "run": 5,
+   "status": "passed",
+   "duration_sec": 373,
+   "turns": 9,
+   "failed_tests": []
+  }
+ ],
+ "authoring_model": "z-ai/glm-5.1"
+}

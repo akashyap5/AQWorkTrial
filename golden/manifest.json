@@ -1,0 +1,659 @@
+{
+ "frozen_at": "2026-10-07T17:38:19-07:00",
+ "note": "Golden demo set: these tasks and their measurements are frozen; later pipeline runs are not shown or selectable.",
+ "shipped": [
+  {
+   "slug": "catalog-export-checklist",
+   "description": "Export a product catalog CSV as a formatted price list with ten independent formatting requirements that each differ from the default.",
+   "measured_passes": "3/5",
+   "probe_job": "a1114a76ce1d4e0d",
+   "family": "everyday-trap",
+   "authoring_model": "z-ai/glm-5.1",
+   "prompt_version": "t005",
+   "derived_from": null,
+   "tweaks": [],
+   "gate": {
+    "policy": "3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe",
+    "traced_runs": [
+     1,
+     3
+    ],
+    "verdict": "fair"
+   },
+   "measurements": [
+    {
+     "id": "a1114a76ce1d4e0d",
+     "created_at": "2026-10-07T20:52:03.457174+00:00",
+     "status": "completed",
+     "summary": {
+      "passes": 3,
+      "failures": 2,
+      "valid_runs": 5,
+      "total_runs": 5,
+      "learnable": true
+     },
+     "source": "fast_author",
+     "shipping": true
+    }
+   ]
+  },
+  {
+   "slug": "cinema-timetable-checklist-export",
+   "description": "Export a cinema evening's semicolon-delimited screening CSV as a plain-text timetable following ten independent formatting and processing conventions that each differ from programming defaults.",
+   "measured_passes": "3/5",
+   "probe_job": "1e9c9b1a0ccd44f8",
+   "family": "everyday-trap",
+   "authoring_model": "z-ai/glm-5.1",
+   "prompt_version": "t012",
+   "derived_from": null,
+   "tweaks": [],
+   "gate": {
+    "policy": "3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe",
+    "traced_runs": [
+     2,
+     4
+    ],
+    "verdict": "fair"
+   },
+   "measurements": [
+    {
+     "id": "1e9c9b1a0ccd44f8",
+     "created_at": "2026-10-07T22:55:24.828940+00:00",
+     "status": "completed",
+     "summary": {
+      "passes": 3,
+      "failures": 2,
+      "valid_runs": 5,
+      "total_runs": 5,
+      "learnable": true
+     },
+     "source": "fast_author",
+     "shipping": true
+    }
+   ]
+  },
+  {
+   "slug": "community-garden-roster-eased",
+   "description": "Removed the unstated == Region == decoration and blank-line-between-groups requirements that caused all solver failures, replacing them with a simple bare region-name header and no inter-group blank lines.",
+   "measured_passes": "2/5",
+   "probe_job": "7f95bd963178428f",
+   "family": "everyday-trap",
+   "authoring_model": "z-ai/glm-5.1",
+   "prompt_version": "dial-experiment",
+   "derived_from": {
+    "slug": "community-garden-roster-checklist",
+    "probe_job": "2f2920c5f4ac465f",
+    "prompt_version": "t013",
+    "measured": "0/5"
+   },
+   "tweaks": [
+    {
+     "direction": "easier",
+     "change": "appended the author's hint to the instruction",
+     "by": null
+    },
+    {
+     "direction": "easier",
+     "change": "GLM-5.1 removed: ['Region group headers must use the == Region == decoration format', 'A blank line must appear after each region group']",
+     "by": "GLM-5.1 (dial experiment, triggered manually)"
+    }
+   ],
+   "gate": {
+    "policy": "3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe",
+    "traced_runs": [
+     1,
+     2,
+     3
+    ],
+    "verdict": "fair"
+   },
+   "measurements": [
+    {
+     "id": "7f95bd963178428f",
+     "created_at": "2026-10-07T23:36:24.034527+00:00",
+     "status": "completed",
+     "summary": {
+      "passes": 2,
+      "failures": 3,
+      "valid_runs": 5,
+      "total_runs": 5,
+      "learnable": true
+     },
+     "source": "fast_author",
+     "shipping": true
+    },
+    {
+     "id": "c833888176694892",
+     "created_at": "2026-10-08T00:17:53.200516+00:00",
+     "status": "completed",
+     "summary": {
+      "passes": 4,
+      "failures": 1,
+      "valid_runs": 5,
+      "total_runs": 5,
+      "learnable": false
+     },
+     "source": "ui",
+     "shipping": false
+    },
+    {
+     "id": "9f9deeeb0b484794",
+     "created_at": "2026-10-08T00:21:48.894618+00:00",
+     "status": "completed",
+     "summary": {
+      "passes": 3,
+      "failures": 2,
+      "valid_runs": 5,
+      "total_runs": 5,
+      "learnable": true
+     },
+     "source": "stability-check",
+     "shipping": false
+    },
+    {
+     "id": "0bf90e7969c94f11",
+     "created_at": "2026-10-08T00:21:48.901693+00:00",
+     "status": "completed",
+     "summary": {
+      "passes": 5,
+      "failures": 0,
+      "valid_runs": 5,
+      "total_runs": 5,
+      "learnable": false
+     },
+     "source": "stability-check",
+     "shipping": false
+    }
+   ]
+  },
+  {
+   "slug": "everyday-trap-29",
+   "description": "Format a pub quiz league leaderboard from a semicolon-delimited CSV with twelve independent formatting and processing requirements that each differ from programming defaults.",
+   "measured_passes": "3/5",
+   "probe_job": "4a06cc8ba56a4b73",
+   "family": "everyday-trap",
+   "authoring_model": "z-ai/glm-5.1",
+   "prompt_version": "t012",
+   "derived_from": null,
+   "tweaks": [],
+   "gate": {
+    "policy": "3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe",
+    "traced_runs": [
+     2,
+     5
+    ],
+    "verdict": "fair"
+   },
+   "measurements": [
+    {
+     "id": "4a06cc8ba56a4b73",
+     "created_at": "2026-10-07T22:56:50.489966+00:00",
+     "status": "completed",
+     "summary": {
+      "passes": 3,
+      "failures": 2,
+      "valid_runs": 5,
+      "total_runs": 5,
+      "learnable": true
+     },
+     "source": "fast_author",
+     "shipping": true
+    }
+   ]
+  },
+  {
+   "slug": "leaderboard-checklist-format",
+   "description": "Format a competition leaderboard with eleven independent formatting and computation details that differ from programming defaults",
+   "measured_passes": "2/5",
+   "probe_job": "c42600f284a64f6b",
+   "family": "everyday-trap",
+   "authoring_model": "z-ai/glm-5.1",
+   "prompt_version": "t005",
+   "derived_from": null,
+   "tweaks": [],
+   "gate": {
+    "policy": "3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe",
+    "traced_runs": [
+     2,
+     3,
+     5
+    ],
+    "verdict": "fair"
+   },
+   "measurements": [
+    {
+     "id": "c42600f284a64f6b",
+     "created_at": "2026-10-07T20:50:55.155098+00:00",
+     "status": "completed",
+     "summary": {
+      "passes": 2,
+      "failures": 3,
+      "valid_runs": 5,
+      "total_runs": 5,
+      "learnable": true
+     },
+     "source": "fast_author",
+     "shipping": true
+    },
+    {
+     "id": "b097f5c838b94de6",
+     "created_at": "2026-10-08T00:04:08.480839+00:00",
+     "status": "completed",
+     "summary": {
+      "passes": 2,
+      "failures": 3,
+      "valid_runs": 5,
+      "total_runs": 5,
+      "learnable": true
+     },
+     "source": "stability-check",
+     "shipping": false
+    },
+    {
+     "id": "b2852d4e53e348e6",
+     "created_at": "2026-10-08T00:04:08.488927+00:00",
+     "status": "completed",
+     "summary": {
+      "passes": 2,
+      "failures": 3,
+      "valid_runs": 5,
+      "total_runs": 5,
+      "learnable": true
+     },
+     "source": "stability-check",
+     "shipping": false
+    },
+    {
+     "id": "6f13fac289bc419f",
+     "created_at": "2026-10-08T00:10:02.752500+00:00",
+     "status": "completed",
+     "summary": {
+      "passes": 2,
+      "failures": 3,
+      "valid_runs": 5,
+      "total_runs": 5,
+      "learnable": true
+     },
+     "source": "ui",
+     "shipping": false
+    }
+   ]
+  },
+  {
+   "slug": "library-schedule-checklist-export",
+   "description": "Export a library program session CSV as a formatted summary with ten independent formatting requirements that each differ from defaults.",
+   "measured_passes": "1/5",
+   "probe_job": "513323db05374edd",
+   "family": "everyday-trap",
+   "authoring_model": "z-ai/glm-5.1",
+   "prompt_version": "t007",
+   "derived_from": null,
+   "tweaks": [],
+   "gate": {
+    "policy": "3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe",
+    "traced_runs": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "verdict": "fair"
+   },
+   "measurements": [
+    {
+     "id": "513323db05374edd",
+     "created_at": "2026-10-07T21:28:56.538033+00:00",
+     "status": "completed",
+     "summary": {
+      "passes": 1,
+      "failures": 4,
+      "valid_runs": 5,
+      "total_runs": 5,
+      "learnable": true
+     },
+     "source": "fast_author",
+     "shipping": true
+    }
+   ]
+  },
+  {
+   "slug": "metrics-log-checklist-summary",
+   "description": "Parse a space-delimited server metrics log and produce a per-server summary with 11 independent formatting and filtering requirements.",
+   "measured_passes": "3/5",
+   "probe_job": "18ceb41dbe93463a",
+   "family": "everyday-trap",
+   "authoring_model": "z-ai/glm-5.1",
+   "prompt_version": "t005",
+   "derived_from": null,
+   "tweaks": [],
+   "gate": {
+    "policy": "3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe",
+    "traced_runs": [
+     1,
+     5
+    ],
+    "verdict": "fair"
+   },
+   "measurements": [
+    {
+     "id": "18ceb41dbe93463a",
+     "created_at": "2026-10-07T20:52:56.383460+00:00",
+     "status": "completed",
+     "summary": {
+      "passes": 3,
+      "failures": 2,
+      "valid_runs": 5,
+      "total_runs": 5,
+      "learnable": true
+     },
+     "source": "fast_author",
+     "shipping": true
+    }
+   ]
+  },
+  {
+   "slug": "nursery-pricelist-checklist-export-28",
+   "description": "Export a formatted plant nursery price list from a semicolon-delimited catalog CSV with twelve independent formatting and processing requirements that differ from programming defaults.",
+   "measured_passes": "3/5",
+   "probe_job": "75e84b5df79046cb",
+   "family": "everyday-trap",
+   "authoring_model": "z-ai/glm-5.1",
+   "prompt_version": "t012",
+   "derived_from": null,
+   "tweaks": [],
+   "gate": {
+    "policy": "3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe",
+    "traced_runs": [
+     2,
+     4
+    ],
+    "verdict": "fair"
+   },
+   "measurements": [
+    {
+     "id": "75e84b5df79046cb",
+     "created_at": "2026-10-07T23:01:48.033376+00:00",
+     "status": "completed",
+     "summary": {
+      "passes": 3,
+      "failures": 2,
+      "valid_runs": 5,
+      "total_runs": 5,
+      "learnable": true
+     },
+     "source": "fast_author",
+     "shipping": true
+    }
+   ]
+  },
+  {
+   "slug": "parts-order-summary-checklist",
+   "description": "Export a parts order CSV as a formatted text summary with ten independent formatting and processing rules that each differ from defaults.",
+   "measured_passes": "3/5",
+   "probe_job": "c1dd2f17707d46f7",
+   "family": "everyday-trap",
+   "authoring_model": "z-ai/glm-5.1",
+   "prompt_version": "t006",
+   "derived_from": null,
+   "tweaks": [
+    {
+     "direction": "fairness",
+     "change": "appended: Each category header line has the format: `{category}:`",
+     "by": "GLM-5.1 fairness audit"
+    }
+   ],
+   "gate": {
+    "policy": "3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe",
+    "traced_runs": [
+     1
+    ],
+    "verdict": "ambiguous"
+   },
+   "measurements": [
+    {
+     "id": "c1dd2f17707d46f7",
+     "created_at": "2026-10-07T21:42:01.428340+00:00",
+     "status": "completed",
+     "summary": {
+      "passes": 3,
+      "failures": 2,
+      "valid_runs": 5,
+      "total_runs": 5,
+      "learnable": true
+     },
+     "source": "fast_author",
+     "shipping": true
+    }
+   ]
+  },
+  {
+   "slug": "pet-boarding-invoice-checklist",
+   "description": "Format a pet boarding kennel invoice from a semicolon-delimited CSV with eleven independent formatting and computation requirements that each differ from programming defaults",
+   "measured_passes": "3/5",
+   "probe_job": "4b6cee5feb9e43f1",
+   "family": "everyday-trap",
+   "authoring_model": "z-ai/glm-5.1",
+   "prompt_version": "t009",
+   "derived_from": null,
+   "tweaks": [],
+   "gate": {
+    "policy": null,
+    "traced_runs": null,
+    "verdict": null
+   },
+   "measurements": [
+    {
+     "id": "4b6cee5feb9e43f1",
+     "created_at": "2026-10-07T22:06:56.710742+00:00",
+     "status": "completed",
+     "summary": {
+      "passes": 3,
+      "failures": 2,
+      "valid_runs": 5,
+      "total_runs": 5,
+      "learnable": true
+     },
+     "source": "fast_author",
+     "shipping": true
+    },
+    {
+     "id": "4603b2b2c62f404d",
+     "created_at": "2026-10-08T00:21:48.909298+00:00",
+     "status": "completed",
+     "summary": {
+      "passes": 4,
+      "failures": 1,
+      "valid_runs": 5,
+      "total_runs": 5,
+      "learnable": false
+     },
+     "source": "stability-check",
+     "shipping": false
+    },
+    {
+     "id": "94697433884d4f77",
+     "created_at": "2026-10-08T00:21:48.915597+00:00",
+     "status": "completed",
+     "summary": {
+      "passes": 3,
+      "failures": 2,
+      "valid_runs": 5,
+      "total_runs": 5,
+      "learnable": true
+     },
+     "source": "stability-check",
+     "shipping": false
+    }
+   ]
+  },
+  {
+   "slug": "shift-roster-checklist-export",
+   "description": "Export a weekly shift summary from CSV with 11 independent formatting requirements covering all measured slip types",
+   "measured_passes": "2/5",
+   "probe_job": "75ea4f1b9d484aa1",
+   "family": "everyday-trap",
+   "authoring_model": "z-ai/glm-5.1",
+   "prompt_version": "t005",
+   "derived_from": null,
+   "tweaks": [
+    {
+     "direction": "fairness",
+     "change": "stated case-insensitive department matching with list spelling, and the blank-line layout when no department matches (both tested but unstated or contradicted)",
+     "by": "manual fairness audit"
+    }
+   ],
+   "gate": {
+    "policy": "3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe",
+    "traced_runs": [
+     1,
+     3,
+     5
+    ],
+    "verdict": "fair"
+   },
+   "measurements": [
+    {
+     "id": "75ea4f1b9d484aa1",
+     "created_at": "2026-10-07T21:11:01.380020+00:00",
+     "status": "completed",
+     "summary": {
+      "passes": 2,
+      "failures": 3,
+      "valid_runs": 5,
+      "total_runs": 5,
+      "learnable": true
+     },
+     "source": "fast_author",
+     "shipping": true
+    },
+    {
+     "id": "01dedc91e6d3489a",
+     "created_at": "2026-10-08T00:04:08.456414+00:00",
+     "status": "completed",
+     "summary": {
+      "passes": 4,
+      "failures": 1,
+      "valid_runs": 5,
+      "total_runs": 5,
+      "learnable": false
+     },
+     "source": "stability-check",
+     "shipping": false
+    },
+    {
+     "id": "fea474abef004cf8",
+     "created_at": "2026-10-08T00:09:28.554192+00:00",
+     "status": "completed",
+     "summary": {
+      "passes": 3,
+      "failures": 2,
+      "valid_runs": 5,
+      "total_runs": 5,
+      "learnable": true
+     },
+     "source": "stability-check",
+     "shipping": false
+    }
+   ]
+  },
+  {
+   "slug": "volunteer-directory-checklist-cleaner",
+   "description": "Clean a community volunteer directory CSV and produce a per-department summary report with ten independent formatting and processing requirements that each differ from programming defaults.",
+   "measured_passes": "3/5",
+   "probe_job": "6fc989baaae74bfe",
+   "family": "everyday-trap",
+   "authoring_model": "z-ai/glm-5.1",
+   "prompt_version": "t015",
+   "derived_from": null,
+   "tweaks": [],
+   "gate": {
+    "policy": "3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe",
+    "traced_runs": [
+     1,
+     3
+    ],
+    "verdict": "fair"
+   },
+   "measurements": [
+    {
+     "id": "6fc989baaae74bfe",
+     "created_at": "2026-10-07T23:36:40.165368+00:00",
+     "status": "completed",
+     "summary": {
+      "passes": 3,
+      "failures": 2,
+      "valid_runs": 5,
+      "total_runs": 5,
+      "learnable": true
+     },
+     "source": "fast_author",
+     "shipping": true
+    }
+   ]
+  },
+  {
+   "slug": "workshop-timetable-checklist-export",
+   "description": "Format a workshop timetable with ten independent formatting requirements covering DD/MM dates, half-up rounding, reverse alphabetical tie-break, title case, thousands separators, empty-field defaults, capacity display, singular/plural wording, and trailing newline.",
+   "measured_passes": "2/5",
+   "probe_job": "b14645085cfb423c",
+   "family": "everyday-trap",
+   "authoring_model": "z-ai/glm-5.1",
+   "prompt_version": "t006",
+   "derived_from": null,
+   "tweaks": [],
+   "gate": {
+    "policy": "3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe",
+    "traced_runs": [
+     1,
+     3,
+     4
+    ],
+    "verdict": "fair"
+   },
+   "measurements": [
+    {
+     "id": "b14645085cfb423c",
+     "created_at": "2026-10-07T21:09:09.409056+00:00",
+     "status": "completed",
+     "summary": {
+      "passes": 2,
+      "failures": 3,
+      "valid_runs": 5,
+      "total_runs": 5,
+      "learnable": true
+     },
+     "source": "fast_author",
+     "shipping": true
+    },
+    {
+     "id": "7f8fd8d7e86145d8",
+     "created_at": "2026-10-08T00:04:08.498961+00:00",
+     "status": "completed",
+     "summary": {
+      "passes": 4,
+      "failures": 1,
+      "valid_runs": 5,
+      "total_runs": 5,
+      "learnable": false
+     },
+     "source": "stability-check",
+     "shipping": false
+    },
+    {
+     "id": "a430874130a24171",
+     "created_at": "2026-10-08T00:04:08.507914+00:00",
+     "status": "completed",
+     "summary": {
+      "passes": 4,
+      "failures": 1,
+      "valid_runs": 5,
+      "total_runs": 5,
+      "learnable": false
+     },
+     "source": "stability-check",
+     "shipping": false
+    }
+   ]
+  }
+ ]
+}

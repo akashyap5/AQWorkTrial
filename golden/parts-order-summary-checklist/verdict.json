@@ -1,0 +1,99 @@
+{
+ "slug": "parts-order-summary-checklist",
+ "decision": "learnable",
+ "reason": "measured 3/5 with controls passing; passed the GLM-5.1 fairness gate (3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe)",
+ "probe_job": "c1dd2f17707d46f7",
+ "runs": [
+  {
+   "run": 1,
+   "status": "failed",
+   "duration_sec": 226,
+   "turns": 6,
+   "failed_tests": [
+    "test_export_order_summary"
+   ]
+  },
+  {
+   "run": 2,
+   "status": "failed",
+   "duration_sec": 281,
+   "turns": 11,
+   "failed_tests": [
+    "test_export_order_summary"
+   ]
+  },
+  {
+   "run": 3,
+   "status": "passed",
+   "duration_sec": 333,
+   "turns": 7,
+   "failed_tests": []
+  },
+  {
+   "run": 4,
+   "status": "passed",
+   "duration_sec": 354,
+   "turns": 9,
+   "failed_tests": []
+  },
+  {
+   "run": 5,
+   "status": "passed",
+   "duration_sec": 343,
+   "turns": 7,
+   "failed_tests": []
+  }
+ ],
+ "fairness_audit": {
+  "runs": [
+   {
+    "run": 1,
+    "stated": true,
+    "quote": "Format quantities with a comma thousands separator.",
+    "why": "The instruction explicitly says comma thousands separator applies to quantities only, not to monetary amounts like subtotal/total.",
+    "quote_verified": true
+   },
+   {
+    "run": 2,
+    "stated": false,
+    "quote": "",
+    "why": "The instruction says 'Show categories in the order ELEC, MECH, HYDR, MISC' but does not specify whether to include categories that have no items; a solver could reasonably output all four categories or skip empty ones.",
+    "quote_verified": false
+   }
+  ],
+  "verdict": "ambiguous",
+  "fix": "Skip categories that have no items.",
+  "uncovered_runs": [],
+  "traced_runs": [
+   1
+  ],
+  "fair": true,
+  "job_id": "c1dd2f17707d46f7",
+  "votes": [
+   {
+    "fair": true,
+    "verdict": "ambiguous",
+    "uncovered_runs": [],
+    "unverified": [
+     2
+    ]
+   },
+   {
+    "fair": true,
+    "verdict": "ambiguous",
+    "uncovered_runs": [],
+    "unverified": []
+   },
+   {
+    "fair": true,
+    "verdict": "ambiguous",
+    "uncovered_runs": [],
+    "unverified": []
+   }
+  ]
+ },
+ "gate_policy": "3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe",
+ "prompt_version": "t006",
+ "authoring_model": "z-ai/glm-5.1",
+ "written": "2026-10-07T15:19:42-0700"
+}

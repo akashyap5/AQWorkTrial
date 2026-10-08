@@ -1,0 +1,101 @@
+{
+ "slug": "metrics-log-checklist-summary",
+ "decision": "learnable",
+ "reason": "measured 3/5 with controls passing; passed the GLM-5.1 fairness gate (3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe)",
+ "probe_job": "18ceb41dbe93463a",
+ "runs": [
+  {
+   "run": 1,
+   "status": "failed",
+   "duration_sec": 653,
+   "turns": 9,
+   "failed_tests": [
+    "test_summarize_log",
+    "test_no_trailing_newline"
+   ]
+  },
+  {
+   "run": 2,
+   "status": "passed",
+   "duration_sec": 402,
+   "turns": 6,
+   "failed_tests": []
+  },
+  {
+   "run": 3,
+   "status": "passed",
+   "duration_sec": 396,
+   "turns": 5,
+   "failed_tests": []
+  },
+  {
+   "run": 4,
+   "status": "passed",
+   "duration_sec": 1205,
+   "turns": 8,
+   "failed_tests": []
+  },
+  {
+   "run": 5,
+   "status": "failed",
+   "duration_sec": 767,
+   "turns": 8,
+   "failed_tests": [
+    "test_summarize_log"
+   ]
+  }
+ ],
+ "fairness_audit": {
+  "runs": [
+   {
+    "run": 1,
+    "stated": true,
+    "quote": "Values may contain commas as thousands separators.",
+    "why": "The solver passed comma-containing value strings directly to Decimal without stripping commas, causing ConversionSyntax errors.",
+    "quote_verified": true
+   },
+   {
+    "run": 5,
+    "stated": true,
+    "quote": "Consecutive spaces indicate empty fields.",
+    "why": "The solver likely collapsed consecutive spaces (e.g. split on whitespace runs) instead of splitting on single spaces, so the empty severity field between '50' and 'INFO' was lost and INFO was treated as the severity, excluding the entry.",
+    "quote_verified": true
+   }
+  ],
+  "verdict": "fair",
+  "fix": "",
+  "uncovered_runs": [],
+  "traced_runs": [
+   1,
+   5
+  ],
+  "fair": true,
+  "job_id": "18ceb41dbe93463a",
+  "votes": [
+   {
+    "fair": true,
+    "verdict": "fair",
+    "uncovered_runs": [],
+    "unverified": []
+   },
+   {
+    "fair": true,
+    "verdict": "fair",
+    "uncovered_runs": [],
+    "unverified": []
+   },
+   {
+    "fair": true,
+    "verdict": "fair",
+    "uncovered_runs": [],
+    "unverified": [
+     5
+    ]
+   }
+  ]
+ },
+ "gate_policy": "3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe",
+ "prompt_version": "t005",
+ "authoring_model": "z-ai/glm-5.1",
+ "written": "2026-10-07T14:40:04-0700"
+}

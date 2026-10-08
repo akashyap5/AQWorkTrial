@@ -1,0 +1,159 @@
+{
+ "slug": "nursery-pricelist-checklist-export-28",
+ "decision": "learnable",
+ "reason": "measured 3/5 with controls passing; passed the GLM-5.1 fairness gate (3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe)",
+ "family": "everyday-trap",
+ "prompt_version": "t012",
+ "strategies": [
+  "H5"
+ ],
+ "rule_relevance": null,
+ "tweaks": null,
+ "probes": [
+  {
+   "job_id": "75e84b5df79046cb",
+   "passes": 3,
+   "completed_runs": 5,
+   "controls_ok": true,
+   "runs": [
+    {
+     "run": 1,
+     "status": "passed",
+     "duration_sec": 287,
+     "turns": 8,
+     "failed_tests": []
+    },
+    {
+     "run": 2,
+     "status": "failed",
+     "duration_sec": 196,
+     "turns": 6,
+     "failed_tests": [
+      "test_export_price_list"
+     ]
+    },
+    {
+     "run": 3,
+     "status": "passed",
+     "duration_sec": 230,
+     "turns": 6,
+     "failed_tests": []
+    },
+    {
+     "run": 4,
+     "status": "failed",
+     "duration_sec": 213,
+     "turns": 5,
+     "failed_tests": [
+      "test_export_price_list"
+     ]
+    },
+    {
+     "run": 5,
+     "status": "passed",
+     "duration_sec": 626,
+     "turns": 14,
+     "failed_tests": []
+    }
+   ],
+   "failures": "FAILED RUN 2: wrong answers vs expected:\n  assert 'Plant Nurser... 2.997,50 \u20ac\\n' == 'Plant Nurser... 2.997,50 \u20ac\\n'\n  agent's last solver code (truncated):\ncat > solution.py <<'PY'\nimport csv\nimport io\nfrom decimal import Decimal, ROUND_HALF_UP\n\n\n_CATEGORY_ORDER = {\n    \"Trees\": 0,\n    \"Shrubs\": 1,\n    \"Perennials\": 2,\n    \"Annuals\": 3,\n    \"Herbs\": 4,\n}\n_CENT = Decimal(\"0.01\")\n\n\ndef _format_money(amount: Decimal) -> str:\n    \"\"\"Format a Decimal using European separators and exactly two decimals.\"\"\"\n    amount = amount.quantize(_CENT, rounding=ROUND_HALF_UP)\n    text = f\"{amount:,.2f}\"\n    return text.replace(\",\", \"X\").replace(\".\", \",\").replace(\"X\", \".\") + \" \u20ac\"\n\n\ndef export_price_list(csv_text: str) -> str:\n    \"\"\"Export a formatted plant nursery price list from a semicolon-delimited CSV string.\"\"\"\n    rows = csv.reader(io.StringIO(csv_text, newline=\"\"), delimiter=\";\")\n    next(rows, None)  # Skip the required header.\n\n    items = []\n    for row in rows:\n        # csv.reader returns an empty list for a physically blank line.\n        if not row:\n            continue\n\n        # Pad only in case a trailing field is omitted, while preserving\n        # deliberately empty (consecutive-delimiter) fields.\n        row.extend([\"\"] * (len(row) and 6 - len(row)))\n        code, name, category, price, stock, added_on = row[:6]\n\n        stock_value = int(stock) if stock else 0\n        if stock_value == 0:\n            continue\n\n        price_value = Decimal(price) if price else Decimal(\"0\")\n        line_total = price_value * stock_value\n\n        items.append(\n            {\n                \"code\": code,\n                \"name\": name.title(),\n                \"category\": category if category else \"Misc\",\n                \"price\": price_value,\n                \"stock\": stock_value,\n                \"total\": line_total,\n                \"added_on\": added_on,\n            }\n        )\n\n    categories = {}\n    for item in items:\n        categories.setdefault(item[\"category\"], []).append(item)\n\n    # Preferred categories first, then all remaining categories alphabetically.\n    category_names = sorted(\n        categories,\n        key=lambda category: (\n            1,\n            _CATEGORY_ORDER.get(category, 1000),\n            category.casefold(),\n            category,\n        )\n        if category not in _CATEGORY_ORDER\n        else (_CATEGORY_ORDER[category], 0, \"\", \"\"),\n    )\n\n    lines = [\"Plant Nursery Price List\", f\"{len(items)} items\", \"\"]\n\n    grand_total = Decimal(\"0\")\n    for category in category_names:\n        category_items = sorted(\n            categories[category], key=lambda item: item[\"name\"].casefold()\n        )\n        lines.append(f\"[{category}]\")\n        for item in category_items:\n            displayed_total = item[\"total\"].quantize(_CENT, rounding=ROUND_HALF_UP)\n            grand_total += displayed_total\n            lines.append(\n                f\"{item['code']} | {item['name']} | \"\n                f\"{_format_money(item['price'])} | {item['stock']} | \"\n                f\"{_format_money(item['total'])} | {item['added_on']}\"\n            )\n        lines.append(\"\")\n\n    lines.append(f\"Total: {_format_money(grand_t\n\nFAILED RUN 4: wrong answers vs expected:\n  \n  agent's last solver code (truncated):\ncat > solution.py <<'PY'\nimport csv\nimport io\nfrom decimal import Decimal, ROUND_HALF_UP\n\n\n_CATEGORY_ORDER = {\n    \"Trees\": 0,\n    \"Shrubs\": 1,\n    \"Perennials\": 2,\n    \"Annuals\": 3,\n    \"Herbs\": 4,\n}\n_CENTS = Decimal(\"0.01\")\n\n\ndef _parse_price(value: str) -> Decimal:\n    \"\"\"Parse a European price (optionally with dots as thousands separators).\"\"\"\n    return Decimal(value.strip().replace(\".\", \"\").replace(\",\", \".\"))\n\n\ndef _parse_stock(value: str) -> int:\n    value = value.strip()\n    return int(value) if value else 0\n\n\ndef _format_money(value: Decimal) -> str:\n    \"\"\"Format a Decimal as 1.234,50 \u20ac (period thousands, comma decimals).\"\"\"\n    rounded = value.quantize(_CENTS, rounding=ROUND_HALF_UP)\n    return (\n        format(rounded, \",.2f\")\n        .replace(\",\", \"\\0\")\n        .replace(\".\", \",\")\n        .replace(\"\\0\", \".\")\n    ) + \" \u20ac\"\n\n\ndef export_price_list(csv_text: str) -> str:\n    \"\"\"Export a formatted plant nursery price list from a semicolon-delimited CSV string.\"\"\"\n    rows = csv.reader(io.StringIO(csv_text, newline=\"\"), delimiter=\";\")\n\n    # The caller is expected to supply the documented header as the first row.\n    try:\n        next(rows)\n    except StopIteration:\n        items = []\n    else:\n        items = []\n        for row in rows:\n            if not row:\n                continue\n\n            # Ensuring the documented field count also preserves consecutive\n            # semicolons as explicit empty fields.\n            row.extend([\"\"] * (6 - len(row)))\n            code, name, category, price, stock, added_on = (field.strip() for field in row[:6])\n\n            stock_count = _parse_stock(stock)\n            if stock_count == 0:\n                continue\n\n            display_category = category if category else \"Misc\"\n            priority = _CATEGORY_ORDER.get(display_category, len(_CATEGORY_ORDER))\n            price_value = _parse_price(price)\n            line_total = (price_value * stock_count).quantize(\n                _CENTS, rounding=ROUND_HALF_UP\n            )\n\n            items.append(\n                {\n                    \"priority\": priority,\n                    \"category\": display_category,\n                    \"name_sort\": name.lower(),\n                    \"line\": (\n                        f\"{code} | {name.title()} | {_format_money(price_value)} | \"\n                        f\"{stock_count} | {_format_money(line_total)} | {added_on}\"\n                    ),\n                    \"total\": line_total,\n                }\n            )\n\n    items.sort(key=lambda item: (item[\"priority\"], item[\"category\"].lower(), item[\"name_sort\"]))\n\n    # Use a case-insensitive stable sort key for categories not in the fixed list.\n    seen_other = set()\n    ordered_categories = []\n    for item in items:\n        category ",
+   "consensus": {}
+  }
+ ],
+ "error": null,
+ "elapsed_sec": 22,
+ "written": "2026-10-07T16:28:28-0700",
+ "gate_policy": "3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe",
+ "fairness_audit": {
+  "runs": [
+   {
+    "run": 2,
+    "stated": true,
+    "quote": "Categories are listed in the order Trees, Shrubs, Perennials, Annuals, Herbs; any other category follows in alphabetical order.",
+    "why": "The five named categories must appear first in that fixed order; 'Misc' is not one of them and must follow after, but the solver placed Misc before Herbs by sorting all categories alphabetically.",
+    "quote_verified": true
+   },
+   {
+    "run": 4,
+    "stated": true,
+    "quote": "Prices in the file use a comma as the decimal separator (e.g. `12,50` means 12.50).",
+    "why": "The solver failed to convert comma-decimal prices to a parseable numeric format, causing a decimal.ConversionSyntax error.",
+    "quote_verified": true
+   }
+  ],
+  "verdict": "fair",
+  "fix": "",
+  "uncovered_runs": [],
+  "traced_runs": [
+   2,
+   4
+  ],
+  "fair": true,
+  "job_id": "75e84b5df79046cb",
+  "votes": [
+   {
+    "fair": true,
+    "verdict": "fair",
+    "uncovered_runs": [],
+    "unverified": []
+   },
+   {
+    "fair": true,
+    "verdict": "fair",
+    "uncovered_runs": [],
+    "unverified": [
+     4
+    ]
+   },
+   {
+    "fair": true,
+    "verdict": "fair",
+    "uncovered_runs": [],
+    "unverified": []
+   }
+  ]
+ },
+ "probe_job": "75e84b5df79046cb",
+ "runs": [
+  {
+   "run": 1,
+   "status": "passed",
+   "duration_sec": 287,
+   "turns": 8,
+   "failed_tests": []
+  },
+  {
+   "run": 2,
+   "status": "failed",
+   "duration_sec": 196,
+   "turns": 6,
+   "failed_tests": [
+    "test_export_price_list"
+   ]
+  },
+  {
+   "run": 3,
+   "status": "passed",
+   "duration_sec": 230,
+   "turns": 6,
+   "failed_tests": []
+  },
+  {
+   "run": 4,
+   "status": "failed",
+   "duration_sec": 213,
+   "turns": 5,
+   "failed_tests": [
+    "test_export_price_list"
+   ]
+  },
+  {
+   "run": 5,
+   "status": "passed",
+   "duration_sec": 626,
+   "turns": 14,
+   "failed_tests": []
+  }
+ ],
+ "authoring_model": "z-ai/glm-5.1"
+}

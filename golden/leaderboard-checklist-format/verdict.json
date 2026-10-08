@@ -1,0 +1,108 @@
+{
+ "slug": "leaderboard-checklist-format",
+ "decision": "learnable",
+ "reason": "measured 2/5 with controls passing; passed the GLM-5.1 fairness gate (3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe)",
+ "probe_job": "c42600f284a64f6b",
+ "runs": [
+  {
+   "run": 1,
+   "status": "passed",
+   "duration_sec": 234,
+   "turns": 10,
+   "failed_tests": []
+  },
+  {
+   "run": 2,
+   "status": "failed",
+   "duration_sec": 149,
+   "turns": 6,
+   "failed_tests": [
+    "test_leaderboard"
+   ]
+  },
+  {
+   "run": 3,
+   "status": "failed",
+   "duration_sec": 234,
+   "turns": 8,
+   "failed_tests": [
+    "test_leaderboard"
+   ]
+  },
+  {
+   "run": 4,
+   "status": "passed",
+   "duration_sec": 415,
+   "turns": 11,
+   "failed_tests": []
+  },
+  {
+   "run": 5,
+   "status": "failed",
+   "duration_sec": 266,
+   "turns": 10,
+   "failed_tests": [
+    "test_leaderboard"
+   ]
+  }
+ ],
+ "fairness_audit": {
+  "runs": [
+   {
+    "run": 2,
+    "stated": true,
+    "quote": "Tied scores receive the same rank number, and the next distinct score increments the rank by one.",
+    "why": "The phrase 'increments the rank by one' means the next distinct score's rank is the previous rank number plus one (dense/1223 ranking), not the previous position plus one (modified competition/1224 ranking).",
+    "quote_verified": true
+   },
+   {
+    "run": 3,
+    "stated": true,
+    "quote": "Tied scores receive the same rank number, and the next distinct score increments the rank by one.",
+    "why": "Same misinterpretation as run 2: the solver used position-based rank skipping instead of incrementing the rank number by one.",
+    "quote_verified": true
+   },
+   {
+    "run": 5,
+    "stated": true,
+    "quote": "Tied scores receive the same rank number, and the next distinct score increments the rank by one.",
+    "why": "Same misinterpretation as run 2: the solver used position-based rank skipping instead of incrementing the rank number by one.",
+    "quote_verified": true
+   }
+  ],
+  "verdict": "fair",
+  "fix": "",
+  "uncovered_runs": [],
+  "traced_runs": [
+   2,
+   3,
+   5
+  ],
+  "fair": true,
+  "job_id": "c42600f284a64f6b",
+  "votes": [
+   {
+    "fair": true,
+    "verdict": "fair",
+    "uncovered_runs": [],
+    "unverified": []
+   },
+   {
+    "fair": true,
+    "verdict": "fair",
+    "uncovered_runs": [],
+    "unverified": []
+   },
+   {
+    "fair": true,
+    "verdict": "fair",
+    "uncovered_runs": [],
+    "unverified": []
+   }
+  ]
+ },
+ "gate_policy": "3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe",
+ "prompt_version": "t005",
+ "authoring_model": "z-ai/glm-5.1",
+ "written": "2026-10-07T14:38:23-0700"
+}

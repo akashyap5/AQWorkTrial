@@ -1,0 +1,1 @@
+This task implements a library program schedule export tool. The function reads a CSV of program sessions and produces a formatted summary report grouped by program name, with computed statistics and specific formatting rules.

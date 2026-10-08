@@ -1,0 +1,25 @@
+schema_version = "1.3"
+
+[task]
+name = "generated/community-garden-roster-eased"
+description = "Removed the unstated == Region == decoration and blank-line-between-groups requirements that caused all solver failures, replacing them with a simple bare region-name header and no inter-group blank lines."
+
+[metadata]
+difficulty = "medium"
+calibration = "learnable"
+measured_passes = "2/5"
+probe_job = "7f95bd963178428f"
+authoring_model = "z-ai/glm-5.1"
+family = "everyday-trap"
+
+[verifier]
+timeout_sec = 600.0
+
+[agent]
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 1200.0
+cpus = 2
+memory_mb = 2048
+storage_mb = 10240

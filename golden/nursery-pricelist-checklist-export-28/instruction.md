@@ -1,0 +1,7 @@
+# Plant Nursery Price List Export
+
+Implement `export_price_list(csv_text: str) -> str` in `/app/solution.py`. It reads a semicolon-delimited catalog CSV and returns a formatted price list text report.
+
+The CSV header is `code;name;category;price;stock;added_on`. Consecutive semicolons in a data row indicate an empty field and should not be collapsed. Plant names are stored in lowercase and should be displayed in title case. The `added_on` column uses DD/MM/YYYY format. Prices in the file use a comma as the decimal separator (e.g. `12,50` means 12.50). In the output, monetary amounts use a period for thousands and a comma for decimals, with two decimal places and a trailing ` €`, rounded half up (e.g. `1.234,50 €`). Line totals are price times stock. Categories are listed in the order Trees, Shrubs, Perennials, Annuals, Herbs; any other category follows in alphabetical order. Within each category, items are sorted alphabetically by name. An empty category field is treated as "Misc" and an empty stock field as 0. Items with zero stock are excluded. The header line shows "1 item" for exactly one item and "N items" otherwise. The output ends with exactly one trailing newline.
+
+The report starts with `Plant Nursery Price List`, then the item count line, then a blank line. Each category is introduced by a `[Category]` header. Item lines use the format `code | name | price | stock | total | added_on`. A blank line follows each category block. The last line is `Total: {grand_total}` where the grand total is the sum of the displayed line totals.

@@ -1,0 +1,110 @@
+{
+ "slug": "shift-roster-checklist-export",
+ "decision": "learnable",
+ "reason": "measured 2/5 with controls passing; passed the GLM-5.1 fairness gate (3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe)",
+ "probe_job": "75ea4f1b9d484aa1",
+ "runs": [
+  {
+   "run": 1,
+   "status": "failed",
+   "duration_sec": 190,
+   "turns": 5,
+   "failed_tests": [
+    "test_export_timetable"
+   ]
+  },
+  {
+   "run": 2,
+   "status": "passed",
+   "duration_sec": 724,
+   "turns": 15,
+   "failed_tests": []
+  },
+  {
+   "run": 3,
+   "status": "failed",
+   "duration_sec": 638,
+   "turns": 9,
+   "failed_tests": [
+    "test_export_timetable"
+   ]
+  },
+  {
+   "run": 4,
+   "status": "passed",
+   "duration_sec": 565,
+   "turns": 12,
+   "failed_tests": []
+  },
+  {
+   "run": 5,
+   "status": "failed",
+   "duration_sec": 328,
+   "turns": 11,
+   "failed_tests": [
+    "test_export_timetable"
+   ]
+  }
+ ],
+ "fairness_audit": {
+  "runs": [
+   {
+    "run": 1,
+    "stated": true,
+    "quote": "When no department has a shift in the range, there is a single blank line between the Timetable line and the Total line.",
+    "why": "The instruction explicitly specifies exactly one blank line between Timetable and Total when no departments have shifts; the solver produced two blank lines instead.",
+    "quote_verified": true
+   },
+   {
+    "run": 3,
+    "stated": true,
+    "quote": "When no department has a shift in the range, there is a single blank line between the Timetable line and the Total line.",
+    "why": "Same as run 1: the instruction explicitly specifies exactly one blank line; the solver produced two.",
+    "quote_verified": true
+   },
+   {
+    "run": 5,
+    "stated": true,
+    "quote": "Timetable: <week_start> to <week_end>\n\n<department>: <count> shift(s), <total> hours (avg <average>)\n...\n\nTotal: <count> shift(s), <total> hours",
+    "why": "The output format template and the example both clearly show a blank line between the last department line and the Total line; the solver omitted this blank line.",
+    "quote_verified": true
+   }
+  ],
+  "verdict": "fair",
+  "fix": "",
+  "uncovered_runs": [],
+  "traced_runs": [
+   1,
+   3,
+   5
+  ],
+  "fair": true,
+  "job_id": "75ea4f1b9d484aa1",
+  "votes": [
+   {
+    "fair": true,
+    "verdict": "fair",
+    "uncovered_runs": [],
+    "unverified": []
+   },
+   {
+    "fair": true,
+    "verdict": "ambiguous",
+    "uncovered_runs": [],
+    "unverified": [
+     5
+    ]
+   },
+   {
+    "fair": true,
+    "verdict": "fair",
+    "uncovered_runs": [],
+    "unverified": []
+   }
+  ]
+ },
+ "gate_policy": "3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe",
+ "prompt_version": "t005",
+ "authoring_model": "z-ai/glm-5.1",
+ "written": "2026-10-07T14:41:14-0700"
+}

@@ -1,0 +1,183 @@
+{
+ "slug": "library-schedule-checklist-export",
+ "decision": "learnable",
+ "reason": "measured 1/5 with controls passing; passed the GLM-5.1 fairness gate (3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe)",
+ "probe_job": "513323db05374edd",
+ "runs": [
+  {
+   "run": 1,
+   "status": "failed",
+   "duration_sec": 395,
+   "turns": 9,
+   "failed_tests": [
+    "test_single_program",
+    "test_half_up_rounding_66_5",
+    "test_half_up_rounding_34_5",
+    "test_reverse_alpha_tie",
+    "test_title_case_various",
+    "test_thousands_separator",
+    "test_large_revenue",
+    "test_empty_leader",
+    "test_whitespace_leader",
+    "test_mixed_leaders",
+    "test_singular_session",
+    "test_plural_sessions",
+    "test_trailing_newline",
+    "test_fee_cents_conversion",
+    "test_empty_seats_default",
+    "test_ddmm_ambiguous_dates",
+    "test_ddmm_date_ordering",
+    "test_combined_traps",
+    "test_combined_traps_2",
+    "test_multiple_programs_sorted",
+    "test_same_name_different_case",
+    "test_three_way_tie"
+   ]
+  },
+  {
+   "run": 2,
+   "status": "failed",
+   "duration_sec": 390,
+   "turns": 9,
+   "failed_tests": [
+    "test_single_program",
+    "test_half_up_rounding_66_5",
+    "test_half_up_rounding_34_5",
+    "test_reverse_alpha_tie",
+    "test_title_case_various",
+    "test_thousands_separator",
+    "test_large_revenue",
+    "test_empty_leader",
+    "test_whitespace_leader",
+    "test_mixed_leaders",
+    "test_singular_session",
+    "test_plural_sessions",
+    "test_trailing_newline",
+    "test_fee_cents_conversion",
+    "test_empty_seats_default",
+    "test_ddmm_ambiguous_dates",
+    "test_ddmm_date_ordering",
+    "test_combined_traps",
+    "test_combined_traps_2",
+    "test_multiple_programs_sorted",
+    "test_same_name_different_case",
+    "test_three_way_tie"
+   ]
+  },
+  {
+   "run": 3,
+   "status": "failed",
+   "duration_sec": 191,
+   "turns": 6,
+   "failed_tests": [
+    "test_single_program",
+    "test_half_up_rounding_66_5",
+    "test_half_up_rounding_34_5",
+    "test_reverse_alpha_tie",
+    "test_title_case_various",
+    "test_thousands_separator",
+    "test_large_revenue",
+    "test_empty_leader",
+    "test_whitespace_leader",
+    "test_mixed_leaders",
+    "test_singular_session",
+    "test_plural_sessions",
+    "test_trailing_newline",
+    "test_fee_cents_conversion",
+    "test_empty_seats_default",
+    "test_ddmm_ambiguous_dates",
+    "test_ddmm_date_ordering",
+    "test_combined_traps",
+    "test_combined_traps_2",
+    "test_multiple_programs_sorted",
+    "test_same_name_different_case",
+    "test_three_way_tie"
+   ]
+  },
+  {
+   "run": 4,
+   "status": "failed",
+   "duration_sec": 271,
+   "turns": 9,
+   "failed_tests": [
+    "test_title_case_various",
+    "test_combined_traps_2",
+    "test_multiple_programs_sorted"
+   ]
+  },
+  {
+   "run": 5,
+   "status": "passed",
+   "duration_sec": 317,
+   "turns": 9,
+   "failed_tests": []
+  }
+ ],
+ "fairness_audit": {
+  "runs": [
+   {
+    "run": 1,
+    "stated": true,
+    "quote": "Each output line uses this format: NAME: COUNT session/sessions, first DATE, TOTAL registered, FILL% fill, $REVENUE, Leader: LEADERS",
+    "why": "The format explicitly shows FILL% (with percent sign) and 'first' before the date; the solver omitted the % sign.",
+    "quote_verified": true
+   },
+   {
+    "run": 2,
+    "stated": true,
+    "quote": "Each output line uses this format: NAME: COUNT session/sessions, first DATE, TOTAL registered, FILL% fill, $REVENUE, Leader: LEADERS",
+    "why": "Same issue as run 1: the solver omitted the % sign from FILL%.",
+    "quote_verified": true
+   },
+   {
+    "run": 3,
+    "stated": true,
+    "quote": "Each output line uses this format: NAME: COUNT session/sessions, first DATE, TOTAL registered, FILL% fill, $REVENUE, Leader: LEADERS",
+    "why": "The solver omitted both the % sign and the word 'first' before the date, both of which are explicitly shown in the format specification.",
+    "quote_verified": true
+   },
+   {
+    "run": 4,
+    "stated": true,
+    "quote": "Each output line uses this format: NAME: COUNT session/sessions, first DATE, TOTAL registered, FILL% fill, $REVENUE, Leader: LEADERS",
+    "why": "Same format violations as previous runs.",
+    "quote_verified": true
+   }
+  ],
+  "verdict": "fair",
+  "fix": "",
+  "uncovered_runs": [],
+  "traced_runs": [
+   1,
+   2,
+   3,
+   4
+  ],
+  "fair": true,
+  "job_id": "513323db05374edd",
+  "votes": [
+   {
+    "fair": true,
+    "verdict": "fair",
+    "uncovered_runs": [],
+    "unverified": []
+   },
+   {
+    "fair": true,
+    "verdict": "fair",
+    "uncovered_runs": [],
+    "unverified": []
+   },
+   {
+    "fair": true,
+    "verdict": "fair",
+    "uncovered_runs": [],
+    "unverified": []
+   }
+  ]
+ },
+ "gate_policy": "3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe",
+ "prompt_version": "t007",
+ "authoring_model": "z-ai/glm-5.1",
+ "written": "2026-10-07T15:05:49-0700"
+}

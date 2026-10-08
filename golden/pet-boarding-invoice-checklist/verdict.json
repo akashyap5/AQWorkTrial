@@ -1,0 +1,98 @@
+{
+ "slug": "pet-boarding-invoice-checklist",
+ "decision": "learnable",
+ "reason": "measured 1-3 passes in 5 completed solver runs with oracle passing and no-op failing",
+ "family": "everyday-trap",
+ "prompt_version": "t009",
+ "strategies": [
+  "H5"
+ ],
+ "rule_relevance": null,
+ "tweaks": null,
+ "probes": [
+  {
+   "job_id": "4b6cee5feb9e43f1",
+   "passes": 3,
+   "completed_runs": 5,
+   "controls_ok": true,
+   "runs": [
+    {
+     "run": 1,
+     "status": "passed",
+     "duration_sec": 229,
+     "turns": 6,
+     "failed_tests": []
+    },
+    {
+     "run": 2,
+     "status": "failed",
+     "duration_sec": 249,
+     "turns": 6,
+     "failed_tests": [
+      "test_basic",
+      "test_half_up_rounding",
+      "test_half_up_rounding_even_digit",
+      "test_late_fee_exactly_5pm",
+      "test_late_fee_one_minute_after",
+      "test_dd_mm_date_ambiguous",
+      "test_sort_tie_reverse_alpha",
+      "test_owner_uppercase",
+      "test_thousands_separator",
+      "test_empty_breed",
+      "test_singular_night",
+      "test_missing_weight_default",
+      "test_trailing_newline",
+      "test_semicolon_delimiter",
+      "test_weight_exactly_25",
+      "test_combined_traps",
+      "test_large_invoice"
+     ]
+    },
+    {
+     "run": 3,
+     "status": "passed",
+     "duration_sec": 257,
+     "turns": 7,
+     "failed_tests": []
+    },
+    {
+     "run": 4,
+     "status": "failed",
+     "duration_sec": 284,
+     "turns": 8,
+     "failed_tests": [
+      "test_basic",
+      "test_half_up_rounding",
+      "test_half_up_rounding_even_digit",
+      "test_late_fee_exactly_5pm",
+      "test_late_fee_one_minute_after",
+      "test_dd_mm_date_ambiguous",
+      "test_sort_tie_reverse_alpha",
+      "test_owner_uppercase",
+      "test_thousands_separator",
+      "test_empty_breed",
+      "test_singular_night",
+      "test_missing_weight_default",
+      "test_trailing_newline",
+      "test_semicolon_delimiter",
+      "test_weight_exactly_25",
+      "test_combined_traps",
+      "test_large_invoice"
+     ]
+    },
+    {
+     "run": 5,
+     "status": "passed",
+     "duration_sec": 242,
+     "turns": 6,
+     "failed_tests": []
+    }
+   ],
+   "failures": "FAILED RUN 2: wrong answers vs expected:\n  assert 'KENNEL INVOI...al: $147.00\\n' == 'KENNEL INVOI...al: $147.00\\n'\n  assert 'KENNEL INVOI...tal: $50.13\\n' == 'KENNEL INVOI...tal: $50.13\\n'\n  assert 'KENNEL INVOI...tal: $60.13\\n' == 'KENNEL INVOI...tal: $60.13\\n'\n  assert 'KENNEL INVOI...tal: $80.00\\n' == 'KENNEL INVOI...tal: $80.00\\n'\n  assert 'KENNEL INVOI...al: $100.00\\n' == 'KENNEL INVOI...al: $100.00\\n'\n  assert 'KENNEL INVOI...tal: $75.00\\n' == 'KENNEL INVOI...tal: $75.00\\n'\n  agent's last solver code (truncated):\ncat > /app/solution.py <<'PY'\nimport csv\nfrom datetime import datetime\nfrom decimal import Decimal, ROUND_HALF_UP\n\n\ndef render_invoice(csv_path: str) -> str:\n    \"\"\"Read a pet boarding kennel CSV and return a formatted invoice string.\"\"\"\n    with open(csv_path, newline='', encoding='utf-8-sig') as csv_file:\n        rows = list(csv.DictReader(csv_file, delimiter=';'))\n\n    cent = Decimal('0.01')\n    weight_limit = Decimal('25')\n    nightly_surcharge = Decimal('4.00')\n    late_pickup_fee = Decimal('20.00')\n    late_pickup_time = datetime.strptime('17:00', '%H:%M').time()\n\n    pets = []\n    for row in rows:\n        breed = (row['breed'] or '').strip() or 'Mixed breed'\n        owner = (row['owner'] or '').upper()\n\n        weight_text = (row['weight_kg'] or '').strip()\n        weight = Decimal(weight_text) if weight_text else Decimal('10.0')\n\n        check_in = datetime.strptime(row['check_in'], '%d/%m/%Y').date()\n        check_out = datetime.strptime(row['check_out'], '%d/%m/%Y').date()\n        pickup_time = datetime.strptime(row['pickup_time'], '%H:%M').time()\n        nights = (check_out - check_in).days\n\n        nightly_rate = Decimal(row['nightly_rate'])\n        base_charge = (nightly_rate * nights).quantize(cent, rounding=ROUND_HALF_UP)\n        weight_surcharge = nightly_surcharge * nights if weight > weight_limit else Decimal('0.00')\n        late_fee = late_pickup_fee if pickup_time > late_pickup_time else Decimal('0.00')\n        total = base_charge + weight_surcharge + late_fee\n\n        pets.append(\n            {\n                'name': row['pet_name'],\n                'owner': owner,\n                'breed': breed,\n                'weight': weight,\n                'check_in': check_in,\n                'check_out': check_out,\n                'nights': nights,\n                'base': base_charge,\n                'weight_surcharge': weight_surcharge,\n                'late_fee': late_fee,\n                'total': total,\n            }\n        )\n\n    # Descending numeric totals, with descending names used to break ties.\n    pets.sort(key=lambda pet: (pet['total'], pet['name']), reverse=True)\n\n    pet_blocks = []\n    grand_total = Decimal('0.00')\n    for pet in pets:\n        grand_total += pet['total']\n        stay_word = 'night' if pet['nights'] == 1 else 'nights'\n        pet_blocks.append(\n            '\\n'.join(\n                (\n                    f\"Pet: {pet['name']}\",\n                    f\"Owner: {pet['owner']}\",\n                    f\"Breed: {pet['breed']}\",\n                    f\"Weight: {pet['weight']:f} kg\",\n                    f\"Stay: {pet['check_in']:%d/%m/%Y} - \"\n                    f\"{pet['check_out']:%d/%m/%Y} ({pet['nights']} {stay_word})\",\n                    f\"Charges: Rate ${pet['base']:,.2f} + Weight \"\n                    f\"${pet['weight_surcharge']:,.2f} + Late \"\n                    f\"${pet['late_fee']:,.2f} = ${pet['total']:,.2f}\",\n                )\n            )\n        )\n\n    invoice_parts = ['KENNEL INVOICE', *pet_blocks, '---'\n\nFAILED RUN 4: wrong answers vs expected:\n  assert 'KENNEL INVOI...al: $147.00\\n' == 'KENNEL INVOI...al: $147.00\\n'\n  assert 'KENNEL INVOI...tal: $50.13\\n' == 'KENNEL INVOI...tal: $50.13\\n'\n  assert 'KENNEL INVOI...tal: $60.13\\n' == 'KENNEL INVOI...tal: $60.13\\n'\n  assert 'KENNEL INVOI...tal: $80.00\\n' == 'KENNEL INVOI...tal: $80.00\\n'\n  assert 'KENNEL INVOI...al: $100.00\\n' == 'KENNEL INVOI...al: $100.00\\n'\n  assert 'KENNEL INVOI...tal: $75.00\\n' == 'KENNEL INVOI...tal: $75.00\\n'\n  agent's last solver code (truncated):\ncat > /app/solution.py <<'PY'\nimport csv\nfrom datetime import datetime\nfrom decimal import Decimal, ROUND_HALF_UP\n\n\n_LATE_PICKUP_TIME = datetime.strptime(\"17:00\", \"%H:%M\").time()\n_CENT = Decimal(\"0.01\")\n\n\ndef _money(value: Decimal) -> str:\n    \"\"\"Format a monetary amount with commas and exactly two decimal places.\"\"\"\n    return format(value, \",.2f\")\n\n\ndef render_invoice(csv_path: str) -> str:\n    \"\"\"Read a pet boarding kennel CSV and return a formatted invoice string.\"\"\"\n    pets = []\n\n    with open(csv_path, newline=\"\", encoding=\"utf-8\") as csv_file:\n        for row in csv.DictReader(csv_file, delimiter=\";\"):\n            pet_name = (row[\"pet_name\"] or \"\").strip()\n            breed = (row[\"breed\"] or \"\").strip() or \"Mixed breed\"\n            owner = (row[\"owner\"] or \"\").strip().upper()\n            weight_text = (row[\"weight_kg\"] or \"\").strip() or \"10.0\"\n            weight = Decimal(weight_text)\n            check_in = (row[\"check_in\"] or \"\").strip()\n            check_out = (row[\"check_out\"] or \"\").strip()\n            pickup_time = datetime.strptime(\n                (row[\"pickup_time\"] or \"\").strip(), \"%H:%M\"\n            ).time()\n            nightly_rate = Decimal((row[\"nightly_rate\"] or \"\").strip())\n\n            nights = (\n                datetime.strptime(check_out, \"%d/%m/%Y\")\n                - datetime.strptime(check_in, \"%d/%m/%Y\")\n            ).days\n\n            base = (nightly_rate * nights).quantize(_CENT, rounding=ROUND_HALF_UP)\n            weight_surcharge = (\n                Decimal(\"4\") * nights if weight > Decimal(\"25\") else Decimal(\"0\")\n            )\n            late_fee = Decimal(\"20\") if pickup_time > _LATE_PICKUP_TIME else Decimal(\"0\")\n            total = base + weight_surcharge + late_fee\n\n            pets.append(\n                {\n                    \"pet_name\": pet_name,\n                    \"owner\": owner,\n                    \"breed\": breed,\n                    \"weight\": weight_text,\n              ",
+   "consensus": {}
+  }
+ ],
+ "error": null,
+ "elapsed_sec": 49,
+ "written": "2026-10-07T16:18:57-0700"
+}

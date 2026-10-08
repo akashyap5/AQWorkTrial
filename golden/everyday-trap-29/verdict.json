@@ -1,0 +1,98 @@
+{
+ "slug": "everyday-trap-29",
+ "decision": "learnable",
+ "reason": "measured 3/5 with controls passing; passed the GLM-5.1 fairness gate (3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe)",
+ "probe_job": "4a06cc8ba56a4b73",
+ "runs": [
+  {
+   "run": 1,
+   "status": "passed",
+   "duration_sec": 198,
+   "turns": 6,
+   "failed_tests": []
+  },
+  {
+   "run": 2,
+   "status": "failed",
+   "duration_sec": 166,
+   "turns": 5,
+   "failed_tests": [
+    "test_literal_inputs"
+   ]
+  },
+  {
+   "run": 3,
+   "status": "passed",
+   "duration_sec": 225,
+   "turns": 11,
+   "failed_tests": []
+  },
+  {
+   "run": 4,
+   "status": "passed",
+   "duration_sec": 186,
+   "turns": 6,
+   "failed_tests": []
+  },
+  {
+   "run": 5,
+   "status": "failed",
+   "duration_sec": 224,
+   "turns": 7,
+   "failed_tests": [
+    "test_literal_inputs"
+   ]
+  }
+ ],
+ "fairness_audit": {
+  "runs": [
+   {
+    "run": 2,
+    "stated": true,
+    "quote": "If the team field is empty, display \"UNAFFILIATED\" as the team name.",
+    "why": "The instruction explicitly states that empty team fields should display 'UNAFFILIATED', but the solver output shows an empty team field instead.",
+    "quote_verified": true
+   },
+   {
+    "run": 5,
+    "stated": true,
+    "quote": "If the team field is empty, display \"UNAFFILIATED\" as the team name.",
+    "why": "The instruction explicitly states that empty team fields should display 'UNAFFILIATED', but the solver output shows an empty team field instead.",
+    "quote_verified": true
+   }
+  ],
+  "verdict": "fair",
+  "fix": "",
+  "uncovered_runs": [],
+  "traced_runs": [
+   2,
+   5
+  ],
+  "fair": true,
+  "job_id": "4a06cc8ba56a4b73",
+  "votes": [
+   {
+    "fair": true,
+    "verdict": "fair",
+    "uncovered_runs": [],
+    "unverified": []
+   },
+   {
+    "fair": true,
+    "verdict": "fair",
+    "uncovered_runs": [],
+    "unverified": []
+   },
+   {
+    "fair": true,
+    "verdict": "fair",
+    "uncovered_runs": [],
+    "unverified": []
+   }
+  ]
+ },
+ "gate_policy": "3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe",
+ "prompt_version": "t012",
+ "authoring_model": "z-ai/glm-5.1",
+ "written": "2026-10-07T16:09:04-0700"
+}

@@ -1,0 +1,11 @@
+{
+ "slug": "parts-order-summary-checklist",
+ "probe_job": "c1dd2f17707d46f7",
+ "decision": "accepted",
+ "passes": 3,
+ "fix": null,
+ "decided_at": "2026-10-07T15:19:42-0700",
+ "source": "reconstructed from output/ledger.jsonl (decision made before the decision store existed)",
+ "gate_policy": "3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe",
+ "written": "2026-10-07T16:27:52-0700"
+}

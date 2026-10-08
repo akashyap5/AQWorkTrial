@@ -1,0 +1,31 @@
+{
+ "slug": "nursery-pricelist-checklist-export-28",
+ "probe_job": "75e84b5df79046cb",
+ "decision": "accepted",
+ "passes": 3,
+ "fix": null,
+ "votes": [
+  {
+   "fair": true,
+   "verdict": "fair",
+   "uncovered_runs": [],
+   "unverified": []
+  },
+  {
+   "fair": true,
+   "verdict": "fair",
+   "uncovered_runs": [],
+   "unverified": [
+    4
+   ]
+  },
+  {
+   "fair": true,
+   "verdict": "fair",
+   "uncovered_runs": [],
+   "unverified": []
+  }
+ ],
+ "gate_policy": "3 independent GLM-5.1 audits; an audit is fair when at least half of the failed runs (and at least one) are traced to a requirement quoted verbatim from the instruction or docs; ship on 2 of 3 fair audits; otherwise append the auditor's clarification and re-probe",
+ "written": "2026-10-07T16:28:28-0700"
+}
