@@ -1,5 +1,29 @@
 # Changelog
 
+## 2026-10-07 (evening) — Champion/challenger prompts, repeat measurements, and two new Task Lab views
+
+A three-hour run tested what raises the share of learnable tasks. Champion/challenger prompts: the champion (the
+t005 instructions) and a challenger written by GLM-5.1 from measured evidence (`generator/prompt_reviser.py`) author
+paired slots from the same briefs, and a fixed rule promotes or replaces the challenger after 8 measured first probes
+per arm. The champion landed 7 of 15 first probes in band (47%) and shipped 4 tasks; the first challenger landed 2 of
+18, was retired automatically, and GLM-5.1 wrote a replacement. Batches now rotate task shapes for diversity
+(command-line tools, migrators, validators, allocators); one non-report task shipped.
+The rule-count dial was turned off (`FAST_AUTHOR_DIAL=0`) after 0 of 4 dialled tasks landed in band: the solver tests
+stated rules, even interacting ones. The 0/5 audit kept finding unstated output rules, and clarified tasks usually
+measured too easy afterwards.
+Every newly shipped task gets three unchanged confirmation re-runs, and the frozen golden tasks were re-measured the
+same way. `generator/fidelity_report.py` groups probes by task content, ignoring task.toml labels, and ranks tasks by
+how often they land in band. Seven tasks landed in band in every repeat (3/3 or 4/4). Shipped tasks picked for one
+in-band result drift toward easy on re-runs, so the ranking is the honest reliability signal.
+`generator/window_report.py` finds the best stretch of consecutive probed tasks (10 or 20). The best 10 shipped 4,
+with 6 in band on the first probe. Task Lab gains `/window` and `/fidelity` pages next to the frozen golden set and
+shows descriptive task names. Task folders and records keep their slugs.
+Fixes: a probe cancelled before any attempt is recorded as `cancelled`, not as a controls failure, and the
+mislabelled verdicts were corrected. The volunteer-directory golden task now uses a valid Harbor difficulty. Docker
+concurrency was tuned to the network-pool limit. One records gap remains: the gate audit text of
+pet-boarding-invoice-checklist was overwritten by a stale batch slot before the merge fix. Its accepted decision is
+preserved in `golden/pet-boarding-invoice-checklist/gate_decision.json`.
+
 ## 2026-10-07 — Checklist tasks, a frozen fairness gate, robustness, and a difficulty dial
 
 The image family and single-trick tasks rarely failed the solver: with one stated trick per task, 1 of 31 first probes

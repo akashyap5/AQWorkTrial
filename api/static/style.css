@@ -297,3 +297,11 @@ footer { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wr
 .history-collapse[open] > summary strong::before { content: "▾ "; }
 .history-collapse[open] > summary { margin-bottom: 10px; }
 .history-versions .prompt-text { max-height: 520px; overflow: auto; white-space: pre-wrap; font-size: 11px; line-height: 1.55; background: #f3f7f3; color: #2f4d3b; padding: 12px; border-radius: 6px; }
+.view-nav { display: flex; gap: 6px; margin: -10px 0 18px; }
+.view-nav a { font-size: 12px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; color: #4f665a; background: white; }
+.view-nav a.active { background: var(--green); border-color: var(--green); color: white; }
+.window-banner { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; padding: 18px 22px; margin-bottom: 18px; background: white; border: 1px solid var(--line); border-radius: 11px; }
+.window-rate { display: flex; flex-direction: column; gap: 4px; }
+.window-rate strong { font-size: 28px; color: var(--green); letter-spacing: -.5px; }
+.window-rate span { font-size: 11px; color: var(--muted); }
+.window-facts { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 12px; color: #4d6658; }

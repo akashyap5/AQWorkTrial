@@ -1393,17 +1393,19 @@
    ]
   },
   "checklist breadth": {
-   "runs": 451,
-   "missed": 54,
+   "runs": 599,
+   "missed": 68,
    "families": [
-    "everyday-trap"
+    "everyday-trap",
+    "everyday-trap-x"
    ]
   },
   "checklist-breadth": {
-   "runs": 156,
-   "missed": 11,
+   "runs": 232,
+   "missed": 16,
    "families": [
-    "everyday-trap"
+    "everyday-trap",
+    "everyday-trap-x"
    ]
   },
   "constraint implied by the goal": {
@@ -1425,6 +1427,41 @@
    "missed": 0,
    "families": [
     "everyday-trap"
+   ]
+  },
+  "strict inequality boundary / inverted value semantics / semantic interaction": {
+   "runs": 9,
+   "missed": 0,
+   "families": [
+    "everyday-trap-x"
+   ]
+  },
+  "stated rule differs from language default, inverted value semantics": {
+   "runs": 10,
+   "missed": 0,
+   "families": [
+    "everyday-trap-x"
+   ]
+  },
+  "strict-inequality-boundary, inverted-value-semantics": {
+   "runs": 5,
+   "missed": 0,
+   "families": [
+    "everyday-trap-x"
+   ]
+  },
+  "strict inequality boundary, inverted value semantics, semantic interaction": {
+   "runs": 13,
+   "missed": 0,
+   "families": [
+    "everyday-trap-x"
+   ]
+  },
+  "strict inequality boundary, inverted value semantics, stated non-default convent": {
+   "runs": 5,
+   "missed": 5,
+   "families": [
+    "everyday-trap-x"
    ]
   }
  },
@@ -4427,6 +4464,633 @@
    "passes": 0,
    "valid": 5,
    "at": "2026-10-07 17:27:45"
+  },
+  {
+   "job_id": "7d078ecac5544f21",
+   "prompt_version": "t013",
+   "slug": "community-kitchen-timetable-checklist",
+   "family": "everyday-trap",
+   "round": 1,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 17:31:29"
+  },
+  {
+   "job_id": "5b42e9d577434728",
+   "prompt_version": "t009",
+   "slug": "config-migrator-cfg-json-breadth",
+   "family": "everyday-trap",
+   "round": 1,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 17:41:15"
+  },
+  {
+   "job_id": "3139416925394ca8",
+   "prompt_version": "t013",
+   "slug": "community-kitchen-timetable-checklist",
+   "family": "everyday-trap",
+   "round": 3,
+   "bugs": 1,
+   "passes": 1,
+   "valid": 5,
+   "at": "2026-10-07 17:46:38"
+  },
+  {
+   "job_id": "6fc989baaae74bfe",
+   "prompt_version": "t015",
+   "slug": "volunteer-directory-checklist-cleaner",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 3,
+   "valid": 5,
+   "at": "2026-10-07 17:46:38"
+  },
+  {
+   "job_id": "7a3c17c98afc4d58",
+   "prompt_version": "t013",
+   "slug": "museum-exhibition-schedule-checklist",
+   "family": "everyday-trap",
+   "round": 4,
+   "bugs": 1,
+   "passes": 1,
+   "valid": 5,
+   "at": "2026-10-07 17:46:38"
+  },
+  {
+   "job_id": "7c1338858c4b4124",
+   "prompt_version": "t012",
+   "slug": "nursery-pricelist-checklist-export",
+   "family": "everyday-trap",
+   "round": 2,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 17:46:38"
+  },
+  {
+   "job_id": "89f2c074b02b47d7",
+   "prompt_version": "t015",
+   "slug": "laundry-service-daily-summary-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 17:46:38"
+  },
+  {
+   "job_id": "8a76edcb3d4048d4",
+   "prompt_version": "t012",
+   "slug": "art-studio-workshop-log-summary",
+   "family": "everyday-trap",
+   "round": 4,
+   "bugs": 1,
+   "passes": 2,
+   "valid": 5,
+   "at": "2026-10-07 17:46:38"
+  },
+  {
+   "job_id": "94b003d265034da7",
+   "prompt_version": "t015",
+   "slug": "vinyl-pricelist-checklist-export",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 17:46:38"
+  },
+  {
+   "job_id": "b33afc28bb2f49f4",
+   "prompt_version": "t015",
+   "slug": "makerspace-usage-log-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 17:46:38"
+  },
+  {
+   "job_id": "d8420447310f49b1",
+   "prompt_version": "t013",
+   "slug": "community-garden-roster-checklist",
+   "family": "everyday-trap",
+   "round": 2,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 0,
+   "at": "2026-10-07 17:46:38"
+  },
+  {
+   "job_id": "e48ce6a748004aa7",
+   "prompt_version": "t008",
+   "slug": "migration-manifest-report",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 2,
+   "at": "2026-10-07 17:46:38"
+  },
+  {
+   "job_id": "88d3aed3778d4541",
+   "prompt_version": "x001",
+   "slug": "reading-challenge-leaderboard-checklist",
+   "family": "everyday-trap-x",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 18:01:16"
+  },
+  {
+   "job_id": "153d4b4f09de4d59",
+   "prompt_version": "t016",
+   "slug": "conference-room-usage-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 18:02:28"
+  },
+  {
+   "job_id": "c2215d1d101c41b5",
+   "prompt_version": "x001",
+   "slug": "activity-bus-departure-board-checklist",
+   "family": "everyday-trap-x",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 18:03:15"
+  },
+  {
+   "job_id": "625dd5fb24514f46",
+   "prompt_version": "x001",
+   "slug": "book-club-directory-cleaner",
+   "family": "everyday-trap-x",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 18:03:23"
+  },
+  {
+   "job_id": "4646cbfae3424a3f",
+   "prompt_version": "t016",
+   "slug": "auto-detail-receipt-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 18:08:35"
+  },
+  {
+   "job_id": "eab7d96b29ab4930",
+   "prompt_version": "t016",
+   "slug": "running-club-leaderboard-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 3,
+   "valid": 5,
+   "at": "2026-10-07 18:10:41"
+  },
+  {
+   "job_id": "5dd08b8b963243d3",
+   "prompt_version": "x001",
+   "slug": "warehouse-robot-task-log-summary",
+   "family": "everyday-trap-x",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 18:13:15"
+  },
+  {
+   "job_id": "7fec17a440ef401e",
+   "prompt_version": "t016",
+   "slug": "animal-shelter-roster-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 1,
+   "valid": 5,
+   "at": "2026-10-07 18:14:30"
+  },
+  {
+   "job_id": "e3b8e704577b48e4",
+   "prompt_version": "x001",
+   "slug": "mineral-specimen-pricelist-checklist",
+   "family": "everyday-trap-x",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 18:15:33"
+  },
+  {
+   "job_id": "d7e3518ca0714769",
+   "prompt_version": "t016",
+   "slug": "swim-lesson-schedule-checklist-export",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 3,
+   "valid": 5,
+   "at": "2026-10-07 18:16:13"
+  },
+  {
+   "job_id": "3a7ca109e5aa4ed6",
+   "prompt_version": "x001",
+   "slug": "vending-restock-log-summary",
+   "family": "everyday-trap-x",
+   "round": 0,
+   "bugs": 1,
+   "passes": 2,
+   "valid": 5,
+   "at": "2026-10-07 18:18:05"
+  },
+  {
+   "job_id": "b7556b4fa8eb4380",
+   "prompt_version": "t016",
+   "slug": "mailing-list-domain-summary-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 18:19:21"
+  },
+  {
+   "job_id": "889b45226deb4055",
+   "prompt_version": "x001",
+   "slug": "chess-blitz-leaderboard-strict-seed",
+   "family": "everyday-trap-x",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 18:19:27"
+  },
+  {
+   "job_id": "3f9f75b19f774b7c",
+   "prompt_version": "x001",
+   "slug": "farmers-market-stall-assignment-export",
+   "family": "everyday-trap-x",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 18:20:26"
+  },
+  {
+   "job_id": "c2156294733146b5",
+   "prompt_version": "t016",
+   "slug": "everyday-trap-52",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 2,
+   "valid": 5,
+   "at": "2026-10-07 18:20:57"
+  },
+  {
+   "job_id": "b82548ae3e794205",
+   "prompt_version": "x001",
+   "slug": "newsletter-subscriber-summary-checklist",
+   "family": "everyday-trap-x",
+   "round": 0,
+   "bugs": 1,
+   "passes": 2,
+   "valid": 5,
+   "at": "2026-10-07 18:22:38"
+  },
+  {
+   "job_id": "ba8df4043c014c47",
+   "prompt_version": "t016",
+   "slug": "kite-shop-pricelist-checklist-export",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 18:23:44"
+  },
+  {
+   "job_id": "7e14ed63ceb14506",
+   "prompt_version": "t016",
+   "slug": "mailing-list-region-report-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 2,
+   "valid": 5,
+   "at": "2026-10-07 18:25:08"
+  },
+  {
+   "job_id": "aab2f475d478435c",
+   "prompt_version": "x001",
+   "slug": "framing-shop-invoice-checklist",
+   "family": "everyday-trap-x",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 18:28:16"
+  },
+  {
+   "job_id": "8220fe57d44b4979",
+   "prompt_version": "x001",
+   "slug": "file-reorganiser-manifest-checklist",
+   "family": "everyday-trap-x",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 18:28:57"
+  },
+  {
+   "job_id": "97d45794428b498c",
+   "prompt_version": "x001",
+   "slug": "tailor-shop-receipt-checklist",
+   "family": "everyday-trap-x",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 18:29:43"
+  },
+  {
+   "job_id": "1aa9b4b43b304d7f",
+   "prompt_version": "x001",
+   "slug": "cfg-json-migrator-strict-inverted-normalize",
+   "family": "everyday-trap-x",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 18:30:19"
+  },
+  {
+   "job_id": "311212b3883b4407",
+   "prompt_version": "x001",
+   "slug": "clinical-lab-sample-validator",
+   "family": "everyday-trap-x",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 18:31:40"
+  },
+  {
+   "job_id": "e14421b0152946b8",
+   "prompt_version": "x001",
+   "slug": "reading-challenge-leaderboard-checklist",
+   "family": "everyday-trap-x",
+   "round": 1,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 18:34:44"
+  },
+  {
+   "job_id": "6835d4f8c90042ab",
+   "prompt_version": "t016",
+   "slug": "bike-share-log-replay-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 18:36:18"
+  },
+  {
+   "job_id": "d3066bcb04194622",
+   "prompt_version": "x001",
+   "slug": "site-health-check-report-cli",
+   "family": "everyday-trap-x",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 18:36:42"
+  },
+  {
+   "job_id": "3196473efb5844e4",
+   "prompt_version": "t016",
+   "slug": "conference-room-usage-checklist",
+   "family": "everyday-trap",
+   "round": 1,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 18:38:07"
+  },
+  {
+   "job_id": "bd172365540f47af",
+   "prompt_version": "t016",
+   "slug": "hot-desk-allocation-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 5,
+   "valid": 5,
+   "at": "2026-10-07 18:39:40"
+  },
+  {
+   "job_id": "c31cb43c016043de",
+   "prompt_version": "x001",
+   "slug": "activity-bus-departure-board-checklist",
+   "family": "everyday-trap-x",
+   "round": 1,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 18:39:44"
+  },
+  {
+   "job_id": "c77f17db98cc4ed1",
+   "prompt_version": "x001",
+   "slug": "book-club-directory-cleaner",
+   "family": "everyday-trap-x",
+   "round": 1,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 18:39:48"
+  },
+  {
+   "job_id": "0661916e4f844613",
+   "prompt_version": "t016",
+   "slug": "auto-detail-receipt-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 18:47:58"
+  },
+  {
+   "job_id": "b1969d6a86a14b27",
+   "prompt_version": "t016",
+   "slug": "patch-compliance-reporter",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 18:50:38"
+  },
+  {
+   "job_id": "a1ad5537e72f47b3",
+   "prompt_version": "t016",
+   "slug": "animal-shelter-roster-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 18:51:55"
+  },
+  {
+   "job_id": "498f139943274336",
+   "prompt_version": "x001",
+   "slug": "warehouse-robot-task-log-summary",
+   "family": "everyday-trap-x",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 18:57:48"
+  },
+  {
+   "job_id": "9af07cb8b00140da",
+   "prompt_version": "x001",
+   "slug": "vending-restock-log-summary",
+   "family": "everyday-trap-x",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 18:59:31"
+  },
+  {
+   "job_id": "b1a848e9c6084b35",
+   "prompt_version": "x001",
+   "slug": "warehouse-inventory-checklist-export",
+   "family": "everyday-trap-x",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 19:02:08"
+  },
+  {
+   "job_id": "b02e90ea7ef74337",
+   "prompt_version": "x001",
+   "slug": "transit-card-log-replay-checklist",
+   "family": "everyday-trap-x",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 19:04:38"
+  },
+  {
+   "job_id": "2b2da4b5b53342fb",
+   "prompt_version": "t016",
+   "slug": "cfg-json-migrator-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 2,
+   "passes": 1,
+   "valid": 5,
+   "at": "2026-10-07 19:04:48"
+  },
+  {
+   "job_id": "ff7513d42edd45cd",
+   "prompt_version": "t016",
+   "slug": "server-log-archive-migration-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 3,
+   "valid": 5,
+   "at": "2026-10-07 19:06:08"
+  },
+  {
+   "job_id": "c92527215fbf4f0f",
+   "prompt_version": "t016",
+   "slug": "warehouse-receiving-log-validator-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 19:07:14"
+  },
+  {
+   "job_id": "4720ebdca0184665",
+   "prompt_version": "x001",
+   "slug": "coworking-desk-allocator-checklist",
+   "family": "everyday-trap-x",
+   "round": 0,
+   "bugs": 1,
+   "passes": 0,
+   "valid": 5,
+   "at": "2026-10-07 19:07:22"
+  },
+  {
+   "job_id": "ee4d231d8c2941aa",
+   "prompt_version": "x001",
+   "slug": "tailor-shop-receipt-checklist",
+   "family": "everyday-trap-x",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 4,
+   "at": "2026-10-07 19:08:48"
+  },
+  {
+   "job_id": "4a2a732fdd234dee",
+   "prompt_version": "x001",
+   "slug": "newsletter-subscriber-summary-checklist",
+   "family": "everyday-trap-x",
+   "round": 0,
+   "bugs": 1,
+   "passes": 3,
+   "valid": 5,
+   "at": "2026-10-07 19:12:09"
+  },
+  {
+   "job_id": "4e1b9f71ffdc4f38",
+   "prompt_version": "t016",
+   "slug": "mailing-list-region-report-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 19:13:12"
+  },
+  {
+   "job_id": "59002a575dc44fce",
+   "prompt_version": "t016",
+   "slug": "bike-share-log-replay-checklist",
+   "family": "everyday-trap",
+   "round": 0,
+   "bugs": 1,
+   "passes": 4,
+   "valid": 5,
+   "at": "2026-10-07 19:16:59"
   }
  ]
 }

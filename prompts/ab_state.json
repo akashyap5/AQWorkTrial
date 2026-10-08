@@ -1,0 +1,40 @@
+{
+ "window_start": "2026-10-07T17:43:34-07:00",
+ "challenger_since": "2026-10-07T18:34:57-07:00",
+ "history": [
+  {
+   "at": "2026-10-07T17:46:08-07:00",
+   "event": "new challenger",
+   "note": "first challenger",
+   "rationale": "The revised prompt addresses three measured problems: (1) the 43% too-easy rate by adding evidence-based guidance that pure formatting rules (date formats, thousands separators, half-up rounding, etc.) are caught by the agent's self-tests and should not be primary difficulty drivers, while identifying what reliably slips through\u2014strict inequalities, consecutive delimiters, inverted semantics, and semantic interactions; (2) the 21% unfair 0/5 rate by adding a critical warning in GOAL and DESIGN that every test-checked behavior must be stated in the instruction, since unstated format requirements were the dominant cause of unfair failures; and (3) the agent's false-confidence weakness by adding to WHY the measured finding that self-tests share blind spots with the implementation, explaining why traps must be the kind the agent's typical self-tests miss. New trap families 9 (strict inequality) and 10 (inverted semantics) codify the most effective difficulty levers, and family 8 is revised to distinguish hard-to-verify details (which drive difficulty) from easy-to-verify formatting details (which add realism only).",
+   "chars": 13033
+  },
+  {
+   "at": "2026-10-07T18:32:24-07:00",
+   "event": "challenger retired",
+   "champion": {
+    "measured": 9,
+    "in_band": 5,
+    "rate": 0.5555555555555556,
+    "too_easy": 2,
+    "too_hard": 2,
+    "pending": 6
+   },
+   "challenger": {
+    "measured": 14,
+    "in_band": 2,
+    "rate": 0.14285714285714285,
+    "too_easy": 9,
+    "too_hard": 3,
+    "pending": 4
+   }
+  },
+  {
+   "at": "2026-10-07T18:34:57-07:00",
+   "event": "new challenger",
+   "note": "previous challenger trailed (14% vs 56%)",
+   "rationale": "The revision addresses three evidence-based problems. First, **too-hard tasks (0/5)** overwhelmingly come from unstated requirements that tests check anyway\u2014the gate's 20+ added behaviors show this pattern clearly\u2014so I added an explicit completeness checklist and a warning that this is the most common cause of unfair failure. Second, **too-easy tasks (43%)** arise because the agent's ad-hoc verification catches independent rules easily; I restructured the trap families around measured effectiveness, promoting misleading column names, strict inequalities, inverted semantics, and mixed-direction sorts (all 20-65% pass rates) while demoting pure formatting and pure-function traps that the agent unit-tests away. Third, I added the insight that the agent's tests share its blind spots, making **interacting rules** (dedup-before-filter, priority-affects-both-eligibility-and-sort) more effective than independent rules, and capped checklist breadth at 8-11 rules since 12+ caused 0/5 failures.",
+   "chars": 14778
+  }
+ ]
+}

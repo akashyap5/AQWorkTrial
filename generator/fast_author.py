@@ -972,7 +972,7 @@ def repair(spec, results, problem):
 # ---------------------------------------------------------------- grid-image-puzzle family
 
 GRID_FAMILIES = {"grid-image-puzzle"}
-TRAP_FAMILIES = {"everyday-trap"}
+TRAP_FAMILIES = {"everyday-trap", "everyday-trap-x"}
 # Lever combinations explored round-robin across grid batch slots (one strong + one or two mild levers).
 LEVER_COMBOS = [("H2", "H1"), ("H7", "H1"), ("H8", "H1", "H3"), ("H2", "H6"), ("H7", "H8"), ("H1", "H3", "H4"),
                 ("H2", "H7"), ("H8", "H6")]
@@ -1655,6 +1655,7 @@ OUTCOME_REASONS = {
     "superseded": "a newer probe of the edited task replaced this measurement; the gate only decides on a task's newest probe",
     "awaiting_runs": "in band so far; the gate decides once all five runs have finished (the gate sweeper picks it up)",
     "gate_error": "the fairness gate could not run (see the log); the task was not accepted",
+    "cancelled": "the probe was cancelled before any attempt finished, so there is no measurement",
     "error": "pipeline error (see the error field)",
 }
 
@@ -1837,7 +1838,11 @@ def dial_harder(spec, result, slug, extra):
     message = (f"INSTRUCTION (what the solver sees):\n{spec['instruction_md']}\n\nREFERENCE SOLUTION ({bug['file']}, hidden):\n{reference}\n\n"
                f"TESTS (hidden):\n{spec['tests_py']}\n\nMEASUREMENT: {result['passes']} of {result['valid']} solver runs passed; the target "
                f"is 1-3 of 5. This solver follows any single stated rule but slips (a few percent per rule) when an easy task carries "
-               f"many independent stated rules.\n\nREQUEST: add exactly {extra} more independent requirements. Each new requirement must "
+               f"many independent stated rules, and it unit-tests isolated formatting rules reliably, so prefer requirements that "
+               f"interact with an existing rule or apply only when two conditions coincide (a conditional exception, an order of "
+               f"operations, a rule for one field but not a value derived from it). Whenever a rule interacts with another, state "
+               f"the order explicitly (for example whether a default applies before or after a filter or deduplication).\n\n"
+               f"REQUEST: add exactly {extra} more requirements. Each new requirement must "
                f"be stated once, plainly, in the instruction (a careful reader gets it right); differ from the obvious programming "
                f"default (kinds that tripped solvers before: {'; '.join(DIAL_RULE_KINDS)}); be checked by the tests on inputs where "
                f"the default and the stated behaviour give different output; and leave every existing requirement unchanged. Update "
@@ -2107,6 +2112,9 @@ def run_candidate(index, brief, variant, args, batch=None):
                         evolve_strategies(spec, bugs, bug_tests, result)
                 except Exception as exc:  # the library is advisory; never block calibration
                     log(slug, f"strategy update failed: {exc}")
+            if result.get("status") == "cancelled" and result["valid"] == 0:
+                record["outcome"] = "cancelled"  # stopped before any attempt finished: no measurement, not a controls failure
+                return record
             if not result["controls"]:
                 record["outcome"] = "controls_failed"
                 return record
@@ -2164,8 +2172,9 @@ def run_candidate(index, brief, variant, args, batch=None):
             grid = spec.get("family") in GRID_FAMILIES
             trap = spec.get("family") in TRAP_FAMILIES
             if (grid or trap) and direction == "harder":
-                if trap and not FAKE and not spec.get("_dial_harder"):
-                    extra = 3 if result["passes"] >= 5 else 2
+                # FAST_AUTHOR_DIAL=0 turns the dial off (measured: 0 of 4 dialled tasks landed in band in the 17:46 run).
+                if trap and not FAKE and not spec.get("_dial_harder") and os.environ.get("FAST_AUTHOR_DIAL", "1") != "0":
+                    extra = 4 if result["passes"] >= 5 else 3  # +2 isolated rules left 2 of 3 dialled tasks too easy
                     try:
                         built = dial_harder(spec, result, slug, extra)
                     except Exception as exc:
@@ -2331,6 +2340,12 @@ EXTRA_FAMILIES = (
      "topic": "Recover the exact set of valid records from a partially corrupted binary log (documented layout with magic bytes, length fields, CRCs, and sequence numbers) generated at build time with deliberate corruption patterns. The agent writes or fixes the recovery tool; output must match exactly (ordering, tie-breaks, and which partially valid records count are stated in docs).",
      "variants": ("write-ahead log with torn writes and duplicate replays", "append-only event store with interleaved writers", "segmented archive with a damaged index")},
 )
+# Challenger arm of the prompt A/B: the same briefs as everyday-trap, authored from the prompt that
+# generator/prompt_reviser.py writes from measured evidence (its own version registry, prefix "x").
+_TRAP_BRIEF = next(f for f in EXTRA_FAMILIES if f["family"] == "everyday-trap")
+EXTRA_FAMILIES = EXTRA_FAMILIES + ({**_TRAP_BRIEF, "family": "everyday-trap-x",
+                                    "prompt_file": ROOT / "prompts" / "trap_author_prompt_x.txt",
+                                    "versions": ROOT / "prompts" / "trap_author_versions_x", "version_prefix": "x"},)
 
 
 def main():

@@ -60,6 +60,7 @@ def examples():
     rows = store.examples()
     for row in rows:
         row["readme_html"] = render_markdown(row["readme"])
+        row["name"] = display_slug(row["name"]) if row.get("group") == "Generated" else row["name"]
     return {"examples": rows}
 
 
@@ -102,9 +103,12 @@ def submit(body: Submission):
 @app.get("/api/jobs/{job_id}")
 def get_job(job_id: str):
     try:
-        return store.job(job_id)
+        record = store.job(job_id)
     except KeyError:
         raise HTTPException(404, "Unknown job") from None
+    record = dict(record, metadata=dict(record.get("metadata") or {}))
+    record["metadata"]["display_name"] = display_text(record["metadata"].get("display_name") or record.get("task_name"))
+    return record
 
 
 @app.get("/api/jobs/{job_id}/runs/{run_id}")
@@ -205,6 +209,33 @@ def prompt_versions():
     return {"versions": rows, "current": rows[0]["version"] if rows else None, "stats": stats}
 
 
+# Display names: describe the task, not the method used to calibrate it (task folders and records keep their slugs).
+RENAMED = {"everyday-trap-29": "pub-quiz-league-leaderboard", "everyday-trap-52": "animal-shelter-intake-summary",
+           "nursery-pricelist-checklist-export-28": "nursery-pricelist-export"}
+
+
+def display_slug(slug):
+    if slug in RENAMED:
+        return RENAMED[slug]
+    words = [w for w in slug.split("-") if w not in ("checklist", "breadth")]
+    return "-".join(words) or slug
+
+
+def display_text(text):
+    """Apply display_slug to every slug-like token in a label such as 'name (stability 1)'."""
+    import re as _re
+    return _re.sub(r"[a-z0-9]+(?:-[a-z0-9]+)+", lambda m: display_slug(m.group(0)), text or "")
+
+
+def with_names(rows):
+    seen = {}
+    for row in rows:
+        name = display_slug(row["slug"])
+        seen[name] = seen.get(name, 0) + 1
+        row["name"] = name if seen[name] == 1 else f"{name}-{seen[name]}"
+    return rows
+
+
 def read_json(path, default):
     try:
         return json.loads(path.read_text())
@@ -224,8 +255,59 @@ def shipped():
     """The frozen golden set (golden/manifest.json): fixed tasks and measurements that later runs never change."""
     manifest = read_json(GOLDEN / "manifest.json", None)
     if manifest:
-        return {"shipped": manifest["shipped"], "frozen_at": manifest.get("frozen_at")}
+        return {"shipped": with_names(manifest["shipped"]), "frozen_at": manifest.get("frozen_at")}
     return live_shipped()
+
+
+@app.get("/window")
+def window_page():
+    return FileResponse(store.ROOT / "api" / "static" / "index.html")
+
+
+@app.get("/api/window")
+def window(size: int = 10):
+    """Best `size` consecutive probed tasks by share shipped: frozen once it reaches 40%, otherwise the best so far."""
+    folder = store.ROOT / "output" / "window"
+    data = read_json(folder / f"best-{size}.json", None) or read_json(folder / f"latest-{size}.json", None)
+    if not data:
+        return {"shipped": [], "window": None}
+    rows = []
+    for task in data["tasks"]:
+        measurements = []
+        for k, probe in enumerate(task["probes"]):
+            shipping = probe["id"] == task.get("shipped_job")
+            measurements.append({"id": probe["id"], "created_at": probe["created_at"], "status": probe["status"],
+                                 "summary": {"passes": probe["passes"], "valid_runs": probe["valid"]}, "source": "fast_author",
+                                 "shipping": shipping, "label": "Shipping probe" if shipping else "First probe" if k == 0 else "Re-probe after an edit"})
+        rows.append({"slug": task["slug"], "description": task["summary"], "prompt_version": task["prompt_version"],
+                     "outcome": "shipped" if task["shipped"] else task["first_outcome"], "measurements": measurements})
+    meta = {key: data.get(key) for key in ("label", "written", "size", "shipped", "rate", "in_band_first", "start", "end", "overall")}
+    return {"shipped": with_names(rows), "window": meta}
+
+
+@app.get("/fidelity")
+def fidelity_page():
+    return FileResponse(store.ROOT / "api" / "static" / "index.html")
+
+
+@app.get("/api/fidelity")
+def fidelity():
+    """Tasks whose identical content was measured more than once (generator/fidelity_report.py), most consistent first."""
+    data = read_json(store.ROOT / "output" / "fidelity" / "latest.json", None)
+    if not data:
+        return {"shipped": [], "fidelity": None}
+    names = {"stability-check": "Re-run", "confirmation": "Confirmation", "ui": "Run from this page"}
+    rows = []
+    for task in data["tasks"]:
+        measurements = [{"id": r["id"], "created_at": r["created_at"], "status": r["status"], "source": r["source"],
+                         "summary": {"passes": r["passes"], "valid_runs": r["valid"]},
+                         "label": ("Shipping probe" if k == 0 else "Probe") if r["source"] == "fast_author" else names.get(r["source"], "Run")}
+                        for k, r in enumerate(task["runs"])]
+        steady = task["in_band"] == task["measured"]
+        rows.append({"slug": task["slug"], "description": task["summary"], "prompt_version": task["prompt_version"],
+                     "tag": f"in band {task['in_band']} of {task['measured']}" + (f" · {task['pending']} running" if task["pending"] else ""),
+                     "tagClass": "learnable" if steady else "pending", "measurements": measurements})
+    return {"shipped": with_names(rows), "fidelity": {"written": data["written"], "count": len(rows)}}
 
 
 def live_shipped():

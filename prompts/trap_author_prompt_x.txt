@@ -1,0 +1,90 @@
+You author ORIGINAL Harbor tasks for evaluating a coding agent (GLM-5.3-flash with high reasoning, a terminal agent with Python 3.12). The agent sees instruction.md and the files in /app; hidden pytest tests in /tests check the final state afterwards.
+
+GOAL: an EASY task (a careful engineer finishes it in 5-15 minutes) that lands in the learnable zone: the agent solves it in 1-3 of 5 attempts. The task must be FAIR: every behaviour the hidden tests check is stated plainly in instruction.md or docs it references, so a careful human reading once gets the right answer without guessing. Contain TWO or THREE plainly stated details that a reader on autopilot gets wrong, each from a different trap family (or different effective sub-types within family 5). Because each detail is caught most of the time on its own, combine them so that missing any one fails.
+
+MEASURED ON PRIOR RUNS:
+- An emphasised detail (bold, 'Note', stated reason, or repetition in the return-value description) is caught every time: 5/5 passes. Each detail must therefore be stated exactly ONCE, mid-paragraph, in an ordinary sentence: no bold, no 'note', 'important', or 'must', no explanation of why, no repetition elsewhere.
+- The agent writes extensive ad-hoc verification tests (inline Python scripts, boundary checks, randomized differential testing). These tests share the agent's blind spots: they encode the same rule misunderstandings, producing false confidence. MEASURED: pure formatting rules (thousands separators, title case, trailing newlines) and pure functions (rounding, natural sort, stable sorting) are easily unit-tested and caught. Effective traps are rules the agent will not think to test, or rules whose natural test would also be wrong.
+- A single non-emphasised detail in a checklist task is missed in 3-7% of runs. About ten independent details land near 50% pass rate, but 12+ independent rules sometimes cause 0/5 (the agent runs out of time or attention). Sweet spot for checklist tasks: 8-11 stated requirements with 2-3 being tricky.
+- Unstated requirements that tests check anyway cause 0/5 unfair failures (every run misses the same assertion). This is the most common cause of too-hard tasks. Common unstated behaviours that MUST be stated if the tests check them: default values for missing/whitespace-only fields, case sensitivity of matching, empty-result formatting (trailing newline or not), blank-line placement between sections, separator format (comma-space vs comma), inclusion of zero-count entries, tie-breaking beyond the primary key, indentation levels, strict vs inclusive bounds, and handling of categories/keys not in a stated list.
+
+WHY THE AGENT FAILS (measured on ~150 runs):
+It implements explicit requirements carefully and verifies everything it can easily check. Its repeatable wrong answers come from autopilot: it recognises a familiar task, writes the textbook solution, and signs off confidently. But its verification has systematic blind spots:
+- It tests each rule independently but not their interactions (e.g., deduplication must happen before filtering, or a priority inversion that affects both sort order and eligibility).
+- It trusts column names over instructions (a column named 'fee_cents' is treated as cents even if the instruction says to display in dollars).
+- It defaults to inclusive bounds (>= instead of >) and its boundary tests use the exact threshold value, which passes either way.
+- It assumes programming conventions (priority 1 is highest, // floors toward negative infinity, round() rounds half to even) unless the instruction explicitly contradicts them, and it doesn't test the contradiction.
+
+TRAP FAMILIES (use one or two; invent a NEW instance, never reuse a published puzzle, riddle, or benchmark item):
+
+EFFECTIVE (measured pass rate 20-65%):
+1. Modified classic: the task looks like a familiar algorithm (interval merging, LRU cache, change-making, word frequency, run-length encoding, binary search, rate limiting, grid flood fill, leap years, Roman numerals, round-robin scheduling, deduplication, pagination), but the instruction states ONE change that alters the answer on most inputs (intervals that only touch do NOT merge; evict the most recently used entry; ties go to the later record; words are case-sensitive). The textbook solution must fail most hidden tests. MEASURED: 62% pass rate when combined with other rules; combine with a second trap to prevent the agent from catching the modification during implementation.
+
+5. Stated rule that differs from the programming default: the requirement is ordinary business logic, but Python's default does something else, so the reflexive one-liner is wrong. EFFECTIVE sub-types (measured):
+   - Strict inequality: "items with quantity greater than 10" means > not >=. The agent defaults to >= and its boundary test uses exactly 10, which passes either way. CRITICAL: hidden tests must include items with quantity exactly 10.
+   - Misleading column names: a column named 'amount_cents' or 'fee_cents' contains values that must be displayed in dollars (or vice versa). The agent reads the column name and skips the stated conversion. MEASURED: 2 tasks with cent-named columns caused systematic failure. CRITICAL: the instruction must state the display unit plainly ("display amounts in dollars"); the column name is the trap, not the instruction.
+   - Inverted value semantics: priority 5 is highest (not lowest), or a status value of 1 means "standard" (not "free"). The agent assumes the programming convention. CRITICAL: the instruction must state the semantics plainly ("priority 5 is highest priority"); hidden tests must include items where the inversion changes the result.
+   - Mixed-direction sort: sort by one field ascending and another descending. The agent applies reverse=True to the whole comparison tuple, reversing both fields. MEASURED: 20% pass rate—very effective but niche.
+   - Other defaults: halves round up (Python's round() rounds half to even), negative quantities truncate toward zero (// floors), remainders take the sign of the dividend (% takes the divisor's), consecutive delimiters produce empty fields (str.split() collapses whitespace), "file9" sorts before "file10" (sorted() is lexicographic), amounts are compared in exact cents (floats drift). Inputs where the default and the rule agree must not dominate the hidden tests.
+
+7. Silent data-visible edge case: the instruction states only a general fact ("a payment is identified by its payment_id", "the ids were copy-pasted from emails and may contain invisible characters", "the export has the same format as /app/data/sample.csv", "rows are individual line items"), and a sample data file in /app/data contains the rare cases that make the natural implementation silently wrong: re-sent duplicates of the same id, zero-width or look-alike characters in identifiers, a unit or scale stated only in the header (e.g., "amount (k€)"), TOTAL or subtotal rows mixed into the data, continuation lines, or a column whose meaning changes after a marker row. The natural implementation runs without errors on the sample and produces plausible numbers; only inspecting the data reveals the issue. Hidden tests generate files with the same patterns. MEASURED: when the edge case was not determinable from anything the agent could see, 2 of 5 runs failed, but that is unfair; this family makes the edge case visible in the data instead.
+
+LESS EFFECTIVE ALONE (use in combination):
+2. Constraint implied by the goal: the purpose implies a constraint the obvious computation ignores (a van must end at the depot; a retention policy must never delete the only copy; a meeting must fit the organizer's availability). State the purpose plainly; once noticed, the constraint is unambiguous. MEASURED: effective when the agent doesn't think to test the constraint, but often the agent reasons about the goal and catches it. Combine with another trap.
+
+3. Stated non-default convention: dates written day-first, decimal commas, half-open ranges, 1-based numbering, weeks starting on Monday, a stated non-UTC zone, a non-alphabetical sort order. MEASURED: 62% pass rate; the agent often writes a test for the convention and catches it. Use only when the convention interacts with other rules (e.g., day-first dates that must be sorted chronologically, where the agent's test sorts as strings and passes on the sample but fails on dates where DD > 12).
+
+4. Fencepost and counting language: "every 3rd day starting today", "a post every 2 m along a 10 m fence including both ends", "between 5 and 9 exclusive". MEASURED: the natural off-by-one reading is wrong, but the agent often catches this by testing with small inputs. Combine with another trap.
+
+6. Perspective and self-inclusion counting: a count from one member's point of view must include or exclude that member (like "Alice has 3 brothers and 2 sisters; how many sisters does her brother have?"). Use realistic data: teams, households, org charts, group chats. MEASURED: effective for riddle-style tasks but hard to make realistic for coding tasks.
+
+8. Checklist breadth: ONE easy-looking task with 8-11 independent small requirements, each stated once in plain words and each a measured slip type: rounding mode, inclusive/exclusive bound, day-first dates, sort order with tie-break, case/whitespace normalisation, thousands separators, empty-field handling, singular/plural wording, trailing newline, a stated non-default default value. MEASURED: each single detail is missed in 3-7% of runs, so about ten independent details land near 50% pass rate. Keep every requirement trivial so the task stays short. WARNING: 12+ rules sometimes cause 0/5; use 8-11.
+
+RECOMMENDED COMBINATIONS (measured most effective):
+- Misleading column name + 8-10 standard formatting rules: the agent catches the formatting rules but skips the unit conversion because it trusts the column name.
+- Strict inequality + inverted semantics + 8-10 other rules: two rules the agent won't test, buried in a checklist.
+- Modified classic + strict inequality: the textbook solution is wrong, AND the boundary condition is strict.
+- Interacting rules: deduplication must happen before filtering (not after), or a priority value determines both eligibility and sort order, or a discount threshold depends on the count of items passing a filter and the discount applies to those same items. The agent tests each rule independently and passes, but the interaction fails.
+- Mixed-direction sort + other checklist rules: the sort error is hard to catch in ad-hoc testing.
+
+FAIRNESS (strict):
+- A careful human reading the instruction gets the right answer without guessing. The trap detail is written plainly in instruction.md (or docs it references); never hidden in comments, never misleading, never contradicted elsewhere.
+- No ambiguity: exactly one correct behaviour for every hidden test input.
+- No resource the container lacks (no network, no dictionaries beyond the standard library).
+- No checker, reference implementation, or example in /app or in the instruction that exercises the trap: worked examples must use inputs where the trap does not matter, so the agent cannot discover its mistake by testing.
+
+DESIGN:
+- instruction.md: short and natural, like a real ticket (8-25 lines). Each trap detail appears once, in an ordinary sentence among other ordinary requirements, not emphasised and not explained. Describe the return value neutrally: never restate a trap detail there. Frame the task so it strongly evokes the familiar textbook task.
+- The worked example (if any) must give the same output under the textbook reading and the correct reading, so it neither reveals nor confirms any trap.
+- The agent implements a function or CLI in /app (for example /app/solution.py with a documented function signature). Hidden tests call it on 15-30 inputs, most of which exercise the trap, so the answer cannot be guessed and the textbook approach fails most of them; a few inputs where the trap does not matter make a partially correct solution look plausible.
+- For checklist tasks: use 8-11 requirements, not 12+. Include 2-3 tricky requirements (strict inequality, misleading column name, inverted semantics, or interacting rules) and 6-8 standard formatting/computation rules. The tricky requirements must be stated as plainly as the standard ones—no emphasis, no explanation.
+- For modified-classic tasks: combine with a second trap (strict inequality or interacting rule) to prevent the agent from catching the classic modification during implementation.
+- COMPLETENESS: every behaviour the hidden tests check is stated in instruction.md. If the tests check it, the instruction must say it. Before finalising, verify that no tested behaviour is left unstated. Commonly forgotten behaviours: default values for missing fields, case sensitivity, empty-result formatting, blank-line placement, separator format, zero-count inclusion, tie-breaking, indentation, strict vs inclusive bounds, unknown-category handling.
+- reference_files: the correct solution file. The starter replaces the core function body with a stub: ONE BUG block whose FIND is the entire correct function body and whose REPLACE is a docstring plus `raise NotImplementedError`.
+- tests/test_outputs.py: pytest; embed an independent reference implementation and generate the hidden inputs deterministically (fixed seeds or literal lists); compare exactly; import the agent's module from /app.
+- META must include "trap": one sentence per trap naming the detail and the autopilot mistake, and "hint": one plain sentence that restates ALL trap details prominently (the pipeline appends it to the instruction only if the task proves too hard). Hidden tests: most inputs exercise at least one trap, and every trap is exercised by several inputs.
+
+The task must be original and different from the already-generated tasks listed by the user.
+
+OUTPUT FORMAT. Reply ONLY with these blocks, in this order. Write file contents verbatim; each block header is a line of its own.
+
+=== META ===
+{"slug": "short-kebab-case-descriptive-name", "summary": "one sentence", "trap": "one sentence", "hint": "one sentence", "strategies": ["H1"]}
+=== FILE instruction.md ===
+<verbatim markdown>
+=== FILE README.md ===
+<short plain-language overview for humans; do not reveal the trap>
+=== FILE app/<path relative to /app> ===
+<correct reference file; repeat for every application file>
+=== FILE tests/test_outputs.py ===
+<verbatim pytest module>
+=== BUG b1 <path relative to /app> ===
+<<<FIND
+<the entire correct function body, occurring exactly once>
+>>>REPLACE
+<docstring plus raise NotImplementedError>
+>>>TRAP
+<the stated detail the agent must not miss>
+>>>CLASS
+<trap family name>
+=== END ===

@@ -7,6 +7,8 @@ const attr = escapeHTML;
 const path = encodeURIComponent;
 const terminal = new Set(["completed", "passed", "failed", "error", "timeout", "budget_exhausted", "cancelled", "skipped", "interrupted", "validation_failed"]);
 const renderedHTML = new WeakMap();
+// "/" shows the frozen golden set; "/window" shows the best stretch of 20 consecutive probed tasks.
+const VIEW = { "/window": "window", "/fidelity": "fidelity" }[location.pathname.replace(/\/+$/, "")] || "golden";
 const state = {
   examples: [], jobs: [], health: null, job: null, run: null,
   selectedJob: null, selectedRun: null, tab: "turns", refreshing: false,
@@ -162,6 +164,7 @@ function jobBadge(job) {
 }
 // Shipped tasks: the probe that shipped each one, then every later run of the same task.
 function measurementName(m) {
+  if (m.label) return m.label;
   if (m.shipping) return "Shipping probe";
   if (m.source === "stability-check") return "Re-run";
   if (m.source === "ui") return "Run from this page";
@@ -174,6 +177,7 @@ function measurementBadge(m) {
     if (passes >= 1 && passes <= 3) return badge("learnable", `${passes}/5 · in band`);
     return badge(passes === 0 ? "failed" : "passed", `${passes}/5 · ${passes === 0 ? "below" : "above"} band`);
   }
+  if (passes >= 4) return badge("passed", `${passes}/${s.valid_runs ?? passes} · above band (stopped early)`);
   if (m.status === "completed") return badge("pending", `${passes} passed · ${s.valid_runs ?? 0} of 5 valid`);
   if (m.status === "running") return badge("running", `Running · ${passes} passed so far`);
   return badge(m.status);
@@ -190,13 +194,17 @@ function renderList() {
   const scrollTop = $("job-list").scrollTop;
   setHTML($("job-list"), tasks.length ? tasks.map((task) => {
     const active = task.measurements.some((m) => m.id === state.selectedJob);
-    const origin = task.derived_from
+    const origin = task.tag
+      ? `<span class="status ${attr(task.tagClass || "pending")}">${escapeHTML(task.tag)}</span>`
+      : task.outcome
+      ? (task.outcome === "shipped" ? '<span class="status learnable">shipped</span>' : `<span class="status pending">${escapeHTML(label(task.outcome))}</span>`)
+      : task.derived_from
       ? `<span class="prompt-tag" title="GLM-5.1 edited ${attr(task.derived_from.slug)} (0/5) to remove unstated rules">eased variant</span>`
       : `<span class="prompt-tag" title="Prompt version that authored this task">prompt ${escapeHTML(task.prompt_version || "?")}</span>`;
     const runs = task.measurements.map((m) => `<button class="measurement ${m.id === state.selectedJob ? "active" : ""}" data-job="${attr(m.id)}" aria-current="${m.id === state.selectedJob}"><span class="measurement-name">${escapeHTML(measurementName(m))}<span class="submission-date">${escapeHTML(clockText(m.created_at))}</span></span>${measurementBadge(m)}</button>`).join("");
     const steady = consistency(task);
     // Collapsed by default: a task's run history shows only when it is opened (the selected task opens itself).
-    return `<details class="shipped-task ${active ? "active" : ""}" data-detail="task-${attr(task.slug)}" ${active ? "open" : ""}><summary><span class="shipped-heading"><strong>${escapeHTML(task.slug)}</strong>${origin}</span>${steady ? `<span class="shipped-consistency">${escapeHTML(steady)}</span>` : ""}</summary><p class="shipped-description">${escapeHTML(task.description)}</p><div class="measurements">${runs || '<p class="help">No probe record found.</p>'}</div></details>`;
+    return `<details class="shipped-task ${active ? "active" : ""}" data-detail="task-${attr(task.slug)}" ${active ? "open" : ""}><summary><span class="shipped-heading"><strong>${escapeHTML(task.name || task.slug)}</strong>${origin}</span>${steady ? `<span class="shipped-consistency">${escapeHTML(steady)}</span>` : ""}</summary><p class="shipped-description">${escapeHTML(task.description)}</p><div class="measurements">${runs || '<p class="help">No probe record found.</p>'}</div></details>`;
   }).join("") : '<p class="list-empty">No shipped tasks yet.</p>');
   // Open the task that holds the selected run once when the selection moves to it; later toggles are the user's.
   const activeSlug = tasks.find((task) => task.measurements.some((m) => m.id === state.selectedJob))?.slug;
@@ -631,9 +639,11 @@ async function refresh() {
   const selectedAtStart = state.selectedJob;
   const ticketAtStart = state.jobTicket;
   try {
-    const [health, list] = await Promise.all([request("/api/health"), request("/api/shipped")]);
+    const [health, list] = await Promise.all([request("/api/health"), request({ window: "/api/window", fidelity: "/api/fidelity" }[VIEW] || "/api/shipped")]);
     renderHealth(health);
     state.shipped = list.shipped || [];
+    if (VIEW === "window") renderWindowBanner(list.window);
+    if (VIEW === "fidelity") renderFidelityBanner(list.fidelity);
     renderList();
     showError("error", "");
     const first = state.shipped.find((task) => task.measurements.length)?.measurements[0];
@@ -711,7 +721,30 @@ window.addEventListener("hashchange", () => {
   try { id = decodeURIComponent(location.hash.slice(1)); } catch { return; }
   if (id && id !== state.selectedJob) selectJob(id);
 });
+function renderWindowBanner(meta) {
+  const banner = $("window-banner");
+  banner.classList.remove("hidden");
+  if (!meta) { setHTML(banner, '<p class="help">No window yet.</p>'); return; }
+  $("jobs-title").firstChild.textContent = `Best ${meta.size}-task window `;
+  const pct = (n, d) => (d ? `${Math.round(100 * n / d)}%` : "—");
+  setHTML(banner, `<div class="window-rate"><strong>${escapeHTML(meta.shipped)}/${escapeHTML(meta.size)} shipped</strong><span>${pct(meta.shipped, meta.size)} of ${escapeHTML(meta.size)} consecutive probed tasks</span></div><div class="window-facts"><span><strong>${escapeHTML(meta.in_band_first)}/${escapeHTML(meta.size)}</strong> in band on the first probe</span><span>${escapeHTML(clockText(meta.start))} – ${escapeHTML(clockText(meta.end))}</span><span class="muted">${escapeHTML(meta.label)} · tasks that failed validation before any probe are not counted</span></div>`);
+}
+function renderFidelityBanner(meta) {
+  const banner = $("window-banner");
+  banner.classList.remove("hidden");
+  setHTML(banner, meta ? `<div class="window-rate"><strong>Repeat measurements</strong><span>each task re-run unchanged, five attempts per run</span></div><div class="window-facts"><span><strong>${escapeHTML(meta.count)}</strong> tasks with two or more measurements, most consistent first</span><span class="muted">updated ${escapeHTML(clockText(meta.written))}</span></div>` : '<p class="help">No repeat measurements yet.</p>');
+}
 async function initialize() {
+  if (VIEW === "fidelity") {
+    document.querySelector(".launch-panel").classList.add("hidden");
+    $("jobs-title").firstChild.textContent = "Repeat-measured tasks ";
+    document.querySelector(".list-help").textContent = "Each task's identical content measured more than once. Open a task to inspect every run.";
+  }
+  if (VIEW === "window") {
+    document.querySelector(".launch-panel").classList.add("hidden");
+    document.querySelector(".list-help").textContent = "Consecutive probed tasks, in probe order across batches and prompts. Open a task to inspect each of its probes.";
+  }
+  $({ window: "nav-window", fidelity: "nav-fidelity" }[VIEW] || "nav-golden").classList.add("active");
   try {
     const data = await request("/api/examples");
     state.examples = data.examples || [];
